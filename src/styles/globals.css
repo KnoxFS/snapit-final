@@ -1,0 +1,73 @@
+@import url("https://fonts.googleapis.com/css2?family=Manrope:wght@200;400;700&display=swap");
+@import url("./devices.css");
+@import url("./blog.css");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* custom scrollbar */
+
+.custom-scrollbar::-webkit-scrollbar {
+  @apply rounded-lg w-2 h-2;
+}
+
+.custom-scrollbar-sm::-webkit-scrollbar {
+  @apply rounded-lg w-1.5 h-1.5;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track,
+.custom-scrollbar-sm::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb,
+.custom-scrollbar-sm::-webkit-scrollbar-thumb {
+  background: #414244;
+  @apply rounded-lg;
+}
+
+.scrollbar-none::-webkit-scrollbar {
+  display: none;
+}
+
+/* select */
+select {
+  appearance: none;
+  text-indent: 1px;
+  text-overflow: "";
+}
+
+/* editor */
+.cm-theme-dark {
+  background: transparent !important;
+}
+
+.cm-focused {
+  outline: none !important;
+}
+
+.cm-scroller::-webkit-scrollbar {
+  @apply rounded-lg w-1.5 h-1.5;
+}
+.cm-scroller::-webkit-scrollbar-thumb {
+  background: #414244;
+  @apply rounded-lg;
+}
+
+/* twitter content */
+.tweet-content img:not(.emoji) {
+  @apply my-2 rounded-lg h-auto w-full;
+}
+
+.tweet-content .emoji {
+  @apply w-5 h-5 inline;
+}
+
+.tweet-content a {
+  @apply text-[#1DA1F2] inline;
+}
+
+.tweet-content .separator {
+  @apply my-2 w-full;
+}
