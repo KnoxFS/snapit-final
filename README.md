@@ -2,6 +2,7 @@
 
 > This project uses **yarn** as primary package manager. If you want to use it, run the following command: `npm i -g yarn`
 
+
 First, install all the necessary packages.
 
 ```bash
