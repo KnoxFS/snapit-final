@@ -130,6 +130,7 @@ function MyApp({ Component, pageProps }) {
         id="pirscheventsjs"
         data-code="siNM6FvgNGUmo3KEcHi1EVgPYXqCj5ve"
       />
+      
 
       {/* Crisp */}
       <Script defer id="crisp">
