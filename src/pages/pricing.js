@@ -15,7 +15,7 @@ const Pricing = () => {
     <>
       <Head>
         <title>
-          Snapit - Create beautiful screenshots and mockups so easily
+          Snapit - Create beautiful screenshots and mockups easily and free
         </title>
         <meta
           name="description"
