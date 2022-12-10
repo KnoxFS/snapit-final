@@ -18,11 +18,11 @@ const features = [
 const plans = [
   {
     name: "Monthly",
-    price: "$8",
+    price: "$5",
   },
   {
     name: "Yearly",
-    price: "$88",
+    price: "$49",
   },
 ];
 

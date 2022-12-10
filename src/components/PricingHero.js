@@ -22,7 +22,7 @@ const PricingHero = () => {
               (indicated by ⚡️) which requires a monthly or yearly
               subscription.
             </p>
-            <p>Snapit Pro is $8 a month , or $88 a year (1 month free).</p>
+            <p>Snapit Pro is $5 a month , or $49 a year (1 month free).</p>
 
             <p>
               <b>
@@ -47,7 +47,7 @@ const PricingHero = () => {
                 ⚡ Want Snapit Pro?
               </button>
 
-              <p className="text-white">Just $8 a month.</p>
+              <p className="text-white">Just $5 a month.</p>
             </div>
           )}
         </article>
