@@ -10,7 +10,7 @@ export default async function handler(req, res) {
   const price_id =
     plan.toLowerCase() === "monthly"
       ? process.env.STRIPE_MONTHLY_PRICE_ID
-      : process.env.STRIPE_LIFETIME_PRICE_ID;
+      : process.env.STRIPE_YEARLY_PRICE_ID;
 
   if (req.method === "POST") {
     const session = await stripe.checkout.sessions.create({
@@ -21,6 +21,7 @@ export default async function handler(req, res) {
           quantity: 1,
         },
       ],
+      mode: "subscription",
       allow_promotion_codes: true,
       success_url: `${YOUR_DOMAIN}/api/subscription?success=true&session_id={CHECKOUT_SESSION_ID}&user_id=${user_id}`,
       cancel_url: `${YOUR_DOMAIN}/`,
