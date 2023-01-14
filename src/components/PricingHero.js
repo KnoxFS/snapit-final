@@ -22,7 +22,7 @@ const PricingHero = () => {
               (indicated by ⚡️) which requires a monthly or yearly
               subscription.
             </p>
-            <p>Snapit Pro is $5 a month , or $49 a year (2 months free).</p>
+            <p>Snapit Pro is $5 a month , or $99 for a perpetual (lifetime) license.</p>
 
             <p>
               <b>
