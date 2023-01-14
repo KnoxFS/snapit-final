@@ -28,7 +28,6 @@ const plans = [
     name: "Lifetime",
     price: "$99",
   },
-
 ];
 
 const Settings = ({ open, setOpen }) => {
