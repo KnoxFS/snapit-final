@@ -21,7 +21,6 @@ export default async function handler(req, res) {
           quantity: 1,
         },
       ],
-      mode: "subscription",
       allow_promotion_codes: true,
       success_url: `${YOUR_DOMAIN}/api/subscription?success=true&session_id={CHECKOUT_SESSION_ID}&user_id=${user_id}`,
       cancel_url: `${YOUR_DOMAIN}/`,
