@@ -10,7 +10,8 @@ export default async function handler(req, res) {
   const price_id =
     plan.toLowerCase() === "monthly"
       ? process.env.STRIPE_MONTHLY_PRICE_ID
-      : process.env.STRIPE_YEARLY_PRICE_ID;
+      : process.env.STRIPE_YEARLY_PRICE_ID
+      : process.env.STRIPE_LIFETIME_PRICE_ID;
 
   if (req.method === "POST") {
     const session = await stripe.checkout.sessions.create({
