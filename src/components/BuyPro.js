@@ -21,8 +21,8 @@ const plans = [
     price: "$5",
   },
   {
-    name: "Lifetime",
-    price: "$99",
+    name: "Annual",
+    price: "$49",
   },
 
 ];
@@ -149,7 +149,7 @@ const Settings = ({ open, setOpen }) => {
                                           {plan.price} each{" "}
                                           {plan.name === "Monthly"
                                             ? "month"
-                                            : "lifetime"}
+                                            : "year"}
                                         </p>
                                       </RadioGroup.Description>
                                     </div>
