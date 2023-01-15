@@ -15,12 +15,11 @@ export default async function handler(req, res) {
   if (req.method === "POST") {
     const session = await stripe.checkout.sessions.create({
       billing_address_collection: "auto",
-      line_items: [
-        {
-          price: price_id,
+      line_items: LIFETIME
+        
+          price: 9900
           quantity: 1,
-        },
-      ],
+        
       mode: "subscription",
       allow_promotion_codes: true,
       success_url: `${YOUR_DOMAIN}/api/subscription?success=true&session_id={CHECKOUT_SESSION_ID}&user_id=${user_id}`,
