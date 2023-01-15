@@ -17,10 +17,13 @@ const features = [
 
 const plans = [
   {
-    name: "Lifetime",
-    price: "$99",
+    name: "Monthly",
+    price: "$5",
   },
-
+  {
+    name: "Yearly",
+    price: "$49",
+  },
 ];
 
 const Settings = ({ open, setOpen }) => {
@@ -142,9 +145,9 @@ const Settings = ({ open, setOpen }) => {
                                         }`}
                                       >
                                         <p>
-                                          {plan.price} onetime{" "}
-                                          {plan.name === "Lifetime"
-                                            ? "payment"
+                                          {plan.price} each{" "}
+                                          {plan.name === "Monthly"
+                                            ? "month"
                                             : "year"}
                                         </p>
                                       </RadioGroup.Description>
