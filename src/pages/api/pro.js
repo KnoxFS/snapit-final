@@ -17,7 +17,7 @@ export default async function handler(req, res) {
       billing_address_collection: "auto",
       line_items: [
         {
-          price: 9900,
+          price: price_id,
           quantity: 1,
         },
       ],
