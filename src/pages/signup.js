@@ -11,8 +11,8 @@ import { CheckCircleIcon } from "@heroicons/react/24/outline";
 
 const plans = [
   {
-    name: "Lifetime",
-    price: "$99",
+    name: "Monthly",
+    price: "$5",
   },
   {
     name: "Yearly",
