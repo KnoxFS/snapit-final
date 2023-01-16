@@ -8,7 +8,7 @@ export default async function handler(req, res) {
   const { plan, user_id } = req.query;
 
   if (plan.toLowerCase() == "lifetime") {
-    const lifetime = "price_1MQwdxE4EcK5n9JayQITodUS";
+    const lifetime = "price_1MQ91dFt34MDQES9lN7iLH6t";
 
     if (req.method === "POST") {
       const session = await stripe.checkout.sessions.create({
