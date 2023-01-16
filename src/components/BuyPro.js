@@ -150,8 +150,7 @@ const Settings = ({ open, setOpen }) => {
                                       >
                                       {plan.name === "Lifteime" ? (
                                         <p>
-                                          {plan.price} each{" "}
-                                          one time payment
+                                          {plan.price} one time payment{" "}
                                         </p>
                                       ) : (
                                         <p>
