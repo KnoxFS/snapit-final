@@ -148,18 +148,12 @@ const Settings = ({ open, setOpen }) => {
                                             : "text-gray-500"
                                         }`}
                                       >
-                                      {plan.name === "Lifteime" ? (
-                                        <p>
-                                          {plan.price} "one time payment"
-                                        </p>
-                                      ) : (
                                         <p>
                                           {plan.price} each{" "}
                                           {plan.name === "Monthly"
                                             ? "month"
                                             : "year"}
                                         </p>
-                                      )
                                       </RadioGroup.Description>
                                     </div>
                                   </div>
