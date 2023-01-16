@@ -19,7 +19,7 @@ const plans = [
     price: "$49",
   },
   {
-    name: 'Life-Time',
+    name: 'Lifetime',
     price: '$99',
   }
 ];
