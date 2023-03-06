@@ -39,7 +39,7 @@
     "react-joystick-component": "^4.0.1",
     "react-parallax-tilt": "^1.7.67",
     "screenshotone-api-sdk": "^1.0.20",
-    "static-tweets": "^1.0.0",
+    "static-tweets": "^2.0.0",
     "stripe": "^10.11.0",
     "swiper": "^8.4.3"
   },
