@@ -10,6 +10,7 @@ const api = new GhostContentAPI({
 export async function getPosts() {
   return await api.posts
     .browse({
+      filter: 'tag:Snapit'
       limit: "all",
       include: "authors",
     })
