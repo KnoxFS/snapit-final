@@ -10,7 +10,7 @@ const api = new GhostContentAPI({
 export async function getPosts() {
   return await api.posts
     .browse({
-      filter: 'tag:Snapit'
+      filter: "tag:Snapit",
       limit: "all",
       include: "authors",
     })
@@ -24,7 +24,7 @@ export async function getSinglePost(postSlug) {
   return await api.posts
     .read({
       slug: postSlug,
-      filter: 'tag:Snapit'
+      filter: "tag:Snapit",
       include: "authors",
     })
     .catch((err) => {
