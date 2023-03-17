@@ -1,13 +1,43 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="https://www.sitemaps.org/schemas/sitemap/0.9" xmlns:news="https://www.google.com/schemas/sitemap-news/0.9" xmlns:xhtml="https://www.w3.org/1999/xhtml" xmlns:mobile="https://www.google.com/schemas/sitemap-mobile/1.0" xmlns:image="https://www.google.com/schemas/sitemap-image/1.1" xmlns:video="https://www.google.com/schemas/sitemap-video/1.1">
-<url><loc>http://localhost:3000</loc><lastmod>2022-11-27T16:42:46.556Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
-<url><loc>http://localhost:3000/blog</loc><lastmod>2022-11-27T16:42:46.556Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
-<url><loc>http://localhost:3000/confirm-email</loc><lastmod>2022-11-27T16:42:46.556Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
-<url><loc>http://localhost:3000/forgot-password</loc><lastmod>2022-11-27T16:42:46.556Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
-<url><loc>http://localhost:3000/opengraph</loc><lastmod>2022-11-27T16:42:46.556Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
-<url><loc>http://localhost:3000/pricing</loc><lastmod>2022-11-27T16:42:46.556Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
-<url><loc>http://localhost:3000/signin</loc><lastmod>2022-11-27T16:42:46.556Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
-<url><loc>http://localhost:3000/signup</loc><lastmod>2022-11-27T16:42:46.556Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
-<url><loc>http://localhost:3000/templates</loc><lastmod>2022-11-27T16:42:46.556Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
-<url><loc>http://localhost:3000/update-password</loc><lastmod>2022-11-27T16:42:46.556Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+<!--  created with Free Online Sitemap Generator www.xml-sitemaps.com  -->
+<url>
+<loc>https://www.snapit.gg/</loc>
+<lastmod>2023-03-16T19:19:35+00:00</lastmod>
+<priority>1.00</priority>
+</url>
+<url>
+<loc>https://www.snapit.gg/templates</loc>
+<lastmod>2023-03-16T19:19:35+00:00</lastmod>
+<priority>0.80</priority>
+</url>
+<url>
+<loc>https://www.snapit.gg/opengraph</loc>
+<lastmod>2023-03-16T19:19:35+00:00</lastmod>
+<priority>0.80</priority>
+</url>
+<url>
+<loc>https://www.snapit.gg/pricing</loc>
+<lastmod>2023-03-16T19:19:35+00:00</lastmod>
+<priority>0.80</priority>
+</url>
+<url>
+<loc>https://www.snapit.gg/blog</loc>
+<lastmod>2023-03-16T19:19:35+00:00</lastmod>
+<priority>0.80</priority>
+</url>
+<url>
+<loc>https://www.snapit.gg/signin</loc>
+<lastmod>2023-03-16T19:19:35+00:00</lastmod>
+<priority>0.80</priority>
+</url>
+<url>
+<loc>https://www.snapit.gg/signup</loc>
+<lastmod>2023-03-16T19:19:35+00:00</lastmod>
+<priority>0.80</priority>
+</url>
+<url>
+<loc>https://www.snapit.gg/forgot-password</loc>
+<lastmod>2023-03-16T19:19:35+00:00</lastmod>
+<priority>0.64</priority>
+</url>
 </urlset>
