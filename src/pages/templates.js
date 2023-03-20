@@ -135,6 +135,36 @@ const Templates = () => {
             <TweetTemplateMaker proMode={user?.isPro} />
           </Tab.Panel>
         </Tab.Panels>
+
+        <Tab.Panels>
+          <div class="relative flex min-h-screen flex-col justify-center">
+            <div class='bg-gray-100 border border-slate-300 rounded-2xl duration-300 my-8 p-5 max-w-xl mx-auto'>
+                <div class='flex justify-between'>
+                  <a class='flex items-center gap-3 group' href='https://twitter.com/naval/status/1516188493541785606'>
+                    <img
+                      class='rounded-full h-12 w-12'
+                      src='https://pbs.twimg.com/profile_images/1256841238298292232/ycqwaMI2_400x400.jpg'
+                    />
+                    <div class='flex flex-col leading-snug'>
+                      <span class='text-sm font-semibold flex gap-2'>
+                        Naval
+                        <span class='text-sm font-normal opacity-70 group-hover:opacity-100 duration-300'>@naval</span>
+                      </span>
+                      <span class='text-sm opacity-80 group-hover:opacity-100 duration-300'>April 18, 2022</span>
+                    </div>
+                  </a>
+                </div>
+                <div class='text-lg my-3 leading-normal'>
+                  Your success in life depends on your ability to make good decisions.Your happiness depends on your ability to not care about the outcomes.
+                </div>
+                <div class='flex mt-2 gap-6 text-sm font-medium tracking-wider'>
+                  <span>20 Replies</span>
+                  <span>6190 Retweets</span>
+                  <span>32.9K Likes</span>
+                </div>
+              </div>
+          </div>
+        </Tab.Panels>
       </Tab.Group>
     </>
   );
