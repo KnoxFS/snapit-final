@@ -1,6 +1,7 @@
 import { fetchTweetAst } from "static-tweets";
 
 export default async function handler(req, res) {
+  console.log(req);
   const { id } = req.query;
 
   try {
