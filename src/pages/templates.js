@@ -131,9 +131,9 @@ const Templates = () => {
             <CodeTemplateMaker proMode={user?.isPro} />
           </Tab.Panel>
 
-          // <Tab.Panel>
-          //   <TweetTemplateMaker proMode={user?.isPro} />
-          // </Tab.Panel>
+          <Tab.Panel>
+            <TweetTemplateMaker proMode={user?.isPro} />
+          </Tab.Panel>
         </Tab.Panels>
       </Tab.Group>
     </>
