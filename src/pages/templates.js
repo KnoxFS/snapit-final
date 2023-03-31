@@ -96,25 +96,6 @@ const Templates = () => {
                 </p>
               </article>
             </Tab>
-
-            // <Tab className="outline-none">
-            //   <article className="bg-[#232323] p-4 rounded-md ui-selected:bg-green-400 h-full">
-            //     <img
-            //       src="/TweetTemplate.png"
-            //       alt="Mobile Template"
-            //       className="rounded-md w-full h-52 object-cover"
-            //     />
-
-            //     <h3 className="text-white text-xl font-bold my-4">
-            //       Tweet Mockup
-            //     </h3>
-
-            //     <p className="text-gray-500 ui-selected:text-black">
-            //       Create beautiful tweet mockups that are fully customizable for
-            //       social media, emails and more.
-            //     </p>
-            //   </article>
-            // </Tab>
           </Tab.List>
         </section>
 
@@ -129,10 +110,6 @@ const Templates = () => {
 
           <Tab.Panel>
             <CodeTemplateMaker proMode={user?.isPro} />
-          </Tab.Panel>
-
-          <Tab.Panel>
-            <TweetTemplateMaker proMode={user?.isPro} />
           </Tab.Panel>
         </Tab.Panels>
       </Tab.Group>
