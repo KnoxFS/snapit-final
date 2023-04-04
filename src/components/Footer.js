@@ -15,7 +15,7 @@ const Footer = () => {
         <Link href="/#features">
           <a>Features</a>
         </Link>
-        <Link href="https://app.loopedin.io/snapit#/roadmap">
+        <Link href="https://app.loopedin.io/snapit#/roadmap" target="_blank">
           <a>Roadmap</a>
         </Link>
       </ul>
