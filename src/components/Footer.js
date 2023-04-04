@@ -6,7 +6,7 @@ const Footer = () => {
       <p>Snapit - All rights reserved (c) 2023.</p>
 
       <ul className="space-x-4 md:space-x-6 hover:[&>*]:underline my-4 md:my-0">
-        <Link href="/aboutus">
+        <Link href="#">
           <a>About Us</a>
         </Link>
         <Link href="#">
