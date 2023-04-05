@@ -56,6 +56,13 @@ const Index = () => {
           name="keywords"
           content="Screenshot tool, screenshot generator, gradient generator, website mockup, screenshot generator, beautiful screenshots, pretty screenshots, screenshot background, screenshots into shareable images"
         />
+        <script
+      id="Cookiebot"
+      src="https://consent.cookiebot.com/uc.js"
+      data-cbid="08d34754-d627-4308-81ed-0b6be79c0888"
+      data-blockingmode="auto"
+      type="text/javascript"
+    ></script>
       </Head>
 
       <HeadOG
