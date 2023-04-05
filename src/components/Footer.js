@@ -30,8 +30,13 @@ const Footer = () => {
         <Link href="https://app.loopedin.io/snapit#/roadmap" target="_blank">
           <a>Roadmap</a>
         </Link>
-       
       </ul>
+      <a href="https://twitter.com/snapit_gg" target="_blank">
+          <TwitterIcon className="w-6 h-6 text-white" />
+        </a>
+        <a href="mailto:support@snapit.gg">
+                <EnvelopeIcon className="w-6 h-6 text-white" /> </a>
+
       <p>Made with ❤️ in San Francisco.</p>
     </footer>
   );
