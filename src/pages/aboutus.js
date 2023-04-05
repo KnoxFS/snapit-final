@@ -51,7 +51,6 @@ const AboutUs = () => {
 				<img
                   className="h-12 w-12 rounded-full bg-gray-400 object-cover"
                   src="/people/robin.jpg"
-                  style="width: 20%; height: auto;"
                 />
 
 				<p className="text-sm md:text-lg text-white mt-4"> 
