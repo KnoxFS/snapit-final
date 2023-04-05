@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { InstagramIcon } from "ui/icons";
 import { TwitterIcon } from "ui/icons";
 import { EnvelopeIcon } from "@heroicons/react/24/solid";
 
