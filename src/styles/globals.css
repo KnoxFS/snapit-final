@@ -71,11 +71,3 @@ select {
 .tweet-content .separator {
   @apply my-2 w-full;
 }
-
-.justify-evenly {
-  justify-content: space-evenly;
-}
-
-.social-display-flex {
-  display:flex;
-}
