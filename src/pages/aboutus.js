@@ -35,20 +35,29 @@ const AboutUs = () => {
           		</h1>
 
           		<p className="text-sm md:text-lg text-white mt-4">
-            		Hello and thank you for visiting Snapit!  Hope you like how easy we have made it to create beautiful screenshots. Snapit has been developed late 2022 by an independent developer in San Francisco. Soon after the launch the website as been acquired by Robin Kuipers, an internet entrepreneur from The Netherlands. He is since managing Snapit with a small team of freelance developers. 
+          			Hello and thank you for visiting Snapit!  Hope you like how easy we have made it to create beautiful screenshots. Snapit has been developed late 2022 by an independent developer in San Francisco. Soon after the launch the website as been acquired by Robin Kuipers, an internet entrepreneur from The Netherlands. He is since managing Snapit with a small team of freelance developers. 
           		</p>
-          		
-          		<p className="text-sm md:text-lg text-white mt-4">
-          			We at Snapit aim to create the go to web app for all your screenshots. Snapit does not require technical skills from a user, meaning that anyone can make beautiful screenshots in seconds.
-          		</p>
-          		
-          		<p className="text-sm md:text-lg text-white mt-4">
-          			We are constantly working on improving Snapit and introducing new features.  In the comings months you can expect some really cool new functionalities, so stay tuned for more info!
-          		</p>
-          		
-          		<p className="text-sm md:text-lg text-white mt-4">
-          			If you like to reach out to us, or in need of technical support, you can contact us via support@snapit.gg or through direct chat on the website. We try to respond as quickly as possible.
-          		</p>
+				
+				<p className="text-sm md:text-lg text-white mt-4">
+					We at Snapit aim to create the go to web app for all your screenshots. Snapit does not require technical skills from a user, meaning that anyone can make beautiful screenshots in seconds.
+					We are constantly working on improving Snapit and introducing new features.  In the comings months you can expect some really cool new functionalities, so stay tuned for more info!
+				</p>
+
+				<p className="text-sm md:text-lg text-white mt-4">
+					If you like to reach out to us, or in need of technical support, you can contact us via support@snapit.gg or through direct chat on the website. We try to respond as quickly as possible.
+				</p>
+
+
+				<img
+                  className="h-12 w-12 rounded-full bg-gray-400 object-cover"
+                  src="/people/robin.jpg"
+                />
+
+				<p className="text-sm md:text-lg text-white mt-4"> 
+					Robin Kuipers
+					https://www.linkedin.com/in/robin-kuipers/ 
+				</p>
+
           	</div>
 
       		<BuyPro open={showBuyPro} setOpen={setShowBuyPro} />
