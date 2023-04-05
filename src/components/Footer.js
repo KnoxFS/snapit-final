@@ -36,7 +36,7 @@ const Footer = () => {
                 <EnvelopeIcon className="w-6 h-6 text-white" /> </a>
         <a href="https://twitter.com/snapit_gg" target="_blank" rel="noreferrer">
           <TwitterIcon className="w-6 h-6 text-white" />
-        </a> Made with ❤️ in San Francisco.</p>
+        </a> </p>
     </footer>
   );
 };
