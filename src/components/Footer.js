@@ -1,4 +1,7 @@
 import Link from "next/link";
+import { TwitterIcon } from "ui/icons";
+import { EnvelopeIcon } from "@heroicons/react/24/solid";
+
 
 const Footer = () => {
   return (
