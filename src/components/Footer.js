@@ -6,7 +6,7 @@ import { EnvelopeIcon } from "@heroicons/react/24/solid";
 
 const Footer = () => {
   return (
-    <footer className="bg-[#232323] p-8 mt-12 text-gray-500 flex flex-col md:flex-row items-center text-sm md:text-base" style="justify-content: space-evenly;">
+    <footer className="bg-[#232323] p-8 mt-12 text-gray-500 flex flex-col md:flex-row items-center justify-evenly text-sm md:text-base">
       <p>Snapit - All rights reserved (c) 2023.</p>
 
       <ul className="space-x-4 md:space-x-6 hover:[&>*]:underline my-4 md:my-0">
@@ -34,7 +34,7 @@ const Footer = () => {
       </ul>
   
       <p>Contact us 
-        <ul className="space-x-4 md:space-x-6 hover:[&>*]:underline my-4 md:my-0" style="display:flex;">
+        <ul className="space-x-4 md:space-x-6 hover:[&>*]:underline my-4 social-display-flex md:my-0">
           <li><a href="mailto:support@snapit.gg">
                 <EnvelopeIcon className="w-6 h-6 text-white" /> </a>
           </li>
