@@ -28,7 +28,7 @@ const Footer = () => {
           <a>Roadmap</a>
         </Link>
       </ul>
-      
+      <p>Made with ❤️ in San Francisco.</p>
     </footer>
   );
 };
