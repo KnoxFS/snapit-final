@@ -29,7 +29,7 @@ const Footer = () => {
         </Link>
         <Link href="https://twitter.com/snapit_gg" target="_blank">
           <TwitterIcon className="w-6 h-6 text-white" />
-        </link>
+        </Link>
       </ul>
       <p>Made with ❤️ in San Francisco.</p>
     </footer>
