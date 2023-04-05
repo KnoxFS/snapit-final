@@ -32,7 +32,9 @@ const Footer = () => {
         </Link>
       </ul>
   
-      <p><a href="https://twitter.com/snapit_gg" target="_blank" rel="noreferrer">
+      <p>Contact us <a href="mailto:support@snapit.gg">
+                <EnvelopeIcon className="w-6 h-6 text-white" /> </a>
+        <a href="https://twitter.com/snapit_gg" target="_blank" rel="noreferrer">
           <TwitterIcon className="w-6 h-6 text-white" />
         </a> Made with ❤️ in San Francisco.</p>
     </footer>
