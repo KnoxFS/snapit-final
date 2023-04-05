@@ -29,8 +29,8 @@ const PrivacyPolicy = () => {
         		url="https://www.snapit.gg/privacypolicy"
       		/>
 
-      		<div className="text-center my-32">
-      			<h1 className="text-lg md:text-6xl font-bold text-white">
+      		<div className="my-32">
+      			<h1 className="text-lg font-bold text-white">
             		Privacy Policy
           		</h1>
 

@@ -29,8 +29,8 @@ const TermsOfService = () => {
         		url="https://www.snapit.gg/termsofservice"
       		/>
 
-      		<div className="text-center my-32">
-      			<h1 className="text-lg md:text-6xl font-bold text-white">
+      		<div className="my-32">
+      			<h1 className="text-lg font-bold text-white">
       				1. Terms
       			</h1>
 
@@ -38,7 +38,7 @@ const TermsOfService = () => {
 					By accessing the website www.snapit.gg you are agreeing to be bound by these terms of service, all applicable laws and regulations, and agree that you are responsible for compliance with any applicable local laws. If you do not agree with any of these terms, you are prohibited from using or accessing this site. The materials contained in this website are protected by applicable copyright and trademark law.
 				</p>
 
-				<h1 className="text-lg md:text-6xl font-bold text-white">
+				<h1 className="text-lg font-bold text-white">
 					2. Use License
 				</h1>
 
@@ -53,7 +53,7 @@ const TermsOfService = () => {
 					b.	This license shall automatically terminate if you violate any of these restrictions and may be terminated by Snapit at any time. Upon terminating your viewing of these materials or upon the termination of this license, you must destroy any downloaded materials in your possession whether in electronic or printed format.
 				</p>
 
-				<h1 className="text-lg md:text-6xl font-bold text-white">
+				<h1 className="text-lg font-bold text-white">
 					3. Disclaimer
 				</h1>
 
@@ -62,7 +62,7 @@ const TermsOfService = () => {
 					b.	Further, Snapit does not warrant or make any representations concerning the accuracy, likely results, or reliability of the use of the materials on its website or otherwise relating to such materials or on any sites linked to this site.
 				</p>
 
-				<h1 className="text-lg md:text-6xl font-bold text-white">
+				<h1 className="text-lg font-bold text-white">
 					4. Limitations
 				</h1>
 
@@ -70,7 +70,7 @@ const TermsOfService = () => {
 					In no event shall Snapit or its suppliers be liable for any damages (including, without limitation, damages for loss of data or profit, or due to business interruption) arising out of the use or inability to use the materials on Snapit's website, even if Snapit or a Snapit authorized representative has been notified orally or in writing of the possibility of such damage. Because some jurisdictions do not allow limitations on implied warranties, or limitations of liability for consequential or incidental damages, these limitations may not apply to you.
 				</p>
 
-				<h1 className="text-lg md:text-6xl font-bold text-white">
+				<h1 className="text-lg font-bold text-white">
 					5. Accuracy of materials
 				</h1>
 
@@ -78,7 +78,7 @@ const TermsOfService = () => {
 					The materials appearing on Snapit website could include technical, typographical, or photographic errors. Snapit does not warrant that any of the materials on its website are accurate, complete or current. Snapit may make changes to the materials contained on its website at any time without notice. However Snapit does not make any commitment to update the materials.
 				</p>
 
-				<h1 className="text-lg md:text-6xl font-bold text-white">
+				<h1 className="text-lg font-bold text-white">
 					6. Modifications
 				</h1>
 
@@ -86,7 +86,7 @@ const TermsOfService = () => {
 					Snapit may revise these terms of service for its website at any time without notice. By using this website you are agreeing to be bound by the then current version of these terms of service.
 				</p>
 
-				<h1 className="text-lg md:text-6xl font-bold text-white">
+				<h1 className="text-lg font-bold text-white">
 				7. Marketing & Promotion
 				</h1>
 
@@ -94,7 +94,7 @@ const TermsOfService = () => {
 					By creating an account on Passdropit.com, users agree and opt-in to receive periodic emails from Snapit. Users can at all times, choose to unsubscribe from the mailinglist and choose not to receive emails from Snapit anymore.
 				</p>
 
-				<h1 className="text-lg md:text-6xl font-bold text-white">
+				<h1 className="text-lg font-bold text-white">
 					8. Governing Law
 				</h1>
 
