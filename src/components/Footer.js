@@ -31,7 +31,7 @@ const Footer = () => {
           <a>Roadmap</a>
         </Link>
       </ul>
-      <a href="https://twitter.com/snapit_gg" target="_blank">
+      <a href="https://twitter.com/snapit_gg" target="_blank" rel="noreferrer">
           <TwitterIcon className="w-6 h-6 text-white" />
         </a>
         <a href="mailto:support@snapit.gg">
