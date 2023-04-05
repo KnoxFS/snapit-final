@@ -36,7 +36,11 @@ const Footer = () => {
                 <EnvelopeIcon className="w-6 h-6 text-white" /> </a>
         <a href="https://twitter.com/snapit_gg" target="_blank" rel="noreferrer">
           <TwitterIcon className="w-6 h-6 text-white" />
-        </a> </p>
+        </a> 
+        <a href="https://www.instagram.com/snapit_gg/" target="_blank" rel="noreferrer">
+          <InstagramIcon className="w-6 h-6 text-white" />
+        </a>
+        </p>
     </footer>
   );
 };
