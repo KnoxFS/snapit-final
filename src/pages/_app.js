@@ -111,13 +111,14 @@ function MyApp({ Component, pageProps }) {
           },
         }}
       />
-<Script
-      defer
-      id="Cookiebot"
-      src="https://consent.cookiebot.com/uc.js"
-      data-cbid="08d34754-d627-4308-81ed-0b6be79c0888"
-      data-blockingmode="auto"
-      type="text/javascript" 
+
+      <Script
+        defer
+        type="text/javascript" 
+        src="https://consent.cookiebot.com/uc.js"
+        id="Cookiebot"
+        data-cbid="08d34754-d627-4308-81ed-0b6be79c0888"
+        data-blockingmode="auto"
       />
 
       {/* Pirsch analytics */}
