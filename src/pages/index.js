@@ -57,8 +57,6 @@ const Index = () => {
           content="Screenshot tool, screenshot generator, gradient generator, website mockup, screenshot generator, beautiful screenshots, pretty screenshots, screenshot background, screenshots into shareable images"
         />
       </Head>
-      
-      <script id="CookieDeclaration" src="https://consent.cookiebot.com/08d34754-d627-4308-81ed-0b6be79c0888/cd.js" type="text/javascript" async></script>
 
       <HeadOG
         title="Snapit - Free Screenshot Mockup Tool to create beautiful images."
