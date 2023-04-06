@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { InstagramIcon } from "ui/icons";
 import { TwitterIcon } from "ui/icons";
-import { LinkedinIcon } from "ui/icons";
+import { LinkedInIcon } from "ui/icons";
 import { EnvelopeIcon } from "@heroicons/react/24/solid";
 
 
@@ -48,7 +48,7 @@ const Footer = () => {
             </a>
           </li>
           <li><a href="https://www.linkedin.com/company/snapitgg" target="_blank" rel="noreferrer">
-              <LinkedinIcon className="w-6 h-6 text-white" />
+              <LinkedInIcon className="w-6 h-6 text-white" />
             </a>
           </li>
         </ul>
