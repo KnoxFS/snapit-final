@@ -2,7 +2,7 @@ import Link from "next/link";
 import { InstagramIcon } from "ui/icons";
 import { TwitterIcon } from "ui/icons";
 import { LinkedInIcon } from "ui/icons";
-import { FaYoutube } from "react-icons/fa";
+import { FaYoutube } from "@react-icons/fa";
 import { EnvelopeIcon } from "@heroicons/react/24/solid";
 
 
