@@ -49,7 +49,8 @@ const Footer = () => {
           </li>
           <li><a href="https://www.linkedin.com/company/snapitgg" target="_blank" rel="noreferrer">
               <LinkedInIcon className="w-6 h-6 text-white" />
-            </a>
+            </a></li>
+
         </ul>
         </p>
     </footer>
