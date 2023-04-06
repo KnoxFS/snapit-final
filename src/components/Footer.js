@@ -2,7 +2,6 @@ import Link from "next/link";
 import { InstagramIcon } from "ui/icons";
 import { TwitterIcon } from "ui/icons";
 import { LinkedInIcon } from "ui/icons";
-import { FontAwesomeIcon } from "font-awesome";
 import { EnvelopeIcon } from "@heroicons/react/24/solid";
 
 
@@ -51,11 +50,6 @@ const Footer = () => {
           <li><a href="https://www.linkedin.com/company/snapitgg" target="_blank" rel="noreferrer">
               <LinkedInIcon className="w-6 h-6 text-white" />
             </a>
-          </li>
-            <li><a href="https://www.youtube.com/watch?v=sQUBlJvv-zQ" target="_blank" rel="noreferrer">
-              <FontAwesomeIcon icon="fa-brands fa-youtube" />
-            </a>
-          </li>
         </ul>
         </p>
     </footer>
