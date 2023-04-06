@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { InstagramIcon } from "ui/icons";
 import { TwitterIcon } from "ui/icons";
+import { LinkedinIcon } from "ui/icons";
 import { EnvelopeIcon } from "@heroicons/react/24/solid";
 
 
@@ -33,7 +34,7 @@ const Footer = () => {
         </Link>
       </ul>
   
-      <p>Contact us 
+      <p> 
         <ul className="space-x-4 md:space-x-6 hover:[&>*]:underline my-4 md:my-0" style={{display:"flex"}}>
           <li><a href="mailto:support@snapit.gg">
                 <EnvelopeIcon className="w-6 h-6 text-white" /> </a>
@@ -44,6 +45,10 @@ const Footer = () => {
           </li>
           <li><a href="https://www.instagram.com/snapit_gg/" target="_blank" rel="noreferrer">
               <InstagramIcon className="w-6 h-6 text-white" />
+            </a>
+          </li>
+          <li><a href="https://www.linkedin.com/company/snapitgg" target="_blank" rel="noreferrer">
+              <LinkedinIcon className="w-6 h-6 text-white" />
             </a>
           </li>
         </ul>
