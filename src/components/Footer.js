@@ -2,7 +2,7 @@ import Link from "next/link";
 import { InstagramIcon } from "ui/icons";
 import { TwitterIcon } from "ui/icons";
 import { LinkedInIcon } from "ui/icons";
-import { FaYoutube } from "@react-icons/fa";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { EnvelopeIcon } from "@heroicons/react/24/solid";
 
 
@@ -53,7 +53,7 @@ const Footer = () => {
             </a>
           </li>
             <li><a href="https://www.youtube.com/watch?v=sQUBlJvv-zQ" target="_blank" rel="noreferrer">
-              <FaYoutube className="w-6 h-6 text-white" />
+              <FontAwesomeIcon icon="fa-brands fa-youtube" />
             </a>
           </li>
         </ul>
