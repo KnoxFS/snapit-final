@@ -2,7 +2,7 @@ import Link from "next/link";
 import { InstagramIcon } from "ui/icons";
 import { TwitterIcon } from "ui/icons";
 import { LinkedInIcon } from "ui/icons";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { FontAwesomeIcon } from 'font-awesome'
 import { EnvelopeIcon } from "@heroicons/react/24/solid";
 
 
