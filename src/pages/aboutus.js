@@ -3,6 +3,7 @@ import Head from "components/Head";
 import BuyPro from "components/BuyPro";
 import useAuth from "hooks/useAuth";
 import HeadOG from "components/HeadOG";
+import { LinkedInIcon } from "ui/icons";
 
 const AboutUs = () => {
 	const { showBuyPro, setShowBuyPro } = useAuth();
@@ -58,7 +59,8 @@ const AboutUs = () => {
 					Robin Kuipers
 				</p>
 				<p className="text-sm md:text-lg text-white mt-4"> 
-					https://www.linkedin.com/in/robin-kuipers/ 
+					Linkedin <a href="https://www.linkedin.com/in/robin-kuipers/" target="_blank" rel="noreferrer">
+              <LinkedInIcon className="w-6 h-6 text-white" /></a>
 				</p>
 
           	</div>
