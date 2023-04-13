@@ -3,7 +3,8 @@ import { InstagramIcon } from "ui/icons";
 import { TwitterIcon } from "ui/icons";
 import { LinkedInIcon } from "ui/icons";
 import { EnvelopeIcon } from "@heroicons/react/24/solid";
-import { VideoCameraIcon } from "@heroicons/react/24/solid";
+import { FaFacebook } from "react-icons/fa";
+import { FaYoutube } from "react-icons/fa";
 
 
 const Footer = () => {
@@ -51,8 +52,11 @@ const Footer = () => {
           <li><a href="https://www.linkedin.com/company/snapitgg" target="_blank" rel="noreferrer">
               <LinkedInIcon className="w-6 h-6 text-white" />
             </a></li>
-            <li><a href="https://www.youtube.com/watch?v=sQUBlJvv-zQ" target="_blank" rel="noreferrer">
-                <VideoCameraIcon className="w-6 h-6 text-white" /> </a>
+                <li><a href="https://www.youtube.com/watch?v=sQUBlJvv-zQ" target="_blank" rel="noreferrer">
+                <FaYoutube className="w-6 h-6 text-white" /> </a>
+          </li>
+            <li><a href="https://www.facebook.com/groups/910618990057673" target="_blank" rel="noreferrer">
+                <FaFacebook className="w-6 h-6 text-white" /> </a>
           </li>
 
         </ul>
