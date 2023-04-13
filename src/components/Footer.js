@@ -51,7 +51,7 @@ const Footer = () => {
           <li><a href="https://www.linkedin.com/company/snapitgg" target="_blank" rel="noreferrer">
               <LinkedInIcon className="w-6 h-6 text-white" />
             </a></li>
-            <li><a href="https://www.youtube.com/watch?v=sQUBlJvv-zQ">
+            <li><a href="https://www.youtube.com/watch?v=sQUBlJvv-zQ" target="_blank" rel="noreferrer">
                 <VideoCameraIcon className="w-6 h-6 text-white" /> </a>
           </li>
 
