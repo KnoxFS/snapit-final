@@ -35,7 +35,7 @@ const AboutUs = () => {
             		About Us
           		</h1>
 
-          		<p className="text-sm text-white mt-4">
+          		<p className="text-sm md:text-lg text-white mt-4" style={{textalign: "justify"}}>
           			Hello and thank you for visiting Snapit!  Hope you like how easy we have made it to create beautiful screenshots. Snapit has been developed late 2022 by an independent developer in San Francisco. Soon after the launch the website as been acquired by Robin Kuipers, an internet entrepreneur from The Netherlands. He is since managing Snapit with a small team of freelance developers. 
           		</p>
 				
@@ -48,6 +48,8 @@ const AboutUs = () => {
 					If you like to reach out to us, or in need of technical support, you can contact us via support@snapit.gg or through direct chat on the website. We try to respond as quickly as possible.
 				</p>
 
+				<p>
+				</p>
 
 				<img
                   className="h-12 w-12 rounded-full bg-gray-400 object-cover"
