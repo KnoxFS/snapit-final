@@ -35,6 +35,7 @@ function MyApp({ Component, pageProps }) {
             },
           }}
         />
+
         {/* Pirsch analytics */}
         <Script
           defer
@@ -90,7 +91,7 @@ function MyApp({ Component, pageProps }) {
   }
 
   return (
-    <main className="bg-dark min-h-screen">
+    <main className="bg-bgGreen min-h-screen">
       <AuthProvider>
         <InfoBanner />
 
@@ -110,15 +111,6 @@ function MyApp({ Component, pageProps }) {
             textAlign: "center",
           },
         }}
-      />
-
-      <Script
-        defer
-        type="text/javascript" 
-        src="https://consent.cookiebot.com/uc.js"
-        id="Cookiebot"
-        data-cbid="08d34754-d627-4308-81ed-0b6be79c0888"
-        data-blockingmode="auto"
       />
 
       {/* Pirsch analytics */}

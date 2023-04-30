@@ -9,11 +9,14 @@ module.exports = {
   theme: {
     extend: {
       colors: {
+        primary: '#15D47E',
         dark: "#1C1C1C",
+        darkGreen: '#00241D',
+        bgGreen: '#151F1D'
       },
 
       fontFamily: {
-        sans: "Manrope, sans-serif",
+        sans: "GeneralSans-Variable, Manrope, sans-serif",
       },
 
       gridTemplateColumns: {

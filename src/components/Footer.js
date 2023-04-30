@@ -6,10 +6,9 @@ import { EnvelopeIcon } from "@heroicons/react/24/solid";
 import { FaFacebook } from "react-icons/fa";
 import { FaYoutube } from "react-icons/fa";
 
-
 const Footer = () => {
   return (
-    <footer className="bg-[#232323] p-8 mt-12 text-gray-500 flex flex-col md:flex-row items-center justify-evenly text-sm md:text-base" style={{justifyContent: "space-evenly"}}>
+    <footer className="text-white p-8 text-opacity-70  flex flex-col md:flex-row items-center justify-evenly text-sm md:text-base" style={{justifyContent: "space-evenly"}}>
       <p>Snapit - All rights reserved (c) 2023.</p>
 
       <ul className="space-x-4 md:space-x-6 hover:[&>*]:underline my-4 md:my-0">
@@ -61,6 +60,7 @@ const Footer = () => {
 
         </ul>
         </p>
+      
     </footer>
   );
 };

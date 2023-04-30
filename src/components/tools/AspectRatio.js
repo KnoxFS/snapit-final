@@ -19,30 +19,29 @@ const AspectRatio = ({ options, setOptions }) => {
       {({ open }) => (
         <>
           <Disclosure.Button className="w-full">
-            <div className="grid grid-cols-[180px,2em,1fr] w-full">
+            <div className="grid grid-cols-[3fr,1fr] w-full">
               <div className="flex items-center space-x-2">
                 <BubbleIcon />
 
-                <h3 className="text-sm text-gray-400">Size</h3>
+                <h3 className="text-sm text-white">Size</h3>
               </div>
 
-              {/* tip */}
-              <div className="relative">
-                <QuestionMarkCircleIcon className="w-6 h-6 text-white cursor-pointer [&~div]:hover:block" />
-
-                <div className="absolute top-full left-1/2 bg-dark/40 backdrop-blur-sm p-2 rounded-md shadow-md z-50 transform -translate-x-1/2 hidden hover:block w-44">
-                  <p className="text-sm text-white">
-                    Aspect ratio is the ratio of the width of an image to its
-                    height.
-                  </p>
+              <div className="flex justify-around items-center">
+                {/* tip */}
+                <div className="relative">
+                  <QuestionMarkCircleIcon className="w-6 h-6 text-white cursor-pointer [&~div]:hover:block" />
+                  <div className="absolute top-full left-1/2 bg-dark/40 backdrop-blur-sm p-2 rounded-md shadow-md z-50 transform -translate-x-1/2 hidden hover:block w-44">
+                    <p className="text-sm text-white">
+                      Aspect ratio is the ratio of the width of an image to its
+                      height.
+                    </p>
+                  </div>
                 </div>
+                <ChevronRightIcon
+                  className={`${open ? "rotate-90 transform" : ""
+                    } h-5 w-5 text-white justify-self-end`}
+                />
               </div>
-
-              <ChevronRightIcon
-                className={`${
-                  open ? "rotate-90 transform" : ""
-                } h-5 w-5 text-gray-500 justify-self-end`}
-              />
             </div>
           </Disclosure.Button>
 

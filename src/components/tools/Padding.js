@@ -2,12 +2,12 @@ import { Disclosure, RadioGroup } from "@headlessui/react";
 import { useRef } from "react";
 
 import {
-  ArrowsPointingOutIcon,
   QuestionMarkCircleIcon,
   ChevronRightIcon,
 } from "@heroicons/react/24/outline";
 
 import useDrag from "hooks/useDrag";
+import { PaddingIcon } from "ui/icons";
 
 const Padding = ({ options, setOptions }) => {
   const paddingRef = useRef(null);
@@ -19,29 +19,28 @@ const Padding = ({ options, setOptions }) => {
       {({ open }) => (
         <>
           <Disclosure.Button className="w-full">
-            <div className="grid grid-cols-[180px,2em,1fr] w-full">
+            <div className="grid grid-cols-[3fr,1fr] w-full">
               <div className="flex items-center space-x-2">
-                <ArrowsPointingOutIcon className="h-6 w-6 text-[#A0A0A0]" />
+                <PaddingIcon className="h-6 w-6 text-[#A0A0A0]" />
 
-                <h3 className="text-sm text-gray-400">Padding</h3>
+                <h3 className="text-sm text-white">Padding</h3>
               </div>
 
-              {/* tip */}
-              <div className="relative">
-                <QuestionMarkCircleIcon className="w-6 h-6 text-white cursor-pointer [&~div]:hover:block" />
-
-                <div className="absolute top-full left-1/2 bg-dark/40 backdrop-blur-sm p-2 rounded-md shadow-md z-50 transform -translate-x-1/2 hidden hover:block w-44">
-                  <p className="text-sm text-white">
-                    Sets padding into the container.
-                  </p>
+              <div className="flex justify-around items-center">
+                {/* tip */}
+                <div className="relative">
+                  <QuestionMarkCircleIcon className="w-6 h-6 text-white cursor-pointer [&~div]:hover:block" />
+                  <div className="absolute top-full left-1/2 bg-dark/40 backdrop-blur-sm p-2 rounded-md shadow-md z-50 transform -translate-x-1/2 hidden hover:block w-44">
+                    <p className="text-sm text-white">
+                      Sets padding into the container.
+                    </p>
+                  </div>
                 </div>
+                <ChevronRightIcon
+                  className={`${open ? "rotate-90 transform" : ""
+                    } h-5 w-5 text-white justify-self-end`}
+                />
               </div>
-
-              <ChevronRightIcon
-                className={`${
-                  open ? "rotate-90 transform" : ""
-                } h-5 w-5 text-gray-500 justify-self-end`}
-              />
             </div>
           </Disclosure.Button>
 

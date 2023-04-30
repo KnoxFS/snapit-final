@@ -6,6 +6,7 @@ import {
 } from "@heroicons/react/24/outline";
 
 import useAuth from "hooks/useAuth";
+import { TextIcon, ThunderIcon } from "ui/icons";
 
 const EditText = ({ options, setOptions }) => {
   const { user } = useAuth();
@@ -15,33 +16,34 @@ const EditText = ({ options, setOptions }) => {
       {({ open }) => (
         <>
           <Disclosure.Button className="w-full" disabled={!user?.isPro}>
-            <div className="grid grid-cols-[180px,2em,1fr] w-full">
+            <div className="grid grid-cols-[3fr,1fr] w-full">
               <div className="flex items-center space-x-2">
-                <Bars3BottomLeftIcon className="h-6 w-6 text-[#A0A0A0]" />
+                <TextIcon className="h-6 w-6 text-[#A0A0A0]" />
 
-                <h3 className="text-sm text-gray-400">Edit Text</h3>
+                <h3 className="text-sm text-white">Edit Text</h3>
               </div>
 
               {/* tip */}
-              <div className="relative">
-                <QuestionMarkCircleIcon className="w-6 h-6 text-white cursor-pointer [&~div]:hover:block" />
-
-                <div className="absolute top-full left-1/2 bg-dark/40 backdrop-blur-sm p-2 rounded-md shadow-md z-50 transform -translate-x-1/2 hidden hover:block w-44">
-                  <p className="text-sm text-white">
-                    Put some text inside the canvas.
-                  </p>
+              <div className="flex justify-around items-center">
+                <div className="relative">
+                  <QuestionMarkCircleIcon className="w-6 h-6 text-white cursor-pointer [&~div]:hover:block" />
+                  <div className="absolute top-full left-1/2 bg-dark/40 backdrop-blur-sm p-2 rounded-md shadow-md z-50 transform -translate-x-1/2 hidden hover:block w-44">
+                    <p className="text-sm text-white">
+                      Put some text inside the canvas.
+                    </p>
+                  </div>
                 </div>
+                {user?.isPro ? (
+                  <ChevronRightIcon
+                    className={`${open ? "rotate-90 transform" : ""
+                      } h-5 w-5 text-gray-500 justify-self-end`}
+                  />
+                ) : (
+                  <div className="justify-self-end mr-2">
+                    <ThunderIcon />
+                  </div>
+                )}
               </div>
-
-              {user?.isPro ? (
-                <ChevronRightIcon
-                  className={`${
-                    open ? "rotate-90 transform" : ""
-                  } h-5 w-5 text-gray-500 justify-self-end`}
-                />
-              ) : (
-                <div className="justify-self-end">⚡</div>
-              )}
             </div>
           </Disclosure.Button>
 
@@ -98,11 +100,10 @@ const EditText = ({ options, setOptions }) => {
                         },
                       })
                     }
-                    className={`rounded-l-md ${
-                      options.text.color === "dark"
-                        ? "bg-green-400 text-black"
-                        : ""
-                    }`}
+                    className={`rounded-l-md ${options.text.color === "dark"
+                      ? "bg-green-400 text-black"
+                      : ""
+                      }`}
                   >
                     Dark
                   </button>
@@ -116,11 +117,10 @@ const EditText = ({ options, setOptions }) => {
                         },
                       })
                     }
-                    className={`rounded-r-md ${
-                      options.text.color === "white"
-                        ? "bg-green-400 text-black"
-                        : ""
-                    }`}
+                    className={`rounded-r-md ${options.text.color === "white"
+                      ? "bg-green-400 text-black"
+                      : ""
+                      }`}
                   >
                     White
                   </button>
@@ -138,11 +138,10 @@ const EditText = ({ options, setOptions }) => {
                         },
                       })
                     }
-                    className={`rounded-l-md ${
-                      options.text.align === "text-left"
-                        ? "bg-green-400 text-black"
-                        : ""
-                    }`}
+                    className={`rounded-l-md ${options.text.align === "text-left"
+                      ? "bg-green-400 text-black"
+                      : ""
+                      }`}
                   >
                     Left
                   </button>
@@ -156,11 +155,10 @@ const EditText = ({ options, setOptions }) => {
                         },
                       })
                     }
-                    className={`${
-                      options.text.align === "text-center"
-                        ? "bg-green-400 text-black"
-                        : ""
-                    }`}
+                    className={`${options.text.align === "text-center"
+                      ? "bg-green-400 text-black"
+                      : ""
+                      }`}
                   >
                     Center
                   </button>
@@ -174,11 +172,10 @@ const EditText = ({ options, setOptions }) => {
                         },
                       })
                     }
-                    className={`rounded-r-md ${
-                      options.text.align === "text-right"
-                        ? "bg-green-400 text-black"
-                        : ""
-                    }`}
+                    className={`rounded-r-md ${options.text.align === "text-right"
+                      ? "bg-green-400 text-black"
+                      : ""
+                      }`}
                   >
                     Right
                   </button>
@@ -198,11 +195,10 @@ const EditText = ({ options, setOptions }) => {
                         },
                       })
                     }
-                    className={`rounded-l-md ${
-                      options.text.position === "top"
-                        ? "bg-green-400 text-black"
-                        : ""
-                    }`}
+                    className={`rounded-l-md ${options.text.position === "top"
+                      ? "bg-green-400 text-black"
+                      : ""
+                      }`}
                   >
                     Top
                   </button>
@@ -216,11 +212,10 @@ const EditText = ({ options, setOptions }) => {
                         },
                       })
                     }
-                    className={`rounded-r-md ${
-                      options.text.position === "bottom"
-                        ? "bg-green-400 text-black"
-                        : ""
-                    }`}
+                    className={`rounded-r-md ${options.text.position === "bottom"
+                      ? "bg-green-400 text-black"
+                      : ""
+                      }`}
                   >
                     Bottom
                   </button>
@@ -240,19 +235,17 @@ const EditText = ({ options, setOptions }) => {
                         },
                       })
                     }
-                    className={`${
-                      options.text.show ? "bg-green-400" : "bg-[#212121]"
-                    }
+                    className={`${options.text.show ? "bg-green-400" : "bg-[#212121]"
+                      }
           relative inline-flex h-[20px] w-[52px] items-center shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus-visible:ring-2  focus-visible:ring-white focus-visible:ring-opacity-75 justify-self-end`}
                   >
                     <span className="sr-only">Use setting</span>
                     <span
                       aria-hidden="true"
-                      className={`${
-                        options.text.show
-                          ? "translate-x-8"
-                          : "translate-x-[3px]"
-                      }
+                      className={`${options.text.show
+                        ? "translate-x-8"
+                        : "translate-x-[3px]"
+                        }
             pointer-events-none inline-block h-[15px] w-[15px] transform rounded-full bg-white shadow-lg ring-0 transition duration-200 ease-in-out`}
                     />
                   </Switch>

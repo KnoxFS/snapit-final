@@ -1,5 +1,5 @@
 import { Disclosure } from "@headlessui/react";
-import { PlusCircleIcon } from "@heroicons/react/24/outline";
+import { ChevronDownIcon, ChevronRightIcon, PlusCircleIcon } from "@heroicons/react/24/outline";
 
 const faq = [
   {
@@ -36,22 +36,22 @@ const faq = [
 
 const FAQ = () => {
   return (
-    <section className="w-[90%] md:w-[80%] mx-auto mt-12" id="faq">
-      <header className="text-center text-gray-500 pb-12">
-        <h3 className="text-3xl">FAQ</h3>
+    <section className="sm:w-[90%] md:max-w-[1280px] mx-auto md:mt-[140px] mt-[80px]" id="faq">
+      <header className="text-center text-white pb-12">
+        <h3 className="md:text-5xl text-3xl font-semibold mb-4">FAQs</h3>
       </header>
 
       <article className="space-y-4">
         {faq.map((item, i) => (
           <Disclosure as="article" key={i}>
-            <Disclosure.Button className="bg-[#282828] flex items-center justify-between w-full py-6 px-6 md:px-10 rounded-md text-gray-500 shadow-md">
-              <p className="text-left w-[80%]">{item.question}</p>
+            <Disclosure.Button className="bg-primary bg-opacity-10 flex items-center justify-between md:w-full py-6 px-6 md:px-10 rounded-md text-white shadow-md mx-auto w-[93%] ">
+              <p className="text-left w-[80%] text-lg font-bold">{item.question}</p>
 
-              <PlusCircleIcon className="h-5 w-5" />
+              <ChevronDownIcon className="h-8 w-8" />
             </Disclosure.Button>
 
             <Disclosure.Panel className="p-4">
-              <p className="text-gray-500">{item.answer}</p>
+              <p className="text-white">{item.answer}</p>
             </Disclosure.Panel>
           </Disclosure>
         ))}
