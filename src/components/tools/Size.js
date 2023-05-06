@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-
+import { KeySizeIcon } from "ui/icons";
 const Size = ({ options, setOptions, label, max, min }) => {
   // save initial value
   const [initialValue, setInitialValue] = useState(options.size);
@@ -11,15 +11,29 @@ const Size = ({ options, setOptions, label, max, min }) => {
   return (
     <div className="col-span-2 mb-4">
       <header className="flex items-center justify-between">
-        <h3 className="text-sm text-gray-400">
-          {label || "Size"}{" "}
-          <sup className="bg-[#212121] py-0.5 px-1 rounded-md">
-            {options.size}
-          </sup>{" "}
-        </h3>
-
+        <div className="flex items-center space-x-2">
+          <KeySizeIcon  />
+          <h3
+            className={`text-sm  ${
+              label === "Keys Size" ? "text-white" : "text-gray-400"
+            }`}
+          >
+            {label || "Size"}{" "}
+            <sup
+              className={`rounded-md ${
+                label === "Keys Size" ? " bg-bgDarkGreen" : " bg-[#212121]"
+              } py-0.5 px-1`}
+            >
+              {options.size}
+            </sup>{" "}
+          </h3>
+        </div>
         <button
-          className="bg-[#212121] py-1 px-2 rounded-md text-xs text-gray-400 hover:bg-opacity-80 transition"
+          className={`rounded-md  py-1 px-2 text-xs ${
+            label === "Keys Size"
+              ? "bg-bgDarkGreen text-white"
+              : "bg-[#212121] text-gray-400"
+          } transition hover:bg-opacity-80`}
           onClick={() => {
             setOptions((prev) => ({
               ...prev,
@@ -45,7 +59,7 @@ const Size = ({ options, setOptions, label, max, min }) => {
             size: parseInt(e.target.value),
           })
         }
-        className="w-full accent-green-400 appearance-none h-1.5 rounded-sm bg-[#212121] cursor-grab"
+        className="h-1.5 w-full cursor-grab appearance-none rounded-sm bg-[#212121] accent-green-400"
       />
     </div>
   );

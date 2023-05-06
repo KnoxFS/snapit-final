@@ -40,7 +40,6 @@ const AnimatedScreenshotMaker = ({ proMode }) => {
   const [[manualTiltAngleX, manualTiltAngleY], setManualTiltAngle] = useState([
     0, 0,
   ]);
-
   const [image, setImage] = useState(null);
   const [blob, setBlob] = useState({ src: null, w: 0, h: 0 });
   const wrapperRef = useRef(null);
@@ -48,8 +47,14 @@ const AnimatedScreenshotMaker = ({ proMode }) => {
     ...defaultOptions,
     watermark: !proMode,
   });
-  const [size, setSize] = useState({ width: 0, height: 0 });
-
+  const [duration, setDuration] = useState({
+    ...defaultOptions,
+    size: 5,
+    watermark: !proMode,
+  });
+  const [size, setSize] = useState({ width: 1920, height: 1080 });
+  const [toggle, setToggle] = useState(false);
+  const [scrollToggle, setScrollToggle] = useState(false);
   const saveImage = () => {
     const wrapperElement = wrapperRef.current;
 
@@ -60,7 +65,9 @@ const AnimatedScreenshotMaker = ({ proMode }) => {
 
     domtoimage.toBlob(wrapperElement).then(() => {
       const link = document.createElement("a");
-      link.download = `snapit-${new Date().toISOString()}.gif`;
+      link.download = `snapit-${new Date().toISOString()}.${
+        toggle ? "mp4" : "gif"
+      }`;
       link.href = blob.src;
       setImage(link.href);
       link.click();
@@ -68,13 +75,24 @@ const AnimatedScreenshotMaker = ({ proMode }) => {
   };
 
   const handleChange = (e) => {
-    console.log(e.target.value);
-    setSize({ [e.target.name]: e.target.value });
+    setSize({ ...size, [e.target.name]: e.target.value });
+  };
+  const handleToggle = (e) => {
+    if (e.target.value) {
+      setToggle(!toggle);
+      setScrollToggle(false);
+    }
   };
 
+  const handleScrollToggle = (e) => {
+    if (e.target.value) {
+      setScrollToggle(!scrollToggle);
+    }
+  };
   const { width, height } = size;
+  const type = blob?.src?.split(";")[0].split("/")[1];
   const renderPreview = () => (
-    <article className="bg-[#2B2C2F] h-full p-8 rounded-md flex justify-center">
+    <article className="flex h-full justify-center rounded-md bg-[#2B2C2F] p-8">
       {/* wrapper */}
       <div
         ref={wrapperRef}
@@ -94,27 +112,40 @@ const AnimatedScreenshotMaker = ({ proMode }) => {
           options.roundedWrapper
         } flex p-4 ${
           options.text.position === "top" ? "flex-col" : "flex-col-reverse"
-        } h-[600px] w-full relative overflow-hidden transition-all`}
+        } relative h-[600px] w-full overflow-hidden transition-all`}
       >
         {/* Text */}
-        <div className=" bg-gradient-to-br from-indigo-400 via-blue-300 to-purple-300 rounded-2xl flex p-4 flex-col h-[600px] w-full relative overflow-hidden transition-all">
+        <div className=" relative flex h-[600px] w-full flex-col overflow-hidden rounded-2xl bg-gradient-to-br from-indigo-400 via-blue-300 to-purple-300 p-4 transition-all">
           <ReactTilt
             tiltAngleXManual={manualTiltAngleX}
             tiltAngleYManual={manualTiltAngleY}
             tiltMaxAngleY={30}
             tiltMaxAngleX={30}
             reset={false}
-            className="flex justify-center items-center  h-[100%] mx-2 "
+            className="mx-2 flex h-[100%]  items-center justify-center "
           >
             <div
               style={{
                 transform: `scale(${options.size / 100})`,
               }}
             >
-              <img
-                src={blob.src}
-                className="w-full h-full rounded-2xl  pointer-events-none select-none"
-              />
+              {toggle
+                ? type === "mp4" && (
+                    <video controls preload="auto">
+                      <source
+                        src={blob.src}
+                        type="video/mp4"
+                        alt="Image not loaded"
+                      />
+                      Your browser does not support the video tag.
+                    </video>
+                  )
+                : type === "png" && (
+                    <img
+                      src={blob.src}
+                      className="pointer-events-none h-full w-full  select-none rounded-2xl"
+                    />
+                  )}
             </div>
           </ReactTilt>
         </div>
@@ -123,24 +154,87 @@ const AnimatedScreenshotMaker = ({ proMode }) => {
   );
 
   const renderOptions = () => (
-    <article className="bg-[#2B2C2F] rounded-md p-4 overflow-y-auto overflow-x-hidden max-h-[680px] custom-scrollbar">
-      <div className="space-y-4 h-full flex flex-col">
-        <h3 className="text-center text-gray-500 w-full">Device Options</h3>
+    <article className="custom-scrollbar max-h-[680px] overflow-y-auto overflow-x-hidden rounded-md bg-[#2B2C2F] p-4">
+      <div className="flex h-full flex-col space-y-4">
+        <h3 className="w-full text-center text-gray-500">Device Options</h3>
         <div>
           <input
             type="number"
             name="width"
+            min="0"
             onChange={handleChange}
-            className="w-full p-3 text-center text-sm bg-[#212121] rounded-md border border-[#2B2C2F] text-white outline-none"
+            className="w-full rounded-md border border-[#2B2C2F] bg-[#212121] p-3 text-center text-sm text-white outline-none"
             placeholder="Enter Width"
+            value={width}
           />
           <input
             type="number"
             name="height"
+            min="0"
             onChange={handleChange}
-            className="w-full p-3 mt-4 text-center text-sm bg-[#212121] rounded-md border border-[#2B2C2F] text-white outline-none"
+            className="mt-4 w-full rounded-md border border-[#2B2C2F] bg-[#212121] p-3 text-center text-sm text-white outline-none"
             placeholder="Enter Height"
+            value={height}
           />
+          <div className="mt-4 flex items-center justify-between">
+            <h3 className="text-sm text-gray-400">Format (GIF/MP4)</h3>
+            <div className="flex items-center">
+              <input
+                class="mr-2 mt-[0.3rem] h-3.5 w-8 appearance-none rounded-[0.4375rem] bg-neutral-300 before:pointer-events-none before:absolute before:h-3.5 before:w-3.5 before:rounded-full before:bg-transparent before:content-[''] after:absolute after:z-[2] after:-mt-[0.1875rem] after:h-5 after:w-5 after:rounded-full after:border-none after:bg-green-400 after:shadow-[0_0px_3px_0_rgb(0_0_0_/_7%),_0_2px_2px_0_rgb(0_0_0_/_4%)] after:transition-[background-color_0.2s,transform_0.2s] after:content-[''] checked:bg-primary checked:after:absolute checked:after:z-[2] checked:after:-mt-[3px] checked:after:ml-[1.0625rem] checked:after:h-5 checked:after:w-5 checked:after:rounded-full checked:after:border-none checked:after:bg-primary checked:after:shadow-[0_3px_1px_-2px_rgba(0,0,0,0.2),_0_2px_2px_0_rgba(0,0,0,0.14),_0_1px_5px_0_rgba(0,0,0,0.12)] checked:after:transition-[background-color_0.2s,transform_0.2s] checked:after:content-[''] hover:cursor-pointer focus:outline-none focus:ring-0 focus:before:scale-100 focus:before:opacity-[0.12] focus:before:shadow-[3px_-1px_0px_13px_rgba(0,0,0,0.6)] focus:before:transition-[box-shadow_0.2s,transform_0.2s] focus:after:absolute focus:after:z-[1] focus:after:block focus:after:h-5 focus:after:w-5 focus:after:rounded-full focus:after:content-[''] checked:focus:border-primary checked:focus:bg-primary checked:focus:before:ml-[1.0625rem] checked:focus:before:scale-100 checked:focus:before:shadow-[3px_-1px_0px_13px_#3b71ca] checked:focus:before:transition-[box-shadow_0.2s,transform_0.2s] dark:bg-neutral-600 dark:after:bg-neutral-400 dark:checked:bg-primary dark:checked:after:bg-primary dark:focus:before:shadow-[3px_-1px_0px_13px_rgba(255,255,255,0.4)] dark:checked:focus:before:shadow-[3px_-1px_0px_13px_#3b71ca] "
+                type="checkbox"
+                role="switch"
+                id="flexSwitchChecked"
+                onChange={handleToggle}
+              />
+              <label
+                class="pl-[0.15rem] text-white hover:cursor-pointer"
+                for="flexSwitchChecked"
+              >
+                <div className="flex items-center space-x-2">
+                  <h3 className="text-sm text-gray-400">
+                    {toggle ? "mp4" : "gif"}
+                  </h3>
+                </div>
+              </label>
+            </div>
+          </div>
+          <div className="mt-4">
+            {toggle && (
+              <Size
+                options={duration}
+                setOptions={setDuration}
+                label="Duration (seconds)"
+                max="30"
+                min="5"
+              />
+            )}
+          </div>
+
+          <div className="mt-4 flex items-center justify-between">
+            <h3 className="text-sm text-gray-400">Scrollable</h3>
+            <div className="flex items-center">
+              <div className="mr-2 justify-self-end">⚡</div>
+              <input
+                class="mr-2 mt-[0.3rem] h-3.5 w-8 appearance-none rounded-[0.4375rem] bg-neutral-300 before:pointer-events-none before:absolute before:h-3.5 before:w-3.5 before:rounded-full before:bg-transparent before:content-[''] after:absolute after:z-[2] after:-mt-[0.1875rem] after:h-5 after:w-5 after:rounded-full after:border-none after:bg-gray-400 after:shadow-[0_0px_3px_0_rgb(0_0_0_/_7%),_0_2px_2px_0_rgb(0_0_0_/_4%)] after:transition-[background-color_0.2s,transform_0.2s] after:content-[''] checked:bg-primary checked:after:absolute checked:after:z-[2] checked:after:-mt-[3px] checked:after:ml-[1.0625rem] checked:after:h-5 checked:after:w-5 checked:after:rounded-full checked:after:border-none checked:after:bg-green-400 checked:after:bg-primary checked:after:shadow-[0_3px_1px_-2px_rgba(0,0,0,0.2),_0_2px_2px_0_rgba(0,0,0,0.14),_0_1px_5px_0_rgba(0,0,0,0.12)] checked:after:transition-[background-color_0.2s,transform_0.2s] checked:after:content-[''] hover:cursor-pointer focus:outline-none focus:ring-0 focus:before:scale-100 focus:before:opacity-[0.12] focus:before:shadow-[3px_-1px_0px_13px_rgba(0,0,0,0.6)] focus:before:transition-[box-shadow_0.2s,transform_0.2s] focus:after:absolute focus:after:z-[1] focus:after:block focus:after:h-5 focus:after:w-5 focus:after:rounded-full focus:after:content-[''] checked:focus:border-primary checked:focus:bg-primary checked:focus:before:ml-[1.0625rem] checked:focus:before:scale-100 checked:focus:before:shadow-[3px_-1px_0px_13px_#3b71ca] checked:focus:before:transition-[box-shadow_0.2s,transform_0.2s] dark:bg-neutral-600 dark:after:bg-neutral-400 dark:checked:bg-primary dark:checked:after:bg-primary dark:focus:before:shadow-[3px_-1px_0px_13px_rgba(255,255,255,0.4)] dark:checked:focus:before:shadow-[3px_-1px_0px_13px_#3b71ca]"
+                type="checkbox"
+                role="switch"
+                id="flexSwitchChecked"
+                onChange={handleScrollToggle}
+                disabled={!proMode ? true : false}
+                checked={scrollToggle ? true : false}
+              />
+              <label
+                class="pl-[0.15rem] text-white hover:cursor-pointer"
+                for="flexSwitchChecked"
+              >
+                <div className="flex items-center space-x-2">
+                  <h3 className="text-sm text-gray-400">
+                    {scrollToggle ? "on" : "off"}
+                  </h3>
+                </div>
+              </label>
+            </div>
+          </div>
 
           <URLScreenshot
             proMode={proMode}
@@ -150,9 +244,11 @@ const AnimatedScreenshotMaker = ({ proMode }) => {
             target="desktop"
             animatedWidth={width}
             animatedHeight={height}
+            format={toggle}
+            duration={toggle && duration.size}
+            scrollable={scrollToggle}
           />
         </div>
-
         {/* <Size
           options={options}
           setOptions={setOptions}
@@ -160,14 +256,13 @@ const AnimatedScreenshotMaker = ({ proMode }) => {
           max="100"
           min="50"
         /> */}
-
-        <div className="flex flex-row justify-between !mt-auto">
+        <div className="!mt-auto flex flex-row justify-between">
           <button
-            className="flex items-center justify-center px-4 py-2 text-base bg-green-400 rounded-md text-white"
+            className="flex items-center justify-center rounded-md bg-green-400 px-4 py-2 text-base text-white"
             title="Use Ctrl/Cmd + S to save the image"
             onClick={saveImage}
           >
-            <span className="w-6 h-5 mr-2">{SaveIcon}</span>
+            <span className="mr-2 h-5 w-6">{SaveIcon}</span>
             Save
           </button>
           <div className="px-1"></div>
@@ -177,7 +272,7 @@ const AnimatedScreenshotMaker = ({ proMode }) => {
   );
 
   return (
-    <section className="w-[90%] md:w-[80%] mx-auto grid grid-cols-1 sm:grid-cols-1 md:grid-cols-[1fr,300px] gap-10">
+    <section className="mx-auto grid w-[90%] grid-cols-1 gap-10 sm:grid-cols-1 md:w-[80%] md:grid-cols-[1fr,300px]">
       {renderPreview()} {renderOptions()}
     </section>
   );

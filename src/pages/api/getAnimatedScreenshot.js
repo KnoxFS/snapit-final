@@ -6,10 +6,13 @@
 // );
 
 export default async function handler(req, res) {
-  const { url, width, height } = req.query;
-
+  const { url, width, height, format, duration, scenario } = req.query;
   fetch(
-    `https://api.screenshotone.com/animate?url=${url}&format=gif&access_key=${process.env.SCREENSHOT_API_KEY}&width=${width}&height=${height}`
+    `https://api.screenshotone.com/animate?url=${url}&format=${format}${
+      duration ? `&duration=${duration}` : ""
+    }&access_key=${
+      process.env.SCREENSHOT_API_KEY
+    }&width=${width}&height=${height}${scenario ? `&scenario=${scenario}` : ""}`
   )
     .then(async (imageBlob) => {
       const buffer = Buffer.from(await imageBlob.arrayBuffer());

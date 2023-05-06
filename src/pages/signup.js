@@ -1,34 +1,34 @@
-import { useState } from "react";
-import Link from "next/link";
+import { useState } from 'react';
+import Link from 'next/link';
 
-import { supabase } from "lib/supabase";
-import toast from "react-hot-toast";
+import { supabase } from 'lib/supabase';
+import toast from 'react-hot-toast';
 
-import { useRouter } from "next/router";
-import Head from "components/Head";
-import { RadioGroup } from "@headlessui/react";
-import { CheckCircleIcon } from "@heroicons/react/24/outline";
+import { useRouter } from 'next/router';
+import Head from 'components/Head';
+import { RadioGroup } from '@headlessui/react';
+import { CheckCircleIcon } from '@heroicons/react/24/outline';
 
 const plans = [
   {
-    name: "Monthly",
-    price: "$5",
+    name: 'Monthly',
+    price: '$5',
   },
   {
-    name: "Yearly",
-    price: "$49",
+    name: 'Yearly',
+    price: '$49',
   },
   {
     name: 'Lifetime',
     price: '$99',
-  }
+  },
 ];
 
 const Signup = () => {
   const [credentials, setCredentials] = useState({
-    email: "",
-    password: "",
-    name: "",
+    email: '',
+    password: '',
+    name: '',
   });
 
   // const [selectedPlan, setSelectedPlan] = useState(plans[0]);
@@ -38,9 +38,9 @@ const Signup = () => {
 
   const [selectedPlan, setSelectedPlan] = useState(plans[0]);
 
-  const handleBuyPro = async (user) => {
+  const handleBuyPro = async user => {
     if (!user) {
-      router.replace("/singup?state=buyPro");
+      router.replace('/singup?state=buyPro');
       setOpen(false);
       return;
     }
@@ -48,23 +48,23 @@ const Signup = () => {
     const res = await fetch(
       `/api/pro?plan=${selectedPlan.name}&user_id=${user.id}`,
       {
-        method: "POST",
-      }
-    ).then((res) => res.json());
+        method: 'POST',
+      },
+    ).then(res => res.json());
 
     // Open Stripe Checkout
     window.location.href = res.session_url;
   };
 
-  const handleChange = (e) => {
+  const handleChange = e => {
     setCredentials({ ...credentials, [e.target.name]: e.target.value });
   };
 
-  const handleRegister = async (e) => {
+  const handleRegister = async e => {
     e.preventDefault();
     setRegistering(true);
 
-    const toastId = toast.loading("Creating your account...");
+    const toastId = toast.loading('Creating your account...');
 
     const {
       error,
@@ -87,7 +87,7 @@ const Signup = () => {
     }
     // save user info in database
 
-    const { error: db_error } = await supabase.from("users").insert([
+    const { error: db_error } = await supabase.from('users').insert([
       {
         user_id: user.id,
       },
@@ -105,11 +105,11 @@ const Signup = () => {
     };
 
     const { error: stats_error } = await supabase
-      .from("stats")
+      .from('stats')
       .insert([{ user_id: user.id, stats: JSON.stringify(defaultStats) }]);
 
     if (db_error || stats_error) {
-      toast.error("An error has ocurred, please try again.", {
+      toast.error('An error has ocurred, please try again.', {
         id: toastId,
       });
 
@@ -117,7 +117,7 @@ const Signup = () => {
       return;
     }
 
-    toast.success("User registered", { id: toastId });
+    toast.success('User registered', { id: toastId });
     setRegistering(false);
 
     await handleBuyPro(user);
@@ -130,69 +130,69 @@ const Signup = () => {
           Snapit - Create beautiful screenshots and mockups so easily
         </title>
         <meta
-          name="description"
-          content="Turn boring screenshots into shareable ones with just few clicks
+          name='description'
+          content='Turn boring screenshots into shareable ones with just few clicks
           Design beautiful screenshots and browser mockups quickly using Snapit. Create eye-catching images today to share with your audience
-  "
+  '
         />
       </Head>
 
-      <section className="flex md:h-[calc(100vh-2.5em)] justify-center items-center">
-        <div className="grid grid-cols-1 md:grid-cols-[60%,2em,1fr] items-center w-[90%] md:w-[80%] mx-auto gap-10">
+      <section className='flex md:h-[calc(100vh-2.5em)] justify-center items-center'>
+        <div className='grid grid-cols-1 md:grid-cols-[60%,2em,1fr] items-center w-[90%] md:w-[80%] mx-auto gap-10'>
           {/* illustration */}
 
           <article>
-            <Link href="/">
-              <a className="w-full">
-                <img src="/AuthGIF.gif" className="rounded-3xl" />
+            <Link href='/'>
+              <a className='w-full'>
+                <img src='/AuthGIF.gif' className='rounded-3xl' />
               </a>
             </Link>
           </article>
 
           {/* separator */}
-          <div className="hidden md:block w-2 h-full rounded-md bg-green-500 mx-auto my-10"></div>
+          <div className='hidden md:block w-2 h-full rounded-md bg-green-500 mx-auto my-10'></div>
 
           {/* form */}
           <form>
-            <h3 className="text-2xl text-white font-bold">Signup</h3>
+            <h3 className='text-2xl text-white font-bold'>Signup</h3>
 
-            <div className="space-y-4 my-6">
+            <div className='space-y-4 my-6'>
               <input
-                type="text"
-                name="name"
+                type='text'
+                name='name'
                 value={credentials.name}
                 onChange={handleChange}
-                placeholder="Name"
-                className="w-full py-2 px-4 rounded-md bg-[#212121] outline-none ring-1 ring-transparent focus:ring-green-400 text-white"
+                placeholder='Name'
+                className='w-full py-2 px-4 rounded-md bg-darkGreen outline-none ring-1 ring-transparent focus:ring-green-400 text-white'
                 autoFocus
               />
 
               <input
-                type="email"
-                name="email"
+                type='email'
+                name='email'
                 value={credentials.email}
                 onChange={handleChange}
-                placeholder="Email address"
-                className="w-full py-2 px-4 rounded-md bg-[#212121] outline-none ring-1 ring-transparent focus:ring-green-400 text-white"
+                placeholder='Email address'
+                className='w-full py-2 px-4 rounded-md bg-darkGreen outline-none ring-1 ring-transparent focus:ring-green-400 text-white'
               />
 
               <input
-                type="password"
-                name="password"
+                type='password'
+                name='password'
                 value={credentials.password}
                 onChange={handleChange}
-                placeholder="Password"
-                className="w-full py-2 px-4 rounded-md bg-[#212121] outline-none ring-1 ring-transparent focus:ring-green-400 text-white"
+                placeholder='Password'
+                className='w-full py-2 px-4 rounded-md bg-darkGreen outline-none ring-1 ring-transparent focus:ring-green-400 text-white'
               />
             </div>
 
-            <div className="mx-auto w-full my-6">
+            <div className='mx-auto w-full my-6'>
               <RadioGroup value={selectedPlan} onChange={setSelectedPlan}>
-                <RadioGroup.Label className="sr-only">
+                <RadioGroup.Label className='sr-only'>
                   Choose plan
                 </RadioGroup.Label>
-                <div className="space-y-2">
-                  {plans.map((plan) => (
+                <div className='space-y-2'>
+                  {plans.map(plan => (
                     <RadioGroup.Option
                       key={plan.name}
                       value={plan}
@@ -200,49 +200,46 @@ const Signup = () => {
                         `
                   ${
                     checked
-                      ? "bg-green-400 bg-opacity-75 text-white"
-                      : "bg-[#212121]"
+                      ? 'bg-primary bg-opacity-75 text-darkGreen'
+                      : 'bg-darkGreen'
                   }
                     relative flex cursor-pointer rounded-lg px-5 py-4 shadow-md focus:outline-none`
-                      }
-                    >
+                      }>
                       {({ checked }) => (
-                        <div className="flex w-full items-center justify-between">
-                          <div className="flex items-center">
-                            <div className="text-sm">
+                        <div className='flex w-full items-center justify-between'>
+                          <div className='flex items-center'>
+                            <div className='text-sm font-medium'>
                               <RadioGroup.Label
-                                as="p"
-                                className="font-medium text-white"
-                              >
+                                as='p'
+                                className={`font-medium ${
+                                  checked ? 'text-darkGreen' : 'text-white'
+                                }`}>
                                 {plan.name}
                               </RadioGroup.Label>
                               <RadioGroup.Description
-                                as="div"
+                                as='div'
                                 className={`inline ${
-                                  checked ? "text-gray-300" : "text-gray-500"
-                                }`}
-                              >
-                                {plan.name === "Lifetime" ?
+                                  checked ? 'text-darkGreen' : 'text-white/80'
+                                }`}>
+                                {plan.name === 'Lifetime' ? (
                                   <p>
-                                    {plan.price} one{" "}
-                                    {plan.name === "Lifetime"
-                                      ? "time payment"
-                                      : "time payment"}
+                                    {plan.price} one{' '}
+                                    {plan.name === 'Lifetime'
+                                      ? 'time payment'
+                                      : 'time payment'}
                                   </p>
-                                :
+                                ) : (
                                   <p>
-                                    {plan.price} each{" "}
-                                    {plan.name === "Monthly"
-                                      ? "month"
-                                      : "year"}
+                                    {plan.price} each{' '}
+                                    {plan.name === 'Monthly' ? 'month' : 'year'}
                                   </p>
-                                }
+                                )}
                               </RadioGroup.Description>
                             </div>
                           </div>
                           {checked && (
-                            <div className="shrink-0 text-white">
-                              <CheckCircleIcon className="h-6 w-6" />
+                            <div className='shrink-0 text-darkGreen'>
+                              <CheckCircleIcon className='h-6 w-6' />
                             </div>
                           )}
                         </div>
@@ -254,16 +251,15 @@ const Signup = () => {
             </div>
 
             <button
-              className="mt-4 w-full bg-green-400 text-white text-center font-bol rounded-md py-2 disabled:opacity-70"
+              className='mt-4 w-full bg-primary hover:bg-green-500 text-darkGreen text-center font-medium rounded-md py-2 disabled:opacity-70'
               disabled={registering}
-              onClick={handleRegister}
-            >
+              onClick={handleRegister}>
               Create account
             </button>
 
-            <div className="mt-6 flex justify-between items-center">
-              <Link href="/signin">
-                <a className="text-gray-500 hover:underline">
+            <div className='mt-6 flex justify-between items-center'>
+              <Link href='/signin'>
+                <a className='text-white/80 hover:underline'>
                   Already have an account?
                 </a>
               </Link>
@@ -277,14 +273,14 @@ const Signup = () => {
 
 function CheckIcon(props) {
   return (
-    <svg viewBox="0 0 24 24" fill="none" {...props}>
-      <circle cx={12} cy={12} r={12} fill="#fff" opacity="0.2" />
+    <svg viewBox='0 0 24 24' fill='none' {...props}>
+      <circle cx={12} cy={12} r={12} fill='#fff' opacity='0.2' />
       <path
-        d="M7 13l3 3 7-7"
-        stroke="#fff"
+        d='M7 13l3 3 7-7'
+        stroke='#fff'
         strokeWidth={1.5}
-        strokeLinecap="round"
-        strokeLinejoin="round"
+        strokeLinecap='round'
+        strokeLinejoin='round'
       />
     </svg>
   );

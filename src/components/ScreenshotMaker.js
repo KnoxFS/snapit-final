@@ -731,7 +731,7 @@ export default function ScreenshotMaker({ proMode }) {
           <Tab.Panel>
             <div className='p-6 lg:p-8 rounded-md bg-primary bg-opacity-20 w-full relative mt-10 lg:mt-0 h-auto md:max-h-[550px] overflow-y-scroll custom-scrollbar'>
               <div className='relative flex flex-row flex-wrap items-start justify-start space-y-5 lg:items-start lg:flex-col'>
-                <h3 className='text-center text-white text-opacity-50 text-light w-full text-sm'>
+                <h3 className='text-center text-white text-light w-full text-sm'>
                   Screenshot Options
                 </h3>
 
@@ -767,7 +767,7 @@ export default function ScreenshotMaker({ proMode }) {
 
                 {/* canvas opts */}
 
-                <h3 className='text-center text-white text-opacity-50 w-full text-sm'>
+                <h3 className='text-center text-white w-full text-sm'>
                   Canvas Options
                 </h3>
 
@@ -883,36 +883,35 @@ export default function ScreenshotMaker({ proMode }) {
                 <EditText options={options} setOptions={setOptions} />
 
                 {/* Roundness */}
-                {/* <Roundness
+                <Roundness
                   options={options}
                   setOptions={setOptions}
-                  target="wrapper"
-                /> */}
+                  target='wrapper'
+                />
 
                 {/* Position */}
-                {/* <ScreenshotPosition options={options} setOptions={setOptions} /> */}
+                <ScreenshotPosition options={options} setOptions={setOptions} />
 
                 {/* Custom watermark */}
-                {/* <CustomWatermark options={options} setOptions={setOptions} /> */}
+                <CustomWatermark options={options} setOptions={setOptions} />
 
                 {/* Noise */}
-                {/* <Noise options={options} setOptions={setOptions} /> */}
+                <Noise options={options} setOptions={setOptions} />
 
                 {/* Snapit Watermark */}
-                {/* <SnapitWatermark
+                <SnapitWatermark
                   options={options}
                   setOptions={setOptions}
                   proMode={proMode}
-                /> */}
+                />
 
                 {/* Reset */}
-                {/* <div
+                <div
                   onClick={resetCanvas}
-                  className="flex items-center justify-center w-full mx-auto text-green-400 cursor-pointer !mt-8"
-                >
-                  <span className="w-4 h-4 mr-1">{ResetIcon}</span>
+                  className='flex items-center justify-center w-full mx-auto text-green-400 cursor-pointer !mt-8'>
+                  <span className='w-4 h-4 mr-1'>{ResetIcon}</span>
                   Reset
-                </div> */}
+                </div>
                 {/* Pro plan tooltip */}
                 {!proMode && (
                   <div className='bg-primary md:w-full flex-1 p-4 rounded-md text-darkGreen flex flex-col md:flex-row text-center md:text-left items-center justify-between mb-4'>
@@ -944,7 +943,7 @@ export default function ScreenshotMaker({ proMode }) {
 
                   <button
                     onClick={() => setShowBuyPro(true)}
-                    className='bg-green-400 text-darkGreen hover:bg-green-500 transition w-full p-2 rounded-md mt-6'>
+                    className='bg-primary text-darkGreen hover:bg-green-500 transition w-full p-2 rounded-md mt-6'>
                     Get Snapit Pro
                   </button>
                 </div>
@@ -1063,7 +1062,7 @@ export default function ScreenshotMaker({ proMode }) {
 
         {!blob?.src && (
           <button
-            className='flex items-center justify-center px-4 py-2 text-base font-medium bg-green-400 hover:bg-green-500 transition rounded-md text-darkGreen'
+            className='flex items-center justify-center px-4 py-2 text-base font-medium bg-primary hover:bg-green-500 transition rounded-md text-darkGreen'
             onClick={setDemoImage}>
             <span className='w-6 h-6 mr-2'>
               <PhotoIcon />
@@ -1074,7 +1073,7 @@ export default function ScreenshotMaker({ proMode }) {
 
         {blob?.src && (
           <button
-            className='flex items-center justify-center px-4 py-2 text-base font-medium bg-green-400 hover:bg-green-500 transition rounded-md text-darkGreen'
+            className='flex items-center justify-center px-4 py-2 text-base font-medium bg-primary hover:bg-green-500 transition rounded-md text-darkGreen'
             onClick={handleCropImage}>
             <span className='w-6 h-6 mr-2'>
               <StopIcon />
@@ -1084,7 +1083,7 @@ export default function ScreenshotMaker({ proMode }) {
         )}
 
         <button
-          className='flex items-center justify-center px-4 py-2 text-base font-medium bg-green-400 hover:bg-green-500 transition rounded-md text-darkGreen'
+          className='flex items-center justify-center px-4 py-2 text-base font-medium bg-primary hover:bg-green-500 transition rounded-md text-darkGreen'
           title='Use Ctrl/Cmd + S to save the image'
           onClick={saveImage}>
           <span className='w-6 h-6 mr-2'>{SaveIcon}</span>
@@ -1092,7 +1091,7 @@ export default function ScreenshotMaker({ proMode }) {
         </button>
 
         <button
-          className='flex items-center justify-center px-4 py-2 text-base font-medium bg-green-400 hover:bg-green-500 transition rounded-md text-darkGreen'
+          className='flex items-center justify-center px-4 py-2 text-base font-medium bg-primary hover:bg-green-500 transition rounded-md text-darkGreen'
           onClick={copyImage}
           title='Use Ctrl/Cmd + C to copy the image'>
           <span className='w-6 h-6 mr-2'>{ClipboardIcon}</span>

@@ -71,7 +71,7 @@ const Index = () => {
 
       {/* Screenshot tool placeholder */}
       {/* <div className="h-[600px] bg-zinc-800 w-[80%] mx-auto my-24"></div> */}
-      <section className="sm:w-[90%] md:max-w-[1280px] mx-auto">
+      <section className="sm:w-[90%]  mx-auto">
         <ScreenshotMaker proMode={user?.isPro} />
       </section>
 

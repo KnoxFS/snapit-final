@@ -16,7 +16,7 @@ const DoMore = () => {
             and presets make it easy to get started.
           </p>
           {user?.isPro ? (
-            <p className='inline-block bg-green-400 py-1 px-6 rounded-full text-white'>
+            <p className='inline-block bg-primary py-1 px-6 rounded-full text-white'>
               You're already pro!
             </p>
           ) : (

@@ -2,15 +2,15 @@ import { Tab } from "@headlessui/react";
 import MobileTemplateMaker from "components/MobileTemplateMaker";
 import DesktopTemplateMaker from "components/DesktopTemplateMaker";
 import CodeTemplateMaker from "components/CodeTemplateMaker";
-import TweetTemplateMaker from "components/TweetTemplateMaker";
-
+import AnimatedScreenshotMaker from "components/AnimatedScreenshotMaker";
+import KeyCapsMaker from "components/KeyCapsMaker";
+import { SettingsProvider } from "hooks/use-settings";
 import useAuth from "hooks/useAuth";
 import Head from "components/Head";
 import HeadOG from "components/HeadOG";
 
 const Templates = () => {
   const { user } = useAuth();
-
   return (
     <>
       <Head>
@@ -33,26 +33,26 @@ const Templates = () => {
       />
 
       <Tab.Group>
-        <section className="w-[90%] md:w-[80%] mx-auto my-12 overflow-x-hidden">
-          <h2 className="text-gray-500 mb-6 font-semibold">Snapit Templates</h2>
+        <section className="mx-auto my-12 w-[90%] overflow-x-hidden md:w-[80%]">
+          <h2 className="mb-6 font-semibold text-gray-500">Snapit Templates</h2>
 
           <Tab.List
             as="section"
-            className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 mt-12 mb-24 gap-5 h-full"
+            className="mt-12 mb-24 grid h-full grid-cols-1 gap-5 sm:grid-cols-2 md:grid-cols-4"
           >
             <Tab className="outline-none">
-              <article className="bg-[#232323] p-4 rounded-md ui-selected:bg-green-400 h-full">
+            <article className='bg-primary bg-opacity-10 p-4 rounded-md ui-selected:bg-primary h-full'>
                 <img
                   src="/MobileTemplate.png"
                   alt="Mobile Template"
-                  className="rounded-md w-full"
+                  className="w-full rounded-md"
                 />
 
-                <h3 className="text-white text-xl font-bold my-4">
+<h3 className='text-white ui-selected:text-darkGreen text-xl font-bold my-4'>
                   Mobile Screenshots Mockup
                 </h3>
 
-                <p className="text-gray-500 ui-selected:text-black">
+                <p className='text-white/90 ui-selected:text-darkGreen'>
                   Create beautiful mockups for your mobile app screenshots with
                   this customizable template.
                 </p>
@@ -60,18 +60,17 @@ const Templates = () => {
             </Tab>
 
             <Tab className="outline-none">
-              <article className="bg-[#232323] p-4 rounded-md ui-selected:bg-green-400 h-full">
+            <article className='bg-primary bg-opacity-10 p-4 rounded-md ui-selected:bg-primary h-full'>
                 <img
                   src="/DesktopTemplate.png"
                   alt="Mobile Template"
-                  className="rounded-md w-full"
+                  className="w-full rounded-md"
                 />
-
-                <h3 className="text-white text-xl font-bold my-4">
+<h3 className='text-white ui-selected:text-darkGreen text-xl font-bold my-4'>
                   Desktop Screenshots Mockup
                 </h3>
 
-                <p className="text-gray-500 ui-selected:text-black">
+                <p className='text-white/90 ui-selected:text-darkGreen'>
                   Create beautiful mockups for your desktop app or website's
                   screenshots with this customizable template.
                 </p>
@@ -79,20 +78,54 @@ const Templates = () => {
             </Tab>
 
             <Tab className="outline-none">
-              <article className="bg-[#232323] p-4 rounded-md ui-selected:bg-green-400 h-full">
+            <article className='bg-primary bg-opacity-10 p-4 rounded-md ui-selected:bg-primary h-full'>
                 <img
                   src="/CodeTemplate.png"
                   alt="Mobile Template"
-                  className="rounded-md w-full"
+                  className="w-full rounded-md"
                 />
 
-                <h3 className="text-white text-xl font-bold my-4">
+<h3 className='text-white ui-selected:text-darkGreen text-xl font-bold my-4'>
                   Code Snippet Mockup
                 </h3>
 
-                <p className="text-gray-500 ui-selected:text-black">
+                <p className='text-white/90 ui-selected:text-darkGreen'>
                   Create beautiful code snippets for design resources with this
                   customizable template.
+                </p>
+              </article>
+            </Tab>
+            <Tab className="outline-none">
+            <article className='bg-primary bg-opacity-10 p-4 rounded-md ui-selected:bg-primary h-full'>
+                <img
+                  src="/DesktopTemplate.png"
+                  alt="Screenshot Template"
+                  className="w-full rounded-md"
+                />
+           <h3 className='text-white ui-selected:text-darkGreen text-xl font-bold my-4'>
+                  Animated Screenshot Mockup
+                </h3>
+                <p className='text-white/90 ui-selected:text-darkGreen'>
+                  Create Animated Screenshot or design resources with this
+                  customizable template.
+                </p>
+              </article>
+            </Tab>
+            <Tab className="outline-none">
+            <article className='bg-primary bg-opacity-10 p-4 rounded-md ui-selected:bg-primary h-full'>
+                <img
+                  src="/KeyCaps.png"
+                  alt="Screenshot Template"
+                  className="w-full rounded-md"
+                />
+
+<h3 className='text-white ui-selected:text-darkGreen text-xl font-bold my-4'>
+                  Keyboard Shortcut Mockup
+                </h3>
+
+                <p className='text-white/90 ui-selected:text-darkGreen'>
+                  Create amazing keyboard shortcut images to share online with
+                  anyone.
                 </p>
               </article>
             </Tab>
@@ -110,6 +143,14 @@ const Templates = () => {
 
           <Tab.Panel>
             <CodeTemplateMaker proMode={user?.isPro} />
+          </Tab.Panel>
+          <Tab.Panel>
+            <AnimatedScreenshotMaker proMode={true} />
+          </Tab.Panel>
+          <Tab.Panel>
+            <SettingsProvider>
+              <KeyCapsMaker proMode={true} />
+            </SettingsProvider>
           </Tab.Panel>
         </Tab.Panels>
       </Tab.Group>

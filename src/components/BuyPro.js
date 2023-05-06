@@ -175,7 +175,7 @@ const Settings = ({ open, setOpen }) => {
 
                     <button
                       onClick={handleBuyPro}
-                      className='bg-green-400 text-white w-full py-4 rounded-md mt-12'>
+                      className='bg-primary text-white w-full py-4 rounded-md mt-12'>
                       Get Snapit Pro - {selectedPlan.name}
                     </button>
                   </article>

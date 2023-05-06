@@ -12,7 +12,12 @@ module.exports = {
         primary: '#15D47E',
         dark: "#1C1C1C",
         darkGreen: '#00241D',
-        bgGreen: '#151F1D'
+        bgGreen: '#151F1D',
+        bgDarkGreen : 'rgba(21, 212, 126, 0.3)',
+        bgDark : 'rgba(21, 212, 126, 0.1)',
+        bgKeysDark: 'rgba(21, 212, 126, 1)',
+        bgToggle: 'rgba(21, 31, 29, 1)',
+        bgOnToggle: 'rgba(21, 212, 126, 1)'
       },
 
       fontFamily: {
