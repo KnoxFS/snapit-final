@@ -145,11 +145,11 @@ const Templates = () => {
             <CodeTemplateMaker proMode={user?.isPro} />
           </Tab.Panel>
           <Tab.Panel>
-            <AnimatedScreenshotMaker proMode={true} />
+            <AnimatedScreenshotMaker proMode={user?.isPro} />
           </Tab.Panel>
           <Tab.Panel>
             <SettingsProvider>
-              <KeyCapsMaker proMode={true} />
+              <KeyCapsMaker proMode={user?.isPro} />
             </SettingsProvider>
           </Tab.Panel>
         </Tab.Panels>
