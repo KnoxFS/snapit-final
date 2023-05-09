@@ -22,10 +22,10 @@ const URLScreenshot = ({
 }) => {
   const [websiteUrl, setWebsiteUrl] = useState("");
   const getWebsiteScreenshot = async () => {
-    if (!proMode) {
-      toast.error("This feature is only available in pro mode");
-      return;
-    }
+    // if (!proMode) {
+    //   toast.error("This feature is only available in pro mode");
+    //   return;
+    // }
     // valid url with http or https
     if (!websiteUrl.match(/^(http|https):\/\//)) {
       toast.error("Please enter a valid url (https://example.com).");
