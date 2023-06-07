@@ -11,7 +11,7 @@ export default async function handler(req, res) {
   // Save the subscription to your database.
   await supabase
     .from("users")
-    .update({session_id: session.id })
+    .update({subscription_id: 'lifetime', session_id: session.id })
     .eq("user_id", user_id);
 
   res.redirect(307, "/?successPro=true");
