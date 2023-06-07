@@ -108,7 +108,7 @@ export default function AuthProvider({ children }) {
       setUser(user ? data : null);
       setLoading(false);
     }
-  };
+  }; 
 
   const value = {
     user,
