@@ -126,7 +126,7 @@ const Navbar = () => {
 
             <Link href='/signup'>
               <a className='bg-primary py-2 px-6 rounded-sm hover:bg-green-500 transition text-darkGreen font-semibold'>
-                Try it free
+                Signup
               </a>
             </Link>
           </div>
