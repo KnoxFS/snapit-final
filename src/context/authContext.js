@@ -91,6 +91,7 @@ export default function AuthProvider({ children }) {
       if (subscription_id) {
         if (subscription_id == 'lifetime' || subscription_id == null) {
           data.isPro = true;
+          data.endPro = 'Never';
         } else {
           //  verify subscription in stripe
           const { active, end } = await fetch(
