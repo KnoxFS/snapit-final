@@ -34,13 +34,20 @@ const Account = () => {
                 Snapit Pro is currently active
               </div>
 
-              {user.endPro != '' &&  (
+              {user.endPro != null ?  (
               <div className="bg-green-400 p-4 rounded-md">
                 Renews on{" "}
                   <span className="font-bold">
                   {new Intl.DateTimeFormat("en-US", {
                     dateStyle: "medium",
                   }).format(new Date(new Date().getTime() + user.endPro))}
+                </span>
+              </div>
+              ): (
+                <div className="bg-green-400 p-4 rounded-md">
+                Renews {" "}
+                  <span className="font-bold">
+                    Never
                 </span>
               </div>
               )}
