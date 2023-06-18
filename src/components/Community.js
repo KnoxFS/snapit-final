@@ -4,7 +4,7 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 // css
 import 'swiper/css';
 
-const feeds = [ 
+const feeds = [
   {
     id: 1,
     author: '@ste_grider',
@@ -38,10 +38,10 @@ const feeds = [
 const Community = () => {
   return (
     <section
-      className='sm:w-[90%] md:max-w-[1280px] mx-auto overflow-hidden md:mt-[140px] mt-[80px]'
+      className='mx-auto mt-[80px] overflow-hidden sm:w-[90%] md:mt-[140px] md:max-w-[1280px]'
       id='community'>
-      <header className='text-center text-white pb-16'>
-        <h3 className='md:text-5xl text-3xl font-semibold mb-4'>
+      <header className='pb-16 text-center text-darkGreen dark:text-white'>
+        <h3 className='mb-4 text-3xl font-semibold md:text-5xl'>
           Join the community
         </h3>
       </header>
@@ -57,7 +57,6 @@ const Community = () => {
         spaceBetween={10}
         slidesPerView={3.5}
         breakpoints={{
-          
           320: {
             slidesPerView: 1.2,
             spaceBetween: 10,
@@ -90,16 +89,20 @@ const Community = () => {
         {/* card */}
         {feeds.map(feed => (
           <SwiperSlide key={feed.id} className='cursor-move'>
-            <div className='bg-primary bg-opacity-10 p-4 rounded-md lg:min-w-[350px] min-h-[200px] mx-2 md:mx-auto'>
-              <header className='mb-4 flex items-center space-x-2'>
+            <div className='mx-2 min-h-[200px] rounded-md bg-primary bg-opacity-10 p-4 md:mx-auto lg:min-w-[350px]'>
+              <header className='flex items-center mb-4 space-x-2'>
                 <img
-                  className='h-12 w-12 rounded-full object-cover'
+                  className='object-cover w-12 h-12 rounded-full'
                   src={feed.avatar}
                 />
-                <h3 className='text-white'>{feed.author}</h3>
+                <h3 className='font-bold tracking-wide text-darkGreen dark:text-white '>
+                  {feed.author}
+                </h3>
               </header>
 
-              <p className='text-white text-[18px]'>{feed.content}</p>
+              <p className='text-[18px] text-darkGreen dark:text-white'>
+                {feed.content}
+              </p>
             </div>
           </SwiperSlide>
         ))}

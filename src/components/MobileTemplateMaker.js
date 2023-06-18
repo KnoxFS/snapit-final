@@ -267,7 +267,7 @@ const TemplateMaker = ({ proMode }) => {
       <>
         {bgPicker ? (
           <div
-            className='fixed inset-0 w-full h-full bg-transparent'
+            className='fixed inset-0 h-full w-full bg-transparent'
             onClick={() => setBGPicker(false)}
           />
         ) : (
@@ -275,16 +275,16 @@ const TemplateMaker = ({ proMode }) => {
         )}
         <div
           className={classnames(
-            'absolute w-auto max-w-[400px] z-10 top-[calc(100%)] left-[-30px] bg-white/80 backdrop-blur shadow-lg py-4 px-5 rounded-xl flex shadow-gray-500/50 dark:shadow-black/80 border border-gray-400 flex-col dark:border-gray-800 dark:bg-black/80 duration-200',
+            'absolute top-[calc(100%)] left-[-30px] z-10 flex w-auto max-w-[400px] flex-col rounded-xl border border-gray-400 bg-white/80 py-4 px-5 shadow-lg shadow-gray-500/50 backdrop-blur duration-200 dark:border-gray-800 dark:bg-black/80 dark:shadow-black/80',
             {
-              'opacity-0 pointer-events-none scale-[0.9]': !bgPicker,
+              'pointer-events-none scale-[0.9] opacity-0': !bgPicker,
             },
             {
-              'opacity-100 pointer-events-auto scale-[1]': bgPicker,
+              'pointer-events-auto scale-[1] opacity-100': bgPicker,
             },
           )}>
           <div
-            className='absolute top-[5%] right-[5%] opacity-50 cursor-pointer hover:opacity-100 z-10'
+            className='absolute top-[5%] right-[5%] z-10 cursor-pointer opacity-50 hover:opacity-100'
             onClick={() => setBGPicker(false)}>
             ✕
           </div>
@@ -292,11 +292,11 @@ const TemplateMaker = ({ proMode }) => {
             {/* Pick Start Color */}
             <div className='mb-1'>Pick first color</div>
             <div className='flex items-center'>
-              <div className='relative group'>
+              <div className='group relative'>
                 <input
                   id='startColorPicker'
                   type='color'
-                  className='absolute top-0 left-0 w-12 h-12 rounded-full opacity-0 cursor-pointer'
+                  className='absolute top-0 left-0 h-12 w-12 cursor-pointer rounded-full opacity-0'
                   value={options.customTheme.colorStart || '#222'}
                   onChange={e =>
                     setOptions({
@@ -313,7 +313,7 @@ const TemplateMaker = ({ proMode }) => {
                     backgroundColor: options?.customTheme?.colorStart || '#222',
                   }}
                   htmlFor='startColorPicker'
-                  className='left-0 flex items-center justify-center w-12 h-12 rounded-full pointer-events-none text-white/50 group-hover:scale-[1.1] duration-100'>
+                  className='pointer-events-none left-0 flex h-12 w-12 items-center justify-center rounded-full text-white/50 duration-100 group-hover:scale-[1.1]'>
                   <span className='font-mono text-xs text-white/80 drop-shadow'>
                     Pick
                   </span>
@@ -324,7 +324,7 @@ const TemplateMaker = ({ proMode }) => {
                 placeholder='Enter hex value'
                 type='text'
                 value={options.customTheme.colorStart || '#000000'}
-                className='px-2 py-1 font-mono text-base text-black border-2 border-gray-500 rounded-lg focus:outline-none focus:border-black'
+                className='rounded-lg border-2 border-gray-500 px-2 py-1 font-mono text-base text-black focus:border-black focus:outline-none'
                 onChange={e => {
                   let startColorToast;
                   setOptions({
@@ -352,11 +352,11 @@ const TemplateMaker = ({ proMode }) => {
           <div>
             <div className='mb-1'>Pick second color</div>
             <div className='flex items-center'>
-              <div className='relative group'>
+              <div className='group relative'>
                 <input
                   id='startColorPicker'
                   type='color'
-                  className='absolute top-0 left-0 w-12 h-12 rounded-full opacity-0 cursor-pointer'
+                  className='absolute top-0 left-0 h-12 w-12 cursor-pointer rounded-full opacity-0'
                   value={options.customTheme.colorEnd || '#222'}
                   onChange={e =>
                     setOptions({
@@ -373,7 +373,7 @@ const TemplateMaker = ({ proMode }) => {
                     backgroundColor: options?.customTheme?.colorEnd || '#222',
                   }}
                   htmlFor='startColorPicker'
-                  className='left-0 flex items-center justify-center w-12  h-12 rounded-full pointer-events-none text-white/50 group-hover:scale-[1.1] duration-100'>
+                  className='pointer-events-none left-0 flex h-12 w-12  items-center justify-center rounded-full text-white/50 duration-100 group-hover:scale-[1.1]'>
                   <span className='font-mono text-xs text-white/80 drop-shadow'>
                     Pick
                   </span>
@@ -384,7 +384,7 @@ const TemplateMaker = ({ proMode }) => {
                 placeholder='Enter hex value'
                 type='text'
                 value={options.customTheme.colorEnd || '#000000'}
-                className='px-2 py-1 font-mono text-base text-black border-2 border-gray-500 rounded-lg focus:outline-none focus:border-black'
+                className='rounded-lg border-2 border-gray-500 px-2 py-1 font-mono text-base text-black focus:border-black focus:outline-none'
                 onChange={e => {
                   let endColorToast;
                   setOptions({
@@ -417,7 +417,7 @@ const TemplateMaker = ({ proMode }) => {
   };
 
   const renderPreview = () => (
-    <article className='bg-primary bg-opacity-10 h-full p-8 rounded-md flex justify-center'>
+    <article className='flex h-full justify-center rounded-md bg-primary bg-opacity-20 p-8 dark:bg-opacity-10'>
       {/* wrapper */}
       <div
         ref={wrapperRef}
@@ -437,7 +437,7 @@ const TemplateMaker = ({ proMode }) => {
               }
         }
         className={classnames(
-          `bg-cover h-[600px] w-full relative overflow-hidden transition-all flex p-4 ${
+          `relative flex h-[600px] w-full overflow-hidden bg-cover p-4 transition-all ${
             options.text.position === 'top' ? 'flex-col' : 'flex-col-reverse'
           }`,
           { [options?.theme]: !options.customTheme },
@@ -451,7 +451,7 @@ const TemplateMaker = ({ proMode }) => {
             className={`w-full ${options.text.align} ${
               options.text.position === 'top' ? 'mt-2' : 'mb-2'
             } ${options.text.color === 'dark' ? 'text-black' : 'text-white'}`}>
-            <p className='font-bold text-3xl mb-2 break-word whitespace-pre-wrap'>
+            <p className='break-word mb-2 whitespace-pre-wrap text-3xl font-bold'>
               {options.text.heading}
             </p>
             <p className='break-word whitespace-pre-wrap'>
@@ -466,7 +466,7 @@ const TemplateMaker = ({ proMode }) => {
           tiltMaxAngleY={30}
           tiltMaxAngleX={30}
           reset={false}
-          className='relative w-full h-[600px]'>
+          className='relative h-[600px] w-full'>
           {/* device */}
           <div
             className={`absolute ${options.position} transform transition-all`}>
@@ -478,7 +478,7 @@ const TemplateMaker = ({ proMode }) => {
               <div className='device-frame'>
                 <img
                   src={blob.src || '/bg-mobile.jpg'}
-                  className='w-full h-full rounded-[calc(68px/1.6)] bg-top pointer-events-none select-none'
+                  className='pointer-events-none h-full w-full select-none rounded-[calc(68px/1.6)] bg-top'
                 />
               </div>
               <div className='device-stripe'></div>
@@ -493,7 +493,7 @@ const TemplateMaker = ({ proMode }) => {
 
         {/* watermark */}
         {options?.watermark && (
-          <div className='bg-green-500 text-white absolute bottom-0 right-1/2 translate-x-1/2 p-1 px-2 select-none text-xs rounded-t-md'>
+          <div className='absolute bottom-0 right-1/2 translate-x-1/2 select-none rounded-t-md bg-green-500 p-1 px-2 text-xs text-white'>
             Made with snapit.gg
           </div>
         )}
@@ -502,12 +502,14 @@ const TemplateMaker = ({ proMode }) => {
   );
 
   const renderOptions = () => (
-    <article className='bg-primary bg-opacity-10 rounded-md p-4 overflow-y-auto overflow-x-hidden max-h-[680px] custom-scrollbar'>
+    <article className='custom-scrollbar max-h-[680px] overflow-y-auto overflow-x-hidden rounded-md bg-primary bg-opacity-20 p-4 dark:bg-opacity-10'>
       <div className='space-y-4'>
-        <h3 className='text-center text-white/90 w-full'>Device Options</h3>
+        <h3 className='w-full text-center text-darkGreen dark:text-white'>
+          Device Options
+        </h3>
 
         {/* Add image */}
-        <div className='bg-primary font-medium p-2 rounded-md text-darkGreen flex items-center justify-between'>
+        <div className='flex items-center justify-between rounded-md bg-primary bg-opacity-30 p-2 font-medium text-darkGreen dark:bg-opacity-100'>
           <p className='w-[60%] text-sm'>Add Image</p>
 
           <input
@@ -520,10 +522,10 @@ const TemplateMaker = ({ proMode }) => {
 
           <label
             htmlFor='image'
-            className={`cursor-pointer bg-darkGreen w-max p-2 rounded-md text-sm relative ${
+            className={`relative w-max cursor-pointer rounded-md bg-primary p-2 text-sm dark:bg-darkGreen ${
               blob.src ? 'bg-opacity-70' : ''
             }`}>
-            <PlusIcon className='w-6 h-6 text-white' />
+            <PlusIcon className='h-6 w-6 text-darkGreen dark:text-white' />
 
             {/* remove image */}
             {blob.src && (
@@ -532,14 +534,14 @@ const TemplateMaker = ({ proMode }) => {
                   e.stopPropagation();
                   setBlob({ src: null, h: 0, w: 0 });
                 }}
-                className='absolute -right-1 -top-1 bg-darkGreen shadow-md rounded-full p-0.5 z-10'>
-                <XMarkIcon className='h-3 w-3 text-white' />
+                className='absolute -right-1 -top-1 z-10 rounded-full bg-darkGreen p-0.5 shadow-md'>
+                <XMarkIcon className='h-3 w-3 text-darkGreen dark:text-white' />
               </button>
             )}
           </label>
         </div>
 
-        <p className='text-center text-white text-sm'>
+        <p className='text-center text-sm text-darkGreen dark:text-white'>
           Or add screenshot from website/link.
         </p>
 
@@ -552,19 +554,21 @@ const TemplateMaker = ({ proMode }) => {
         />
 
         {/* Device */}
-        <div className='grid grid-cols-[3fr,1fr] w-full'>
+        <div className='grid w-full grid-cols-[3fr,1fr]'>
           <div className='flex items-center space-x-2'>
-            <DevicePhoneMobileIcon className='h-6 w-6 text-white/90' />
+            <DevicePhoneMobileIcon className='h-6 w-6 text-darkGreen dark:text-white' />
 
-            <h3 className='text-sm text-white/90'>Device</h3>
+            <h3 className='text-sm text-darkGreen dark:text-white'>Device</h3>
           </div>
-          <div className='flex justify-around items-center'>
+          <div className='flex items-center justify-around'>
             {/* tip */}
             <div className='relative'>
-              <QuestionMarkCircleIcon className='w-6 h-6 text-white cursor-pointer [&~div]:hover:block' />
+              <QuestionMarkCircleIcon className='h-6 w-6 cursor-pointer text-darkGreen dark:text-white [&~div]:hover:block' />
 
-              <div className='absolute top-full text-center left-1/2 bg-dark/40 backdrop-blur-sm p-2 rounded-md shadow-md z-50 transform -translate-x-1/2 hidden hover:block w-44'>
-                <p className='text-sm text-white'>Sets the device to use.</p>
+              <div className='absolute top-full left-1/2 z-50 hidden w-44 -translate-x-1/2 transform rounded-md bg-dark/40 p-2 text-center shadow-md backdrop-blur-sm hover:block'>
+                <p className='text-sm text-darkGreen dark:text-white'>
+                  Sets the device to use.
+                </p>
               </div>
             </div>
 
@@ -575,11 +579,11 @@ const TemplateMaker = ({ proMode }) => {
                     <ChevronRightIcon
                       className={`${
                         open ? 'rotate-90 transform' : ''
-                      } h-5 w-5 text-white/90`}
+                      } h-5 w-5 text-darkGreen dark:text-white`}
                     />
                   </Popover.Button>
 
-                  <Popover.Panel className='absolute z-50 top-full mt-2 -right-[9px]  bg-dark/40 backdrop-blur-md  p-4 rounded-md shadow-md w-72'>
+                  <Popover.Panel className='absolute top-full -right-[9px] z-50 mt-2  w-72 rounded-md  bg-dark/40 p-4 shadow-md backdrop-blur-md'>
                     <div className='grid grid-cols-2 gap-4'>
                       {/* render preview */}
                       {devices.map((device, i) => {
@@ -609,19 +613,19 @@ const TemplateMaker = ({ proMode }) => {
                             }}>
                             {/* pro badge */}
                             {device.isPro && (
-                              <div className='absolute top-0 right-0 bg-green-500 text-white px-2 text-xs rounded-bl-md'>
+                              <div className='absolute top-0 right-0 rounded-bl-md bg-green-500 px-2 text-xs text-white'>
                                 Pro
                               </div>
                             )}
 
                             {/* device */}
-                            <div className='h-32 relative'>
+                            <div className='relative h-32'>
                               <div
-                                className={`${device.value} scale-[0.12] absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2`}>
+                                className={`${device.value} absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 scale-[0.12] transform`}>
                                 <div className='device-frame'>
                                   <img
                                     src={blob.src || '/bg-mobile.jpg'}
-                                    className='w-full h-full rounded-[calc(68px/1.6)] bg-top pointer-events-none select-none'
+                                    className='pointer-events-none h-full w-full select-none rounded-[calc(68px/1.6)] bg-top'
                                   />
                                 </div>
                                 <div className='device-stripe'></div>
@@ -633,7 +637,7 @@ const TemplateMaker = ({ proMode }) => {
                               </div>
                             </div>
 
-                            <p className='text-xs mt-2 text-white'>
+                            <p className='mt-2 text-xs text-white'>
                               {device.name}
                             </p>
                           </button>
@@ -672,30 +676,34 @@ const TemplateMaker = ({ proMode }) => {
           min='30'
         />
 
-        <h3 className='text-center text-white/90 w-full'>Canvas Options</h3>
+        <h3 className='w-full text-center text-darkGreen dark:text-white'>
+          Canvas Options
+        </h3>
 
         {/* Background */}
         <Disclosure>
           {({ open }) => (
             <>
               <Disclosure.Button className='w-full'>
-                <div className='relative flex items-center justify-between pb-2 text-sm text-white/90 w-full'>
-                  <div className='grid grid-cols-[2fr,1fr] w-full'>
+                <div className='relative flex w-full items-center justify-between pb-2 text-sm text-darkGreen dark:text-white'>
+                  <div className='grid w-full grid-cols-[2fr,1fr]'>
                     <div className='flex items-center space-x-2'>
-                      <BackgroundIcon className='h-6 w-6 text-white/90' />
+                      <BackgroundIcon className='h-6 w-6 text-darkGreen dark:text-white' />
 
-                      <h3 className='text-sm text-white/90'>Background</h3>
+                      <h3 className='text-sm text-darkGreen dark:text-white'>
+                        Background
+                      </h3>
                     </div>
 
-                    <div className='flex justify-around items-center gap-2'>
+                    <div className='flex items-center justify-around gap-2'>
                       <div className='relative'>
                         <div
                           onClick={e => {
                             e.stopPropagation();
                             setBGPicker(!bgPicker);
                           }}
-                          className='flex items-center px-2 ml-2 rounded-lg cursor-pointer bg-primary hover:bg-green-500 font-medium text-darkGreen'>
-                          <span className='w-3 h-3 mr-1'>
+                          className='ml-2 flex cursor-pointer items-center rounded-lg bg-primary px-2 font-medium text-darkGreen hover:bg-green-500'>
+                          <span className='mr-1 h-3 w-3'>
                             {ColorPickerIcon}
                           </span>
                           Pick
@@ -704,7 +712,7 @@ const TemplateMaker = ({ proMode }) => {
                       <ChevronRightIcon
                         className={`${
                           open ? 'rotate-90 transform' : ''
-                        } h-5 w-5 text-white/90`}
+                        } h-5 w-5 text-darkGreen  dark:text-white`}
                       />
                     </div>
                     {pickBackground()}
@@ -712,9 +720,9 @@ const TemplateMaker = ({ proMode }) => {
                 </div>
               </Disclosure.Button>
 
-              <Disclosure.Panel className='w-full overflow-x-scroll scrollbar-none'>
+              <Disclosure.Panel className='scrollbar-none w-full overflow-x-scroll'>
                 <div>
-                  <div className='grid flex-wrap grid-cols-6 mt-1 gap-x-4 gap-y-2'>
+                  <div className='mt-1 grid grid-cols-6 flex-wrap gap-x-4 gap-y-2'>
                     {[
                       'bg-gradient-to-br from-pink-300 via-orange-200 to-red-300',
                       'bg-gradient-to-br from-green-300 via-yellow-200 to-green-200',
@@ -731,7 +739,7 @@ const TemplateMaker = ({ proMode }) => {
                     ].map(theme => (
                       <div
                         key={theme}
-                        className={`cursor-pointer shadow dark:shadow-black/20 shadow-gray-500/20 w-8 h-8 rounded-full ${theme}`}
+                        className={`h-8 w-8 cursor-pointer rounded-full shadow shadow-gray-500/20 dark:shadow-black/20 ${theme}`}
                         onClick={() => {
                           setOptions({
                             ...options,
@@ -744,11 +752,11 @@ const TemplateMaker = ({ proMode }) => {
                     ))}
                   </div>
 
-                  <div className='grid flex-wrap grid-cols-6 mt-2 gap-x-4 gap-y-2'>
+                  <div className='mt-2 grid grid-cols-6 flex-wrap gap-x-4 gap-y-2'>
                     {wallpapers.map(wallpaper => (
                       <div
                         key={wallpaper.name}
-                        className='cursor-pointer shadow dark:shadow-black/20 shadow-gray-500/20 w-8 h-8 rounded-full bg-cover bg-center'
+                        className='h-8 w-8 cursor-pointer rounded-full bg-cover bg-center shadow shadow-gray-500/20 dark:shadow-black/20'
                         style={{
                           backgroundImage: `url(${wallpaper.src})`,
                         }}
@@ -765,7 +773,7 @@ const TemplateMaker = ({ proMode }) => {
 
                   {/* gradient direction */}
                   <RadioGroup
-                    className='flex items-center space-x-2 mt-4'
+                    className='mt-4 flex items-center space-x-2 text-darkGreen dark:text-white'
                     value={options.bgDirection}
                     onChange={value =>
                       setOptions({
@@ -777,7 +785,7 @@ const TemplateMaker = ({ proMode }) => {
                       <RadioGroup.Option
                         key={gd}
                         value={gd.value}
-                        className='border p-1 rounded-md ui-checked:border-green-400 cursor-pointer'>
+                        className='cursor-pointer rounded-md border p-1 text-darkGreen ui-checked:border-green-400 dark:text-white'>
                         <span>{gd.icon}</span>
                       </RadioGroup.Option>
                     ))}
@@ -799,20 +807,20 @@ const TemplateMaker = ({ proMode }) => {
         />
 
         {/* Export / Copy */}
-        <div className='flex items-center justify-center w-full space-x-6 !mt-12'>
+        <div className='!mt-12 flex w-full items-center justify-center space-x-6'>
           <button
-            className='flex items-center justify-center px-4 py-2 text-base bg-primary hover:bg-green-500 font-medium rounded-md text-darkGreen'
+            className='flex items-center justify-center rounded-md bg-primary px-4 py-2 text-base font-medium text-darkGreen hover:bg-green-500'
             title='Use Ctrl/Cmd + S to save the image'
             onClick={saveImage}>
-            <span className='w-6 h-6 mr-2'>{SaveIcon}</span>
+            <span className='mr-2 h-6 w-6'>{SaveIcon}</span>
             Save
           </button>
 
           <button
-            className='flex items-center justify-center px-4 py-2 text-base bg-primary hover:bg-green-500 font-medium rounded-md text-darkGreen'
+            className='flex items-center justify-center rounded-md bg-primary px-4 py-2 text-base font-medium text-darkGreen hover:bg-green-500'
             onClick={copyImage}
             title='Use Ctrl/Cmd + C to copy the image'>
-            <span className='w-6 h-6 mr-2'>{ClipboardIcon}</span>
+            <span className='mr-2 h-6 w-6'>{ClipboardIcon}</span>
             Copy
           </button>
         </div>
@@ -820,8 +828,8 @@ const TemplateMaker = ({ proMode }) => {
         {/* Reset */}
         <div
           onClick={resetCanvas}
-          className='flex items-center justify-center w-full mx-auto text-primary cursor-pointer !mt-8'>
-          <span className='w-4 h-4 mr-1'>{ResetIcon}</span>
+          className='mx-auto !mt-8 flex w-full cursor-pointer items-center justify-center text-primary'>
+          <span className='mr-1 h-4 w-4'>{ResetIcon}</span>
           Reset
         </div>
       </div>
@@ -829,7 +837,7 @@ const TemplateMaker = ({ proMode }) => {
   );
 
   return (
-    <section className='w-[90%] md:w-[80%] mx-auto grid grid-cols-1 sm:grid-cols-1 md:grid-cols-[1fr,300px] gap-10'>
+    <section className='mx-auto grid w-[90%] grid-cols-1 gap-10 sm:grid-cols-1 md:w-[80%] md:grid-cols-[1fr,300px]'>
       {renderPreview()} {renderOptions()}
     </section>
   );

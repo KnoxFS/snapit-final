@@ -9,11 +9,11 @@ import { FaYoutube } from 'react-icons/fa';
 const Footer = () => {
   return (
     <footer
-      className='text-white p-8 text-opacity-70  flex flex-col md:flex-row items-center justify-evenly text-sm md:text-base'
+      className='mt-8 flex flex-col items-center justify-evenly bg-primary bg-opacity-20 p-8 text-sm text-darkGreen text-opacity-70 dark:bg-opacity-10 dark:text-white md:flex-row md:text-base'
       style={{ justifyContent: 'space-evenly' }}>
       <p>Snapit - All rights reserved (c) 2023.</p>
 
-      <ul className='space-x-4 md:space-x-6 hover:[&>*]:underline my-4 md:my-0'>
+      <ul className='my-4 space-x-4 md:my-0 md:space-x-6 hover:[&>*]:underline'>
         <Link href='/aboutus'>
           <a>About Us</a>
         </Link>
@@ -39,11 +39,11 @@ const Footer = () => {
 
       <p>
         <ul
-          className='space-x-4 md:space-x-6 hover:[&>*]:underline my-4 md:my-0'
+          className='my-4 space-x-4 md:my-0 md:space-x-6 hover:[&>*]:underline'
           style={{ display: 'flex' }}>
           <li>
             <a href='mailto:support@snapit.gg'>
-              <EnvelopeIcon className='w-6 h-6 text-white' />{' '}
+              <EnvelopeIcon className='h-6 w-6 text-darkGreen dark:text-white' />{' '}
             </a>
           </li>
           <li>
@@ -51,7 +51,7 @@ const Footer = () => {
               href='https://twitter.com/snapit_gg'
               target='_blank'
               rel='noreferrer'>
-              <TwitterIcon className='w-6 h-6 text-white' />
+              <TwitterIcon className='h-6 w-6 text-darkGreen dark:text-white' />
             </a>
           </li>
           <li>
@@ -59,7 +59,7 @@ const Footer = () => {
               href='https://www.instagram.com/snapit_gg/'
               target='_blank'
               rel='noreferrer'>
-              <InstagramIcon className='w-6 h-6 text-white' />
+              <InstagramIcon className='h-6 w-6 text-darkGreen dark:text-white' />
             </a>
           </li>
           <li>
@@ -67,7 +67,7 @@ const Footer = () => {
               href='https://www.linkedin.com/company/snapitgg'
               target='_blank'
               rel='noreferrer'>
-              <LinkedInIcon className='w-6 h-6 text-white' />
+              <LinkedInIcon className='h-6 w-6 text-darkGreen dark:text-white' />
             </a>
           </li>
           <li>
@@ -75,7 +75,7 @@ const Footer = () => {
               href='https://www.youtube.com/watch?v=sQUBlJvv-zQ'
               target='_blank'
               rel='noreferrer'>
-              <FaYoutube className='w-6 h-6 text-white' />{' '}
+              <FaYoutube className='h-6 w-6 text-darkGreen dark:text-white' />{' '}
             </a>
           </li>
           <li>
@@ -83,7 +83,7 @@ const Footer = () => {
               href='https://www.facebook.com/groups/910618990057673'
               target='_blank'
               rel='noreferrer'>
-              <FaFacebook className='w-6 h-6 text-white' />{' '}
+              <FaFacebook className='h-6 w-6 text-darkGreen dark:text-white' />{' '}
             </a>
           </li>
         </ul>

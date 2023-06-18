@@ -1,15 +1,15 @@
-import { Joystick } from "react-joystick-component";
+import { Joystick } from 'react-joystick-component';
 
-import { Disclosure } from "@headlessui/react";
+import { Disclosure } from '@headlessui/react';
 
-import { LanternIcon, ThunderIcon } from "ui/icons";
+import { LanternIcon, ThunderIcon } from 'ui/icons';
 
 import {
   QuestionMarkCircleIcon,
   ChevronRightIcon,
-} from "@heroicons/react/24/outline";
+} from '@heroicons/react/24/outline';
 
-import useAuth from "hooks/useAuth";
+import useAuth from 'hooks/useAuth';
 
 const Tilt = ({ proMode, onTiltMove, setManualTiltAngle }) => {
   const { user } = useAuth();
@@ -18,31 +18,32 @@ const Tilt = ({ proMode, onTiltMove, setManualTiltAngle }) => {
     <Disclosure>
       {({ open }) => (
         <>
-          <Disclosure.Button className="w-full" disabled={!user?.isPro}>
-            <div className="grid grid-cols-[3fr,1fr] w-full ">
-              <div className="flex items-center space-x-2">
-                <LanternIcon />
+          <Disclosure.Button className='w-full' disabled={!user?.isPro}>
+            <div className='grid w-full grid-cols-[3fr,1fr] '>
+              <div className='flex items-center space-x-2'>
+                <LanternIcon className={'text-darkGreen dark:text-white'} />
 
-                <h3 className="text-sm text-white">Tilt</h3>
+                <h3 className='text-sm text-darkGreen dark:text-white'>Tilt</h3>
               </div>
 
-              <div className="flex justify-around items-center">
+              <div className='flex items-center justify-around'>
                 {/* tip */}
-                <div className="relative">
-                  <QuestionMarkCircleIcon className="w-6 h-6 text-white cursor-pointer [&~div]:hover:block" />
-                  <div className="absolute top-full left-1/2 bg-dark/40 backdrop-blur-sm p-2 rounded-md shadow-md z-50 transform -translate-x-1/2 hidden hover:block w-44">
-                    <p className="text-sm text-white">
+                <div className='relative'>
+                  <QuestionMarkCircleIcon className='h-6 w-6 cursor-pointer text-darkGreen dark:text-white [&~div]:hover:block' />
+                  <div className='absolute z-50 hidden p-2 transform -translate-x-1/2 rounded-md shadow-md top-full left-1/2 w-44 bg-dark/40 backdrop-blur-sm hover:block'>
+                    <p className='text-sm text-darkGreen dark:text-white'>
                       Sets a 3D effect to the screenshot.
                     </p>
                   </div>
                 </div>
                 {user?.isPro ? (
                   <ChevronRightIcon
-                    className={`${open ? "rotate-90 transform" : ""
-                      } h-5 w-5 text-gray-500 justify-self-end`}
+                    className={`${
+                      open ? 'rotate-90 transform' : ''
+                    } h-5 w-5 justify-self-end text-darkGreen dark:text-white`}
                   />
                 ) : (
-                  <div className="justify-self-end mr-2">
+                  <div className='mr-2 justify-self-end'>
                     <ThunderIcon />
                   </div>
                 )}
@@ -50,24 +51,23 @@ const Tilt = ({ proMode, onTiltMove, setManualTiltAngle }) => {
             </div>
           </Disclosure.Button>
 
-          <Disclosure.Panel className="w-full overflow-x-scroll scrollbar-none">
-            <div className="flex justify-between items-center">
-              <p className="text-sm text-gray-400 w-[50%]">
+          <Disclosure.Panel className='w-full overflow-x-scroll scrollbar-none'>
+            <div className='flex items-center justify-between'>
+              <p className='w-[50%] text-sm text-gray-400'>
                 Move around with the joystick to tilt the screenshot.
               </p>
 
               {/* Reset */}
               <button
                 onClick={() => setManualTiltAngle([0, 0])}
-                className="mr-4 text-sm text-green-500"
-              >
+                className='mr-4 text-sm text-green-500'>
                 Reset
               </button>
 
               <Joystick
                 size={40}
-                baseColor="#4ade80"
-                stickColor="#232323"
+                baseColor='#4ade80'
+                stickColor='#232323'
                 disabled={!proMode}
                 move={onTiltMove}
               />

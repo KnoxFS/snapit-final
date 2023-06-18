@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import ToggleTheme from './ToggleTheme';
 
 const brands = [
   {
@@ -21,20 +22,20 @@ const brands = [
 
 const Hero = () => {
   return (
-    <section className='sm:w-[90%] md:max-w-[1280px] mx-auto grid grid-cols-1 md:grid-cols-1 gap-12 mt-12 place-items-center text-center'>
-      <article className='grid place-items-center'>
-        <h1 className='md:text-6xl text-3xl text-white font-semibold'>
+    <section className='mx-auto mt-12 grid grid-cols-1 place-items-center gap-12 text-center sm:w-[90%] md:max-w-[1280px] md:grid-cols-1'>
+      <article className='relative grid place-items-center'>
+        <h1 className='text-3xl font-semibold text-darkGreen dark:text-white md:text-6xl'>
           Creating beautiful screenshots
           <br />
           has
           <span className='relative z-[1]'>
             {' '}
             never been so easy
-            <span className='bg-primary w-[220px] h-4 lg:block absolute right-0 bottom-2 -z-[1] hidden'></span>
+            <span className='absolute right-0 bottom-2 -z-[1] hidden h-4 w-[220px] bg-primary lg:block'></span>
           </span>
         </h1>
 
-        <p className='text-lg text-white text-opacity-70 mt-4 mx-4 w-[60%]'>
+        <p className='mx-4 mt-4 w-[60%] text-lg text-darkGreen text-opacity-70 dark:text-white'>
           Capture, annotate, and share screenshots with just few buttons. Take a
           screenshot of anything on your screen and we’ll make it look amazing
           in seconds.
@@ -43,10 +44,12 @@ const Hero = () => {
         {/* sponsor */}
 
         <div className='mt-6'>
-          <p className='text-sm text-white'>Used daily by members of</p>
+          <p className='text-sm text-darkGreen dark:text-white'>
+            Used daily by members of
+          </p>
 
           <ul className='grid place-items-center'>
-            <div className='flex items-center space-x-4 mt-4'>
+            <div className='flex items-center mt-4 space-x-4'>
               {brands.map(brand => (
                 <li
                   key={brand.name}
@@ -63,7 +66,7 @@ const Hero = () => {
             <img
               src='https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=376208&theme=dark'
               alt='Snapit - Creating&#0032;beautiful&#0032;screenshots&#0032;has&#0032;never&#0032;been&#0032;so&#0032;easy | Product Hunt'
-              className=' mt-4 mr-3 width: 250px; height: 54px;'
+              className=' width: 250px; height: 54px; mt-4 mr-3'
               width='250'
               height='54'
             />

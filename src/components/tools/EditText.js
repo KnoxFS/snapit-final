@@ -16,19 +16,21 @@ const EditText = ({ options, setOptions }) => {
       {({ open }) => (
         <>
           <Disclosure.Button className='w-full' disabled={!user?.isPro}>
-            <div className='grid grid-cols-[3fr,1fr] w-full'>
+            <div className='grid w-full grid-cols-[3fr,1fr]'>
               <div className='flex items-center space-x-2'>
-                <TextIcon className='h-6 w-6 text-[#A0A0A0]' />
+                <TextIcon className='w-6 h-6 text-darkGreen dark:text-white' />
 
-                <h3 className='text-sm text-white'>Edit Text</h3>
+                <h3 className='text-sm text-darkGreen dark:text-white'>
+                  Edit Text
+                </h3>
               </div>
 
               {/* tip */}
-              <div className='flex justify-around items-center'>
+              <div className='flex items-center justify-around'>
                 <div className='relative'>
-                  <QuestionMarkCircleIcon className='w-6 h-6 text-white cursor-pointer [&~div]:hover:block' />
-                  <div className='absolute top-full left-1/2 bg-dark/40 backdrop-blur-sm p-2 rounded-md shadow-md z-50 transform -translate-x-1/2 hidden hover:block w-44'>
-                    <p className='text-sm text-white'>
+                  <QuestionMarkCircleIcon className='h-6 w-6 cursor-pointer text-darkGreen dark:text-white [&~div]:hover:block' />
+                  <div className='absolute z-50 hidden p-2 transform -translate-x-1/2 rounded-md shadow-md top-full left-1/2 w-44 bg-dark/40 backdrop-blur-sm hover:block'>
+                    <p className='text-sm text-darkGreen dark:text-white'>
                       Put some text inside the canvas.
                     </p>
                   </div>
@@ -37,10 +39,10 @@ const EditText = ({ options, setOptions }) => {
                   <ChevronRightIcon
                     className={`${
                       open ? 'rotate-90 transform' : ''
-                    } h-5 w-5 text-gray-500 justify-self-end`}
+                    } h-5 w-5 justify-self-end text-darkGreen dark:text-white`}
                   />
                 ) : (
-                  <div className='justify-self-end mr-2'>
+                  <div className='mr-2 justify-self-end'>
                     <ThunderIcon />
                   </div>
                 )}
@@ -50,7 +52,7 @@ const EditText = ({ options, setOptions }) => {
 
           <Disclosure.Panel className='w-full overflow-x-scroll custom-scrollbar-sm'>
             <div>
-              <label className='text-white text-sm'>
+              <label className='text-sm text-darkGreen dark:text-white'>
                 <p className='mb-2'>Heading</p>
                 <textarea
                   type='text'
@@ -65,11 +67,11 @@ const EditText = ({ options, setOptions }) => {
                       },
                     })
                   }
-                  className='w-full py-2 px-4 rounded-md bg-[#212121] outline-none text-white mb-4 resize-vertical custom-scrollbar-sm'
+                  className='resize-vertical custom-scrollbar-sm mb-4 w-full rounded-md bg-[#212121] py-2 px-4 text-white outline-none'
                 />
               </label>
 
-              <label className='text-white text-sm'>
+              <label className='text-sm text-darkGreen dark:text-white'>
                 <p className='mb-2'>Sub-Heading</p>
                 <textarea
                   type='text'
@@ -84,13 +86,13 @@ const EditText = ({ options, setOptions }) => {
                       },
                     })
                   }
-                  className='w-full py-2 px-4 rounded-md bg-[#212121] outline-none text-white mb-4 resize-vertical custom-scrollbar-sm'
+                  className='resize-vertical custom-scrollbar-sm mb-4 w-full rounded-md bg-[#212121] py-2 px-4 text-white outline-none'
                 />
               </label>
 
-              <div className='flex justify-between items-center mb-4'>
+              <div className='flex items-center justify-between mb-4'>
                 {/* color */}
-                <div className='flex text-sm [&>*]:text-center [&>*]:p-1 [&>*]:border [&>*]:border-gray-500 text-white'>
+                <div className='flex text-sm text-white [&>*]:border [&>*]:border-gray-500 [&>*]:p-1 [&>*]:text-center'>
                   <button
                     onClick={() =>
                       setOptions({
@@ -128,7 +130,7 @@ const EditText = ({ options, setOptions }) => {
                 </div>
 
                 {/* aligment */}
-                <div className='flex text-sm [&>*]:text-center [&>*]:p-1 [&>*]:border [&>*]:border-gray-500 text-white'>
+                <div className='flex text-sm text-white [&>*]:border [&>*]:border-gray-500 [&>*]:p-1 [&>*]:text-center'>
                   <button
                     onClick={() =>
                       setOptions({
@@ -185,7 +187,7 @@ const EditText = ({ options, setOptions }) => {
 
               <div className='flex items-center justify-between'>
                 {/* aligment */}
-                <div className='flex text-sm [&>*]:text-center [&>*]:p-1 [&>*]:border [&>*]:border-gray-500 text-white'>
+                <div className='flex text-sm text-white [&>*]:border [&>*]:border-gray-500 [&>*]:p-1 [&>*]:text-center'>
                   <button
                     onClick={() =>
                       setOptions({
@@ -223,7 +225,7 @@ const EditText = ({ options, setOptions }) => {
                 </div>
 
                 {/* switch show */}
-                <div className='flex items-center text-white space-x-2'>
+                <div className='flex items-center space-x-2 text-white'>
                   <p className='text-sm'>Show text</p>
                   <Switch
                     checked={options?.text.show || false}
@@ -239,7 +241,7 @@ const EditText = ({ options, setOptions }) => {
                     className={`${
                       options.text.show ? 'bg-primary' : 'bg-[#212121]'
                     }
-          relative inline-flex h-[20px] w-[52px] items-center shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus-visible:ring-2  focus-visible:ring-white focus-visible:ring-opacity-75 justify-self-end`}>
+          relative inline-flex h-[20px] w-[52px] shrink-0 cursor-pointer items-center justify-self-end rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none  focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75`}>
                     <span className='sr-only'>Use setting</span>
                     <span
                       aria-hidden='true'

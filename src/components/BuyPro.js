@@ -78,34 +78,36 @@ const Settings = ({ open, setOpen }) => {
               leave='ease-in duration-200'
               leaveFrom='opacity-100 scale-100'
               leaveTo='opacity-0 scale-95'>
-              <Dialog.Panel className='w-[70%] h-[70vh] overflow-y-auto custom-scrollbar mx-auto rounded-md bg-darkGreen p-6 text-left shadow-xl'>
-                <section className='grid grid-cols-1 md:grid-cols-2 gap-10'>
+              <Dialog.Panel className='custom-scrollbar mx-auto h-[70vh] w-[70%] overflow-y-auto rounded-md bg-white p-6 text-left shadow-xl dark:bg-darkGreen'>
+                <section className='grid grid-cols-1 gap-10 md:grid-cols-2'>
                   {/* Features */}
                   <article>
-                    <h2 className='text-white font-bold text-xl'>
+                    <h2 className='text-xl font-bold text-primary dark:text-white'>
                       Get Snapit Pro to enjoy these exclusive features!
                     </h2>
                     <ul className='my-6 space-y-4'>
                       {features.map((feature, index) => (
                         <li key={index} className='flex items-center gap-2'>
-                          <CheckCircleIcon className='h-6 w-6 text-green-400' />
-                          <p className='text-white'>{feature}</p>
+                          <CheckCircleIcon className='h-6 w-6 text-primary' />
+                          <p className='text-darkGreen dark:text-white'>
+                            {feature}
+                          </p>
                         </li>
                       ))}
                     </ul>
 
-                    <p className='text-green-400 font-bold'>
+                    <p className='font-bold text-green-400'>
                       and unlock other customizations & branding options
                     </p>
                   </article>
 
                   {/* Buy */}
                   <article>
-                    <h2 className='text-white font-bold text-xl'>
+                    <h2 className='text-xl font-bold text-primary dark:text-white'>
                       Select the plan that suits you
                     </h2>
 
-                    <div className='mx-auto w-full my-6'>
+                    <div className='mx-auto my-6 w-full'>
                       <RadioGroup
                         value={selectedPlan}
                         onChange={setSelectedPlan}>
@@ -121,8 +123,8 @@ const Settings = ({ open, setOpen }) => {
                                 `
                   ${
                     checked
-                      ? 'bg-primary bg-opacity-75 text-white'
-                      : 'bg-[#004D3E]'
+                      ? 'bg-primary bg-opacity-75 text-darkGreen dark:text-white'
+                      : 'bg-primary bg-opacity-80 dark:bg-opacity-20'
                   }
                     relative flex cursor-pointer rounded-lg px-5 py-4 shadow-md focus:outline-none`
                               }>
@@ -132,15 +134,19 @@ const Settings = ({ open, setOpen }) => {
                                     <div className='text-sm'>
                                       <RadioGroup.Label
                                         as='p'
-                                        className='font-medium text-white'>
+                                        className={`font-medium  ${
+                                          checked
+                                            ? 'text-darkGreen dark:text-white'
+                                            : 'text-white'
+                                        }`}>
                                         {plan.name}
                                       </RadioGroup.Label>
                                       <RadioGroup.Description
                                         as='div'
                                         className={`inline ${
                                           checked
-                                            ? 'text-gray-300'
-                                            : 'text-gray-500'
+                                            ? 'text-darkGreen dark:text-gray-300'
+                                            : 'text-white/75'
                                         }`}>
                                         {plan.name === 'Lifetime' ? (
                                           <p>
@@ -161,7 +167,7 @@ const Settings = ({ open, setOpen }) => {
                                     </div>
                                   </div>
                                   {checked && (
-                                    <div className='shrink-0 text-white'>
+                                    <div className='shrink-0 text-darkGreen dark:text-white'>
                                       <CheckCircleIcon className='h-6 w-6' />
                                     </div>
                                   )}
@@ -175,7 +181,7 @@ const Settings = ({ open, setOpen }) => {
 
                     <button
                       onClick={handleBuyPro}
-                      className='bg-primary text-white w-full py-4 rounded-md mt-12'>
+                      className='mt-12 w-full rounded-md bg-primary py-4 text-darkGreen dark:text-white'>
                       Get Snapit Pro - {selectedPlan.name}
                     </button>
                   </article>

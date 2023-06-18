@@ -73,8 +73,8 @@ const Signup = () => {
         />
       </Head>
 
-      <section className='flex md:h-[calc(100vh-2.5em)] justify-center items-center'>
-        <div className='grid grid-cols-1 md:grid-cols-[60%,2em,1fr] items-center w-[90%] md:w-[80%] mx-auto gap-10'>
+      <section className='flex items-center justify-center md:h-[calc(100vh-2.5em)]'>
+        <div className='mx-auto grid w-[90%] grid-cols-1 items-center gap-10 md:w-[80%] md:grid-cols-[60%,2em,1fr]'>
           {/* illustration */}
 
           <article>
@@ -86,20 +86,22 @@ const Signup = () => {
           </article>
 
           {/* separator */}
-          <div className='hidden md:block w-2 h-full rounded-md bg-green-500 mx-auto my-10'></div>
+          <div className='hidden w-2 h-full mx-auto my-10 bg-green-500 rounded-md md:block'></div>
 
           {/* form */}
           <form>
-            <h3 className='text-2xl text-white font-bold'>Signin</h3>
+            <h3 className='text-2xl font-bold text-darkGreen dark:text-white'>
+              Signin
+            </h3>
 
-            <div className='space-y-4 my-6'>
+            <div className='my-6 space-y-4'>
               <input
                 type='email'
                 name='email'
                 value={credentials.email}
                 onChange={handleChange}
                 placeholder='Email address'
-                className='w-full py-2 px-4 rounded-md bg-darkGreen outline-none ring-1 ring-transparent focus:ring-green-400 text-white'
+                className='w-full px-4 py-2 text-white rounded-md outline-none bg-primary placeholder-darkGreen ring-1 ring-transparent focus:ring-green-400 dark:bg-darkGreen dark:placeholder-white'
                 autoFocus
               />
 
@@ -109,26 +111,28 @@ const Signup = () => {
                 value={credentials.password}
                 onChange={handleChange}
                 placeholder='Password'
-                className='w-full py-2 px-4 rounded-md bg-darkGreen outline-none ring-1 ring-transparent focus:ring-green-400 text-white'
+                className='w-full px-4 py-2 text-white rounded-md outline-none bg-primary placeholder-darkGreen ring-1 ring-transparent focus:ring-green-400 dark:bg-darkGreen dark:placeholder-white'
               />
             </div>
 
             <button
-              className='mt-4 w-full bg-primary hover:bg-green-500 text-darkGreen text-center font-medium rounded-md py-2 disabled:opacity-70'
+              className='w-full py-2 mt-4 font-medium text-center rounded-md bg-primary text-darkGreen hover:bg-green-500 disabled:opacity-70'
               disabled={logging}
               onClick={handleLogin}>
               Login
             </button>
 
-            <div className='mt-6 flex justify-between items-center'>
+            <div className='flex items-center justify-between mt-6'>
               <Link href='/signup'>
-                <a className='text-white/80 hover:underline'>
+                <a className='text-darkGreen hover:underline dark:text-white'>
                   Dont have account?
                 </a>
               </Link>
 
               <Link href='/forgot-password'>
-                <a className='text-white/80 underline'>Reset password</a>
+                <a className='underline text-darkGreen dark:text-white'>
+                  Reset password
+                </a>
               </Link>
             </div>
           </form>
@@ -136,7 +140,7 @@ const Signup = () => {
       </section>
 
       {showProMessage && (
-        <div className='fixed bottom-0 left-0 right-0 bg-primary text-white text-center py-2'>
+        <div className='fixed bottom-0 left-0 right-0 py-2 text-center bg-primary text-darkGreen dark:text-white'>
           <p className='text-sm'>
             You need to login to buy pro plan. Please login first.
           </p>

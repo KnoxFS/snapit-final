@@ -41,7 +41,7 @@ export default function MyModal({
                 leave='ease-in duration-200'
                 leaveFrom='opacity-100 scale-100'
                 leaveTo='opacity-0 scale-95'>
-                <Dialog.Panel className='w-full max-w-4xl transform overflow-hidden rounded-2xl bg-[#212121] p-6 text-left align-middle shadow-xl transition-all'>
+                <Dialog.Panel className='w-full max-w-4xl transform overflow-hidden rounded-2xl bg-[#E3F9EC] bg-opacity-90 p-6 text-left align-middle shadow-xl transition-all dark:bg-darkGreen'>
                   <Dialog.Title as='h3' className='sr-only'>
                     Crop Image
                   </Dialog.Title>
@@ -64,15 +64,15 @@ export default function MyModal({
                     />
                   </ReactCrop>
 
-                  <div className='flex justify-center items-center gap-5 mt-4'>
+                  <div className='mt-4 flex items-center justify-center gap-5'>
                     <button
-                      className='bg-primary px-4 py-2 rounded-md text-white'
+                      className='rounded-md bg-primary px-4 py-2 text-darkGreen dark:bg-primary dark:text-white'
                       onClick={() => saveCrop(crop)}>
                       Save
                     </button>
 
                     <button
-                      className='text-gray-500 px-4 py-2'
+                      className='px-4 py-2 text-darkGreen dark:text-white'
                       onClick={() => setOpen(false)}>
                       Cancel
                     </button>

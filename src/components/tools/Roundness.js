@@ -24,19 +24,21 @@ const Roundness = ({ options, setOptions, target = 'screenshot' }) => {
       {({ open }) => (
         <>
           <Disclosure.Button className='w-full'>
-            <div className='grid grid-cols-[3fr,1fr] w-full'>
+            <div className='grid w-full grid-cols-[3fr,1fr]'>
               <div className='flex items-center space-x-2'>
-                <TurboIcon />
+                <TurboIcon className={'text-darkGreen dark:text-white'} />
 
-                <h3 className='text-sm text-white'>Roundness</h3>
+                <h3 className='text-sm text-darkGreen dark:text-white'>
+                  Roundness
+                </h3>
               </div>
 
-              <div className='flex justify-around items-center'>
+              <div className='flex items-center justify-around'>
                 {/* tip */}
                 <div className='relative'>
-                  <QuestionMarkCircleIcon className='w-6 h-6 text-white cursor-pointer [&~div]:hover:block' />
-                  <div className='absolute top-full left-1/2 bg-dark/40 backdrop-blur-sm p-2 rounded-md shadow-md z-50 transform -translate-x-1/2 hidden hover:block w-44'>
-                    <p className='text-sm text-white'>
+                  <QuestionMarkCircleIcon className='h-6 w-6 cursor-pointer text-darkGreen dark:text-white [&~div]:hover:block' />
+                  <div className='absolute z-50 hidden p-2 transform -translate-x-1/2 rounded-md shadow-md top-full left-1/2 w-44 bg-dark/40 backdrop-blur-sm hover:block'>
+                    <p className='text-sm text-darkGreen dark:text-white'>
                       Sets the roundness of the screenshot's corners.
                     </p>
                   </div>
@@ -44,7 +46,7 @@ const Roundness = ({ options, setOptions, target = 'screenshot' }) => {
                 <ChevronRightIcon
                   className={`${
                     open ? 'rotate-90 transform' : ''
-                  } h-5 w-5 text-white justify-self-end`}
+                  } h-5 w-5 justify-self-end text-darkGreen dark:text-white`}
                 />
               </div>
             </div>
@@ -60,7 +62,7 @@ const Roundness = ({ options, setOptions, target = 'screenshot' }) => {
             }
             className='w-full overflow-x-scroll custom-scrollbar-sm'>
             <RadioGroup
-              className='p-2 flex items-center space-x-2 w-max'
+              className='flex items-center p-2 space-x-2 w-max'
               value={options[targets[target]]}
               onChange={value =>
                 setOptions({ ...options, [targets[target]]: value })
@@ -70,28 +72,28 @@ const Roundness = ({ options, setOptions, target = 'screenshot' }) => {
               <RadioGroup.Option
                 as='button'
                 value='rounded-none'
-                className={`border border-gray-400 py-2 px-4 text-sm text-gray-400 rounded-md ui-checked:bg-primary ui-checked:text-white ui-checked:border-green-400 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-green-400`}>
+                className={`rounded-md border border-gray-400 py-2 px-4 text-sm text-gray-400 focus:outline-none focus:ring-2 focus:ring-green-400 focus:ring-offset-2 focus:ring-offset-gray-800 ui-checked:border-green-400 ui-checked:bg-primary ui-checked:text-white`}>
                 None
               </RadioGroup.Option>
 
               <RadioGroup.Option
                 as='button'
                 value='rounded-2xl'
-                className={`border border-gray-400 py-2 px-4 text-sm text-gray-400 rounded-md ui-checked:bg-primary ui-checked:text-white ui-checked:border-green-400 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-green-400`}>
+                className={`rounded-md border border-gray-400 py-2 px-4 text-sm text-gray-400 focus:outline-none focus:ring-2 focus:ring-green-400 focus:ring-offset-2 focus:ring-offset-gray-800 ui-checked:border-green-400 ui-checked:bg-primary ui-checked:text-white`}>
                 Small
               </RadioGroup.Option>
 
               <RadioGroup.Option
                 as='button'
                 value='rounded-3xl'
-                className={`border border-gray-400 py-2 px-4 text-sm text-gray-400 rounded-md ui-checked:bg-primary ui-checked:text-white ui-checked:border-green-400 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-green-400`}>
+                className={`rounded-md border border-gray-400 py-2 px-4 text-sm text-gray-400 focus:outline-none focus:ring-2 focus:ring-green-400 focus:ring-offset-2 focus:ring-offset-gray-800 ui-checked:border-green-400 ui-checked:bg-primary ui-checked:text-white`}>
                 Medium
               </RadioGroup.Option>
 
               <RadioGroup.Option
                 as='button'
                 value='rounded-[32px]'
-                className={`border border-gray-400 py-2 px-4 text-sm text-gray-400 rounded-md ui-checked:bg-primary ui-checked:text-white ui-checked:border-green-400 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-green-400`}>
+                className={`rounded-md border border-gray-400 py-2 px-4 text-sm text-gray-400 focus:outline-none focus:ring-2 focus:ring-green-400 focus:ring-offset-2 focus:ring-offset-gray-800 ui-checked:border-green-400 ui-checked:bg-primary ui-checked:text-white`}>
                 Large
               </RadioGroup.Option>
             </RadioGroup>

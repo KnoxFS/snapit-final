@@ -403,16 +403,16 @@ const TemplateMaker = ({ proMode }) => {
         )}
         <div
           className={classnames(
-            'absolute w-auto max-w-[400px] z-10 top-[calc(100%)] left-[-30px] bg-white/80 backdrop-blur shadow-lg py-4 px-5 rounded-xl flex shadow-gray-500/50 dark:shadow-black/80 border border-gray-400 flex-col dark:border-gray-800 dark:bg-black/80 duration-200',
+            'absolute top-[calc(100%)] left-[-30px] z-10 flex w-auto max-w-[400px] flex-col rounded-xl border border-gray-400 bg-white/80 py-4 px-5 shadow-lg shadow-gray-500/50 backdrop-blur duration-200 dark:border-gray-800 dark:bg-black/80 dark:shadow-black/80',
             {
-              'opacity-0 pointer-events-none scale-[0.9]': !bgPicker,
+              'pointer-events-none scale-[0.9] opacity-0': !bgPicker,
             },
             {
-              'opacity-100 pointer-events-auto scale-[1]': bgPicker,
+              'pointer-events-auto scale-[1] opacity-100': bgPicker,
             },
           )}>
           <div
-            className='absolute top-[5%] right-[5%] opacity-50 cursor-pointer hover:opacity-100 z-10'
+            className='absolute top-[5%] right-[5%] z-10 cursor-pointer opacity-50 hover:opacity-100'
             onClick={() => setBGPicker(false)}>
             ✕
           </div>
@@ -441,7 +441,7 @@ const TemplateMaker = ({ proMode }) => {
                     backgroundColor: options?.customTheme?.colorStart || '#222',
                   }}
                   htmlFor='startColorPicker'
-                  className='left-0 flex items-center justify-center w-12 h-12 rounded-full pointer-events-none text-white/50 group-hover:scale-[1.1] duration-100'>
+                  className='pointer-events-none left-0 flex h-12 w-12 items-center justify-center rounded-full text-white/50 duration-100 group-hover:scale-[1.1]'>
                   <span className='font-mono text-xs text-white/80 drop-shadow'>
                     Pick
                   </span>
@@ -452,7 +452,7 @@ const TemplateMaker = ({ proMode }) => {
                 placeholder='Enter hex value'
                 type='text'
                 value={options.customTheme.colorStart || '#000000'}
-                className='px-2 py-1 font-mono text-base text-black border-2 border-gray-500 rounded-lg focus:outline-none focus:border-black'
+                className='px-2 py-1 font-mono text-base text-black border-2 border-gray-500 rounded-lg focus:border-black focus:outline-none'
                 onChange={e => {
                   let startColorToast;
                   setOptions({
@@ -501,7 +501,7 @@ const TemplateMaker = ({ proMode }) => {
                     backgroundColor: options?.customTheme?.colorEnd || '#222',
                   }}
                   htmlFor='startColorPicker'
-                  className='left-0 flex items-center justify-center w-12  h-12 rounded-full pointer-events-none text-white/50 group-hover:scale-[1.1] duration-100'>
+                  className='pointer-events-none left-0 flex h-12 w-12  items-center justify-center rounded-full text-white/50 duration-100 group-hover:scale-[1.1]'>
                   <span className='font-mono text-xs text-white/80 drop-shadow'>
                     Pick
                   </span>
@@ -512,7 +512,7 @@ const TemplateMaker = ({ proMode }) => {
                 placeholder='Enter hex value'
                 type='text'
                 value={options.customTheme.colorEnd || '#000000'}
-                className='px-2 py-1 font-mono text-base text-black border-2 border-gray-500 rounded-lg focus:outline-none focus:border-black'
+                className='px-2 py-1 font-mono text-base text-black border-2 border-gray-500 rounded-lg focus:border-black focus:outline-none'
                 onChange={e => {
                   let endColorToast;
                   setOptions({
@@ -550,7 +550,7 @@ const TemplateMaker = ({ proMode }) => {
   };
 
   const renderPreview = () => (
-    <article className='bg-primary bg-opacity-10 h-full p-8 rounded-md flex justify-center'>
+    <article className='flex justify-center h-full p-8 rounded-md bg-primary bg-opacity-20 dark:bg-opacity-10'>
       {/* wrapper */}
       <div
         ref={wrapperRef}
@@ -567,9 +567,9 @@ const TemplateMaker = ({ proMode }) => {
         }
         className={`${options.bgDirection} ${options.theme} ${
           options.roundedWrapper
-        }  w-full relative overflow-hidden transition-all flex px-4 py-8 ${
+        }  relative flex w-full overflow-hidden px-4 py-8 transition-all ${
           options.text.position === 'top' ? 'flex-col' : 'flex-col-reverse'
-        } justify-center items-center`}>
+        } items-center justify-center`}>
         {/* Text */}
 
         {options?.text.show && (
@@ -577,10 +577,10 @@ const TemplateMaker = ({ proMode }) => {
             className={`w-full ${options.text.align} ${
               options.text.position === 'top' ? 'mb-6' : 'mt-6'
             } ${options.text.color === 'dark' ? 'text-black' : 'text-white'}`}>
-            <p className='font-bold text-3xl mb-2 break-word whitespace-pre-wrap'>
+            <p className='mb-2 text-3xl font-bold whitespace-pre-wrap break-word'>
               {options.text.heading}
             </p>
-            <p className='break-word whitespace-pre-wrap'>
+            <p className='whitespace-pre-wrap break-word'>
               {options.text.subheading}
             </p>
           </div>
@@ -592,21 +592,21 @@ const TemplateMaker = ({ proMode }) => {
           tiltMaxAngleY={30}
           tiltMaxAngleX={30}
           reset={false}
-          className='flex justify-center items-center w-[90%]'>
+          className='flex w-[90%] items-center justify-center'>
           {/* editor */}
           <div
             style={{
               background: themesBG[options.editorTheme],
               transform: `scale(${options.size / 100})`,
             }}
-            className={`w-[90%] min-h-[250px] p-4 ${options.roundedWrapper} ${options.shadow}`}>
+            className={`min-h-[250px] w-[90%] p-4 ${options.roundedWrapper} ${options.shadow}`}>
             {/* Header */}
-            <header className='mb-4 flex items-center'>
+            <header className='flex items-center mb-4'>
               {/* dots */}
               {getCodeFrame(options.frame, options.editorTheme)}
 
               {/* tabs */}
-              <div className='flex items-center space-x-2 mx-4 text-gray-500 custom-scrollbar-sm'>
+              <div className='flex items-center mx-4 space-x-2 text-gray-500 custom-scrollbar-sm'>
                 {tabs.map((tab, index) => {
                   const isActive = index === activeTab;
 
@@ -614,7 +614,7 @@ const TemplateMaker = ({ proMode }) => {
                     <button
                       key={index}
                       onClick={() => setActiveTab(index)}
-                      className={`relative text-xs p-2 rounded-md text-gray-300 ${
+                      className={`relative rounded-md p-2 text-xs text-gray-300 ${
                         isActive ? 'bg-[#333d43]' : 'text-gray-300'
                       }`}>
                       <p>
@@ -636,7 +636,7 @@ const TemplateMaker = ({ proMode }) => {
                               return newTabs;
                             });
                           }}
-                          className='absolute -top-0 -right-1 w-3 h-3 flex items-center justify-center rounded-full bg-red-500 text-white text-[10px] cursor-pointer'>
+                          className='absolute -top-0 -right-1 flex h-3 w-3 cursor-pointer items-center justify-center rounded-full bg-red-500 text-[10px] text-white'>
                           x
                         </span>
                       )}
@@ -646,15 +646,15 @@ const TemplateMaker = ({ proMode }) => {
 
                 {/* add tab */}
                 <Popover className='relative'>
-                  <Popover.Button className='text-sm font-medium p-2 rounded-md text-gray-800'>
-                    <PlusIcon className='w-5 w-5 text-gray-500' />
+                  <Popover.Button className='p-2 text-sm font-medium text-gray-800 rounded-md'>
+                    <PlusIcon className='w-5 text-gray-500' />
                   </Popover.Button>
 
                   <Popover.Panel>
-                    <div className='absolute -top-10 left-0 z-10 bg-[#212121] rounded-md shadow-lg py-2 px-4'>
+                    <div className='absolute -top-10 left-0 z-10 rounded-md bg-[#212121] py-2 px-4 shadow-lg'>
                       <input
                         type='text'
-                        className='bg-[#212121] outline-none text-xs'
+                        className='bg-[#212121] text-xs outline-none'
                         placeholder='File name...'
                         value={newTabName}
                         onChange={e => setNewTabName(e.target.value)}
@@ -672,7 +672,7 @@ const TemplateMaker = ({ proMode }) => {
             </header>
             <CodeMirror
               ref={editorRef}
-              className={`outline-none ${options.fontSize} w-full !bg-transparent !min-h-[250px] !overflow-hidden`}
+              className={`outline-none ${options.fontSize} !min-h-[250px] w-full !overflow-hidden !bg-transparent`}
               basicSetup={{
                 lineNumbers: false,
                 autocompletion: false,
@@ -701,7 +701,7 @@ const TemplateMaker = ({ proMode }) => {
 
         {/* watermark */}
         {options?.watermark && (
-          <div className='bg-primary text-darkGreen absolute bottom-0 right-1/2 translate-x-1/2 p-1 px-2 select-none text-xs rounded-t-md'>
+          <div className='absolute bottom-0 p-1 px-2 text-xs translate-x-1/2 select-none right-1/2 rounded-t-md bg-primary text-darkGreen'>
             Made with snapit.gg
           </div>
         )}
@@ -713,15 +713,15 @@ const TemplateMaker = ({ proMode }) => {
     <Tab.Group as='div' id='tabs' className='relative'>
       {/* tabs */}
 
-      <Tab.List className='absolute w-52 rotate-90 top-1/2 -right-[117px] px-6 py-1 cursor-pointer rounded-t-xl bg-primary bg-opacity-10 text-white text-sm flex flex-row justify-between'>
+      <Tab.List className='absolute top-1/2 -right-[117px] flex w-52 rotate-90 cursor-pointer flex-row justify-between rounded-t-xl bg-primary bg-opacity-20 px-6 py-1 text-sm text-darkGreen dark:bg-opacity-10 dark:text-white'>
         <Tab
           as='button'
-          className='ui-selected:bg-green-500 ui-not-selected:bg-transparent px-2 rounded-md outline-none'>
+          className='px-2 rounded-md outline-none ui-selected:bg-green-500 ui-not-selected:bg-transparent'>
           Options
         </Tab>
         <Tab
           as='button'
-          className='ui-selected:bg-green-500 ui-not-selected:bg-transparent px-2 rounded-md outline-none'>
+          className='px-2 rounded-md outline-none ui-selected:bg-green-500 ui-not-selected:bg-transparent'>
           Presets
         </Tab>
       </Tab.List>
@@ -729,16 +729,20 @@ const TemplateMaker = ({ proMode }) => {
       <Tab.Panels>
         {/* options */}
         <Tab.Panel>
-          <article className='bg-primary bg-opacity-10 rounded-md p-4 overflow-y-auto overflow-x-hidden max-h-[680px] custom-scrollbar'>
+          <article className='custom-scrollbar max-h-[680px] overflow-y-auto overflow-x-hidden rounded-md bg-primary bg-opacity-20 p-4 dark:bg-opacity-10'>
             <div className='space-y-4'>
-              <h3 className='text-center text-white w-full'>Editor Options</h3>
+              <h3 className='w-full text-center text-darkGreen dark:text-white'>
+                Editor Options
+              </h3>
 
               {/* Lang */}
-              <div className='grid grid-cols-2 w-full'>
+              <div className='grid w-full grid-cols-2'>
                 <div className='flex items-center space-x-2'>
-                  <CodeBracketIcon className='h-6 w-6 text-white' />
+                  <CodeBracketIcon className='w-6 h-6 text-darkGreen dark:text-white' />
 
-                  <h3 className='text-sm text-white'>Language</h3>
+                  <h3 className='text-sm text-darkGreen dark:text-white'>
+                    Language
+                  </h3>
                 </div>
 
                 <select
@@ -751,7 +755,7 @@ const TemplateMaker = ({ proMode }) => {
                       return newTabs;
                     })
                   }
-                  className='bg-primary p-2 text-dark font-semibold rounded-md cursor-pointer text-sm custom-scrollbar-sm outline-none'>
+                  className='p-2 text-sm font-semibold rounded-md outline-none cursor-pointer custom-scrollbar-sm bg-primary text-dark'>
                   {langNames.map(lang => (
                     <option key={lang} value={lang}>
                       {lang.charAt(0).toUpperCase() + lang.slice(1)}
@@ -763,11 +767,13 @@ const TemplateMaker = ({ proMode }) => {
               </div>
 
               {/* Theme */}
-              <div className='grid grid-cols-2 w-full'>
+              <div className='grid w-full grid-cols-2'>
                 <div className='flex items-center space-x-2'>
-                  <Bars3Icon className='h-6 w-6 text-white' />
+                  <Bars3Icon className='w-6 h-6 text-darkGreen dark:text-white' />
 
-                  <h3 className='text-sm text-white'>Theme</h3>
+                  <h3 className='text-sm text-darkGreen dark:text-white'>
+                    Theme
+                  </h3>
                 </div>
 
                 <select
@@ -775,7 +781,7 @@ const TemplateMaker = ({ proMode }) => {
                   onChange={e =>
                     setOptions({ ...options, editorTheme: e.target.value })
                   }
-                  className='bg-primary p-2 text-dark font-semibold rounded-md text-sm cursor-pointer custom-scrollbar-sm outline-none'>
+                  className='p-2 text-sm font-semibold rounded-md outline-none cursor-pointer custom-scrollbar-sm bg-primary text-dark'>
                   {Object.keys(themes).map(theme => (
                     <option key={theme} value={theme}>
                       {theme.charAt(0).toUpperCase() + theme.slice(1)}
@@ -794,19 +800,21 @@ const TemplateMaker = ({ proMode }) => {
                 {({ open }) => (
                   <>
                     <Disclosure.Button className='w-full'>
-                      <div className='grid grid-cols-[3fr,1fr] w-full'>
+                      <div className='grid w-full grid-cols-[3fr,1fr]'>
                         <div className='flex items-center space-x-2'>
-                          <BarsArrowUpIcon className='h-6 w-6 text-white' />
+                          <BarsArrowUpIcon className='w-6 h-6 text-darkGreen dark:text-white' />
 
-                          <h3 className='text-sm text-white'>Font Size</h3>
+                          <h3 className='text-sm text-darkGreen dark:text-white'>
+                            Font Size
+                          </h3>
                         </div>
 
-                        <div className='flex justify-around items-center'>
+                        <div className='flex items-center justify-around'>
                           {/* tip */}
                           <div className='relative'>
-                            <QuestionMarkCircleIcon className='w-6 h-6 text-white cursor-pointer [&~div]:hover:block' />
-                            <div className='absolute top-full left-1/2 bg-dark/40 backdrop-blur-sm p-2 rounded-md shadow-md z-50 transform -translate-x-1/2 hidden hover:block w-44'>
-                              <p className='text-sm text-white'>
+                            <QuestionMarkCircleIcon className='h-6 w-6 cursor-pointer text-darkGreen  dark:text-white [&~div]:hover:block' />
+                            <div className='absolute z-50 hidden p-2 transform -translate-x-1/2 rounded-md shadow-md top-full left-1/2 w-44 bg-dark/40 backdrop-blur-sm hover:block'>
+                              <p className='text-sm text-darkGreen dark:text-white'>
                                 Change the font size of the code editor.
                               </p>
                             </div>
@@ -814,7 +822,7 @@ const TemplateMaker = ({ proMode }) => {
                           <ChevronRightIcon
                             className={`${
                               open ? 'rotate-90 transform' : ''
-                            } h-5 w-5 text-white justify-self-end`}
+                            } h-5 w-5 justify-self-end text-darkGreen  dark:text-white`}
                           />
                         </div>
                       </div>
@@ -833,7 +841,7 @@ const TemplateMaker = ({ proMode }) => {
                       }
                       className='w-full overflow-x-scroll custom-scrollbar-sm'>
                       <RadioGroup
-                        className='p-2 flex items-center space-x-2 w-max'
+                        className='flex items-center p-2 space-x-2 w-max'
                         value={options.fontSize}
                         onChange={value =>
                           setOptions({ ...options, fontSize: value })
@@ -845,21 +853,21 @@ const TemplateMaker = ({ proMode }) => {
                         <RadioGroup.Option
                           as='button'
                           value='text-sm'
-                          className={`border border-white py-2 px-4 text-sm text-white rounded-md ui-checked:bg-primary ui-checked:text-white ui-checked:border-green-400 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-green-400`}>
+                          className={`rounded-md border border-white py-2 px-4 text-sm text-white focus:outline-none focus:ring-2 focus:ring-green-400 focus:ring-offset-2 focus:ring-offset-gray-800 ui-checked:border-green-400 ui-checked:bg-primary ui-checked:text-white`}>
                           Small
                         </RadioGroup.Option>
 
                         <RadioGroup.Option
                           as='button'
                           value='text-base'
-                          className={`border border-white py-2 px-4 text-sm text-white rounded-md ui-checked:bg-primary ui-checked:text-white ui-checked:border-green-400 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-green-400`}>
+                          className={`rounded-md border border-white py-2 px-4 text-sm text-white focus:outline-none focus:ring-2 focus:ring-green-400 focus:ring-offset-2 focus:ring-offset-gray-800 ui-checked:border-green-400 ui-checked:bg-primary ui-checked:text-white`}>
                           Medium
                         </RadioGroup.Option>
 
                         <RadioGroup.Option
                           as='button'
                           value='text-lg'
-                          className={`border border-white py-2 px-4 text-sm text-white rounded-md ui-checked:bg-primary ui-checked:text-white ui-checked:border-green-400 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-green-400`}>
+                          className={`rounded-md border border-white py-2 px-4 text-sm text-white focus:outline-none focus:ring-2 focus:ring-green-400 focus:ring-offset-2 focus:ring-offset-gray-800 ui-checked:border-green-400 ui-checked:bg-primary ui-checked:text-white`}>
                           Large
                         </RadioGroup.Option>
                       </RadioGroup>
@@ -881,29 +889,33 @@ const TemplateMaker = ({ proMode }) => {
                 setManualTiltAngle={setManualTiltAngle}
               />
 
-              <h3 className='text-center text-white w-full'>Canvas Options</h3>
+              <h3 className='w-full text-center text-darkGreen dark:text-white'>
+                Canvas Options
+              </h3>
 
               {/* Background */}
               <Disclosure>
                 {({ open }) => (
                   <>
                     <Disclosure.Button className='w-full'>
-                      <div className='relative flex items-center justify-between pb-2 text-sm text-gray-400 w-full'>
+                      <div className='relative flex items-center justify-between w-full pb-2 text-sm text-gray-400'>
                         <div className='grid grid-cols-[2fr,1fr]'>
                           <div className='flex items-center space-x-2'>
-                            <BackgroundIcon className='h-6 w-6 text-white' />
+                            <BackgroundIcon className='w-6 h-6 text-darkGreen dark:text-white' />
 
-                            <h3 className='text-sm text-white'>Background</h3>
+                            <h3 className='text-sm text-darkGreen dark:text-white'>
+                              Background
+                            </h3>
                           </div>
 
-                          <div className='flex justify-around items-center'>
+                          <div className='flex items-center justify-around'>
                             <div className='relative'>
                               <div
                                 onClick={e => {
                                   e.stopPropagation();
                                   setBGPicker(!bgPicker);
                                 }}
-                                className='flex items-center px-2 ml-2 rounded-lg cursor-pointer bg-primary hover:bg-green-500 text-darkGreen font-medium'>
+                                className='flex items-center px-2 ml-2 font-medium rounded-lg cursor-pointer bg-primary text-darkGreen hover:bg-green-500'>
                                 <span className='w-3 h-3 mr-1'>
                                   {ColorPickerIcon}
                                 </span>
@@ -913,7 +925,7 @@ const TemplateMaker = ({ proMode }) => {
                             <ChevronRightIcon
                               className={`${
                                 open ? 'rotate-90 transform' : ''
-                              } h-5 w-5 text-white`}
+                              } h-5 w-5 text-darkGreen  dark:text-white`}
                             />
                           </div>
                           {pickBackground()}
@@ -940,7 +952,7 @@ const TemplateMaker = ({ proMode }) => {
                           ].map(theme => (
                             <div
                               key={theme}
-                              className={`cursor-pointer shadow dark:shadow-black/20 shadow-gray-500/20 w-8 h-8 rounded-full ${theme}`}
+                              className={`h-8 w-8 cursor-pointer rounded-full shadow shadow-gray-500/20 dark:shadow-black/20 ${theme}`}
                               onClick={() => {
                                 setOptions({
                                   ...options,
@@ -954,7 +966,7 @@ const TemplateMaker = ({ proMode }) => {
 
                         {/* gradient direction */}
                         <RadioGroup
-                          className='flex items-center space-x-2 mt-4'
+                          className='flex items-center mt-4 space-x-2'
                           value={options.bgDirection}
                           onChange={value =>
                             setOptions({
@@ -966,7 +978,7 @@ const TemplateMaker = ({ proMode }) => {
                             <RadioGroup.Option
                               key={gd}
                               value={gd.value}
-                              className='border p-1 rounded-md ui-checked:border-green-400 cursor-pointer'>
+                              className='p-1 border rounded-md cursor-pointer ui-checked:border-green-400'>
                               <span>{gd.icon}</span>
                             </RadioGroup.Option>
                           ))}
@@ -992,9 +1004,9 @@ const TemplateMaker = ({ proMode }) => {
               />
 
               {/* Export / Copy */}
-              <div className='flex items-center justify-center w-full space-x-6 !mt-12'>
+              <div className='!mt-12 flex w-full items-center justify-center space-x-6'>
                 <button
-                  className='flex items-center justify-center px-4 py-2 text-base bg-primary hover:bg-green-500 font-medium rounded-md text-darkGreen'
+                  className='flex items-center justify-center px-4 py-2 text-base font-medium rounded-md bg-primary text-darkGreen hover:bg-green-500'
                   title='Use Ctrl/Cmd + S to save the image'
                   onClick={saveImage}>
                   <span className='w-6 h-6 mr-2'>{SaveIcon}</span>
@@ -1002,7 +1014,7 @@ const TemplateMaker = ({ proMode }) => {
                 </button>
 
                 <button
-                  className='flex items-center justify-center px-4 py-2 text-base bg-primary hover:bg-green-500 font-medium rounded-md text-darkGreen'
+                  className='flex items-center justify-center px-4 py-2 text-base font-medium rounded-md bg-primary text-darkGreen hover:bg-green-500'
                   onClick={copyImage}
                   title='Use Ctrl/Cmd + C to copy the image'>
                   <span className='w-6 h-6 mr-2'>{ClipboardIcon}</span>
@@ -1010,14 +1022,14 @@ const TemplateMaker = ({ proMode }) => {
                 </button>
               </div>
 
-              <p className='text-center text-white'>or</p>
+              <p className='text-center text-darkGreen dark:text-white'>or</p>
 
               <div className='space-y-4'>
                 {showPresetModal && user?.isPro && (
                   <input
                     type='text'
                     placeholder="Preset's name"
-                    className='py-2 px-4 rounded-md bg-[#212121] outline-none ring-1 ring-transparent focus:ring-green-400 text-white w-full'
+                    className='w-full rounded-md bg-[#212121] py-2 px-4 text-darkGreen  outline-none ring-1 ring-transparent focus:ring-green-400 dark:text-white'
                     value={presetName}
                     onChange={e => setPresetName(e.target.value)}
                   />
@@ -1025,7 +1037,7 @@ const TemplateMaker = ({ proMode }) => {
 
                 {user && user.isPro && (
                   <button
-                    className='flex items-center justify-center px-4 py-2 w-full text-base bg-primary rounded-md text-white'
+                    className='flex items-center justify-center w-full px-4 py-2 text-base text-white rounded-md bg-primary'
                     onClick={handleSavePreset}>
                     <span className='w-6 h-6 mr-2'>{SaveIcon}</span>
                     Create Preset
@@ -1036,7 +1048,7 @@ const TemplateMaker = ({ proMode }) => {
               {/* Reset */}
               <button
                 onClick={resetCanvas}
-                className='flex items-center justify-center w-full mx-auto text-green-400 cursor-pointer !mt-8'>
+                className='mx-auto !mt-8 flex w-full cursor-pointer items-center justify-center text-darkGreen dark:text-primary'>
                 <span className='w-4 h-4 mr-1'>{ResetIcon}</span>
                 Reset
               </button>
@@ -1046,9 +1058,9 @@ const TemplateMaker = ({ proMode }) => {
 
         {/* presets */}
         <Tab.Panel>
-          <div className='p-8 rounded-md bg-primary bg-opacity-10 w-full min-h-[550px] overflow-y-scroll custom-scrollbar'>
+          <div className='custom-scrollbar min-h-[550px] w-full overflow-y-scroll rounded-md bg-primary bg-opacity-20 p-8 dark:bg-opacity-10'>
             {!proMode && (
-              <div className='text-center text-white'>
+              <div className='text-center text-darkGreen dark:text-white'>
                 <h3>
                   Save time applying customizations with Presets. You can save
                   your customizations and apply them later with just one-click.
@@ -1056,7 +1068,7 @@ const TemplateMaker = ({ proMode }) => {
 
                 <button
                   onClick={() => setShowBuyPro(true)}
-                  className='bg-primary text-darkGreen w-full p-2 rounded-md mt-6'>
+                  className='w-full p-2 mt-6 rounded-md bg-primary text-darkGreen'>
                   Get Snapit Pro
                 </button>
               </div>
@@ -1064,10 +1076,10 @@ const TemplateMaker = ({ proMode }) => {
 
             {proMode && (
               <article className='space-y-4'>
-                <h3 className='text-center text-gray-500 w-full'>Presets</h3>
+                <h3 className='w-full text-center text-gray-500'>Presets</h3>
 
                 {user?.presets?.code?.length === 0 && (
-                  <div className='text-center text-gray-400 mt-6'>
+                  <div className='mt-6 text-center text-gray-400'>
                     <h3>
                       You don't have any presets yet. Create one by clicking the
                       "Save as Preset" button.
@@ -1079,7 +1091,7 @@ const TemplateMaker = ({ proMode }) => {
                   <div className='flex items-center space-x-2' key={i}>
                     <button
                       key={preset.id}
-                      className='flex items-center justify-between w-full p-2 rounded-md bg-dark/40 hover:bg-dark/80 transition'
+                      className='flex items-center justify-between w-full p-2 transition rounded-md bg-dark/40 hover:bg-dark/80'
                       onClick={() => setPreset(preset.options)}>
                       <p className='text-sm text-gray-400'>{preset.name}</p>
                     </button>
@@ -1088,7 +1100,7 @@ const TemplateMaker = ({ proMode }) => {
                       onClick={async () =>
                         await handleDeletePreset(preset.name)
                       }>
-                      <TrashIcon className='h-5 w-5 text-gray-500' />
+                      <TrashIcon className='w-5 h-5 text-gray-500' />
                     </button>
                   </div>
                 ))}
@@ -1101,7 +1113,7 @@ const TemplateMaker = ({ proMode }) => {
   );
 
   return (
-    <section className='w-[90%] md:w-[80%] mx-auto grid grid-cols-1 sm:grid-cols-1 md:grid-cols-[1fr,300px] gap-10'>
+    <section className='mx-auto grid w-[90%] grid-cols-1 gap-10 sm:grid-cols-1 md:w-[80%] md:grid-cols-[1fr,300px]'>
       {renderPreview()} {renderOptions()}
     </section>
   );

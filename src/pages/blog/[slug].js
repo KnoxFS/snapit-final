@@ -1,18 +1,18 @@
-import Head from "components/Head";
-import HeadOG from "components/HeadOG";
+import Head from 'components/Head';
+import HeadOG from 'components/HeadOG';
 
-import { TwitterIcon } from "ui/icons";
-import { EnvelopeIcon } from "@heroicons/react/24/solid";
+import { TwitterIcon } from 'ui/icons';
+import { EnvelopeIcon } from '@heroicons/react/24/solid';
 
-import { getPosts, getSinglePost } from "utils/posts";
+import { getPosts, getSinglePost } from 'utils/posts';
 
 const SinglePost = ({ post }) => {
   return (
-    <section className="w-[90%] md:w-[80%] mx-auto my-12 min-h-screen">
+    <section className='mx-auto my-12 min-h-screen w-[90%] md:w-[80%]'>
       <Head>
         <title>Snapit - {post.title}</title>
 
-        <meta name="description" content={post.excerpt} />
+        <meta name='description' content={post.excerpt} />
       </Head>
 
       <HeadOG
@@ -22,14 +22,14 @@ const SinglePost = ({ post }) => {
         image={post.feature_image}
       />
 
-      <header className="md:w-[80%] mx-auto">
-        <h2 className="text-white mb-6 font-semibold text-center text-lg md:text-4xl">
+      <header className='mx-auto md:w-[80%]'>
+        <h2 className='mb-6 text-lg font-semibold text-center text-darkGreen dark:text-white md:text-4xl'>
           {post.title}
         </h2>
 
         {/* description */}
         {post.excerpt && (
-          <p className="text-gray-400 text-sm md:text-base text-center">
+          <p className='text-sm text-center text-gray-400 md:text-base'>
             {post.excerpt}
           </p>
         )}
@@ -46,9 +46,9 @@ const SinglePost = ({ post }) => {
           />
         )}
 
-        <article className="p-4 flex flex-col space-y-6 md:flex-row md:space-y-0 md:space-x-12">
+        <article className="flex flex-col p-4 space-y-6 md:flex-row md:space-y-0 md:space-x-12">
           <div>
-            <h3 className="text-gray-400 uppercase font-bold text-base">
+            <h3 className="text-base font-bold text-gray-400 uppercase">
               Last updated
             </h3>
             <p className="text-white">
@@ -61,7 +61,7 @@ const SinglePost = ({ post }) => {
           </div>
 
           <div>
-            <h3 className="text-gray-400 uppercase font-bold text-base">
+            <h3 className="text-base font-bold text-gray-400 uppercase">
               Written By
             </h3>
             <p className="text-white">{post.primary_author.name}</p>
@@ -70,38 +70,35 @@ const SinglePost = ({ post }) => {
       </figure> */}
 
       {/* Content */}
-      <section className="grid grid-cols-1 md:grid-cols-[70%,1fr] gap-10 my-24">
+      <section className='my-24 grid grid-cols-1 gap-10 md:grid-cols-[70%,1fr]'>
         <div
-          className="text-gray-400 post-content"
-          dangerouslySetInnerHTML={{ __html: post.html }}
-        ></div>
+          className='text-gray-400 post-content'
+          dangerouslySetInnerHTML={{ __html: post.html }}></div>
 
         <article>
-          <h3 className="text-white uppercase font-bold mb-4">
+          <h3 className='mb-4 font-bold uppercase text-darkGreen dark:text-white'>
             Share this post
           </h3>
 
-          <ul className="flex space-x-4">
+          <ul className='flex space-x-4'>
             <li>
               {/* twitter */}
               <a
-                className="twitter-share-button"
-                target="_blank"
-                rel="noreferrer"
-                href={`https://twitter.com/intent/tweet?text=${post.title}&url=https://www.snapit.gg/blog/${post.slug}`}
-              >
-                <TwitterIcon className="w-6 h-6 text-white" />
+                className='twitter-share-button'
+                target='_blank'
+                rel='noreferrer'
+                href={`https://twitter.com/intent/tweet?text=${post.title}&url=https://www.snapit.gg/blog/${post.slug}`}>
+                <TwitterIcon className='w-6 h-6 text-darkGreen dark:text-white' />
               </a>
             </li>
 
             <li>
               {/* mail */}
               <a
-                target="_blank"
-                rel="noreferrer"
-                href={`mailto:#?subject=${post.title} - https://www.snapit.gg/blog/${post.slug}`}
-              >
-                <EnvelopeIcon className="w-6 h-6 text-white" />
+                target='_blank'
+                rel='noreferrer'
+                href={`mailto:#?subject=${post.title} - https://www.snapit.gg/blog/${post.slug}`}>
+                <EnvelopeIcon className='w-6 h-6 text-darkGreen dark:text-white' />
               </a>
             </li>
           </ul>
@@ -115,7 +112,7 @@ export async function getStaticPaths() {
   const posts = await getPosts();
 
   // Get the paths we want to create based on posts
-  const paths = posts.map((post) => ({
+  const paths = posts.map(post => ({
     params: { slug: post.slug },
   }));
 

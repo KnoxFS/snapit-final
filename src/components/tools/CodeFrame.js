@@ -24,19 +24,23 @@ const codeFrames = [
 
 const BrowserFrame = ({ options, setOptions }) => {
   return (
-    <div className='grid grid-cols-[3fr,1fr] w-full'>
+    <div className='grid w-full grid-cols-[3fr,1fr]'>
       <div className='flex items-center space-x-2'>
-        <ComputerDesktopIcon className='h-6 w-6 text-white' />
+        <ComputerDesktopIcon className='w-6 h-6 text-darkGreen dark:text-white' />
 
-        <h3 className='text-sm text-white'>Editor Frame</h3>
+        <h3 className='text-sm text-darkGreen dark:text-white'>
+          Editor Frame
+        </h3>
       </div>
 
-      <div className='flex justify-around items-center'>
+      <div className='flex items-center justify-around'>
         {/* tip */}
         <div className='relative'>
-          <QuestionMarkCircleIcon className='w-6 h-6 text-white cursor-pointer [&~div]:hover:block' />
-          <div className='absolute top-full text-center left-1/2 bg-dark/40 backdrop-blur-sm p-2 rounded-md shadow-md z-50 transform -translate-x-1/2 hidden hover:block w-44'>
-            <p className='text-sm text-white'>Simulates the edit in IDE.</p>
+          <QuestionMarkCircleIcon className='h-6 w-6 cursor-pointer text-darkGreen  dark:text-white [&~div]:hover:block' />
+          <div className='absolute z-50 hidden p-2 text-center transform -translate-x-1/2 rounded-md shadow-md top-full left-1/2 w-44 bg-dark/40 backdrop-blur-sm hover:block'>
+            <p className='text-sm text-darkGreen dark:text-white'>
+              Simulates the edit in IDE.
+            </p>
           </div>
         </div>
         <Popover className='relative justify-self-end'>
@@ -46,10 +50,10 @@ const BrowserFrame = ({ options, setOptions }) => {
                 <ChevronRightIcon
                   className={`${
                     open ? 'rotate-90 transform' : ''
-                  } h-5 w-5 text-white`}
+                  } h-5 w-5 text-darkGreen  dark:text-white`}
                 />
               </Popover.Button>
-              <Popover.Panel className='absolute z-50 top-full mt-2 right-0 bg-dark/40 backdrop-blur-md  p-4 rounded-md shadow-md w-72'>
+              <Popover.Panel className='absolute right-0 z-50 p-4 mt-2 rounded-md shadow-md top-full w-72 bg-dark/40 backdrop-blur-md'>
                 <div className='grid grid-cols-2 gap-4'>
                   {/* render preview */}
                   {codeFrames.map((frame, i) => {
@@ -66,13 +70,13 @@ const BrowserFrame = ({ options, setOptions }) => {
                             frame: frame.value,
                           })
                         }>
-                        <div className='grid grid-rows-[32px,1fr] h-24 w-full relative'>
-                          <div className='w-full p-2 bg-dark rounded-t-md'>
+                        <div className='relative grid h-24 w-full grid-rows-[32px,1fr]'>
+                          <div className='w-full p-2 rounded-t-md bg-dark'>
                             {getCodeFrame(frame.value)}
                           </div>
-                          <div className={`h-full bg-dark rounded-b-md`}></div>
+                          <div className={`h-full rounded-b-md bg-dark`}></div>
                         </div>
-                        <p className='text-xs mt-2 text-white'>{frame.name}</p>
+                        <p className='mt-2 text-xs text-white'>{frame.name}</p>
                       </button>
                     );
                   })}

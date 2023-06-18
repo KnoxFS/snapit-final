@@ -7,18 +7,18 @@ import {
 
 const Noise = ({ options, setOptions }) => {
   return (
-    <div className='grid grid-cols-[3fr,1fr] w-full items-center'>
+    <div className='grid w-full grid-cols-[3fr,1fr] items-center'>
       <div className='flex items-center space-x-2'>
-        <SparklesIcon className='h-6 w-6 text-white' />
+        <SparklesIcon className='w-6 h-6 text-darkGreen dark:text-white' />
 
-        <h3 className='text-sm text-white'>Noise</h3>
+        <h3 className='text-sm text-darkGreen dark:text-white'>Noise</h3>
       </div>
-      <div className='flex justify-center items-center gap-1'>
+      <div className='flex items-center justify-center gap-1'>
         {/* tip */}
         <div className='relative'>
-          <QuestionMarkCircleIcon className='w-6 h-6 text-white cursor-pointer [&~div]:hover:block' />
-          <div className='absolute top-full left-1/2 bg-dark/40 backdrop-blur-sm p-2 rounded-md shadow-md z-50 transform -translate-x-1/2 hidden hover:block w-44'>
-            <p className='text-sm text-white text-center'>
+          <QuestionMarkCircleIcon className='h-6 w-6 cursor-pointer text-darkGreen dark:text-white [&~div]:hover:block' />
+          <div className='absolute z-50 hidden p-2 transform -translate-x-1/2 rounded-md shadow-md top-full left-1/2 w-44 bg-dark/40 backdrop-blur-sm hover:block'>
+            <p className='text-sm text-center text-darkGreen dark:text-white'>
               Puts a grainy texture over the screenshot.
             </p>
           </div>
@@ -27,7 +27,7 @@ const Noise = ({ options, setOptions }) => {
           checked={options?.noise || false}
           onChange={e => setOptions({ ...options, noise: !options?.noise })}
           className={`${options?.noise ? 'bg-primary' : 'bg-darkGreen'}
-        relative inline-flex h-[20px] w-[32px] items-center shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus-visible:ring-2  focus-visible:ring-white focus-visible:ring-opacity-75 justify-self-end`}>
+        relative inline-flex h-[20px] w-[32px] shrink-0 cursor-pointer items-center justify-self-end rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none  focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75`}>
           <span className='sr-only'>Use setting</span>
           <span
             aria-hidden='true'

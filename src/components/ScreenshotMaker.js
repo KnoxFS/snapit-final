@@ -551,7 +551,7 @@ export default function ScreenshotMaker({ proMode }) {
       <>
         {bgPicker ? (
           <div
-            className='fixed inset-0 w-full h-full bg-transparent'
+            className='fixed inset-0 h-full w-full bg-transparent'
             onClick={() => setBGPicker(false)}
           />
         ) : (
@@ -559,16 +559,16 @@ export default function ScreenshotMaker({ proMode }) {
         )}
         <div
           className={classnames(
-            'absolute w-auto max-w-[400px] z-10 top-[calc(100%)] left-[-30px] bg-white/80 backdrop-blur shadow-lg py-4 px-5 rounded-xl flex shadow-gray-500/50 dark:shadow-black/80 border border-gray-400 flex-col dark:border-gray-800 dark:bg-black/80 duration-200',
+            'absolute top-[calc(100%)] left-[-30px] z-10 flex w-auto max-w-[400px] flex-col rounded-xl border border-gray-400 bg-white/80 py-4 px-5 shadow-lg shadow-gray-500/50 backdrop-blur duration-200 dark:border-gray-800 dark:bg-black/80 dark:shadow-black/80',
             {
-              'opacity-0 pointer-events-none scale-[0.9]': !bgPicker,
+              'pointer-events-none scale-[0.9] opacity-0': !bgPicker,
             },
             {
-              'opacity-100 pointer-events-auto scale-[1]': bgPicker,
+              'pointer-events-auto scale-[1] opacity-100': bgPicker,
             },
           )}>
           <div
-            className='absolute top-[5%] right-[5%] opacity-50 cursor-pointer hover:opacity-100 z-10'
+            className='absolute top-[5%] right-[5%] z-10 cursor-pointer opacity-50 hover:opacity-100'
             onClick={() => setBGPicker(false)}>
             ✕
           </div>
@@ -576,11 +576,11 @@ export default function ScreenshotMaker({ proMode }) {
             {/* Pick Start Color */}
             <div className='mb-1'>Pick first color</div>
             <div className='flex items-center'>
-              <div className='relative group'>
+              <div className='group relative'>
                 <input
                   id='startColorPicker'
                   type='color'
-                  className='absolute top-0 left-0 w-12 h-12 rounded-full opacity-0 cursor-pointer'
+                  className='absolute top-0 left-0 h-12 w-12 cursor-pointer rounded-full opacity-0'
                   value={options.customTheme.colorStart || '#222'}
                   onChange={e =>
                     setOptions({
@@ -597,7 +597,7 @@ export default function ScreenshotMaker({ proMode }) {
                     backgroundColor: options?.customTheme?.colorStart || '#222',
                   }}
                   htmlFor='startColorPicker'
-                  className='left-0 flex items-center justify-center w-12 h-12 rounded-full pointer-events-none text-white/50 group-hover:scale-[1.1] duration-100'>
+                  className='pointer-events-none left-0 flex h-12 w-12 items-center justify-center rounded-full text-white/50 duration-100 group-hover:scale-[1.1]'>
                   <span className='font-mono text-xs text-white/80 drop-shadow'>
                     Pick
                   </span>
@@ -608,7 +608,7 @@ export default function ScreenshotMaker({ proMode }) {
                 placeholder='Enter hex value'
                 type='text'
                 value={options.customTheme.colorStart || '#000000'}
-                className='px-2 py-1 font-mono text-base text-black border-2 border-gray-500 rounded-lg focus:outline-none focus:border-black'
+                className='rounded-lg border-2 border-gray-500 px-2 py-1 font-mono text-base text-black focus:border-black focus:outline-none'
                 onChange={e => {
                   let startColorToast;
                   setOptions({
@@ -636,11 +636,11 @@ export default function ScreenshotMaker({ proMode }) {
           <div>
             <div className='mb-1'>Pick second color</div>
             <div className='flex items-center'>
-              <div className='relative group'>
+              <div className='group relative'>
                 <input
                   id='startColorPicker'
                   type='color'
-                  className='absolute top-0 left-0 w-12 h-12 rounded-full opacity-0 cursor-pointer'
+                  className='absolute top-0 left-0 h-12 w-12 cursor-pointer rounded-full opacity-0'
                   value={options.customTheme.colorEnd || '#222'}
                   onChange={e =>
                     setOptions({
@@ -657,7 +657,7 @@ export default function ScreenshotMaker({ proMode }) {
                     backgroundColor: options?.customTheme?.colorEnd || '#222',
                   }}
                   htmlFor='startColorPicker'
-                  className='left-0 flex items-center justify-center w-12  h-12 rounded-full pointer-events-none text-white/50 group-hover:scale-[1.1] duration-100'>
+                  className='pointer-events-none left-0 flex h-12 w-12  items-center justify-center rounded-full text-white/50 duration-100 group-hover:scale-[1.1]'>
                   <span className='font-mono text-xs text-white/80 drop-shadow'>
                     Pick
                   </span>
@@ -668,7 +668,7 @@ export default function ScreenshotMaker({ proMode }) {
                 placeholder='Enter hex value'
                 type='text'
                 value={options.customTheme.colorEnd || '#000000'}
-                className='px-2 py-1 font-mono text-base text-black border-2 border-gray-500 rounded-lg focus:outline-none focus:border-black'
+                className='rounded-lg border-2 border-gray-500 px-2 py-1 font-mono text-base text-black focus:border-black focus:outline-none'
                 onChange={e => {
                   let endColorToast;
                   setOptions({
@@ -705,7 +705,7 @@ export default function ScreenshotMaker({ proMode }) {
         onChange={setActiveTabIndex}>
         {/* Minimize button
         <div
-          className="hidden md:block absolute top-1/2 -right-9 py-6 px-1 -translate-x-1/2 cursor-pointer rounded-r-2xl bg-primary"
+          className="absolute hidden px-1 py-6 -translate-x-1/2 cursor-pointer md:block top-1/2 -right-9 rounded-r-2xl bg-primary"
           onClick={() => setOptionsOpen(false)}
         >
           <ChevronLeftIcon className="w-4 h-4 text-white" />
@@ -713,15 +713,15 @@ export default function ScreenshotMaker({ proMode }) {
 
         {/* tabs */}
 
-        <Tab.List className='absolute w-52 -rotate-90 top-1/2 -left-[122px] cursor-pointer rounded-t-xl overflow-auto bg-primary bg-opacity-20 text-white text-sm flex flex-row-reverse justify-between'>
+        <Tab.List className='absolute top-1/2 -left-[122px] flex w-52 -rotate-90 cursor-pointer flex-row-reverse justify-between overflow-auto rounded-t-xl bg-primary bg-opacity-5 text-sm text-darkGreen dark:bg-primary dark:bg-opacity-20 dark:text-white'>
           <Tab
             as='button'
-            className='ui-selected:bg-[#209F63] ui-selected:bg-opacity-60 w-full py-2 px-4 outline-none font-light'>
+            className='w-full px-4 py-2 font-light outline-none ui-selected:bg-primary dark:ui-selected:bg-opacity-60'>
             Options
           </Tab>
           <Tab
             as='button'
-            className='ui-selected:bg-primary ui-selected:bg-opacity-60 w-full py-2 px-4 outline-none font-light'>
+            className='w-full px-4 py-2 font-light outline-none ui-selected:bg-primary ui-selected:bg-opacity-60'>
             Presets
           </Tab>
         </Tab.List>
@@ -729,9 +729,9 @@ export default function ScreenshotMaker({ proMode }) {
         <Tab.Panels>
           {/* options */}
           <Tab.Panel>
-            <div className='p-6 lg:p-8 rounded-md bg-primary bg-opacity-20 w-full relative mt-10 lg:mt-0 h-auto md:max-h-[550px] overflow-y-scroll custom-scrollbar'>
-              <div className='relative flex flex-row flex-wrap items-start justify-start space-y-5 lg:items-start lg:flex-col'>
-                <h3 className='text-center text-white text-light w-full text-sm'>
+            <div className='custom-scrollbar relative mt-10 h-auto w-full overflow-y-scroll rounded-md bg-primary bg-opacity-10 p-6 dark:bg-opacity-20 md:max-h-[550px] lg:mt-0 lg:p-8'>
+              <div className='relative flex flex-row flex-wrap items-start justify-start space-y-5 lg:flex-col lg:items-start'>
+                <h3 className='text-light w-full text-center text-sm text-darkGreen dark:text-white'>
                   Screenshot Options
                 </h3>
 
@@ -767,7 +767,7 @@ export default function ScreenshotMaker({ proMode }) {
 
                 {/* canvas opts */}
 
-                <h3 className='text-center text-white w-full text-sm'>
+                <h3 className='w-full text-center text-sm text-darkGreen dark:text-white'>
                   Canvas Options
                 </h3>
 
@@ -776,12 +776,14 @@ export default function ScreenshotMaker({ proMode }) {
                   {({ open }) => (
                     <>
                       <Disclosure.Button className='w-full'>
-                        <div className='relative flex items-center justify-between pb-2 text-sm text-gray-400 w-full'>
+                        <div className='relative flex w-full items-center justify-between pb-2 text-sm text-gray-400'>
                           <div className='flex items-center'>
                             <div className='flex items-center space-x-2'>
-                              <BackgroundIcon className='h-6 w-6 text-white' />
+                              <BackgroundIcon className='h-6 w-6 text-darkGreen dark:text-white' />
 
-                              <h3 className='text-sm text-white'>Background</h3>
+                              <h3 className='text-sm text-darkGreen dark:text-white'>
+                                Background
+                              </h3>
                             </div>
 
                             {pickBackground()}
@@ -792,20 +794,20 @@ export default function ScreenshotMaker({ proMode }) {
                                 e.stopPropagation();
                                 setBGPicker(!bgPicker);
                               }}
-                              className='flex items-center px-2 rounded-sm cursor-pointer'>
+                              className='flex cursor-pointer items-center rounded-sm px-2'>
                               <ChevronRightIcon
                                 className={`${
                                   open ? 'rotate-90 transform' : ''
-                                } h-5 w-5 text-white justify-self-end`}
+                                } h-5 w-5 justify-self-end text-darkGreen dark:text-white`}
                               />
                             </div>
                           </div>
                         </div>
                       </Disclosure.Button>
 
-                      <Disclosure.Panel className='w-full overflow-x-scroll scrollbar-none'>
+                      <Disclosure.Panel className='scrollbar-none w-full overflow-x-scroll'>
                         <div>
-                          <div className='grid flex-wrap grid-cols-6 mt-1 gap-x-4 gap-y-2'>
+                          <div className='mt-1 grid grid-cols-6 flex-wrap gap-x-4 gap-y-2'>
                             {[
                               'bg-gradient-to-br from-pink-300 via-orange-200 to-red-300',
                               'bg-gradient-to-br from-green-300 via-yellow-200 to-green-200',
@@ -822,7 +824,7 @@ export default function ScreenshotMaker({ proMode }) {
                             ].map(theme => (
                               <div
                                 key={theme}
-                                className={`cursor-pointer shadow dark:shadow-black/20 shadow-gray-500/20 w-8 h-8 rounded-full ${theme}`}
+                                className={`h-8 w-8 cursor-pointer rounded-full shadow shadow-gray-500/20 dark:shadow-black/20 ${theme}`}
                                 onClick={() => {
                                   setOptions({
                                     ...options,
@@ -835,11 +837,11 @@ export default function ScreenshotMaker({ proMode }) {
                             ))}
                           </div>
 
-                          <div className='grid flex-wrap grid-cols-6 mt-2 gap-x-4 gap-y-2'>
+                          <div className='mt-2 grid grid-cols-6 flex-wrap gap-x-4 gap-y-2'>
                             {wallpapers.map(wallpaper => (
                               <div
                                 key={wallpaper.name}
-                                className='cursor-pointer shadow dark:shadow-black/20 shadow-gray-500/20 w-8 h-8 rounded-full bg-cover bg-center'
+                                className='h-8 w-8 cursor-pointer rounded-full bg-cover bg-center shadow shadow-gray-500/20 dark:shadow-black/20'
                                 style={{
                                   backgroundImage: `url(${wallpaper.src})`,
                                 }}
@@ -856,7 +858,7 @@ export default function ScreenshotMaker({ proMode }) {
 
                           {/* gradient direction */}
                           <RadioGroup
-                            className='flex items-center space-x-2 mt-4'
+                            className='mt-4 flex items-center space-x-2'
                             value={options.bgDirection}
                             onChange={value =>
                               setOptions({
@@ -868,7 +870,7 @@ export default function ScreenshotMaker({ proMode }) {
                               <RadioGroup.Option
                                 key={gd}
                                 value={gd.value}
-                                className='border p-1 rounded-md ui-checked:border-green-400 cursor-pointer'>
+                                className='cursor-pointer rounded-md border p-1 ui-checked:border-green-400'>
                                 <span>{gd.icon}</span>
                               </RadioGroup.Option>
                             ))}
@@ -908,20 +910,20 @@ export default function ScreenshotMaker({ proMode }) {
                 {/* Reset */}
                 <div
                   onClick={resetCanvas}
-                  className='flex items-center justify-center w-full mx-auto text-green-400 cursor-pointer !mt-8'>
-                  <span className='w-4 h-4 mr-1'>{ResetIcon}</span>
+                  className='mx-auto !mt-8 flex w-full cursor-pointer items-center justify-center text-darkGreen dark:text-green-400'>
+                  <span className='mr-1 h-4 w-4'>{ResetIcon}</span>
                   Reset
                 </div>
                 {/* Pro plan tooltip */}
                 {!proMode && (
-                  <div className='bg-primary md:w-full flex-1 p-4 rounded-md text-darkGreen flex flex-col md:flex-row text-center md:text-left items-center justify-between mb-4'>
-                    <p className='md:w-[60%] w-full text-xs'>
+                  <div className='mb-4 flex flex-1 flex-col items-center justify-between rounded-md bg-primary p-4 text-center text-darkGreen md:w-full md:flex-row md:text-left'>
+                    <p className='w-full text-xs md:w-[60%]'>
                       Premium features are avaiable in PRO Account
                     </p>
 
                     <button
                       onClick={() => setShowBuyPro(true)}
-                      className='bg-darkGreen transition text-primary w-max p-2 rounded-sm text-xs mt-4 md:mt-0'>
+                      className='mt-4 w-max rounded-sm bg-darkGreen p-2 text-xs text-primary transition md:mt-0'>
                       Get Snapit Pro
                     </button>
                   </div>
@@ -932,9 +934,9 @@ export default function ScreenshotMaker({ proMode }) {
 
           {/* presets */}
           <Tab.Panel>
-            <div className='p-8 rounded-md bg-primary bg-opacity-20 w-full min-h-[550px] overflow-y-scroll custom-scrollbar'>
+            <div className='custom-scrollbar min-h-[550px] w-full overflow-y-scroll rounded-md bg-primary bg-opacity-10 p-8 dark:bg-opacity-20'>
               {!proMode && (
-                <div className='text-center text-gray-400'>
+                <div className='text-center text-darkGreen dark:text-white'>
                   <h3>
                     Save time applying customizations with Presets. You can save
                     your customizations and apply them later with just
@@ -943,17 +945,17 @@ export default function ScreenshotMaker({ proMode }) {
 
                   <button
                     onClick={() => setShowBuyPro(true)}
-                    className='bg-primary text-darkGreen hover:bg-green-500 transition w-full p-2 rounded-md mt-6'>
+                    className='mt-6 w-full rounded-md bg-primary p-2 text-darkGreen transition hover:bg-green-500'>
                     Get Snapit Pro
                   </button>
                 </div>
               )}
               {proMode && (
                 <article className='space-y-4'>
-                  <h3 className='text-center text-gray-500 w-full'>Presets</h3>
+                  <h3 className='w-full text-center text-gray-500'>Presets</h3>
 
                   {user?.presets?.screenshots?.length === 0 && (
-                    <div className='text-center text-gray-400 mt-6'>
+                    <div className='mt-6 text-center text-gray-400'>
                       <h3>
                         You don't have any presets yet. Create one by clicking
                         the "Save as Preset" button.
@@ -965,7 +967,7 @@ export default function ScreenshotMaker({ proMode }) {
                     <div className='flex items-center space-x-2' key={i}>
                       <button
                         key={preset.id}
-                        className='flex items-center justify-between w-full p-2 rounded-md bg-dark/40 hover:bg-dark/80 transition'
+                        className='flex w-full items-center justify-between rounded-md bg-dark/40 p-2 transition hover:bg-dark/80'
                         onClick={() => setPreset(preset.options)}>
                         <p className='text-sm text-gray-400'>{preset.name}</p>
                       </button>
@@ -989,12 +991,12 @@ export default function ScreenshotMaker({ proMode }) {
 
   const optionsPlaceholder = () => {
     return (
-      <div className='w-6 h-full min-h-[550px] bg-[#2B2C2F] rounded-md relative'>
+      <div className='relative h-full min-h-[550px] w-6 rounded-md bg-[#2B2C2F]'>
         {/* Minimize button */}
         <div
-          className='absolute top-1/2 -right-9 py-6 px-1 -translate-x-1/2 cursor-pointer rounded-r-2xl bg-[#2B2C2F]'
+          className='absolute top-1/2 -right-9 -translate-x-1/2 cursor-pointer rounded-r-2xl bg-[#2B2C2F] py-6 px-1'
           onClick={() => setOptionsOpen(true)}>
-          <ChevronLeftIcon className='w-4 h-4 text-white rotate-180' />
+          <ChevronLeftIcon className='h-4 w-4 rotate-180 text-white' />
         </div>
       </div>
     );
@@ -1003,7 +1005,7 @@ export default function ScreenshotMaker({ proMode }) {
   return (
     <div
       id='screenshots'
-      className='relative w-full mt-[50px] h-auto bg-primary bg-opacity-10 p-4 md:p-10 rounded-md '
+      className='relative mt-[50px] h-auto w-full rounded-md bg-primary bg-opacity-5 p-4 dark:bg-opacity-10 md:p-10 '
       onPaste={onPaste}
       onDragOver={e => e.preventDefault()}
       onDragEnter={e => e.preventDefault()}
@@ -1013,7 +1015,7 @@ export default function ScreenshotMaker({ proMode }) {
         onPaste(e);
       }}>
       <Confetti
-        className='oveflow-hidden !w-full !fixed !inset-0 !z-50'
+        className='oveflow-hidden !fixed !inset-0 !z-50 !w-full'
         width={width}
         height={height}
         numberOfPieces={showConfetti ? 200 : 0}
@@ -1025,12 +1027,12 @@ export default function ScreenshotMaker({ proMode }) {
       />
 
       {/* Handle buttons */}
-      <div className='md:flex items-center justify-end w-full space-y-4 md:space-y-0 [&>*]:w-full md:[&>*]:w-max md:space-x-6 mb-6'>
+      <div className='mb-6 w-full items-center justify-end space-y-4 md:flex md:space-y-0 md:space-x-6 [&>*]:w-full md:[&>*]:w-max'>
         {showPresetModal && user?.isPro && (
           <input
             type='text'
             placeholder="Preset's name"
-            className='py-2 px-4 rounded-md bg-[#212121] outline-none ring-1 ring-transparent focus:ring-green-400 text-white'
+            className='rounded-md bg-[#212121] py-2 px-4 text-white outline-none ring-1 ring-transparent focus:ring-green-400'
             value={presetName}
             onChange={e => setPresetName(e.target.value)}
           />
@@ -1038,16 +1040,16 @@ export default function ScreenshotMaker({ proMode }) {
 
         {user && user.isPro && (
           <button
-            className='flex items-center justify-center px-4 py-2 text-base font-medium bg-primary rounded-md text-darkGreen'
+            className='flex items-center justify-center rounded-md bg-primary px-4 py-2 text-base font-medium text-darkGreen'
             onClick={handleSavePreset}>
-            <span className='w-6 h-6 mr-2'>{SaveIcon}</span>
+            <span className='mr-2 h-6 w-6'>{SaveIcon}</span>
             Create Preset
           </button>
         )}
 
         {blob?.src && (
-          <label className='flex items-center justify-center px-4 py-2 text-base font-medium bg-primary rounded-md text-darkGreen cursor-pointer'>
-            <span className='w-6 h-6 mr-2'>
+          <label className='flex cursor-pointer items-center justify-center rounded-md bg-primary px-4 py-2 text-base font-medium text-darkGreen'>
+            <span className='mr-2 h-6 w-6'>
               <PhotoIcon />
             </span>
             Replace Image
@@ -1062,9 +1064,9 @@ export default function ScreenshotMaker({ proMode }) {
 
         {!blob?.src && (
           <button
-            className='flex items-center justify-center px-4 py-2 text-base font-medium bg-primary hover:bg-green-500 transition rounded-md text-darkGreen'
+            className='flex items-center justify-center rounded-md bg-primary px-4 py-2 text-base font-medium text-darkGreen transition hover:bg-green-500'
             onClick={setDemoImage}>
-            <span className='w-6 h-6 mr-2'>
+            <span className='mr-2 h-6 w-6'>
               <PhotoIcon />
             </span>
             Try demo image
@@ -1073,9 +1075,9 @@ export default function ScreenshotMaker({ proMode }) {
 
         {blob?.src && (
           <button
-            className='flex items-center justify-center px-4 py-2 text-base font-medium bg-primary hover:bg-green-500 transition rounded-md text-darkGreen'
+            className='flex items-center justify-center rounded-md bg-primary px-4 py-2 text-base font-medium text-darkGreen transition hover:bg-green-500'
             onClick={handleCropImage}>
-            <span className='w-6 h-6 mr-2'>
+            <span className='mr-2 h-6 w-6'>
               <StopIcon />
             </span>
             Crop
@@ -1083,18 +1085,18 @@ export default function ScreenshotMaker({ proMode }) {
         )}
 
         <button
-          className='flex items-center justify-center px-4 py-2 text-base font-medium bg-primary hover:bg-green-500 transition rounded-md text-darkGreen'
+          className='flex items-center justify-center rounded-md bg-primary px-4 py-2 text-base font-medium text-darkGreen transition hover:bg-green-500'
           title='Use Ctrl/Cmd + S to save the image'
           onClick={saveImage}>
-          <span className='w-6 h-6 mr-2'>{SaveIcon}</span>
+          <span className='mr-2 h-6 w-6'>{SaveIcon}</span>
           Save
         </button>
 
         <button
-          className='flex items-center justify-center px-4 py-2 text-base font-medium bg-primary hover:bg-green-500 transition rounded-md text-darkGreen'
+          className='flex items-center justify-center rounded-md bg-primary px-4 py-2 text-base font-medium text-darkGreen transition hover:bg-green-500'
           onClick={copyImage}
           title='Use Ctrl/Cmd + C to copy the image'>
-          <span className='w-6 h-6 mr-2'>{ClipboardIcon}</span>
+          <span className='mr-2 h-6 w-6'>{ClipboardIcon}</span>
           Copy
         </button>
       </div>
@@ -1102,12 +1104,12 @@ export default function ScreenshotMaker({ proMode }) {
       <div
         className={`relative grid grid-cols-1 place-items-start ${
           optionsOpen ? 'md:grid-cols-[360px,1fr]' : 'md:grid-cols-[50px,1fr]'
-        } gap-10 w-full mx-auto`}>
+        } mx-auto w-full gap-10`}>
         {optionsOpen ? (
-          <div className='w-full row-start-1 md:row-span-1 self-start mt-6'>
+          <div className='row-start-1 mt-6 w-full self-start md:row-span-1'>
             {renderOptions()}
             {!proMode && (
-              <p className='mt-6 md:mb-0 text-gray-500 text-sm text-center inline-flex justify-center gap-2 md:px-4 w-full'>
+              <p className='mt-6 inline-flex w-full justify-center gap-2 text-center text-sm text-darkGreen dark:text-white md:mb-0 md:px-4'>
                 Features with{' '}
                 <span>
                   <ThunderIcon />
@@ -1117,12 +1119,12 @@ export default function ScreenshotMaker({ proMode }) {
             )}
           </div>
         ) : (
-          <div className='w-full row-start-2 md:row-span-1'>
+          <div className='row-start-2 w-full md:row-span-1'>
             {optionsPlaceholder()}
           </div>
         )}
 
-        <div className='flex items-center w-full'>
+        <div className='flex w-full items-center'>
           {/* Crop Modal */}
           {showCropModal && (
             <CropModal
@@ -1139,7 +1141,7 @@ export default function ScreenshotMaker({ proMode }) {
           )}
 
           <div
-            className={`overflow-hidden duration-200 ease-in-out relative my-5 w-full flex justify-center items-center`}>
+            className={`relative my-5 flex w-full items-center justify-center overflow-hidden duration-200 ease-in-out`}>
             <div
               ref={el => (wrapperRef.current = el)}
               style={
@@ -1158,9 +1160,9 @@ export default function ScreenshotMaker({ proMode }) {
                     }
               }
               className={classnames(
-                `transition-all duration-200 relative ease-in-out overflow-hidden bg-cover ${
+                `relative overflow-hidden bg-cover transition-all duration-200 ease-in-out ${
                   options.aspectRatio === 'aspect-appstore !scale-75'
-                    ? 'w-[5in] h-[7.0in]'
+                    ? 'h-[7.0in] w-[5in]'
                     : 'w-full'
                 }`,
                 options?.padding,
@@ -1174,7 +1176,7 @@ export default function ScreenshotMaker({ proMode }) {
               {options?.noise ? (
                 <div
                   style={{ backgroundImage: `url("/noise.svg")` }}
-                  className={`absolute inset-0 w-full h-full bg-repeat opacity-[0.25] ${
+                  className={`absolute inset-0 h-full w-full bg-repeat opacity-[0.25] ${
                     options?.rounded
                   } ${options.browserBar !== 'hidden' ? 'rounded-t-none' : ''}`}
                 />
@@ -1184,11 +1186,11 @@ export default function ScreenshotMaker({ proMode }) {
 
               {blob?.src ? (
                 <div
-                  className={`h-full flex ${
+                  className={`flex h-full ${
                     options.text.position === 'top'
                       ? 'flex-col'
                       : 'flex-col-reverse'
-                  }  justify-center items-center`}>
+                  }  items-center justify-center`}>
                   {/* Text */}
 
                   {options?.text.show && (
@@ -1200,7 +1202,7 @@ export default function ScreenshotMaker({ proMode }) {
                           ? 'text-black'
                           : 'text-white'
                       }`}>
-                      <p className='font-bold text-3xl mb-2 break-word whitespace-pre-wrap'>
+                      <p className='break-word mb-2 whitespace-pre-wrap text-3xl font-bold'>
                         {options.text.heading}
                       </p>
                       <p className='break-word whitespace-pre-wrap'>
@@ -1217,11 +1219,11 @@ export default function ScreenshotMaker({ proMode }) {
                     reset={false}
                     className={`relative`}>
                     <div
-                      className={`flex flex-col justify-center items-center ${options.aspectRatio} transition`}>
+                      className={`flex flex-col items-center justify-center ${options.aspectRatio} transition`}>
                       {getTabFrame(options?.browserBar, options?.rounded)}
                       <img
                         src={blob?.src}
-                        className={`relative z-10 transition-all duration-200 ease-in-out select-none max-w-full bg-cover ${
+                        className={`relative z-10 max-w-full select-none bg-cover transition-all duration-200 ease-in-out ${
                           options?.rounded
                         } ${options.shadow} ${getImageRadius(
                           options?.padding,
@@ -1236,10 +1238,10 @@ export default function ScreenshotMaker({ proMode }) {
                   </ReactTilt>
                 </div>
               ) : (
-                <div className='flex items-center justify-center w-full min-h-[50vh]'>
-                  <div className='bg-darkGreen rounded-md overflow-hidden shadow-md'>
+                <div className='flex min-h-[50vh] w-full items-center justify-center'>
+                  <div className='overflow-hidden rounded-md bg-white shadow-md dark:bg-darkGreen'>
                     <label
-                      className='flex flex-col items-center justify-center text-sm md:text-lg select-none max-w-[550px] rounded-xl p-10 text-center text-white cursor-pointer hover:opacity-50 duration-300'
+                      className='flex max-w-[550px] cursor-pointer select-none flex-col items-center justify-center rounded-xl p-10 text-center text-sm text-darkGreen duration-300 hover:opacity-50 dark:text-white md:text-lg'
                       htmlFor='imagesUpload'>
                       <input
                         className='hidden'
@@ -1247,14 +1249,14 @@ export default function ScreenshotMaker({ proMode }) {
                         type='file'
                         onChange={onPaste}
                       />
-                      <span className=' px-3 py-1 mb-2 shadow-lg '>
-                        <UploadIcon className='!text-white' />
+                      <span className='mb-2 px-3 py-1 '>
+                        <UploadIcon className='text-darkGreen dark:text-white' />
                       </span>
                       <p>Upload a Screenshot</p>
                     </label>
 
                     {/* website url request */}
-                    <div className='bg-[#004D3E] p-6 mt-4 text-center text-white'>
+                    <div className='mt-4 bg-primary bg-opacity-10 p-6 text-center text-darkGreen dark:bg-[#004D3E] dark:text-white'>
                       <p className='text-base font-light'>Or</p>
                       <h4 className='text-base font-light'>
                         Add a screenshot from website/link
@@ -1263,7 +1265,7 @@ export default function ScreenshotMaker({ proMode }) {
                       <input
                         type='text'
                         placeholder='https://example.com'
-                        className='w-full p-2 text-center text-sm md:text-base bg-darkGreen my-4 rounded-sm'
+                        className='my-4 w-full rounded-sm bg-primary bg-opacity-30 p-2 text-center text-sm text-darkGreen placeholder-darkGreen dark:bg-darkGreen dark:text-white dark:placeholder-white md:text-base'
                         value={websiteUrl}
                         onChange={e => setWebsiteUrl(e.target.value)}
                         onKeyUp={e => {
@@ -1274,7 +1276,7 @@ export default function ScreenshotMaker({ proMode }) {
                       />
 
                       <button
-                        className=' bg-primary hover:bg-green-500 transition text-darkGreen rounded-sm p-2 mt-5 disabled:opacity-80 text-xs font-semibold'
+                        className='mt-5 rounded-sm bg-primary p-2 text-xs font-semibold text-darkGreen transition hover:bg-green-500 disabled:opacity-80'
                         disabled={fetchingWebsite}
                         onClick={getWebsiteScreenshot}>
                         Capture website screenshot
@@ -1287,7 +1289,7 @@ export default function ScreenshotMaker({ proMode }) {
               {/* custom watermark */}
               {options?.customWatermark.show && blob?.src && (
                 <div
-                  className={`absolute ${options.customWatermark.position} z-50 left-1/2 -translate-x-1/2 ${options.customWatermark.color} py-1 px-2 text-xs rounded-md flex items-center space-x-2`}>
+                  className={`absolute ${options.customWatermark.position} left-1/2 z-50 -translate-x-1/2 ${options.customWatermark.color} flex items-center space-x-2 rounded-md py-1 px-2 text-xs`}>
                   {options?.customWatermark.text && (
                     <p>{options.customWatermark?.text}</p>
                   )}
@@ -1295,14 +1297,14 @@ export default function ScreenshotMaker({ proMode }) {
                   {/* link */}
                   {options?.customWatermark?.link && (
                     <p className='flex items-center'>
-                      <LinkIcon className='w-3 h-3 mr-1' />
+                      <LinkIcon className='mr-1 h-3 w-3' />
                       {options?.customWatermark?.link}
                     </p>
                   )}
 
                   {options.customWatermark.twitter && (
                     <p className='flex items-center'>
-                      <TwitterIcon className='w-3 h-3 mr-1' />
+                      <TwitterIcon className='mr-1 h-3 w-3' />
                       {options.customWatermark?.twitter}
                     </p>
                   )}
@@ -1310,7 +1312,7 @@ export default function ScreenshotMaker({ proMode }) {
                   {/* instagram */}
                   {options.customWatermark.instagram && (
                     <p className='flex items-center'>
-                      <InstagramIcon className='w-3 h-3 mr-1' />
+                      <InstagramIcon className='mr-1 h-3 w-3' />
                       {options.customWatermark?.instagram}
                     </p>
                   )}
@@ -1318,7 +1320,7 @@ export default function ScreenshotMaker({ proMode }) {
                   {/* github */}
                   {options.customWatermark.github && (
                     <p className='flex items-center'>
-                      <GitHubIcon className='w-3 h-3 mr-1' />
+                      <GitHubIcon className='mr-1 h-3 w-3' />
                       {options.customWatermark?.github}
                     </p>
                   )}
@@ -1326,7 +1328,7 @@ export default function ScreenshotMaker({ proMode }) {
                   {/* linkedin */}
                   {options.customWatermark.linkedin && (
                     <p className='flex items-center'>
-                      <LinkedInIcon className='w-3 h-3 mr-1' />
+                      <LinkedInIcon className='mr-1 h-3 w-3' />
                       {options.customWatermark?.linkedin}
                     </p>
                   )}
@@ -1335,7 +1337,7 @@ export default function ScreenshotMaker({ proMode }) {
 
               {/* watermark */}
               {options?.watermark && blob?.src && (
-                <div className='bg-green-500 text-white absolute bottom-0 right-12 p-1 px-2 select-none text-xs rounded-t-md'>
+                <div className='absolute bottom-0 right-12 select-none rounded-t-md bg-green-500 p-1 px-2 text-xs text-white'>
                   Made with snapit.gg
                 </div>
               )}
