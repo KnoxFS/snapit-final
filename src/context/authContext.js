@@ -89,25 +89,21 @@ export default function AuthProvider({ children }) {
       };
 
       if (subscription_id) {
-        if (subscription_id == 'lifetime' || subscription_id == null) {
-          data.isPro = true;
-        } else {
-          //  verify subscription in stripe
-          const { active, end } = await fetch(
-            `/api/verifySubscription?subscription_id=${subscription_id}`
-          ).then((res) => res.json());
+        //  verify subscription in stripe
+        const { active, end } = await fetch(
+          `/api/verifySubscription?subscription_id=${subscription_id}`
+        ).then((res) => res.json());
 
-          if (active) {
-            data.isPro = true;
-            data.endPro = end;
-          }
+        if (active) {
+          data.isPro = true;
+          data.endPro = end;
         }
       }
 
       setUser(user ? data : null);
       setLoading(false);
     }
-  }; 
+  };
 
   const value = {
     user,
@@ -118,5 +114,4 @@ export default function AuthProvider({ children }) {
   };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
-}  
-  
+}
