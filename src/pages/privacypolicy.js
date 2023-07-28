@@ -69,7 +69,7 @@ const PrivacyPolicy = () => {
           By creating an account Snapit.gg, users agree and opt-in to receive
           periodic emails from Snapit. Users can at all times, choose to
           unsubscribe from the mailinglist and choose not to receive emails from
-          Snapit anymore.
+          Snapit anymore. 
         </p>
       </div>
 
