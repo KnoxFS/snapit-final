@@ -60,7 +60,7 @@ const TermsOfService = () => {
           any of these restrictions and may be terminated by Snapit at any time.
           Upon terminating your viewing of these materials or upon the
           termination of this license, you must destroy any downloaded materials
-          in your possession whether in electronic or printed format.
+          in your possession whether in electronic or printed format. 
         </p>
 
         <h1 className="text-lg font-bold text-darkGreen dark:text-white">
