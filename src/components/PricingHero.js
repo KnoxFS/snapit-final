@@ -76,7 +76,7 @@ const PricingHero = () => {
                 Want Snapit Pro?
               </button>
 
-              <p className='text-darkGreen dark:text-white'>Just $5 a month.</p>
+              <p className='text-darkGreen dark:text-white'>Just $7,99 a month.</p>
             </div>
           )}
         </article>
