@@ -38,7 +38,7 @@ const PricingHero = () => {
               ) which requires a monthly or yearly subscription.
             </p>
             <p>
-              Snapit Pro is $5 a month, $49 annual or $99 for a perpetual
+              Snapit Pro is $7,99 a month, $79 annual or $99 for a perpetual
               (lifetime) license.
             </p>
 
