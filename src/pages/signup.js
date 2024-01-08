@@ -127,12 +127,12 @@ const Signup = () => {
     <>
       <Head>
         <title>
-          Snapit - Create beautiful screenshots and mockups so easily
+        Screenshots4all - Create beautiful screenshots and mockups so easily
         </title>
         <meta
           name='description'
           content='Turn boring screenshots into shareable ones with just few clicks
-          Design beautiful screenshots and browser mockups quickly using Snapit. Create eye-catching images today to share with your audience
+          Design beautiful screenshots and browser mockups quickly using Screenshots4all. Create eye-catching images today to share with your audience
   '
         />
       </Head>

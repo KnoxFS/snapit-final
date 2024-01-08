@@ -46,7 +46,7 @@ const layouts = {
         {/* Watermark */}
         {options.watermark && (
           <div className='mt-6 w-max rounded-md bg-primary p-2 px-3 text-sm font-medium text-darkGreen md:mt-0'>
-            <p className='whitespace-nowrap'>Made with snapit.gg</p>
+            <p className='whitespace-nowrap'>Made with Screenshots4all.com</p>
           </div>
         )}
       </footer>
@@ -85,7 +85,7 @@ const layouts = {
       {/* Watermark */}
       {options.watermark && (
         <div className='absolute bottom-5 right-5 w-max rounded-md bg-primary p-2 text-sm font-medium text-bgGreen'>
-          <p>Made with snapit.gg</p>
+          <p>Made with Screenshots4all.com</p>
         </div>
       )}
     </div>
@@ -127,7 +127,7 @@ const layouts = {
       {/* Watermark */}
       {options.watermark && (
         <div className='absolute bottom-5 right-5 w-max rounded-md bg-primary p-2 text-sm font-medium text-bgGreen'>
-          <p>Made with snapit.gg</p>
+          <p>Made with Screenshots4all.com</p>
         </div>
       )}
     </div>

@@ -12,14 +12,14 @@ const features = [
     icon: <img src='/feat-cards/backgrounds.svg' className='w-36 md:w-56' />,
     title: 'Apply beautiful backgrounds',
     description:
-      'Snapit offers an extensive range of gradient backgrounds and image backgrounds to perfectly fit your browser mockups.',
+      'Screenshots4all offers an extensive range of gradient backgrounds and image backgrounds to perfectly fit your browser mockups.',
     id: 2,
   },
   {
     icon: <img src='/feat-cards/media.svg' className='w-36 md:w-56' />,
     title: 'Social media ready sizes',
     description:
-      "With Snapit, you'll be able to export your image in a variety of sizes that are perfect for your social media content be it your twitter posts or instagram stories, we've got your back!",
+      "With Screenshots4all, you'll be able to export your image in a variety of sizes that are perfect for your social media content be it your twitter posts or instagram stories, we've got your back!",
     id: 3,
   },
   {
@@ -40,7 +40,7 @@ const features = [
     icon: <img src='/feat-cards/instant.svg' className='w-36 md:w-56' />,
     title: 'Instant customization and exports',
     description:
-      "Snapit lets you automatically apply customizations you've made in the past, which saves you time. In addition, Snapit gives you shortcuts to export images instantly.",
+      "Screenshots4all lets you automatically apply customizations you've made in the past, which saves you time. In addition, Screenshots4all gives you shortcuts to export images instantly.",
     id: 6,
   },
 ];

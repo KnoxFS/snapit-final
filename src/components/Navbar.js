@@ -101,7 +101,7 @@ const Navbar = () => {
           <button
             onClick={() => setShowBuyPro(true)}
             className="block rounded-md border-2 border-green-500 px-4 py-2 text-sm text-green-500">
-            Snapit Pro
+            Screenshots4all Pro
           </button>
         ) : null}
 

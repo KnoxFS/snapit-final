@@ -8,18 +8,18 @@ const HeadOG = ({ title, description, image, url }) => {
       <meta content={description} name="twitter:description" />
 
       <meta
-        content={image || "https://www.snapit.gg/og-image.png"}
+        content={image || "https://www.screenshots4all.com/og-image.png"}
         name="twitter:image:src"
       />
 
       <meta content="website" property="og:type" />
       <meta content={url} property="og:url" />
-      <meta content="Snapit" property="og:site_name" />
+      <meta content="Screenshots4all" property="og:site_name" />
 
       <meta content={title} property="og:title" />
       <meta content={description} property="og:description" />
       <meta
-        content={image || "https://www.snapit.gg/og-image.png"}
+        content={image || "https://www.screenshots4all.com/og-image.png"}
         property="og:image"
       />
       <meta content="object" property="og:type" />

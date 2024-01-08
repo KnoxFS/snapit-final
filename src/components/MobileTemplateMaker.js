@@ -62,7 +62,7 @@ const defaultOptions = {
 
   // text
   text: {
-    heading: 'Made with Snapit.gg',
+    heading: 'Made with Screenshots4all.com',
     subheading: 'The best screenshot maker',
     show: false,
     color: 'dark',
@@ -494,7 +494,7 @@ const TemplateMaker = ({ proMode }) => {
         {/* watermark */}
         {options?.watermark && (
           <div className='absolute bottom-0 right-1/2 translate-x-1/2 select-none rounded-t-md bg-green-500 p-1 px-2 text-xs text-white'>
-            Made with snapit.gg
+            Made with Screenshots4all.com
           </div>
         )}
       </div>

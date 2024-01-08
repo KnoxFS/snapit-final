@@ -70,7 +70,7 @@ const Applications = () => {
     <section className='mx-auto w-[90%] md:w-[80%]'>
       <header className='my-12'>
         <h2 className='text-xl text-darkGreen dark:text-white'>
-          Here's what extra you can do with Snapit Pro:
+          Here's what extra you can do with Screenshots4all Pro:
         </h2>
       </header>
 

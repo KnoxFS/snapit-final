@@ -7,7 +7,7 @@ const OpenGraph = () => {
   return (
     <>
       <Head>
-        <title>Snapit - Free Open Graph Image Generator</title>
+        <title>Screenshots4all - Free Open Graph Image Generator</title>
         <meta
           name="description"
           content="With Free Open Graph Image Generator, you can edit and experiment with your content - then preview how your webpage will look on Google, Facebook, and Twitter. Create Free Open Graph Image today."
@@ -20,9 +20,9 @@ const OpenGraph = () => {
       </Head>
 
       <HeadOG
-        title="Snapit - Free Open Graph Image Generator."
+        title="Screenshots4all - Free Open Graph Image Generator."
         description="Screenshot tool, screenshot generator, gradient generator, website mockup, screenshot generator, beautiful screenshots, pretty screenshots, screenshot background, screenshots into shareable images"
-        url="https://www.snapit.gg/opengraph"
+        url="https://www.screenshots4all.com/opengraph"
       />
 
       <OpenGraphHero />

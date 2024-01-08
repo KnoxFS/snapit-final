@@ -15,11 +15,11 @@ const Pricing = () => {
     <>
       <Head>
         <title>
-          Snapit - Create beautiful screenshots and mockups easily and free
+        Screenshots4all - Create beautiful screenshots and mockups easily and free
         </title>
         <meta
           name="description"
-          content="Snapit is absolutely free to use without any registration. Creators, entrepreneurs, programmers and many more use Snapit to turn boring screenshots into a shareable one."
+          content="Snapit is absolutely free to use without any registration. Creators, entrepreneurs, programmers and many more use Screenshots4all to turn boring screenshots into a shareable one."
         />
         <meta
           name="keywords"
@@ -28,9 +28,9 @@ const Pricing = () => {
       </Head>
 
       <HeadOG
-        title="Snapit - Create beautiful screenshots and mockups so easily"
-        description="Snapit is absolutely free to use without any registration. Creators, entrepreneurs, programmers and many more use Snapit to turn boring screenshots into a shareable one."
-        url="https://www.snapit.gg/pricing"
+        title="Screenshots4all - Create beautiful screenshots and mockups so easily"
+        description="Screenshots4all is absolutely free to use without any registration. Creators, entrepreneurs, programmers and many more use Screenshots4all to turn boring screenshots into a shareable one."
+        url="https://www.screenshots4all.com/pricing"
       />
 
       <PricingHero />

@@ -29,7 +29,7 @@ const ForgotPassword = () => {
   return (
     <>
       <Head>
-        <title>Snapit - Confirm your email</title>
+        <title>Screenshots4all - Confirm your email</title>
       </Head>
 
       <section className='flex h-[calc(100vh-2.5em)] flex-col items-center justify-center text-center text-darkGreen dark:text-white'>

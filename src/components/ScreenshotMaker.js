@@ -90,7 +90,7 @@ const defaultOptions = {
   watermark: true,
   // text
   text: {
-    heading: 'Made with Snapit.gg',
+    heading: 'Made with Screenshots4all.com',
     subheading: 'The best screenshot maker',
     show: false,
     color: 'dark',
@@ -1338,7 +1338,7 @@ export default function ScreenshotMaker({ proMode }) {
               {/* watermark */}
               {options?.watermark && blob?.src && (
                 <div className='absolute bottom-0 right-12 select-none rounded-t-md bg-green-500 p-1 px-2 text-xs text-white'>
-                  Made with snapit.gg
+                  Made with Screenshots4all.com
                 </div>
               )}
             </div>

@@ -31,7 +31,7 @@ const defaultOptions = {
 
   // text
   text: {
-    heading: 'Made with Snapit.gg',
+    heading: 'Made with Screenshots4all.com',
     subheading: 'The best screenshot maker',
     show: false,
     color: 'dark',

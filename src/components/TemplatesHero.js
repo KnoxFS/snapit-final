@@ -3,7 +3,7 @@ import Link from 'next/link';
 const TemplatesHero = () => {
   return (
     <section className='w-[80%] mx-auto my-12'>
-      <h2 className='text-gray-500 mb-6 font-semibold'>Snapit Templates </h2>
+      <h2 className='text-gray-500 mb-6 font-semibold'>Screenshots4all Templates </h2>
 
       <header>
         <h1 className='text-white font-bold md:text-2xl md:w-1/2'>

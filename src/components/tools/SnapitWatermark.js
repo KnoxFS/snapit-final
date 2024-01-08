@@ -16,7 +16,7 @@ const SnapitWatermark = ({ options, setOptions, proMode }) => {
         <PaintBrushIcon className='h-5 w-5 text-darkGreen dark:text-white' />
 
         <h3 className='text-sm text-darkGreen dark:text-white'>
-          Snapit Watermark
+        Screenshots4all Watermark
         </h3>
       </div>
       {/* tip */}

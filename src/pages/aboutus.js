@@ -12,11 +12,11 @@ const AboutUs = () => {
 		<main className="w-[90%] md:w-[80%] mx-auto my-12 min-h-screen">
 			<Head>
 				<title>
-          			Snapit - About Us
+				Screenshots4all - About Us
         		</title>
         		<meta
           			name="description"
-          			content="We at Snapit aim to create the go to web app for all your screenshots."
+          			content="We at Screenshots4all aim to create the go to web app for all your screenshots."
         		/>
         		<meta
           			name="keywords"
@@ -25,9 +25,9 @@ const AboutUs = () => {
       		</Head>
 
       		<HeadOG
-        		title="Snapit - Create beautiful screenshots and mockups so easily"
-        		description="We at Snapit aim to create the go to web app for all your screenshots."
-        		url="https://www.snapit.gg/aboutus"
+        		title="Screenshots4all - Create beautiful screenshots and mockups so easily"
+        		description="We at Screenshots4all aim to create the go to web app for all your screenshots."
+        		url="https://www.screenshots4all.com/aboutus"
       		/>
 
       		<div className="my-32">
@@ -36,16 +36,16 @@ const AboutUs = () => {
           		</h1>
 
           		<p className="text-sm md:text-lg text-white mt-4" style={{textAlign: "justify"}}>
-          			Hello and thank you for visiting Snapit!  Hope you like how easy we have made it to create beautiful screenshots. Snapit has been developed late 2022 by an independent developer in San Francisco. Soon after the launch the website as been acquired by Robin Kuipers, an internet entrepreneur from The Netherlands. He is since managing Snapit with a small team of freelance developers. 
+          			Hello and thank you for visiting Screenshots4all!  Hope you like how easy we have made it to create beautiful screenshots. Screenshots4all has been developed late 2022 by an independent developer in San Francisco. Soon after the launch the website as been acquired by Robin Kuipers, an internet entrepreneur from The Netherlands. He is since managing Screenshots4all with a small team of freelance developers. 
           		</p>
 				
 				<p className="text-sm md:text-lg text-white mt-4" style={{textAlign: "justify"}}>
-					We at Snapit aim to create the go to web app for all your screenshots. Snapit does not require technical skills from a user, meaning that anyone can make beautiful screenshots in seconds.
-					We are constantly working on improving Snapit and introducing new features.  In the comings months you can expect some really cool new functionalities, so stay tuned for more info!
+					We at Screenshots4all aim to create the go to web app for all your screenshots. Screenshots4all does not require technical skills from a user, meaning that anyone can make beautiful screenshots in seconds.
+					We are constantly working on improving Screenshots4all and introducing new features.  In the comings months you can expect some really cool new functionalities, so stay tuned for more info!
 				</p>
 
 				<p className="text-sm md:text-lg text-white mt-4" style={{textAlign: "justify"}}>
-					If you like to reach out to us, or in need of technical support, you can contact us via support@snapit.gg or through direct chat on the website. We try to respond as quickly as possible.
+					If you like to reach out to us, or in need of technical support, you can contact us via support@screenshots4all.com or through direct chat on the website. We try to respond as quickly as possible.
 				</p>
 
 				<p>

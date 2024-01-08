@@ -31,7 +31,7 @@ const Account = () => {
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-10">
               <div className="bg-green-400 p-4 rounded-md">
-                Snapit Pro is currently active
+              Screenshots4all Pro is currently active
               </div>
 
               {user.endPro != null ?  (

@@ -26,7 +26,7 @@ const Tutorial = () => {
       id='tutorial'>
       <header className='text-center text-darkGreen dark:text-white'>
         <h3 className='mb-4 text-3xl font-semibold md:text-5xl'>
-          How to design screenshots using Snapit?
+          How to design screenshots using Screenshots4all?
         </h3>
       </header>
 

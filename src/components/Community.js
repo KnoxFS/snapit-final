@@ -17,21 +17,21 @@ const feeds = [
     author: '@Goodeye',
     avatar: '/people/2.png',
     content:
-      '“And thanks to Snapit, I was able to take snazzy screenshots in no time!”',
+      '“And thanks to Screenshots4all, I was able to take snazzy screenshots in no time!”',
   },
   {
     id: 3,
     author: '@drclairekaye',
     avatar: '/people/3.png',
     content:
-      '“Kudos team! I love using Snapit to add beautiful screenshots to my newsletters.”',
+      '“Kudos team! I love using Screenshots4all to add beautiful screenshots to my newsletters.”',
   },
   {
     id: 4,
     author: '@meneverse',
     avatar: '/people/4.png',
     content:
-      '“Snapit is such a useful tool for me as an advertising guy  -  I can easily modify screenshots to get the desired result.',
+      '“Screenshots4all is such a useful tool for me as an advertising guy  -  I can easily modify screenshots to get the desired result.',
   },
 ];
 

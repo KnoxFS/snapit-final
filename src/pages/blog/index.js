@@ -15,18 +15,18 @@ const Blog = ({ posts }) => {
   return (
     <main className="w-[90%] md:w-[80%] mx-auto my-12 min-h-screen">
       <Head>
-        <title>Snapit - Blog</title>
+        <title>Screenshots4all - Blog</title>
 
         <meta
           name="description"
-          content="Get the latest updates on Snapit, learn how to use Snapit, and get to know the best features on Snapit."
+          content="Get the latest updates on Screenshots4all, learn how to use Screenshots4all, and get to know the best features on Screenshots4all."
         />
       </Head>
 
       <HeadOG
-        title="Snapit - Blog"
-        description="Get the latest updates on Snapit, learn how to use Snapit, and get to know the best features on Snapit."
-        url="https://www.snapit.gg/blog"
+        title="Screenshots4all - Blog"
+        description="Get the latest updates on Screenshots4all, learn how to use Screenshots4all, and get to know the best features on Screenshots4all."
+        url="https://www.Screenshots4all.com/blog"
       />
 
       {/* fallback for no posts */}
@@ -37,7 +37,7 @@ const Blog = ({ posts }) => {
           </h1>
 
           <p className="text-sm md:text-lg text-white mt-4">
-            Come back later to see the latest updates on Snapit.
+            Come back later to see the latest updates on Screenshots4all.
           </p>
         </div>
       )}

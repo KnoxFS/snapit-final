@@ -10,10 +10,10 @@ const PrivacyPolicy = () => {
   return (
     <main className="mx-auto my-12 min-h-screen w-[90%] md:w-[80%]">
       <Head>
-        <title>Snapit - Privacy Policy</title>
+        <title>Screenshots4all - Privacy Policy</title>
         <meta
           name="description"
-          content="Your privacy is important to us. It is Snapit's policy to respect your privacy regarding any information we may collect from you across our website"
+          content="Your privacy is important to us. It is Screenshots4all's policy to respect your privacy regarding any information we may collect from you across our website"
         />
         <meta
           name="keywords"
@@ -22,9 +22,9 @@ const PrivacyPolicy = () => {
       </Head>
 
       <HeadOG
-        title="Snapit - Create beautiful screenshots and mockups so easily"
-        description="Your privacy is important to us. It is Snapit's policy to respect your privacy regarding any information we may collect from you across our website."
-        url="https://www.snapit.gg/privacypolicy"
+        title="Screenshots4all - Create beautiful screenshots and mockups so easily"
+        description="Your privacy is important to us. It is Screenshots4all's policy to respect your privacy regarding any information we may collect from you across our website."
+        url="https://www.Screenshots4all.com/privacypolicy"
       />
 
       <div className="my-32">
@@ -33,9 +33,9 @@ const PrivacyPolicy = () => {
         </h1>
 
         <p className="mt-4 text-sm text-darkGreen dark:text-white md:text-lg">
-          Your privacy is important to us. It is Snapit's policy to respect your
+          Your privacy is important to us. It is Screenshots4all's policy to respect your
           privacy regarding any information we may collect from you across our
-          website, http://snapit.gg
+          website, http://Screenshots4all.com
         </p>
 
         <p className="mt-4 text-sm text-darkGreen dark:text-white md:text-lg">
@@ -60,16 +60,16 @@ const PrivacyPolicy = () => {
         </p>
 
         <p className="mt-4 text-sm text-darkGreen dark:text-white md:text-lg">
-          Images created by users on Snapit are never stored on a server or sent
+          Images created by users on Screenshots4all are never stored on a server or sent
           to anyone. All the image processing happens locally and in the users
           browser. All images created by the user are private and confidential.
         </p>
 
         <p className="mt-4 text-sm text-darkGreen dark:text-white md:text-lg">
-          By creating an account Snapit.gg, users agree and opt-in to receive
-          periodic emails from Snapit. Users can at all times, choose to
+          By creating an account Screenshots4all.com, users agree and opt-in to receive
+          periodic emails from Screenshots4all. Users can at all times, choose to
           unsubscribe from the mailinglist and choose not to receive emails from
-          Snapit anymore. 
+          Screenshots4all anymore. 
         </p>
       </div>
 

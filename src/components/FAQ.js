@@ -7,32 +7,32 @@ import {
 
 const faq = [
   {
-    question: 'What is Snapit?',
+    question: 'What is Screenshots4all?',
     answer:
-      "Snapit is a web app that helps you design beautiful screenshots and website mockups instantly and easily. It's simple to use, perfect for any level of experience, and provides a wide range of customization options.",
+      "Screenshots4all is a software solution that helps you design beautiful screenshots and website mockups instantly and easily. It's simple to use, perfect for any level of experience, and provides a wide range of customization options.",
   },
   {
-    question: 'Is Snapit free?',
+    question: 'Is Screenshots4all free?',
     answer:
-      'Yes, Snapit is completely free to use. There are some cool features which are available with a paid subscription.',
+      'Yes, Screenshots4all is completely free to use. There are some cool features which are available with a paid subscription.',
   },
   {
-    question: 'Does Snapit save my images on server?',
+    question: 'Does Screenshots4all save my images on server?',
     answer:
       'Images are never stored on a server or sent to anyone, and all of the processing happens locally and in your browser. This means that your image is always private and confidential.',
   },
   {
-    question: 'What is Snapit Pro?',
+    question: 'What is Screenshots4all Pro?',
     answer:
-      "When you subscribe to Snapit Pro, you'll be able to use some amazing features like tilt, custom text and watermarking (indicated by ⚡️).",
+      "When you subscribe to Screenshots4all Pro, you'll be able to use some amazing features like tilt, custom text and watermarking (indicated by ⚡️).",
   },
   {
     question: 'Why should I enhance my screenshots?',
     answer:
-      "Once you start using Snapit, you'll see how easy it is to create beautiful and engaging screenshots. You can use Snapit to add personality and life to your screenshots before you can share them with your audience. Perfect for creators, life coaches, bloggers etc. Just look around you, you'll see enhanced screenshots everywhere around you.",
+      "Once you start using Screenshots4all, you'll see how easy it is to create beautiful and engaging screenshots. You can use Screenshots4all to add personality and life to your screenshots before you can share them with your audience. Perfect for creators, life coaches, bloggers etc. Just look around you, you'll see enhanced screenshots everywhere around you.",
   },
   {
-    question: 'Do I need an account to use Snapit?',
+    question: 'Do I need an account to use Screenshots4all?',
     answer:
       'No, only if you choose to take advantage of our paid features, you will need to create an account.',
   },

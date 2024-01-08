@@ -14,7 +14,7 @@ const Templates = () => {
   return (
     <>
       <Head>
-        <title>Snapit - free iphone, desktop, code snippet mockup tool</title>
+        <title>Screenshots4all - free iphone, desktop, code snippet mockup tool</title>
         <meta
           name='description'
           content='Create beautiful images for your product, website and app screenshots. Templates lets you create iPhone mockups, desktop mockups, code snippet mockups in a breeze.'
@@ -27,15 +27,15 @@ const Templates = () => {
       </Head>
 
       <HeadOG
-        title='Snapit - free iphone, desktop, code snippet mockup tool'
+        title='Screenshots4all - free iphone, desktop, code snippet mockup tool'
         description='Create beautiful images for your product, website and app screenshots. Templates lets you create iPhone mockups, desktop mockups, code snippet mockups in a breeze.'
-        url='https://www.snapit.gg/templates'
+        url='https://www.screenshots4all.com/templates'
       />
 
       <Tab.Group>
         <section className='mx-auto my-12 w-[90%] overflow-x-hidden md:w-[80%]'>
           <h2 className='mb-6 font-semibold text-darkGreen dark:text-white'>
-            Snapit Templates
+          Screenshots4all Templates
           </h2>
 
           <Tab.List

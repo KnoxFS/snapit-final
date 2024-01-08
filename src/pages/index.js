@@ -46,7 +46,7 @@ const Index = () => {
     <>
       <Head>
         <title>
-          Snapit - Free Screenshot Mockup Tool to create beautiful images.
+          Screenshots4all - Free Screenshot Mockup Tool to create beautiful images.
         </title>
         <meta
           name='description'
@@ -60,9 +60,9 @@ const Index = () => {
       </Head>
 
       <HeadOG
-        title='Snapit - Free Screenshot Mockup Tool to create beautiful images.'
+        title='Screenshots4all - Free Screenshot Mockup Tool to create beautiful images.'
         description='Screenshot tool, screenshot generator, gradient generator, website mockup, screenshot generator, beautiful screenshots, pretty screenshots, screenshot background, screenshots into shareable images'
-        url='https://www.snapit.gg/'
+        url='https://www.Screenshots4all.com/'
       />
 
       <Hero />

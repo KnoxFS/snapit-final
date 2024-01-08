@@ -83,7 +83,7 @@ const Settings = ({ open, setOpen }) => {
                   {/* Features */}
                   <article>
                     <h2 className='text-xl font-bold text-primary dark:text-white'>
-                      Get Snapit Pro to enjoy these exclusive features!
+                      Get Screenshots4all Pro to enjoy these exclusive features!
                     </h2>
                     <ul className='my-6 space-y-4'>
                       {features.map((feature, index) => (
@@ -182,7 +182,7 @@ const Settings = ({ open, setOpen }) => {
                     <button
                       onClick={handleBuyPro}
                       className='mt-12 w-full rounded-md bg-primary py-4 text-darkGreen dark:text-white'>
-                      Get Snapit Pro - {selectedPlan.name}
+                      Get Screenshots4all Pro - {selectedPlan.name}
                     </button>
                   </article>
                 </section>

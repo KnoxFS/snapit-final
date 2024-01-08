@@ -10,15 +10,15 @@ const SinglePost = ({ post }) => {
   return (
     <section className='mx-auto my-12 min-h-screen w-[90%] md:w-[80%]'>
       <Head>
-        <title>Snapit - {post.title}</title>
+        <title>Screenshots4all - {post.title}</title>
 
         <meta name='description' content={post.excerpt} />
       </Head>
 
       <HeadOG
-        title={`Snapit - ${post.title}`}
+        title={`Screenshots4all - ${post.title}`}
         description={post.excerpt}
-        url={`https://www.snapit.gg/blog/${post.slug}`}
+        url={`https://www.screenshots4all.com/blog/${post.slug}`}
         image={post.feature_image}
       />
 
@@ -87,7 +87,7 @@ const SinglePost = ({ post }) => {
                 className='twitter-share-button'
                 target='_blank'
                 rel='noreferrer'
-                href={`https://twitter.com/intent/tweet?text=${post.title}&url=https://www.snapit.gg/blog/${post.slug}`}>
+                href={`https://twitter.com/intent/tweet?text=${post.title}&url=https://www.screenshots4all.com/blog/${post.slug}`}>
                 <TwitterIcon className='w-6 h-6 text-darkGreen dark:text-white' />
               </a>
             </li>
@@ -97,7 +97,7 @@ const SinglePost = ({ post }) => {
               <a
                 target='_blank'
                 rel='noreferrer'
-                href={`mailto:#?subject=${post.title} - https://www.snapit.gg/blog/${post.slug}`}>
+                href={`mailto:#?subject=${post.title} - https://www.screenshots4all.com/blog/${post.slug}`}>
                 <EnvelopeIcon className='w-6 h-6 text-darkGreen dark:text-white' />
               </a>
             </li>
