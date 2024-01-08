@@ -11,7 +11,7 @@ const Footer = () => {
     <footer
       className='mt-8 flex flex-col items-center justify-evenly bg-primary bg-opacity-20 p-8 text-sm text-darkGreen text-opacity-70 dark:bg-opacity-10 dark:text-white md:flex-row md:text-base'
       style={{ justifyContent: 'space-evenly' }}>
-      <p>Screenshots4all - All rights reserved (c) 2023.</p>
+      <p>Screenshots4all - All rights reserved (c) 2024.</p>
 
       <ul className='my-4 space-x-4 md:my-0 md:space-x-6 hover:[&>*]:underline'>
         <Link href='/aboutus'>
