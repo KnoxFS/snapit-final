@@ -48,7 +48,7 @@ const Footer = () => {
           </li>
           <li>
             <a
-              href='https://twitter.com/snapit_gg'
+              href='https://twitter.com/Screenshots4all'
               target='_blank'
               rel='noreferrer'>
               <TwitterIcon className='h-6 w-6 text-darkGreen dark:text-white' />
@@ -56,7 +56,7 @@ const Footer = () => {
           </li>
           <li>
             <a
-              href='https://www.instagram.com/snapit_gg/'
+              href='https://www.instagram.com/screenshots4all/'
               target='_blank'
               rel='noreferrer'>
               <InstagramIcon className='h-6 w-6 text-darkGreen dark:text-white' />
@@ -64,7 +64,7 @@ const Footer = () => {
           </li>
           <li>
             <a
-              href='https://www.linkedin.com/company/snapitgg'
+              href='https://www.linkedin.com/company/screenshots4all'
               target='_blank'
               rel='noreferrer'>
               <LinkedInIcon className='h-6 w-6 text-darkGreen dark:text-white' />
@@ -72,15 +72,7 @@ const Footer = () => {
           </li>
           <li>
             <a
-              href='https://www.youtube.com/watch?v=sQUBlJvv-zQ'
-              target='_blank'
-              rel='noreferrer'>
-              <FaYoutube className='h-6 w-6 text-darkGreen dark:text-white' />{' '}
-            </a>
-          </li>
-          <li>
-            <a
-              href='https://www.facebook.com/groups/910618990057673'
+              href='https://www.facebook.com/groups/screenshots4all/'
               target='_blank'
               rel='noreferrer'>
               <FaFacebook className='h-6 w-6 text-darkGreen dark:text-white' />{' '}
