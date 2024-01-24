@@ -19,7 +19,7 @@ const Pricing = () => {
         </title>
         <meta
           name="description"
-          content="Snapit is absolutely free to use without any registration. Creators, entrepreneurs, programmers and many more use Screenshots4all to turn boring screenshots into a shareable one."
+          content="Screenshots4all is absolutely free to use without any registration. Creators, entrepreneurs, programmers and many more use Screenshots4all to turn boring screenshots into a shareable one."
         />
         <meta
           name="keywords"

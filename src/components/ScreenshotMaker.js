@@ -924,7 +924,7 @@ export default function ScreenshotMaker({ proMode }) {
                     <button
                       onClick={() => setShowBuyPro(true)}
                       className='mt-4 w-max rounded-sm bg-darkGreen p-2 text-xs text-primary transition md:mt-0'>
-                      Get Snapit Pro
+                      Get Screenshots4all Pro
                     </button>
                   </div>
                 )}
@@ -946,7 +946,7 @@ export default function ScreenshotMaker({ proMode }) {
                   <button
                     onClick={() => setShowBuyPro(true)}
                     className='mt-6 w-full rounded-md bg-primary p-2 text-darkGreen transition hover:bg-green-500'>
-                    Get Snapit Pro
+                    Get Screenshots4all Pro
                   </button>
                 </div>
               )}
