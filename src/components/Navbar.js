@@ -66,11 +66,16 @@ const Navbar = () => {
   return (
     <header className="my-4 mx-auto flex w-[90%] items-center justify-between text-darkGreen dark:text-white">
       {/* Logo */}
-      <Link href="/">
-        <a>
-          <Logo className="h-full w-full text-darkGreen dark:text-white" />
+      <a>
+          <Image
+            priority
+            width={'120px'}
+            height={'70px'}
+            src={Screenshots4all}
+            alt='Follow us on Twitter'
+            className=' w-full h-full'
+          />
         </a>
-      </Link>
 
       <nav className="hidden space-x-8 text-sm lg:block">
         <Link href="/">
