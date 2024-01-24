@@ -16,7 +16,7 @@ import { useTheme } from "next-themes";
 
 import { supabase } from "lib/supabase";
 import Screenshots4all from "../../public/brands/Snapit.svg";
-import { DarkIcon, LightIcon, Logo } from "ui/icons";
+import { Logo } from "ui/icons";
 import ToggleTheme from "./ToggleTheme";
 
 const Navbar = () => {
