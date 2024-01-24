@@ -15,7 +15,7 @@ import useAuth from "hooks/useAuth";
 import { useTheme } from "next-themes";
 
 import { supabase } from "lib/supabase";
-import Snapit from "../../public/Snapit.svg";
+import Snapit from "../../public/brands/Snapit.svg";
 import { DarkIcon, LightIcon, Logo } from "ui/icons";
 import ToggleTheme from "./ToggleTheme";
 
