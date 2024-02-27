@@ -7,6 +7,8 @@ export default async function handler(req, res) {
 
   const subscription = await stripe.subscriptions.retrieve(subscription_id);
 
+  console.log(subscription_id.includes("GPA"));
+
   if (subscription.status === "active") {
     res
       .status(200)
