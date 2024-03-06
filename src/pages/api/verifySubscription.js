@@ -12,13 +12,16 @@ export default async function handler(req, res) {
       return;
   } else {
 
-    const {callbackdata} = fetch(
+    const {callbackdata} = await fetch(
       'https://accounts.google.com/o/oauth2/auth?response_type=code&client_id=607904390113-7ldijsov15clj744qtvao177gemovcvd.apps.googleusercontent.com&redirect_uri=http://screenshots4all.com/callback&access_type=offline&scope=https://www.googleapis.com/auth/androidpublisher'
       ).then((rescall) => rescall.json());
+
+      if (callbackdata) {
         res
         .status(200)
         .json({ active: callbackdata, end: false });
         return;
+      }
 
 
     // const subscription = await stripe.subscriptions.retrieve(subscription_id);
