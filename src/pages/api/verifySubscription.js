@@ -12,7 +12,7 @@ export default async function handler(req, res) {
         // console.log(response);
         res
         .status(200)
-        .active: response;
+        .active(response);
       return;
       })
       .catch(error => {
