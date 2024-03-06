@@ -96,8 +96,7 @@ export default function AuthProvider({ children }) {
           const { active, end } = await fetch(
             `/api/verifySubscription?subscription_id=${subscription_id}`
           ).then((res) => res.json());
-          console.log(active);
-          console.log(end);
+
           if (active) {
             data.isPro = true;
             data.endPro = end;
