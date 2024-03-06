@@ -12,8 +12,7 @@ export default async function handler(req, res) {
         // console.log(response);
         res
         .status(200)
-        .data(response)
-        .json({active: 'reached'});
+        .json({active: 'reached', end: response});
       return;
       })
       .catch(error => {
