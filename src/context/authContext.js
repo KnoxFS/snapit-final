@@ -95,12 +95,11 @@ export default function AuthProvider({ children }) {
           //  verify subscription in stripe
           const { active, end } = await fetch(
             `/api/verifySubscription?subscription_id=${subscription_id}`
-          ).then((res) => console.log(res));
+          ).then((res) => res.json());
 
           if (active) {
-            console.log(active);
-          //   data.isPro = true;
-          //   data.endPro = end;
+            data.isPro = true;
+            data.endPro = end;
           }
         }
       }
