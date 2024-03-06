@@ -95,7 +95,7 @@ export default function AuthProvider({ children }) {
           //  verify subscription in stripe
           const { active, end } = await fetch(
             `/api/verifySubscription?subscription_id=${subscription_id}`
-          ).then((res) => res.json());
+          ).then((res) => console.log('get'));
           console.log(active);
           if (active) {
             data.isPro = true;
