@@ -8,7 +8,7 @@ export default async function handler(req, res) {
   if (subscription_id.includes('GPA')) {
     res
         .status(200)
-        .json({ active: 'checking', end: subscription_id });
+        .json({ active: 'checking'});
       return;
   } else {
 
@@ -24,5 +24,6 @@ export default async function handler(req, res) {
     res
       .status(200)
       .json({ active: false, message: "Subscription is not active." });
+      return;
   }
 }
