@@ -5,7 +5,12 @@ const stripe = new Stripe(process.env.STRIPE_SECREY_KEY);
 export default async function handler(req, res) {
   const { subscription_id } = req.query;
 
-  if (subscription_id.includes('GPA')) {
+  var splitVal = subscription_id.split('.');
+  if (splitVal.length == 0) {
+    splitVal = subscription_id.split('_');
+  }
+
+  if (splitVal[0] == 'GPA') {
     res
         .status(200)
         .json({ active: 'checking'});
