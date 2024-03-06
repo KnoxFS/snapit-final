@@ -23,7 +23,7 @@ export default async function handler(req, res) {
       };
 
       $.ajax(settings).done(function (response) {
-        console.log(response);
+        // console.log(response);
         res
         .status(200)
         .json({ active: response, end: false });
