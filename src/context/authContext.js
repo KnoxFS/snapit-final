@@ -97,10 +97,11 @@ export default function AuthProvider({ children }) {
             `/api/verifySubscription?subscription_id=${subscription_id}`
           ).then((res) => console.log(res));
 
-          // if (active) {
+          if (active) {
+            console.log(active);
           //   data.isPro = true;
           //   data.endPro = end;
-          // }
+          }
         }
       }
 
