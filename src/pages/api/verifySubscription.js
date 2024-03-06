@@ -36,9 +36,9 @@ export default async function handler(req, res) {
     //   return;
     // }
 
-    // res
-    //   .status(200)
-    //   .json({ active: false, message: "Subscription is not active." });
-    //   return;
+    res
+      .status(200)
+      .json({ active: 'fetch data', message: result, error: error });
+      return;
   }
 }
