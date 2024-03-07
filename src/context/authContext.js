@@ -97,7 +97,13 @@ export default function AuthProvider({ children }) {
             `/api/verifySubscription?subscription_id=${subscription_id}`
           ).then((res) => res.json());
 
-          if (active) {
+          if (active == 'google') {
+            const { callbackData } = await fetch(
+              'https://accounts.google.com/o/oauth2/auth?response_type=code&client_id=607904390113-7ldijsov15clj744qtvao177gemovcvd.apps.googleusercontent.com&redirect_uri=http://screenshots4all.com/callback&access_type=offline&scope=https://www.googleapis.com/auth/androidpublisher'
+            ).then(response => {
+              console.log(response);
+            })
+          }else {
             data.isPro = true;
             data.endPro = end;
           }

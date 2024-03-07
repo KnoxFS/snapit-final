@@ -8,7 +8,7 @@ export default async function handler(req, res) {
   if (subscription_id.includes('GPA')) {
         res
         .status(200)
-        .json({ active: true});
+        .json({ active: 'google'});
   } else {
 
 
