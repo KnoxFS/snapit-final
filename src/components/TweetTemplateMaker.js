@@ -119,15 +119,31 @@ const TemplateMaker = ({ proMode }) => {
     }
 
     // match tweet url https://twitter.com/cvander/status/1593422812202426369
-    const regex = /https:\/\/twitter.com\/\w+\/status\/(\d+)/;
-    const match = tweetUrl.match(regex);
+    // const regex = /https:\/\/twitter.com\/\w+\/status\/(\d+)/;
+    // const match = tweetUrl.match(regex);
 
-    if (!match) {
+    // if (!match) {
+    //   toast.error('Invalid tweet url.');
+    //   return;
+    // }
+    const regex = /https:\/\/twitter.com\/\w+\/status\/(\d+)/;
+    const regex1 = /https:\/\/x.com\/\w+\/status\/(\d+)/;
+    const match = tweetUrl.match(regex);
+    const match1 = tweetUrl.match(regex1);
+    
+    if (match === null && match1 == null) {
       toast.error('Invalid tweet url.');
       return;
     }
 
-    const tweetId = match[1];
+    // const tweetId = match[1];
+    var tweetId = '';
+    if (match === null) {
+      tweetId = match1[1];
+    }
+    if (match1 === null) {
+      tweetId = match[1];
+    }
 
     const res = await (await fetch(`/api/getTweet?id=${tweetId}`)).json();
 
@@ -141,24 +157,25 @@ const TemplateMaker = ({ proMode }) => {
       tweet: {
         ...prev.tweet,
         user: {
-          name: res.data.name,
-          username: `@${res.data.username}`,
-          image: res.data.avatar.normal,
+          name: res.author.name,
+          username: `@${res.author.username}`,
+          image: res.author.profileImageUrl,
         },
         // join in a string each node and children
-        content: res.nodes.map(node => formatTweetChild(node)).join(' '),
-        date: res.data.createdAt,
+        // content: res.nodes.map(node => formatTweetChild(node)).join(' '),
+        content: res.text,
+        date: res.createdAt,
 
         metrics: {
           ...prev.tweet.metrics,
           likes: {
             ...prev.tweet.metrics.likes,
-            value: res.data.heartCount,
+            value: res.metrics.likes,
           },
 
           comments: {
             ...prev.tweet.metrics.comments,
-            value: res.data.ctaCount,
+            value: res.metrics.replies,
           },
         },
       },

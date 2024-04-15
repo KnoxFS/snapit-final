@@ -2,6 +2,7 @@ import { Tab } from '@headlessui/react';
 import MobileTemplateMaker from 'components/MobileTemplateMaker';
 import DesktopTemplateMaker from 'components/DesktopTemplateMaker';
 import CodeTemplateMaker from 'components/CodeTemplateMaker';
+import TweetTemplateMaker from "components/TweetTemplateMaker";
 import AnimatedScreenshotMaker from 'components/AnimatedScreenshotMaker';
 import KeyCapsMaker from 'components/KeyCapsMaker';
 import { SettingsProvider } from 'hooks/use-settings';
@@ -130,6 +131,24 @@ const Templates = () => {
                 </p>
               </article>
             </Tab>
+            <Tab className="outline-none">
+            <article className='bg-primary bg-opacity-10 p-4 rounded-md ui-selected:bg-primary h-full'>
+                <img
+                  src="/TweetTemplate.png"
+                  alt="Screenshot Template"
+                  className="w-full rounded-md"
+                />
+
+<h3 className='text-white ui-selected:text-darkGreen text-xl font-bold my-4'>
+                  Twitter Screenshots Mockup
+                </h3>
+
+                <p className='text-white/90 ui-selected:text-darkGreen'>
+                  Create amazing twitter images to share online with
+                  anyone.
+                </p>
+              </article>
+            </Tab>
           </Tab.List>
         </section>
 
@@ -152,6 +171,9 @@ const Templates = () => {
             <SettingsProvider>
               <KeyCapsMaker proMode={true} />
             </SettingsProvider>
+          </Tab.Panel>
+          <Tab.Panel>
+              <TweetTemplateMaker proMode={true} />
           </Tab.Panel>
         </Tab.Panels>
       </Tab.Group>

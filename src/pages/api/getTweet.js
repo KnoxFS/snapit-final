@@ -2,49 +2,51 @@
 
 export default async function handler(req, res) {
   // res.status(200).json(req.query.id);
-  const { id } = req.query.id;
+  // const { id } = req.query.id;
+  var id = req.query.id;
 
   try {
-    // const tweet = await fetchTweetAst(id);
-    // res.status(200).json(tweet[0]);
-    if (id.length === 0) return []
 
-  const options = '&expansions=author_id&tweet.fields=public_metrics,created_at&user.fields=profile_image_url'
+    const myHeaders = new Headers();
+    myHeaders.append("Authorization", "Bearer AAAAAAAAAAAAAAAAAAAAAK78sgEAAAAAFMAQnbqB2Tv4JclBGZFTQfiK29A%3D79Aowj7IQmgojNua46mjHUGYWVii3FeRGMZwgh5yu5JJd7Eo4b");
+    myHeaders.append("Cookie", "guest_id=v1%3A171286196750750306; guest_id_ads=v1%3A171286196750750306; guest_id_marketing=v1%3A171286196750750306; personalization_id=\"v1_/V3PXfr25v6ef0SnaHsNZQ==\"");
 
-  const response = await fetch(
-    `https://api.twitter.com/2/tweets/?ids=${id.join(',')}${options}`,
-    { headers: { Authorization: `Bearer ${process.env.TWITTER_TOKEN}` } }
-  )
-  const body = await response.json()
-  const tweets = body.data.map((t) => {
-    const author = body.includes.users.find((a) => a.id === t.author_id)
-    return {
-      id: t.id,
-      text: t.text,
-      createdAt: new Date(t.created_at).toLocaleDateString('en', {
-        year: 'numeric',
-        month: 'long',
-        day: 'numeric',
-        timeZone: 'UTC',
-      }),
-      metrics: {
-        replies: formatMetric(t.public_metrics?.reply_count ?? 0),
-        likes: formatMetric(t.public_metrics?.like_count ?? 0),
-        retweets: formatMetric(t.public_metrics?.retweet_count ?? 0),
-      },
-      author: {
-        name: author.name,
-        username: author.username,
-        profileImageUrl: author.profile_image_url,
-      },
-      url: `https://twitter.com/${author.username}/status/${t.id}`,
-    }
-  })
+    const requestOptions = {
+      method: "GET",
+      headers: myHeaders,
+      redirect: "follow"
+    };
 
-  // return tweets
-  res.status(200).json(tweets);
-  } catch (error) {
-    res.status(404).json({ error: 'Tweet not found.' });
+    fetch("https://api.twitter.com/2/tweets/"+id+"?tweet.fields=public_metrics,created_at&expansions=author_id&user.fields=profile_image_url", requestOptions)
+      .then((response) => response.text())
+      .then(function(result) {
+        var tweetData = JSON.parse(result);
+        var returnTweet = {
+          id: tweetData.data.id,
+          text: tweetData.data.text,
+          createdAt: new Date(tweetData.data.created_at).toLocaleDateString('en', {
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric',
+            timeZone: 'UTC',
+          }),
+          metrics: {
+            replies: formatMetric(tweetData.data.public_metrics.reply_count?tweetData.data.public_metrics.reply_count:0),
+            likes: formatMetric(tweetData.data.public_metrics.like_count?tweetData.data.public_metrics.like_count:0),
+            retweets: formatMetric(tweetData.data.public_metrics.retweet_count?tweetData.data.public_metrics.retweet_count:0),
+          },
+          author: {
+            name: tweetData.includes.users[0].name,
+            username: tweetData.includes.users[0].username,
+            profileImageUrl: tweetData.includes.users[0].profile_image_url,
+          },
+          url: 'https://twitter.com/'+tweetData.includes.users[0].username+'/status/'+tweetData.data.id,
+        }
+        res.status(200).json(returnTweet);
+      })
+      .catch((error) => res.status(404).json({ error: error.message }));
+  } catch(error) {
+    res.status(404).json({ error: 'Unable to fetch the tweet.' });
   }
 }
 
