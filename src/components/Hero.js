@@ -84,7 +84,7 @@ const Hero = () => {
                 <li
                   key={appLink.name}
                   className='flex items-center space-x-2 text-sm w-[43%] sm:w-[45%] md:w-[170px]'>
-                    <a href={appLink.url} target='_blank' className='flex w-[100%]'>
+                    <a href={appLink.url} target='_blank' rel='noreferrer' className='flex w-[100%]'>
                       <img src={appLink.image} alt={appLink.name} className='w-[100%]' />
                     </a>
                 </li>
