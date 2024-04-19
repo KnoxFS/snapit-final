@@ -1,0 +1,14 @@
+[
+  {
+    "relation": [
+      "delegate_permission/common.handle_all_urls"
+    ],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "com.snapit_app",
+      "sha256_cert_fingerprints": [
+        "58:58:76:3A:18:D2:5A:73:5A:A9:7A:57:CB:A9:43:93:B7:2F:FC:F8:9A:55:85:43:16:FD:86:6A:D6:20:B4:B6"
+      ]
+    }
+  }
+]
