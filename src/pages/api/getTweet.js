@@ -8,7 +8,7 @@ export default async function handler(req, res) {
   try {
 
     const myHeaders = new Headers();
-    myHeaders.append("Authorization", "Bearer AAAAAAAAAAAAAAAAAAAAAK78sgEAAAAAFMAQnbqB2Tv4JclBGZFTQfiK29A%3D79Aowj7IQmgojNua46mjHUGYWVii3FeRGMZwgh5yu5JJd7Eo4b");
+    myHeaders.append("Authorization", "Bearer AAAAAAAAAAAAAAAAAAAAADottgEAAAAAhvFP5wyrEXtJzo5yMtxJPICaA%2Fo%3DdEzetIaUAkLhPZ7Ljxsc9mN9OuEwetQEH3ISuto1jyNzeNeCZl");
     myHeaders.append("Cookie", "guest_id=v1%3A171286196750750306; guest_id_ads=v1%3A171286196750750306; guest_id_marketing=v1%3A171286196750750306; personalization_id=\"v1_/V3PXfr25v6ef0SnaHsNZQ==\"");
 
     const requestOptions = {
