@@ -19,6 +19,18 @@ const brands = [
     image: '/brands/dropbox.svg',
   },
 ];
+const appLinks = [
+  {
+    name: 'Google Play Store',
+    image: '/brands/playstore-btn.png',
+    url: 'https://play.google.com/store/apps/details?id=com.snapit_app'
+  },
+  {
+    name: 'Apple App Store',
+    image: '/brands/appstore-btn.png',
+    url: 'https://apps.apple.com/us/app/screenshots4all/id6459833361'
+  }
+];
 
 const Hero = () => {
   return (
@@ -43,7 +55,7 @@ const Hero = () => {
 
         {/* sponsor */}
 
-        <div className='mt-6'>
+        {/* <div className='mt-6'>
           <p className='text-sm text-darkGreen dark:text-white'>
             Used daily by members of
           </p>
@@ -60,6 +72,25 @@ const Hero = () => {
             </div>
           </ul>
          
+        </div> */}
+        <div className='mt-6'>
+          <p className='text-sm text-darkGreen dark:text-white'>
+            Download our app
+          </p>
+
+          <ul className='grid place-items-center'>
+            <div className='flex items-center mt-4 space-x-4 justify-center'>
+              {appLinks.map(appLink => (
+                <li
+                  key={appLink.name}
+                  className='flex items-center space-x-2 text-sm w-[43%] sm:w-[45%] md:w-[170px]'>
+                    <a href={appLink.url} target='_blank' rel='noreferrer' className='flex w-[100%]'>
+                      <img src={appLink.image} alt={appLink.name} className='w-[100%]' />
+                    </a>
+                </li>
+              ))}
+            </div>
+          </ul>
         </div>
       </article>
     </section>
