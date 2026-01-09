@@ -15,11 +15,12 @@ appleReceiptVerify.config({
 // expects GOOGLE_CLIENT_EMAIL and GOOGLE_PRIVATE_KEY in env
 const androidPublisher = google.androidpublisher({
   version: "v3",
-  auth: new google.auth.JWT({
-    email: process.env.GOOGLE_CLIENT_EMAIL,
-    key: process.env.GOOGLE_PRIVATE_KEY?.replace(/\\n/g, "\n"),
-    scopes: ["https://www.googleapis.com/auth/androidpublisher"],
-  }),
+  auth: new google.auth.JWT(
+    process.env.GOOGLE_CLIENT_EMAIL,
+    null,
+    process.env.GOOGLE_PRIVATE_KEY?.replace(/\\n/g, "\n"),
+    ["https://www.googleapis.com/auth/androidpublisher"]
+  ),
 });
 
 export default async function handler(req, res) {
@@ -29,7 +30,8 @@ export default async function handler(req, res) {
   try {
     // 1. Google Verification
     if (source === 'google' || (subscription_id && subscription_id.startsWith('GPA'))) {
-      console.log(`[Verify] Starting Google verification for ${product_id}`);
+      const packageName = process.env.ANDROID_PACKAGE_NAME || 'com.screenshots4all.app';
+      console.log(`[Verify] Google: Package=${packageName}, Product=${product_id}`);
       if (!token || !product_id) {
         console.warn("[Verify] Missing Google token or product ID");
         return res.status(200).json({ active: false, message: "Missing Google token or product ID" });
@@ -37,7 +39,7 @@ export default async function handler(req, res) {
 
       try {
         const response = await androidPublisher.purchases.subscriptions.get({
-          packageName: process.env.ANDROID_PACKAGE_NAME || 'com.screenshots4all.app',
+          packageName: packageName,
           subscriptionId: product_id, // This is the SKU (e.g. pro_monthly)
           token: token, // The purchase token
         });
@@ -62,13 +64,16 @@ export default async function handler(req, res) {
 
     // 2. Apple Verification
     if (source === 'apple') {
-      console.log(`[Verify] Starting Apple verification. Token length: ${token?.length}`);
+      console.log(`[Verify] Apple Raw Token Length: ${token?.length}`);
       if (!token) {
         return res.status(200).json({ active: false, message: "Missing Apple receipt data" });
       }
 
-      // Sanitize token (remove newlines/spaces)
+      // Sanitize token (remove newlines/spaces/formatting)
       const cleanToken = token.replace(/\s/g, '');
+      console.log(`[Verify] Apple Clean Token Length: ${cleanToken.length}`);
+      // Log preview to check for headers
+      console.log(`[Verify] Apple Token Preview: ${cleanToken.substring(0, 15)}...${cleanToken.substring(cleanToken.length - 15)}`);
 
       try {
         // token is the base64 receipt data
