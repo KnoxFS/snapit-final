@@ -69,11 +69,45 @@ export default async function handler(req, res) {
         return res.status(200).json({ active: false, message: "Missing Apple receipt data" });
       }
 
-      // Sanitize token (remove newlines/spaces/formatting)
+      // Sanitize token
       const cleanToken = token.replace(/\s/g, '');
-      console.log(`[Verify] Apple Clean Token Length: ${cleanToken.length}`);
-      // Log preview to check for headers
-      console.log(`[Verify] Apple Token Preview: ${cleanToken.substring(0, 15)}...${cleanToken.substring(cleanToken.length - 15)}`);
+
+      // CHECK FOR JWS (Modern App Store Server Notification/Receipt)
+      if (cleanToken.startsWith('ey') && cleanToken.includes('.')) {
+        console.log("[Verify] Detected Apple JWS Token. Decoding payload...");
+        try {
+          const parts = cleanToken.split('.');
+          if (parts.length === 3) {
+            const payload = Buffer.from(parts[1], 'base64').toString('utf-8');
+            const data = JSON.parse(payload);
+            console.log("[Verify] JWS Payload:", JSON.stringify(data));
+
+            // Look for expiration date in standard JWS fields
+            // It might be inside a 'transactionInfo' or direct fields
+            // Common fields: expiresDate, expires_date, etc.
+            let expiresDateMs = null;
+
+            if (data.expiresDate) expiresDateMs = data.expiresDate;
+            else if (data.expires_date) expiresDateMs = data.expires_date;
+            else if (data.expirationDate) expiresDateMs = data.expirationDate;
+
+            if (expiresDateMs) {
+              const expiryTime = parseInt(expiresDateMs);
+              const isActive = expiryTime > Date.now();
+              console.log(`[Verify] JWS Expiry: ${expiryTime}, Active: ${isActive}`);
+              return res.status(200).json({
+                active: isActive,
+                end: Math.floor(expiryTime / 1000)
+              });
+            }
+          }
+        } catch (e) {
+          console.error("[Verify] Failed to decode JWS:", e);
+          // Fall through to legacy validator just in case
+        }
+      }
+
+      console.log(`[Verify] Attempting Legacy Validation for token: ${cleanToken.substring(0, 15)}...`);
 
       try {
         // token is the base64 receipt data
