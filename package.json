@@ -51,7 +51,9 @@
     "static-tweets": "^2.0.0",
     "stripe": "^10.11.0",
     "swiper": "^8.4.3",
-    "twitter-lite": "^1.1.0"
+    "twitter-lite": "^1.1.0",
+    "googleapis": "^144.0.0",
+    "node-apple-receipt-verify": "^1.12.2"
   },
   "devDependencies": {
     "@types/slick-carousel": "^1.6.37",

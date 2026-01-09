@@ -5,13 +5,13 @@ import { useRouter } from "next/router";
 
 const initial = {
   user: null,
-  setUser: () => {},
+  setUser: () => { },
 
   loading: true,
-  setLoading: () => {},
+  setLoading: () => { },
 
   showBuyPro: false,
-  setShowBuyPro: () => {},
+  setShowBuyPro: () => { },
 };
 
 export const AuthContext = createContext(initial);
@@ -71,12 +71,14 @@ export default function AuthProvider({ children }) {
     if (user) {
       // get user data from supabase
       const {
-        data: { subscription_id, avatar_url, presets },
+        data: userRow,
       } = await supabase
         .from("users")
         .select("*")
         .eq("user_id", user.id)
         .single();
+
+      const { subscription_id, avatar_url, presets } = userRow || {};
 
       const data = {
         id: user.id,
@@ -92,19 +94,42 @@ export default function AuthProvider({ children }) {
         if (subscription_id == 'lifetime' || subscription_id == null) {
           data.isPro = true;
         } else {
-          //  verify subscription in stripe
-          const { active, end } = await fetch(
-            `/api/verifySubscription?subscription_id=${subscription_id}`
-          ).then((res) => res.json());
+          // Determine verification source & payload
+          let source = 'stripe';
+          let token = null;
+          let productId = null;
 
-          if (active == 'google') {
-            const { callbackData } = await fetch(
-              'https://accounts.google.com/o/oauth2/auth?response_type=code&client_id=607904390113-7ldijsov15clj744qtvao177gemovcvd.apps.googleusercontent.com&redirect_uri=http://screenshots4all.com/callback&access_type=offline&scope=https://www.googleapis.com/auth/androidpublisher',
-              { mode: 'no-cors',}
-            ).then(response => {
-              console.log(response);
+          const purchaseToken = userRow.purchase_token;
+          // 'purchase_type' likely holds the SKU/Product ID (e.g. "monthly")
+          const purchaseType = userRow.purchase_type;
+
+          if (subscription_id.startsWith('sub_')) {
+            source = 'stripe';
+          }
+          else if (subscription_id.startsWith('GPA')) {
+            source = 'google';
+            token = purchaseToken;
+            productId = purchaseType;
+          }
+          else {
+            // Fallback to Apple if not Stripe/Google
+            source = 'apple';
+            token = purchaseToken;
+          }
+
+          // Verify subscription
+          const { active, end } = await fetch('/api/verifySubscription', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              subscription_id,
+              source,
+              token,
+              product_id: productId
             })
-          }else {
+          }).then((res) => res.json());
+
+          if (active) {
             data.isPro = true;
             data.endPro = end;
           }
@@ -114,7 +139,7 @@ export default function AuthProvider({ children }) {
       setUser(user ? data : null);
       setLoading(false);
     }
-  }; 
+  };
 
   const value = {
     user,
@@ -125,5 +150,4 @@ export default function AuthProvider({ children }) {
   };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
-}  
-  
+}
