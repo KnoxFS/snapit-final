@@ -118,20 +118,26 @@ export default function AuthProvider({ children }) {
           }
 
           // Verify subscription
-          const { active, end } = await fetch('/api/verifySubscription', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-              subscription_id,
-              source,
-              token,
-              product_id: productId
-            })
-          }).then((res) => res.json());
+          try {
+            const { active, end, message } = await fetch('/api/verifySubscription', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({
+                subscription_id,
+                source,
+                token,
+                product_id: productId
+              })
+            }).then((res) => res.json());
 
-          if (active) {
-            data.isPro = true;
-            data.endPro = end;
+            if (active) {
+              data.isPro = true;
+              data.endPro = end;
+            } else if (message) {
+              console.warn(`[Auth] Verification failed for ${source}:`, message);
+            }
+          } catch (err) {
+            console.error('[Auth] Verification error:', err);
           }
         }
       }
