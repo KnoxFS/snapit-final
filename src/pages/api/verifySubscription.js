@@ -67,10 +67,13 @@ export default async function handler(req, res) {
         return res.status(200).json({ active: false, message: "Missing Apple receipt data" });
       }
 
+      // Sanitize token (remove newlines/spaces)
+      const cleanToken = token.replace(/\s/g, '');
+
       try {
         // token is the base64 receipt data
         const products = await appleReceiptVerify.validate({
-          receipt: token,
+          receipt: cleanToken,
         });
 
         console.log(`[Verify] Apple returned ${products.length} products`);
