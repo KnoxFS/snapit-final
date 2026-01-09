@@ -14,22 +14,31 @@ appleReceiptVerify.config({
 // Google Play Config
 // expects GOOGLE_CLIENT_EMAIL and GOOGLE_PRIVATE_KEY in env
 const email = process.env.GOOGLE_CLIENT_EMAIL;
-let key = process.env.GOOGLE_PRIVATE_KEY;
+let rawKey = process.env.GOOGLE_PRIVATE_KEY;
+
+// Reconstruct valid PEM from messy input
+const formatPrivateKey = (k) => {
+  if (!k) return null;
+  let clean = k;
+  // Remove quotes
+  if ((clean.startsWith('"') && clean.endsWith('"')) || (clean.startsWith("'") && clean.endsWith("'"))) {
+    clean = clean.slice(1, -1);
+  }
+  // Remove headers/footers
+  clean = clean.replace(/-----BEGIN PRIVATE KEY-----/g, '').replace(/-----END PRIVATE KEY-----/g, '');
+  // Remove whitespace/newlines (real or escaped)
+  const body = clean.replace(/\\n/g, '').replace(/\s+/g, '');
+  // Re-chunk (64 chars)
+  const chunked = body.match(/.{1,64}/g)?.join('\n');
+  return `-----BEGIN PRIVATE KEY-----\n${chunked}\n-----END PRIVATE KEY-----`;
+};
+
+const key = formatPrivateKey(rawKey);
 
 if (!email || !key) {
   console.error("[Verify] Google Credentials Missing in Env!");
 } else {
-  // Clean the key: remove surrounding quotes if any (common copy-paste error)
-  if (key.startsWith('"') && key.endsWith('"')) {
-    key = key.slice(1, -1);
-  }
-  if (key.startsWith("'") && key.endsWith("'")) {
-    key = key.slice(1, -1);
-  }
-  // Ensure newlines are correctly interpreted
-  key = key.replace(/\\n/g, "\n");
-
-  console.log(`[Verify] Google Config: Email='${email}', KeyLength=${key.length}`);
+  console.log(`[Verify] Google Config: Email='${email}', KeyLength=${key.length}, ValidHeader=${key.startsWith('-----BEGIN')}`);
 }
 
 const androidPublisher = google.androidpublisher({
