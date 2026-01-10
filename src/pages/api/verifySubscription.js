@@ -41,14 +41,20 @@ if (!email || !key) {
   console.log(`[Verify] Google Config: Email='${email}', KeyLength=${key.length}, ValidHeader=${key.startsWith('-----BEGIN')}`);
 }
 
+
+
+// Use GoogleAuth (preferred modern Auth method)
+const auth = new google.auth.GoogleAuth({
+  credentials: {
+    client_email: email,
+    private_key: key,
+  },
+  scopes: ["https://www.googleapis.com/auth/androidpublisher"],
+});
+
 const androidPublisher = google.androidpublisher({
   version: "v3",
-  auth: new google.auth.JWT(
-    email,
-    null,
-    key,
-    ["https://www.googleapis.com/auth/androidpublisher"]
-  ),
+  auth: auth,
 });
 
 export default async function handler(req, res) {
