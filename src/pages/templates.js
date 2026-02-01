@@ -6,6 +6,7 @@ import TweetTemplateMaker from "components/TweetTemplateMaker";
 import AnimatedScreenshotMaker from 'components/AnimatedScreenshotMaker';
 import KeyCapsMaker from 'components/KeyCapsMaker';
 import IconTemplateMaker from 'components/IconTemplateMaker';
+import TestimonialTemplateMaker from 'components/TestimonialTemplateMaker';
 import { SettingsProvider } from 'hooks/use-settings';
 import useAuth from 'hooks/useAuth';
 import Head from 'components/Head';
@@ -167,6 +168,23 @@ const Templates = () => {
                 </p>
               </article>
             </Tab>
+            <Tab className="outline-none">
+              <article className='h-full rounded-md bg-primary bg-opacity-20 p-4 ui-selected:bg-primary dark:bg-opacity-10 dark:ui-selected:bg-primary'>
+                <img
+                  src="/TestimonialTemplate.png"
+                  alt="Testimonial Template"
+                  className="w-full rounded-md"
+                />
+
+                <h3 className='my-4 text-xl font-bold text-darkGreen ui-selected:text-darkGreen dark:text-white'>
+                  Testimonial Generator
+                </h3>
+
+                <p className='text-darkGreen ui-selected:text-darkGreen dark:text-white'>
+                  Create beautiful testimonial images with star ratings and customer quotes.
+                </p>
+              </article>
+            </Tab>
           </Tab.List>
         </section>
 
@@ -195,6 +213,9 @@ const Templates = () => {
           </Tab.Panel>
           <Tab.Panel>
             <IconTemplateMaker proMode={user?.isPro} />
+          </Tab.Panel>
+          <Tab.Panel>
+            <TestimonialTemplateMaker proMode={user?.isPro} />
           </Tab.Panel>
         </Tab.Panels>
       </Tab.Group>
