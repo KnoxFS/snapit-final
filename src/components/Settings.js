@@ -3,7 +3,6 @@ import { Dialog, Transition, Tab } from '@headlessui/react';
 
 import Account from './settings/Account';
 import Stats from './settings/Stats';
-import Shortcuts from './settings/Shortcuts';
 import Storage from './settings/Storage';
 
 const Settings = ({ open, setOpen }) => {
@@ -56,13 +55,6 @@ const Settings = ({ open, setOpen }) => {
                           `text-white py-3 px-6 ${selected ? 'bg-primary rounded-sm' : ''
                           }`
                         }>
-                        Shortcuts
-                      </Tab>
-                      <Tab
-                        className={({ selected }) =>
-                          `text-white py-3 px-6 ${selected ? 'bg-primary rounded-sm' : ''
-                          }`
-                        }>
                         Storage
                       </Tab>
                     </Tab.List>
@@ -75,10 +67,6 @@ const Settings = ({ open, setOpen }) => {
                       {/* stats */}
                       <Tab.Panel>
                         <Stats />
-                      </Tab.Panel>
-                      {/* shorcuts */}
-                      <Tab.Panel>
-                        <Shortcuts />
                       </Tab.Panel>
                       {/* storage */}
                       <Tab.Panel>
