@@ -598,7 +598,7 @@ const IconTemplateMaker = ({ proMode }) => {
                 <Roundness options={options} setOptions={setOptions} target='icon' />
 
                 {/* Watermark */}
-                <SnapitWatermark options={options} setOptions={setOptions} />
+                <SnapitWatermark options={options} setOptions={setOptions} proMode={proMode} />
 
                 {/* Actions */}
                 <div className='flex items-center justify-between space-x-2'>
