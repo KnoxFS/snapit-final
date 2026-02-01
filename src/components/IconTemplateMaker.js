@@ -24,6 +24,7 @@ import useAuth from 'hooks/useAuth';
 import DropShadow from './tools/DropShadow';
 import Roundness from './tools/Roundness';
 import SnapitWatermark from './tools/SnapitWatermark';
+import IconPicker from './tools/IconPicker';
 
 import {
     cssGradientsDirections,
@@ -56,8 +57,9 @@ const IconTemplateMaker = ({ proMode }) => {
     const { user } = useAuth();
     const wrapperRef = useRef();
 
-    const [icon, setIcon] = useState({ src: null });
+    const [icon, setIcon] = useState({ src: null, component: null, name: null });
     const [bgPicker, setBGPicker] = useState(false);
+    const [showIconPicker, setShowIconPicker] = useState(false);
     const [options, setOptions] = useState({
         ...defaultOptions,
         watermark: !proMode,
@@ -72,11 +74,19 @@ const IconTemplateMaker = ({ proMode }) => {
                 var blob = item;
                 var reader = new FileReader();
                 reader.onload = function (event) {
-                    setIcon({ src: event.target.result });
+                    setIcon({ src: event.target.result, component: null, name: 'Custom Icon' });
                 };
                 reader.readAsDataURL(blob);
             }
         }
+    };
+
+    const handleIconSelect = (selectedIcon) => {
+        setIcon({
+            src: null,
+            component: selectedIcon.component,
+            name: selectedIcon.name,
+        });
     };
 
     // export image
@@ -347,26 +357,39 @@ const IconTemplateMaker = ({ proMode }) => {
                     options.shadow,
                 )}>
                 {/* Icon */}
-                {icon.src && (
+                {(icon.src || icon.component) && (
                     <div
                         className='flex items-center justify-center'
                         style={{
                             width: `${options.size}%`,
                             height: `${options.size}%`,
                         }}>
-                        <img
-                            src={icon.src}
-                            className={`h-full w-full object-contain ${options.roundedIcon}`}
-                            alt='Icon'
-                        />
+                        {icon.src ? (
+                            <img
+                                src={icon.src}
+                                className={`h-full w-full object-contain ${options.roundedIcon}`}
+                                alt='Icon'
+                            />
+                        ) : (
+                            <div className={`h-full w-full flex items-center justify-center text-white ${options.roundedIcon}`}>
+                                {icon.component && <icon.component className="w-full h-full" />}
+                            </div>
+                        )}
                     </div>
                 )}
 
-                {!icon.src && (
-                    <div className='text-center text-white/50'>
-                        <p className='text-2xl font-bold'>Upload an icon</p>
-                        <p className='text-sm'>to get started</p>
-                    </div>
+                {!icon.src && !icon.component && (
+                    <button
+                        onClick={() => setShowIconPicker(true)}
+                        className='text-center text-white/50 hover:text-white/80 transition cursor-pointer group'>
+                        <div className='mb-2 flex justify-center'>
+                            <svg className='w-24 h-24 text-white/30 group-hover:text-white/50 transition' fill='none' viewBox='0 0 24 24' stroke='currentColor'>
+                                <path strokeLinecap='round' strokeLinejoin='round' strokeWidth={1.5} d='M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z' />
+                            </svg>
+                        </div>
+                        <p className='text-2xl font-bold'>Click to select an icon</p>
+                        <p className='text-sm mt-1'>Choose from our library</p>
+                    </button>
                 )}
 
                 {/* watermark */}
@@ -386,35 +409,58 @@ const IconTemplateMaker = ({ proMode }) => {
                     Icon Options
                 </h3>
 
-                {/* Add icon */}
-                <div className='flex items-center justify-between rounded-md bg-primary bg-opacity-30 p-2 font-medium text-darkGreen dark:bg-opacity-100'>
-                    <p className='w-[60%] text-sm'>Add Icon</p>
+                {/* Select Icon */}
+                <div className='space-y-2'>
+                    <div className='flex items-center justify-between rounded-md bg-primary bg-opacity-30 p-2 font-medium text-darkGreen dark:bg-opacity-100'>
+                        <p className='w-[60%] text-sm'>Select Icon</p>
 
-                    <input
-                        type='file'
-                        id='icon'
-                        accept='image/png,image/jpg,image/jpeg,image/svg+xml'
-                        className='hidden'
-                        onChange={onIconUpload}
-                    />
+                        <button
+                            onClick={() => setShowIconPicker(true)}
+                            className='rounded-md bg-primary px-4 py-2 text-sm dark:bg-darkGreen hover:opacity-80 transition text-darkGreen dark:text-white'>
+                            Choose
+                        </button>
+                    </div>
 
-                    <label
-                        htmlFor='icon'
-                        className={`relative w-max cursor-pointer rounded-md bg-primary p-2 text-sm dark:bg-darkGreen ${icon.src ? 'bg-opacity-70' : ''
-                            }`}>
-                        <PlusIcon className='h-6 w-6 text-darkGreen dark:text-white' />
-
-                        {icon.src && (
+                    {icon.name && (
+                        <div className='flex items-center justify-between text-sm text-darkGreen dark:text-white/70 px-2'>
+                            <span>Selected: {icon.name}</span>
                             <button
-                                onClick={e => {
-                                    e.stopPropagation();
-                                    setIcon({ src: null });
-                                }}
-                                className='absolute -right-1 -top-1 z-10 rounded-full bg-darkGreen p-0.5 shadow-md'>
-                                <XMarkIcon className='h-3 w-3 text-darkGreen dark:text-white' />
+                                onClick={() => setIcon({ src: null, component: null, name: null })}
+                                className='text-red-500 hover:text-red-700 transition'>
+                                <XMarkIcon className='h-4 w-4' />
                             </button>
-                        )}
-                    </label>
+                        </div>
+                    )}
+
+                    <div className='flex items-center justify-between rounded-md bg-primary bg-opacity-30 p-2 font-medium text-darkGreen dark:bg-opacity-100'>
+                        <p className='w-[60%] text-sm'>Upload Custom</p>
+
+                        <input
+                            type='file'
+                            id='icon'
+                            accept='image/png,image/jpg,image/jpeg,image/svg+xml'
+                            className='hidden'
+                            onChange={onIconUpload}
+                        />
+
+                        <label
+                            htmlFor='icon'
+                            className={`relative w-max cursor-pointer rounded-md bg-primary p-2 text-sm dark:bg-darkGreen ${icon.src ? 'bg-opacity-70' : ''
+                                }`}>
+                            <PlusIcon className='h-6 w-6 text-darkGreen dark:text-white' />
+
+                            {icon.src && (
+                                <button
+                                    onClick={e => {
+                                        e.stopPropagation();
+                                        setIcon({ src: null, component: null, name: null });
+                                    }}
+                                    className='absolute -right-1 -top-1 z-10 rounded-full bg-darkGreen p-0.5 shadow-md'>
+                                    <XMarkIcon className='h-3 w-3 text-darkGreen dark:text-white' />
+                                </button>
+                            )}
+                        </label>
+                    </div>
                 </div>
 
                 {/* Icon size */}
@@ -582,12 +628,19 @@ const IconTemplateMaker = ({ proMode }) => {
     );
 
     return (
-        <section className='mx-auto my-12 w-[90%] overflow-x-hidden md:w-[80%]'>
-            <div className='grid grid-cols-1 gap-8 md:grid-cols-2'>
-                {renderPreview()}
-                {renderOptions()}
-            </div>
-        </section>
+        <>
+            <IconPicker
+                isOpen={showIconPicker}
+                onClose={() => setShowIconPicker(false)}
+                onSelect={handleIconSelect}
+            />
+            <section className='mx-auto my-12 w-[90%] overflow-x-hidden md:w-[80%]'>
+                <div className='grid grid-cols-1 gap-8 md:grid-cols-2'>
+                    {renderPreview()}
+                    {renderOptions()}
+                </div>
+            </section>
+        </>
     );
 };
 
