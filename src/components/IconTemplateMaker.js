@@ -103,10 +103,6 @@ const IconTemplateMaker = ({ proMode }) => {
                 document.body.removeChild(a);
                 toast.success('Icon exported!', { id: savingToast });
 
-                if (window.pirsch) {
-                    pirsch('🎉 Icon saved');
-                }
-
                 if (user) {
                     updateStats(user.id, 'Template_Saved');
                 }
@@ -162,9 +158,6 @@ const IconTemplateMaker = ({ proMode }) => {
                 ])
                 .then(() => {
                     toast.success('Icon copied to clipboard');
-                    if (window.pirsch) {
-                        pirsch('🙌 Icon copied');
-                    }
                     if (user) {
                         updateStats(user.id, 'Template_Copied');
                     }
@@ -182,9 +175,6 @@ const IconTemplateMaker = ({ proMode }) => {
                             .write(data)
                             .then(() => {
                                 toast.success('Icon copied to clipboard');
-                                if (window.pirsch) {
-                                    pirsch('🙌 Icon copied');
-                                }
                                 if (user) {
                                     updateStats(user.id, 'Template_Copied');
                                 }
