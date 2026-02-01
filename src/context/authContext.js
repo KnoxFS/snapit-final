@@ -91,7 +91,8 @@ export default function AuthProvider({ children }) {
 
       console.log('[Auth] User row data:', userRow);
 
-      const { subscription_id, avatar_url, presets } = userRow || {};
+      const { subscription_id, avatar_url, presets, twitter_handle, filestreams_account_id, filestreams_username, filestreams_status } = userRow || {};
+
 
       const data = {
         id: user.id,
@@ -101,6 +102,10 @@ export default function AuthProvider({ children }) {
         isPro: false,
         endPro: null,
         presets,
+        twitter_handle,
+        filestreams_account_id,
+        filestreams_username,
+        filestreams_status,
       };
 
       if (subscription_id) {
