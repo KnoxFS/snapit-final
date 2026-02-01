@@ -239,6 +239,27 @@ const TestimonialTemplateMaker = ({ proMode }) => {
         setManualTiltAngle([0, 0]);
     };
 
+    // Handle avatar upload
+    const onAvatarUpload = e => {
+        const file = e.target.files[0];
+        if (!file) return;
+
+        const reader = new FileReader();
+        reader.onload = event => {
+            setOptions({
+                ...options,
+                testimonial: {
+                    ...options.testimonial,
+                    user: {
+                        ...options.testimonial.user,
+                        avatar: event.target.result,
+                    },
+                },
+            });
+        };
+        reader.readAsDataURL(file);
+    };
+
     const pickBackground = () => {
         return (
             <>
@@ -541,12 +562,40 @@ const TestimonialTemplateMaker = ({ proMode }) => {
                     />
                 </div>
 
-                {/* Avatar URL */}
+                {/* Avatar */}
                 <div>
-                    <label className='text-gray-400 text-sm mb-1 block'>Avatar URL</label>
+                    <label className='text-gray-400 text-sm mb-1 block'>Avatar</label>
+
+                    {/* Upload Button */}
+                    <div className='flex items-center space-x-2 mb-2'>
+                        <input
+                            type='file'
+                            id='avatar-upload'
+                            accept='image/png,image/jpg,image/jpeg,image/webp'
+                            className='hidden'
+                            onChange={onAvatarUpload}
+                        />
+                        <label
+                            htmlFor='avatar-upload'
+                            className='cursor-pointer px-4 py-2 bg-primary text-white rounded-md text-sm hover:opacity-80 transition'>
+                            Upload Image
+                        </label>
+
+                        {/* Preview */}
+                        {options.testimonial.user.avatar && (
+                            <div
+                                className='w-12 h-12 rounded-full bg-cover bg-center border-2 border-gray-600'
+                                style={{
+                                    backgroundImage: `url(${options.testimonial.user.avatar})`,
+                                }}
+                            />
+                        )}
+                    </div>
+
+                    {/* URL Input (alternative) */}
                     <input
                         type='text'
-                        placeholder='https://example.com/avatar.jpg'
+                        placeholder='Or paste image URL'
                         className='w-full p-2 text-sm bg-[#212121] rounded-md border border-[#2B2C2F] text-white outline-none'
                         value={options.testimonial.user.avatar}
                         onChange={e =>
