@@ -22,8 +22,28 @@ export const mobileDevices = [
     value: "device device-iphone-8",
   },
   {
-    name: "Samsumg Galaxy S8",
+    name: "Samsung Galaxy S8",
     value: "device device-galaxy-s8",
+  },
+  {
+    name: "iPad Mini",
+    value: "device device-ipad-mini",
+    isPro: false,
+  },
+  {
+    name: "iPad Pro",
+    value: "device device-ipad-pro",
+    isPro: true,
+  },
+  {
+    name: "Google Pixel 8",
+    value: "device device-google-pixel-8",
+    isPro: true,
+  },
+  {
+    name: "Samsung Galaxy S24",
+    value: "device device-galaxy-s24",
+    isPro: true,
   },
 ];
 
@@ -55,5 +75,15 @@ export const desktopDevices = [
   {
     name: "Surface Studio",
     value: "device device-surface-studio",
+  },
+  {
+    name: "MacBook Air",
+    value: "device device-macbook-air",
+    isPro: false,
+  },
+  {
+    name: "Dell XPS",
+    value: "device device-dell-xps",
+    isPro: true,
   },
 ];

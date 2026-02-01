@@ -38,9 +38,8 @@ const AspectRatio = ({ options, setOptions }) => {
                   </div>
                 </div>
                 <ChevronRightIcon
-                  className={`${
-                    open ? 'rotate-90 transform' : ''
-                  } h-5 w-5 justify-self-end text-darkGreen dark:text-white`}
+                  className={`${open ? 'rotate-90 transform' : ''
+                    } h-5 w-5 justify-self-end text-darkGreen dark:text-white`}
                 />
               </div>
             </div>
@@ -110,6 +109,41 @@ const AspectRatio = ({ options, setOptions }) => {
                 value='aspect-[16/10] !scale-75'
                 className={`rounded-md border border-gray-400 py-2 px-4 text-sm text-gray-400 focus:outline-none focus:ring-2 focus:ring-green-400 focus:ring-offset-2 focus:ring-offset-gray-800 ui-checked:border-green-400 ui-checked:bg-primary ui-checked:text-white`}>
                 Product Hunt
+              </RadioGroup.Option>
+
+              <RadioGroup.Option
+                as='button'
+                value='aspect-square !scale-75'
+                className={`rounded-md border border-gray-400 py-2 px-4 text-sm text-gray-400 focus:outline-none focus:ring-2 focus:ring-green-400 focus:ring-offset-2 focus:ring-offset-gray-800 ui-checked:border-green-400 ui-checked:bg-primary ui-checked:text-white`}>
+                Square (1:1)
+              </RadioGroup.Option>
+
+              <RadioGroup.Option
+                as='button'
+                value='aspect-[9/16] !scale-50'
+                className={`rounded-md border border-gray-400 py-2 px-4 text-sm text-gray-400 focus:outline-none focus:ring-2 focus:ring-green-400 focus:ring-offset-2 focus:ring-offset-gray-800 ui-checked:border-green-400 ui-checked:bg-primary ui-checked:text-white`}>
+                Instagram Story
+              </RadioGroup.Option>
+
+              <RadioGroup.Option
+                as='button'
+                value='aspect-[1.91/1] !scale-75'
+                className={`rounded-md border border-gray-400 py-2 px-4 text-sm text-gray-400 focus:outline-none focus:ring-2 focus:ring-green-400 focus:ring-offset-2 focus:ring-offset-gray-800 ui-checked:border-green-400 ui-checked:bg-primary ui-checked:text-white`}>
+                LinkedIn
+              </RadioGroup.Option>
+
+              <RadioGroup.Option
+                as='button'
+                value='aspect-[1.91/1] !scale-75'
+                className={`rounded-md border border-gray-400 py-2 px-4 text-sm text-gray-400 focus:outline-none focus:ring-2 focus:ring-green-400 focus:ring-offset-2 focus:ring-offset-gray-800 ui-checked:border-green-400 ui-checked:bg-primary ui-checked:text-white`}>
+                Facebook
+              </RadioGroup.Option>
+
+              <RadioGroup.Option
+                as='button'
+                value='aspect-[2/3] !scale-60'
+                className={`rounded-md border border-gray-400 py-2 px-4 text-sm text-gray-400 focus:outline-none focus:ring-2 focus:ring-green-400 focus:ring-offset-2 focus:ring-offset-gray-800 ui-checked:border-green-400 ui-checked:bg-primary ui-checked:text-white`}>
+                Pinterest
               </RadioGroup.Option>
             </RadioGroup>
           </Disclosure.Panel>
