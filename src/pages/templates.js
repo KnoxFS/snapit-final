@@ -5,6 +5,7 @@ import CodeTemplateMaker from 'components/CodeTemplateMaker';
 import TweetTemplateMaker from "components/TweetTemplateMaker";
 import AnimatedScreenshotMaker from 'components/AnimatedScreenshotMaker';
 import KeyCapsMaker from 'components/KeyCapsMaker';
+import IconTemplateMaker from 'components/IconTemplateMaker';
 import { SettingsProvider } from 'hooks/use-settings';
 import useAuth from 'hooks/useAuth';
 import Head from 'components/Head';
@@ -36,7 +37,7 @@ const Templates = () => {
       <Tab.Group>
         <section className='mx-auto my-12 w-[90%] overflow-x-hidden md:w-[80%]'>
           <h2 className='mb-6 font-semibold text-darkGreen dark:text-white'>
-          Screenshots4all Templates
+            Screenshots4all Templates
           </h2>
 
           <Tab.List
@@ -132,20 +133,37 @@ const Templates = () => {
               </article>
             </Tab>
             <Tab className="outline-none">
-            <article className='bg-primary bg-opacity-10 p-4 rounded-md ui-selected:bg-primary h-full'>
+              <article className='bg-primary bg-opacity-10 p-4 rounded-md ui-selected:bg-primary h-full'>
                 <img
                   src="/TweetTemplate.png"
                   alt="Screenshot Template"
                   className="w-full rounded-md"
                 />
 
-<h3 className='text-white ui-selected:text-darkGreen text-xl font-bold my-4'>
+                <h3 className='text-white ui-selected:text-darkGreen text-xl font-bold my-4'>
                   Twitter Screenshots Mockup
                 </h3>
 
                 <p className='text-white/90 ui-selected:text-darkGreen'>
                   Create amazing twitter images to share online with
                   anyone.
+                </p>
+              </article>
+            </Tab>
+            <Tab className="outline-none">
+              <article className='h-full rounded-md bg-primary bg-opacity-20 p-4 ui-selected:bg-primary dark:bg-opacity-10 dark:ui-selected:bg-primary'>
+                <img
+                  src="/IconTemplate.png"
+                  alt="Icon Template"
+                  className="w-full rounded-md"
+                />
+
+                <h3 className='my-4 text-xl font-bold text-darkGreen ui-selected:text-darkGreen dark:text-white'>
+                  Icon Image Generator
+                </h3>
+
+                <p className='text-darkGreen ui-selected:text-darkGreen dark:text-white'>
+                  Create beautiful icon images with customizable backgrounds for your app or brand.
                 </p>
               </article>
             </Tab>
@@ -173,7 +191,10 @@ const Templates = () => {
             </SettingsProvider>
           </Tab.Panel>
           <Tab.Panel>
-              <TweetTemplateMaker proMode={true} />
+            <TweetTemplateMaker proMode={true} />
+          </Tab.Panel>
+          <Tab.Panel>
+            <IconTemplateMaker proMode={user?.isPro} />
           </Tab.Panel>
         </Tab.Panels>
       </Tab.Group>
