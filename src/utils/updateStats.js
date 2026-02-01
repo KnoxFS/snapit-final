@@ -10,25 +10,44 @@ const statsType = {
 };
 
 export default async function updateStats(userId, type) {
-  // get stats from supabase
-  const {
-    data: { stats },
-    error,
-  } = await supabase.from("stats").select("stats").eq("user_id", userId).single();
-
-  // parse stats json
-  const parsedStats = JSON.parse(stats);
-
-  // update stats
-  parsedStats[statsType[type]] += 1;
-
-  // update stats in supabase
-  const { error: update_error } = await supabase
+  // Try to get existing stats
+  const { data, error } = await supabase
     .from("stats")
-    .update({ stats: JSON.stringify(parsedStats) })
-    .eq("user_id", userId);
+    .select("stats")
+    .eq("user_id", userId)
+    .single();
 
-  if (error || update_error) {
-    console.log(error || update_error);
+  let parsedStats;
+
+  if (error || !data) {
+    // Create new stats object if doesn't exist
+    parsedStats = {
+      screenshots_saved: 0,
+      screenshots_copied: 0,
+      opengraph_saved: 0,
+      opengraph_copied: 0,
+      templates_saved: 0,
+      templates_copied: 0,
+    };
+  } else {
+    parsedStats = JSON.parse(data.stats);
+  }
+
+  // Increment the stat
+  parsedStats[statsType[type]] = (parsedStats[statsType[type]] || 0) + 1;
+
+  // Upsert (insert or update)
+  const { error: upsertError } = await supabase
+    .from("stats")
+    .upsert(
+      {
+        user_id: userId,
+        stats: JSON.stringify(parsedStats)
+      },
+      { onConflict: 'user_id' }
+    );
+
+  if (upsertError) {
+    console.log('Stats update error:', upsertError);
   }
 }

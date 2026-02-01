@@ -47,21 +47,29 @@ const Stats = () => {
   }, []);
 
   const getStats = async () => {
-    // get stats json from supabase
-    const {
-      data: { stats },
-      error,
-    } = await supabase
+    const { data, error } = await supabase
       .from("stats")
       .select("stats")
       .eq("user_id", user.id)
       .single();
 
     if (error) {
-      console.log(error);
+      console.log('Stats fetch error:', error);
+      // Set default stats if error
+      setStats({
+        screenshots_saved: 0,
+        screenshots_copied: 0,
+        opengraph_saved: 0,
+        opengraph_copied: 0,
+        templates_saved: 0,
+        templates_copied: 0,
+      });
+      return;
     }
 
-    setStats(JSON.parse(stats));
+    if (data?.stats) {
+      setStats(JSON.parse(data.stats));
+    }
   };
 
   if (loading)
