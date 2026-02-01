@@ -99,9 +99,13 @@ export default async function handler(req, res) {
         }
 
         const createData = await createResponse.json();
+        console.log("[Filestreams] Create response:", JSON.stringify(createData));
 
         if (createData._status !== "success") {
-            console.error("[Filestreams] Account creation failed:", createData.response);
+            console.error("[Filestreams] Account creation failed - Full response:", JSON.stringify(createData));
+            console.error("[Filestreams] Status:", createData._status);
+            console.error("[Filestreams] Response:", createData.response);
+            console.error("[Filestreams] Data:", createData.data);
             return res.status(500).json({ error: createData.response || "Failed to create Filestreams account" });
         }
 
