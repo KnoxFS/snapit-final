@@ -25,23 +25,23 @@ export default async function handler(req, res) {
             return res.status(400).json({ error: "Account already exists" });
         }
 
-        // Get Filestreams admin credentials from environment
-        const adminUsername = process.env.FILESTREAMS_ADMIN_USERNAME;
-        const adminPassword = process.env.FILESTREAMS_ADMIN_PASSWORD;
+        // Get Filestreams API keys from environment
+        const apiKey1 = process.env.FILESTREAMS_API_KEY1;
+        const apiKey2 = process.env.FILESTREAMS_API_KEY2;
         const defaultPackageId = process.env.FILESTREAMS_DEFAULT_PACKAGE_ID;
 
-        if (!adminUsername || !adminPassword || !defaultPackageId) {
+        if (!apiKey1 || !apiKey2 || !defaultPackageId) {
             console.error("[Filestreams] Missing environment variables");
+            console.error("[Filestreams] Has key1:", !!apiKey1, "Has key2:", !!apiKey2, "Has package_id:", !!defaultPackageId);
             return res.status(500).json({ error: "Server configuration error" });
         }
 
-        // Step 1: Authorize with Filestreams API v2
-        console.log("[Filestreams] Authorizing with admin API...");
-        console.log("[Filestreams] Username:", adminUsername);
-        console.log("[Filestreams] Username length:", adminUsername?.length);
-        console.log("[Filestreams] Password length:", adminPassword?.length);
+        // Step 1: Authorize with Filestreams API v2 using API keys
+        console.log("[Filestreams] Authorizing with API keys...");
+        console.log("[Filestreams] Key1 length:", apiKey1?.length);
+        console.log("[Filestreams] Key2 length:", apiKey2?.length);
 
-        const requestBody = `username=${encodeURIComponent(adminUsername)}&password=${encodeURIComponent(adminPassword)}`;
+        const requestBody = `key1=${encodeURIComponent(apiKey1)}&key2=${encodeURIComponent(apiKey2)}`;
         console.log("[Filestreams] Request body length:", requestBody.length);
 
         const authResponse = await fetch("https://www.filestreams.com/api/v2/authorize", {
