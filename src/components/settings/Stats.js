@@ -67,7 +67,11 @@ const Stats = () => {
             templates_copied: 0,
           });
         } else if (data?.stats) {
-          setStats(JSON.parse(data.stats));
+          // Handle both JSON string and object formats
+          const parsedStats = typeof data.stats === 'string'
+            ? JSON.parse(data.stats)
+            : data.stats;
+          setStats(parsedStats);
         } else {
           // No stats yet, set defaults
           setStats({

@@ -33,7 +33,10 @@ export default async function updateStats(userId, type) {
       templates_copied: 0,
     };
   } else {
-    parsedStats = JSON.parse(data.stats);
+    // Handle both JSON string and object formats
+    parsedStats = typeof data.stats === 'string'
+      ? JSON.parse(data.stats)
+      : data.stats;
     console.log('[updateStats] Existing stats:', parsedStats);
   }
 
