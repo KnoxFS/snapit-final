@@ -52,7 +52,17 @@ const Navbar = () => {
   };
 
   const handleLogout = async () => {
-    await supabase.auth.signOut();
+    console.log('[Navbar] Logout clicked');
+    try {
+      const { error } = await supabase.auth.signOut();
+      if (error) {
+        console.error('[Navbar] Logout error:', error);
+      } else {
+        console.log('[Navbar] Logout successful');
+      }
+    } catch (err) {
+      console.error('[Navbar] Logout exception:', err);
+    }
   };
 
   const handleDark = () => {
@@ -67,15 +77,15 @@ const Navbar = () => {
     <header className="my-4 mx-auto flex w-[90%] items-center justify-between text-darkGreen dark:text-white">
       {/* Logo */}
       <a>
-          <Image
-            priority
-            width={'120px'}
-            height={'70px'}
-            src={Screenshots4all}
-            alt='Follow us on Twitter'
-            className=' w-full h-full'
-          />
-        </a>
+        <Image
+          priority
+          width={'120px'}
+          height={'70px'}
+          src={Screenshots4all}
+          alt='Follow us on Twitter'
+          className=' w-full h-full'
+        />
+      </a>
 
       <nav className="hidden space-x-8 text-sm lg:block">
         <Link href="/">

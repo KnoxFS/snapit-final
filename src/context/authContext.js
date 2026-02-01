@@ -58,25 +58,38 @@ export default function AuthProvider({ children }) {
   }, []);
 
   const getUser = async () => {
+    console.log('[Auth] Getting user...');
     const {
       data: { user },
       error,
     } = await supabase.auth.getUser();
 
     if (error) {
+      console.error('[Auth] Error getting auth user:', error);
       setUser(null);
       setLoading(false);
+      return;
     }
 
     if (user) {
+      console.log('[Auth] Auth user found:', user.id, user.email);
+
       // get user data from supabase
       const {
         data: userRow,
+        error: userRowError,
       } = await supabase
         .from("users")
         .select("*")
         .eq("user_id", user.id)
         .single();
+
+      if (userRowError) {
+        console.error('[Auth] Error fetching user row:', userRowError);
+        // Continue anyway with minimal user data
+      }
+
+      console.log('[Auth] User row data:', userRow);
 
       const { subscription_id, avatar_url, presets } = userRow || {};
 

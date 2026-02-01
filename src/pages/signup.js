@@ -86,12 +86,19 @@ const Signup = () => {
       return;
     }
     // save user info in database
+    console.log('[Signup] Inserting user into database:', user.id);
 
     const { error: db_error } = await supabase.from('users').insert([
       {
         user_id: user.id,
       },
     ]);
+
+    if (db_error) {
+      console.error('[Signup] Database insert error:', db_error);
+    } else {
+      console.log('[Signup] User inserted successfully');
+    }
 
     // create stats for user
 
@@ -104,9 +111,17 @@ const Signup = () => {
       templates_copied: 0,
     };
 
+    console.log('[Signup] Inserting stats for user:', user.id);
+
     const { error: stats_error } = await supabase
       .from('stats')
       .insert([{ user_id: user.id, stats: JSON.stringify(defaultStats) }]);
+
+    if (stats_error) {
+      console.error('[Signup] Stats insert error:', stats_error);
+    } else {
+      console.log('[Signup] Stats inserted successfully');
+    }
 
     if (db_error || stats_error) {
       toast.error('An error has ocurred, please try again.', {
@@ -127,7 +142,7 @@ const Signup = () => {
     <>
       <Head>
         <title>
-        Screenshots4all - Create beautiful screenshots and mockups so easily
+          Screenshots4all - Create beautiful screenshots and mockups so easily
         </title>
         <meta
           name='description'
@@ -200,11 +215,10 @@ const Signup = () => {
                       value={plan}
                       className={({ active, checked }) =>
                         `
-                  ${
-                    checked
-                      ? 'bg-primary bg-opacity-75 text-darkGreen'
-                      : 'bg-primary dark:bg-darkGreen'
-                  }
+                  ${checked
+                          ? 'bg-primary bg-opacity-75 text-darkGreen'
+                          : 'bg-primary dark:bg-darkGreen'
+                        }
                     relative flex cursor-pointer rounded-lg px-5 py-4 shadow-md focus:outline-none`
                       }>
                       {({ checked }) => (
@@ -213,16 +227,14 @@ const Signup = () => {
                             <div className='text-sm font-medium'>
                               <RadioGroup.Label
                                 as='p'
-                                className={`font-medium ${
-                                  checked ? 'text-darkGreen' : 'text-white'
-                                }`}>
+                                className={`font-medium ${checked ? 'text-darkGreen' : 'text-white'
+                                  }`}>
                                 {plan.name}
                               </RadioGroup.Label>
                               <RadioGroup.Description
                                 as='div'
-                                className={`inline ${
-                                  checked ? 'text-darkGreen' : 'text-white/80'
-                                }`}>
+                                className={`inline ${checked ? 'text-darkGreen' : 'text-white/80'
+                                  }`}>
                                 {plan.name === 'Lifetime' ? (
                                   <p>
                                     {plan.price} one{' '}
