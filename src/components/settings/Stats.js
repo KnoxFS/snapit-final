@@ -44,7 +44,7 @@ const Stats = () => {
   useEffect(() => {
     if (user) getStats().then(() => setLoading(false));
     else setLoading(false);
-  }, []);
+  }, [user]);
 
   const getStats = async () => {
     const { data, error } = await supabase
