@@ -43,7 +43,7 @@ const Stats = () => {
 
   useEffect(() => {
     const fetchStats = async () => {
-      if (!user) {
+      if (!user?.id) {
         setLoading(false);
         return;
       }
@@ -95,7 +95,7 @@ const Stats = () => {
     };
 
     fetchStats();
-  }, [user]);
+  }, [user?.id]);
 
   if (loading) {
     // loading
