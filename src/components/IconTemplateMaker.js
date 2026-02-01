@@ -559,21 +559,21 @@ const IconTemplateMaker = ({ proMode }) => {
                     <button
                         onClick={saveImage}
                         className='flex w-full items-center justify-center space-x-2 rounded-md bg-primary p-2 text-darkGreen transition hover:bg-green-500 dark:bg-darkGreen dark:text-white'>
-                        <SaveIcon />
+                        <span className='h-6 w-6'>{SaveIcon}</span>
                         <span>Save</span>
                     </button>
 
                     <button
                         onClick={copyImage}
                         className='flex w-full items-center justify-center space-x-2 rounded-md bg-primary p-2 text-darkGreen transition hover:bg-green-500 dark:bg-darkGreen dark:text-white'>
-                        <ClipboardIcon />
+                        <span className='h-6 w-6'>{ClipboardIcon}</span>
                         <span>Copy</span>
                     </button>
 
                     <button
                         onClick={resetCanvas}
                         className='flex w-full items-center justify-center space-x-2 rounded-md bg-primary p-2 text-darkGreen transition hover:bg-green-500 dark:bg-darkGreen dark:text-white'>
-                        <ResetIcon />
+                        <span className='h-6 w-6'>{ResetIcon}</span>
                         <span>Reset</span>
                     </button>
                 </div>
