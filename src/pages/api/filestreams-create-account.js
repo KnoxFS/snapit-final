@@ -38,13 +38,18 @@ export default async function handler(req, res) {
         // Step 1: Authorize with Filestreams API v2
         console.log("[Filestreams] Authorizing with admin API...");
         console.log("[Filestreams] Username:", adminUsername);
+        console.log("[Filestreams] Username length:", adminUsername?.length);
+        console.log("[Filestreams] Password length:", adminPassword?.length);
+
+        const requestBody = `username=${encodeURIComponent(adminUsername)}&password=${encodeURIComponent(adminPassword)}`;
+        console.log("[Filestreams] Request body length:", requestBody.length);
 
         const authResponse = await fetch("https://www.filestreams.com/api/v2/authorize", {
             method: "POST",
             headers: {
                 "Content-Type": "application/x-www-form-urlencoded",
             },
-            body: `username=${encodeURIComponent(adminUsername)}&password=${encodeURIComponent(adminPassword)}`,
+            body: requestBody,
         });
 
         if (!authResponse.ok) {
