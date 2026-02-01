@@ -373,45 +373,57 @@ export default function ScreenshotMaker({ proMode }) {
     }
 
     const toastId = toast.loading('Saving preset...');
-    // get current presets from db
-    const { data } = await supabase
-      .from('users')
-      .select('presets')
-      .eq('user_id', user.id)
-      .single();
 
-    const preset = {
-      options,
-      tilt: [manualTiltAngleX, manualTiltAngleY],
-      name: presetName,
-    };
+    try {
+      // get current presets from db
+      const { data, error: fetchError } = await supabase
+        .from('users')
+        .select('presets')
+        .eq('user_id', user.id)
+        .single();
 
-    const { error } = await supabase
-      .from('users')
-      .update({
-        presets: {
-          ...data.presets,
-          screenshots: [...data.presets.screenshots, preset],
-        },
-      })
-      .eq('user_id', user.id);
+      if (fetchError) {
+        toast.error(fetchError.message, { id: toastId });
+        return;
+      }
 
-    if (error) {
-      toast.error(error.message, {
-        id: toastId,
-      });
+      const preset = {
+        options,
+        tilt: [manualTiltAngleX, manualTiltAngleY],
+        name: presetName,
+      };
+
+      // Initialize presets structure if it doesn't exist
+      const currentPresets = data?.presets || {};
+      const currentScreenshots = currentPresets.screenshots || [];
+
+      const { error } = await supabase
+        .from('users')
+        .update({
+          presets: {
+            ...currentPresets,
+            screenshots: [...currentScreenshots, preset],
+          },
+        })
+        .eq('user_id', user.id);
+
+      if (error) {
+        toast.error(error.message, { id: toastId });
+        return;
+      }
+
+      toast.success('Preset saved!', { id: toastId });
+
+      // cleanup
+      setPresetName('');
+      setShowPresetModal(false);
+
+      // refresh data
+      await getUser();
+    } catch (err) {
+      console.error('Preset save error:', err);
+      toast.error('Failed to save preset', { id: toastId });
     }
-
-    toast.success('Preset saved!', {
-      id: toastId,
-    });
-
-    // cleanup
-    setPresetName('');
-    setShowPresetModal(false);
-
-    // refresh data
-    await getUser();
   };
 
   const handleSavePreset = async () => {
@@ -796,9 +808,8 @@ export default function ScreenshotMaker({ proMode }) {
                               }}
                               className='flex cursor-pointer items-center rounded-sm px-2'>
                               <ChevronRightIcon
-                                className={`${
-                                  open ? 'rotate-90 transform' : ''
-                                } h-5 w-5 justify-self-end text-darkGreen dark:text-white`}
+                                className={`${open ? 'rotate-90 transform' : ''
+                                  } h-5 w-5 justify-self-end text-darkGreen dark:text-white`}
                               />
                             </div>
                           </div>
@@ -1102,9 +1113,8 @@ export default function ScreenshotMaker({ proMode }) {
       </div>
 
       <div
-        className={`relative grid grid-cols-1 place-items-start ${
-          optionsOpen ? 'md:grid-cols-[360px,1fr]' : 'md:grid-cols-[50px,1fr]'
-        } mx-auto w-full gap-10`}>
+        className={`relative grid grid-cols-1 place-items-start ${optionsOpen ? 'md:grid-cols-[360px,1fr]' : 'md:grid-cols-[50px,1fr]'
+          } mx-auto w-full gap-10`}>
         {optionsOpen ? (
           <div className='row-start-1 mt-6 w-full self-start md:row-span-1'>
             {renderOptions()}
@@ -1147,23 +1157,20 @@ export default function ScreenshotMaker({ proMode }) {
               style={
                 options.customTheme
                   ? {
-                      background: `linear-gradient(${
-                        cssGradientsDirections[options.bgDirection]
-                      }, ${
-                        options?.customTheme?.colorStart || 'transparent'
+                    background: `linear-gradient(${cssGradientsDirections[options.bgDirection]
+                      }, ${options?.customTheme?.colorStart || 'transparent'
                       }, ${options?.customTheme?.colorEnd || 'transparent'})`,
-                    }
+                  }
                   : {
-                      background: options.background
-                        ? `url(${options.background})`
-                        : '',
-                    }
+                    background: options.background
+                      ? `url(${options.background})`
+                      : '',
+                  }
               }
               className={classnames(
-                `relative overflow-hidden bg-cover transition-all duration-200 ease-in-out ${
-                  options.aspectRatio === 'aspect-appstore !scale-75'
-                    ? 'h-[7.0in] w-[5in]'
-                    : 'w-full'
+                `relative overflow-hidden bg-cover transition-all duration-200 ease-in-out ${options.aspectRatio === 'aspect-appstore !scale-75'
+                  ? 'h-[7.0in] w-[5in]'
+                  : 'w-full'
                 }`,
                 options?.padding,
                 options?.position,
@@ -1176,9 +1183,8 @@ export default function ScreenshotMaker({ proMode }) {
               {options?.noise ? (
                 <div
                   style={{ backgroundImage: `url("/noise.svg")` }}
-                  className={`absolute inset-0 h-full w-full bg-repeat opacity-[0.25] ${
-                    options?.rounded
-                  } ${options.browserBar !== 'hidden' ? 'rounded-t-none' : ''}`}
+                  className={`absolute inset-0 h-full w-full bg-repeat opacity-[0.25] ${options?.rounded
+                    } ${options.browserBar !== 'hidden' ? 'rounded-t-none' : ''}`}
                 />
               ) : (
                 ''
@@ -1186,22 +1192,19 @@ export default function ScreenshotMaker({ proMode }) {
 
               {blob?.src ? (
                 <div
-                  className={`flex h-full ${
-                    options.text.position === 'top'
+                  className={`flex h-full ${options.text.position === 'top'
                       ? 'flex-col'
                       : 'flex-col-reverse'
-                  }  items-center justify-center`}>
+                    }  items-center justify-center`}>
                   {/* Text */}
 
                   {options?.text.show && (
                     <div
-                      className={`w-full ${options.text.align} ${
-                        options.text.position === 'top' ? 'mb-6' : 'mt-6'
-                      } ${
-                        options.text.color === 'dark'
+                      className={`w-full ${options.text.align} ${options.text.position === 'top' ? 'mb-6' : 'mt-6'
+                        } ${options.text.color === 'dark'
                           ? 'text-black'
                           : 'text-white'
-                      }`}>
+                        }`}>
                       <p className='break-word mb-2 whitespace-pre-wrap text-3xl font-bold'>
                         {options.text.heading}
                       </p>
@@ -1223,16 +1226,14 @@ export default function ScreenshotMaker({ proMode }) {
                       {getTabFrame(options?.browserBar, options?.rounded)}
                       <img
                         src={blob?.src}
-                        className={`relative z-10 max-w-full select-none bg-cover transition-all duration-200 ease-in-out ${
-                          options?.rounded
-                        } ${options.shadow} ${getImageRadius(
-                          options?.padding,
-                          options?.position,
-                        )} ${
-                          whitelist.includes(options?.browserBar)
+                        className={`relative z-10 max-w-full select-none bg-cover transition-all duration-200 ease-in-out ${options?.rounded
+                          } ${options.shadow} ${getImageRadius(
+                            options?.padding,
+                            options?.position,
+                          )} ${whitelist.includes(options?.browserBar)
                             ? ''
                             : 'rounded-t-none'
-                        }`}
+                          }`}
                       />
                     </div>
                   </ReactTilt>
