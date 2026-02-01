@@ -1,4 +1,5 @@
 // API route to create Filestreams storage account
+// Updated to use Filestreams API v2
 import { supabase } from "lib/supabase";
 
 export default async function handler(req, res) {
