@@ -34,62 +34,77 @@ export default async function handler(req, res) {
             return res.status(500).json({ error: "Server configuration error" });
         }
 
-        // Step 1: Authorize with Filestreams admin API
+        // Step 1: Authorize with Filestreams API v2
         console.log("[Filestreams] Authorizing with admin API...");
-        const authResponse = await fetch("https://filestreams.com/api/admin/authorize", {
+        const authResponse = await fetch("https://www.filestreams.com/api/v2/authorize", {
             method: "POST",
             headers: {
-                "Content-Type": "application/json",
+                "Content-Type": "application/x-www-form-urlencoded",
             },
-            body: JSON.stringify({
+            body: new URLSearchParams({
                 username: adminUsername,
                 password: adminPassword,
             }),
         });
 
         if (!authResponse.ok) {
-            const errorData = await authResponse.json();
-            console.error("[Filestreams] Authorization failed:", errorData);
+            const errorText = await authResponse.text();
+            console.error("[Filestreams] Authorization failed:", errorText);
             return res.status(500).json({ error: "Failed to authorize with Filestreams" });
         }
 
-        const { token } = await authResponse.json();
+        const authData = await authResponse.json();
+
+        if (authData._status !== "success") {
+            console.error("[Filestreams] Authorization failed:", authData.response);
+            return res.status(500).json({ error: authData.response || "Failed to authorize with Filestreams" });
+        }
+
+        const { access_token } = authData.data;
         console.log("[Filestreams] Authorization successful");
 
         // Step 2: Generate unique username and password
         const username = `snapit_${user_id.substring(0, 8)}_${Date.now()}`;
         const password = generateSecurePassword();
 
-        // Step 3: Create account via Filestreams API
+        // Step 3: Create account via Filestreams API v2
         console.log("[Filestreams] Creating account for:", email);
-        const createResponse = await fetch("https://filestreams.com/api/admin/account/create", {
+        const createResponse = await fetch("https://www.filestreams.com/api/v2/account/create", {
             method: "POST",
             headers: {
-                "Content-Type": "application/json",
-                "Authorization": `Bearer ${token}`,
+                "Content-Type": "application/x-www-form-urlencoded",
             },
-            body: JSON.stringify({
-                email: email,
+            body: new URLSearchParams({
+                access_token: access_token,
                 username: username,
                 password: password,
+                email: email,
                 package_id: defaultPackageId,
+                status: "active",
             }),
         });
 
         if (!createResponse.ok) {
-            const errorData = await createResponse.json();
-            console.error("[Filestreams] Account creation failed:", errorData);
+            const errorText = await createResponse.text();
+            console.error("[Filestreams] Account creation failed:", errorText);
             return res.status(500).json({ error: "Failed to create Filestreams account" });
         }
 
-        const accountData = await createResponse.json();
-        console.log("[Filestreams] Account created:", accountData.account_id);
+        const createData = await createResponse.json();
+
+        if (createData._status !== "success") {
+            console.error("[Filestreams] Account creation failed:", createData.response);
+            return res.status(500).json({ error: createData.response || "Failed to create Filestreams account" });
+        }
+
+        const accountId = createData.data.id;
+        console.log("[Filestreams] Account created:", accountId);
 
         // Step 4: Store account details in Supabase
         const { error: updateError } = await supabase
             .from("users")
             .update({
-                filestreams_account_id: accountData.account_id,
+                filestreams_account_id: accountId,
                 filestreams_username: username,
                 filestreams_status: "active",
             })
@@ -104,7 +119,7 @@ export default async function handler(req, res) {
 
         return res.status(200).json({
             success: true,
-            account_id: accountData.account_id,
+            account_id: accountId,
             username: username,
         });
     } catch (error) {
