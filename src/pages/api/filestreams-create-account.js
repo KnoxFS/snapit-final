@@ -54,14 +54,17 @@ export default async function handler(req, res) {
 
         if (!authResponse.ok) {
             const errorText = await authResponse.text();
-            console.error("[Filestreams] Authorization failed:", errorText);
-            return res.status(500).json({ error: "Failed to authorize with Filestreams" });
+            console.error("[Filestreams] Authorization HTTP error:", authResponse.status, errorText);
+            return res.status(500).json({ error: `Failed to authorize: ${authResponse.status} ${errorText}` });
         }
 
         const authData = await authResponse.json();
+        console.log("[Filestreams] Auth response:", JSON.stringify(authData));
 
         if (authData._status !== "success") {
-            console.error("[Filestreams] Authorization failed:", authData.response);
+            console.error("[Filestreams] Authorization failed - Full response:", JSON.stringify(authData));
+            console.error("[Filestreams] Error message:", authData.response);
+            console.error("[Filestreams] Error details:", authData.details || "none");
             return res.status(500).json({ error: authData.response || "Failed to authorize with Filestreams" });
         }
 
