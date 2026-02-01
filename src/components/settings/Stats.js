@@ -42,37 +42,62 @@ const Stats = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    if (user) getStats().then(() => setLoading(false));
-    else setLoading(false);
+    const fetchStats = async () => {
+      if (!user) {
+        setLoading(false);
+        return;
+      }
+
+      try {
+        const { data, error } = await supabase
+          .from("stats")
+          .select("stats")
+          .eq("user_id", user.id)
+          .single();
+
+        if (error) {
+          console.log('Stats fetch error:', error);
+          // Set default stats if error
+          setStats({
+            screenshots_saved: 0,
+            screenshots_copied: 0,
+            opengraph_saved: 0,
+            opengraph_copied: 0,
+            templates_saved: 0,
+            templates_copied: 0,
+          });
+        } else if (data?.stats) {
+          setStats(JSON.parse(data.stats));
+        } else {
+          // No stats yet, set defaults
+          setStats({
+            screenshots_saved: 0,
+            screenshots_copied: 0,
+            opengraph_saved: 0,
+            opengraph_copied: 0,
+            templates_saved: 0,
+            templates_copied: 0,
+          });
+        }
+      } catch (err) {
+        console.error('Stats error:', err);
+        setStats({
+          screenshots_saved: 0,
+          screenshots_copied: 0,
+          opengraph_saved: 0,
+          opengraph_copied: 0,
+          templates_saved: 0,
+          templates_copied: 0,
+        });
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchStats();
   }, [user]);
 
-  const getStats = async () => {
-    const { data, error } = await supabase
-      .from("stats")
-      .select("stats")
-      .eq("user_id", user.id)
-      .single();
-
-    if (error) {
-      console.log('Stats fetch error:', error);
-      // Set default stats if error
-      setStats({
-        screenshots_saved: 0,
-        screenshots_copied: 0,
-        opengraph_saved: 0,
-        opengraph_copied: 0,
-        templates_saved: 0,
-        templates_copied: 0,
-      });
-      return;
-    }
-
-    if (data?.stats) {
-      setStats(JSON.parse(data.stats));
-    }
-  };
-
-  if (loading)
+  if (loading) {
     // loading
     return (
       <section className="mt-24">
@@ -81,6 +106,7 @@ const Stats = () => {
         </div>
       </section>
     );
+  }
 
   return (
     <section className="grid sm:grid-cols-2 md:grid-cols-3 gap-10 my-12">
@@ -89,8 +115,8 @@ const Stats = () => {
           key={stat.id}
           className="flex flex-col justify-center items-center text-center border border-green-500 rounded-md p-4 shadow-md"
         >
-          {user && (
-            <h3 className="text-white text-2xl font-bold">{stats[stat.key]}</h3>
+          {user && stats && (
+            <h3 className="text-white text-2xl font-bold">{stats[stat.key] || 0}</h3>
           )}
 
           {!user && (
