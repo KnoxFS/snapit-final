@@ -79,6 +79,7 @@ export default async function handler(req, res) {
         console.log("[Filestreams] Creating account for:", email);
         console.log("[Filestreams] Username:", username);
         console.log("[Filestreams] Package ID:", defaultPackageId);
+        console.log("[Filestreams] Access token length:", access_token?.length);
 
         const createResponse = await fetch("https://www.filestreams.com/api/v2/account/create", {
             method: "POST",
@@ -91,6 +92,7 @@ export default async function handler(req, res) {
                 password: password,
                 email: email,
                 package_id: defaultPackageId,
+                status: "active",
                 title: "Mr",
                 firstname: "User",
                 lastname: username,
