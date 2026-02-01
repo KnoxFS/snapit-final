@@ -4,6 +4,7 @@ import { Dialog, Transition, Tab } from '@headlessui/react';
 import Account from './settings/Account';
 import Stats from './settings/Stats';
 import Shortcuts from './settings/Shortcuts';
+import Storage from './settings/Storage';
 
 const Settings = ({ open, setOpen }) => {
   return (
@@ -38,27 +39,31 @@ const Settings = ({ open, setOpen }) => {
                       className='flex flex-wrap justify-around items-center overflow-x-auto'>
                       <Tab
                         className={({ selected }) =>
-                          `text-white py-3 px-6 ${
-                            selected ? 'bg-primary rounded-sm' : ''
+                          `text-white py-3 px-6 ${selected ? 'bg-primary rounded-sm' : ''
                           }`
                         }>
                         Account
                       </Tab>
                       <Tab
                         className={({ selected }) =>
-                          `text-white py-3 px-6 ${
-                            selected ? 'bg-primary rounded-sm' : ''
+                          `text-white py-3 px-6 ${selected ? 'bg-primary rounded-sm' : ''
                           }`
                         }>
                         Stats
                       </Tab>
                       <Tab
                         className={({ selected }) =>
-                          `text-white py-3 px-6 ${
-                            selected ? 'bg-primary rounded-sm' : ''
+                          `text-white py-3 px-6 ${selected ? 'bg-primary rounded-sm' : ''
                           }`
                         }>
                         Shortcuts
+                      </Tab>
+                      <Tab
+                        className={({ selected }) =>
+                          `text-white py-3 px-6 ${selected ? 'bg-primary rounded-sm' : ''
+                          }`
+                        }>
+                        Storage
                       </Tab>
                     </Tab.List>
 
@@ -74,6 +79,10 @@ const Settings = ({ open, setOpen }) => {
                       {/* shorcuts */}
                       <Tab.Panel>
                         <Shortcuts />
+                      </Tab.Panel>
+                      {/* storage */}
+                      <Tab.Panel>
+                        <Storage />
                       </Tab.Panel>
                     </Tab.Panels>
                   </Tab.Group>
