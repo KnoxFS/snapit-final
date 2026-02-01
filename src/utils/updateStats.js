@@ -10,6 +10,8 @@ const statsType = {
 };
 
 export default async function updateStats(userId, type) {
+  console.log('[updateStats] Called with:', { userId, type });
+
   // Try to get existing stats
   const { data, error } = await supabase
     .from("stats")
@@ -20,6 +22,7 @@ export default async function updateStats(userId, type) {
   let parsedStats;
 
   if (error || !data) {
+    console.log('[updateStats] No existing stats, creating new:', error?.message);
     // Create new stats object if doesn't exist
     parsedStats = {
       screenshots_saved: 0,
@@ -31,10 +34,12 @@ export default async function updateStats(userId, type) {
     };
   } else {
     parsedStats = JSON.parse(data.stats);
+    console.log('[updateStats] Existing stats:', parsedStats);
   }
 
   // Increment the stat
   parsedStats[statsType[type]] = (parsedStats[statsType[type]] || 0) + 1;
+  console.log('[updateStats] Updated stats:', parsedStats);
 
   // Upsert (insert or update)
   const { error: upsertError } = await supabase
@@ -48,6 +53,8 @@ export default async function updateStats(userId, type) {
     );
 
   if (upsertError) {
-    console.log('Stats update error:', upsertError);
+    console.error('[updateStats] Upsert error:', upsertError);
+  } else {
+    console.log('[updateStats] Successfully saved stats');
   }
 }
