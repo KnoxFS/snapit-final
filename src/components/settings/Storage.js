@@ -93,6 +93,13 @@ const Storage = () => {
 
             // Refresh connection status
             await checkConnectionStatus();
+
+            // Notify other components (like ScreenshotMaker) that connection status changed
+            if (typeof window !== 'undefined') {
+                window.dispatchEvent(new CustomEvent('filestreams-connection-changed', {
+                    detail: { connected: true }
+                }));
+            }
         } catch (error) {
             console.error('[Storage] Error connecting:', error);
             toast.error(error.message || 'Failed to connect account', { id: toastId });

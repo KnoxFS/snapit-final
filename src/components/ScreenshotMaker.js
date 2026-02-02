@@ -163,10 +163,27 @@ export default function ScreenshotMaker({ proMode }) {
 
   const { width, height } = useWindowSize();
 
+
   // Check Filestreams connection status on mount
   useEffect(() => {
     checkFilestreamsConnection();
   }, [user]);
+
+  // Listen for connection status changes from Settings
+  useEffect(() => {
+    const handleConnectionChange = (event) => {
+      setIsFilestreamsConnected(event.detail.connected);
+      if (event.detail.connected) {
+        toast.success('Filestreams connected! Save/Load buttons are now available.');
+      }
+    };
+
+    window.addEventListener('filestreams-connection-changed', handleConnectionChange);
+
+    return () => {
+      window.removeEventListener('filestreams-connection-changed', handleConnectionChange);
+    };
+  }, []);
 
   const checkFilestreamsConnection = async () => {
     if (!user) return;
