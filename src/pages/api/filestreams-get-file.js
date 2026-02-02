@@ -1,6 +1,12 @@
-// API endpoint to get/download a specific file from Filestreams
-import { supabase } from 'lib/supabase';
+// API endpoint to get/download file from user's Filestreams account
+import { createClient } from '@supabase/supabase-js';
 const { getFilestreamToken } = require('utils/filestreamToken');
+
+// Use service role key for server-side operations
+const supabase = createClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL,
+    process.env.SUPABASE_SERVICE_ROLE_KEY
+);
 
 export default async function handler(req, res) {
     if (req.method !== 'POST') {
