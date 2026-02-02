@@ -23,7 +23,6 @@ import useAuth from 'hooks/useAuth';
 import Shadow from './tools/Shadow';
 import Tilt from './tools/Tilt';
 import Roundness from './tools/Roundness';
-import EditText from './tools/EditText';
 
 import {
     cssGradientsDirections,
@@ -679,9 +678,6 @@ const TestimonialTemplateMaker = ({ proMode }) => {
 
                 {/* Shadow */}
                 <Shadow options={options} setOptions={setOptions} />
-
-                {/* Edit Text */}
-                <EditText options={options} setOptions={setOptions} />
 
                 {/* Device tilt */}
                 <Tilt
