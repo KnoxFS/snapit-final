@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 /**
  * TextAnnotation Component
@@ -12,14 +12,48 @@ const TextAnnotation = ({
     onDelete,
     wrapperRef
 }) => {
-    const [isEditing, setIsEditing] = useState(false);
+    const [isEditing, setIsEditing] = useState(true); // Start in edit mode
     const [isDragging, setIsDragging] = useState(false);
     const [dragStart, setDragStart] = useState({ x: 0, y: 0 });
+
+    // Handle dragging with useEffect
+    useEffect(() => {
+        if (!isDragging) return;
+
+        const handleMouseMove = (e) => {
+            if (!wrapperRef.current) return;
+
+            const wrapper = wrapperRef.current.getBoundingClientRect();
+            const deltaX = ((e.clientX - dragStart.x) / wrapper.width) * 100;
+            const deltaY = ((e.clientY - dragStart.y) / wrapper.height) * 100;
+
+            onUpdate(annotation.id, {
+                position: {
+                    x: Math.max(0, Math.min(100, dragStart.startX + deltaX)),
+                    y: Math.max(0, Math.min(100, dragStart.startY + deltaY)),
+                },
+            });
+        };
+
+        const handleMouseUp = () => {
+            setIsDragging(false);
+        };
+
+        document.addEventListener('mousemove', handleMouseMove);
+        document.addEventListener('mouseup', handleMouseUp);
+
+        return () => {
+            document.removeEventListener('mousemove', handleMouseMove);
+            document.removeEventListener('mouseup', handleMouseUp);
+        };
+    }, [isDragging, dragStart, wrapperRef, annotation.id, onUpdate]);
 
     const handleMouseDown = (e) => {
         if (isEditing) return;
 
         e.stopPropagation();
+        e.preventDefault();
+
         setIsDragging(true);
         setDragStart({
             x: e.clientX,
@@ -30,27 +64,9 @@ const TextAnnotation = ({
         onSelect(annotation.id);
     };
 
-    const handleMouseMove = (e) => {
-        if (!isDragging || !wrapperRef.current) return;
-
-        const wrapper = wrapperRef.current.getBoundingClientRect();
-        const deltaX = ((e.clientX - dragStart.x) / wrapper.width) * 100;
-        const deltaY = ((e.clientY - dragStart.y) / wrapper.height) * 100;
-
-        onUpdate(annotation.id, {
-            position: {
-                x: Math.max(0, Math.min(100, dragStart.startX + deltaX)),
-                y: Math.max(0, Math.min(100, dragStart.startY + deltaY)),
-            },
-        });
-    };
-
-    const handleMouseUp = () => {
-        setIsDragging(false);
-    };
-
     const handleDoubleClick = (e) => {
         e.stopPropagation();
+        e.preventDefault();
         setIsEditing(true);
     };
 
@@ -75,16 +91,6 @@ const TextAnnotation = ({
         }
     };
 
-    // Add global mouse move/up listeners when dragging
-    if (isDragging) {
-        document.addEventListener('mousemove', handleMouseMove);
-        document.addEventListener('mouseup', handleMouseUp);
-        return () => {
-            document.removeEventListener('mousemove', handleMouseMove);
-            document.removeEventListener('mouseup', handleMouseUp);
-        };
-    }
-
     return (
         <div
             style={{
@@ -97,18 +103,23 @@ const TextAnnotation = ({
                 fontWeight: annotation.style.fontWeight || 600,
                 cursor: isDragging ? 'grabbing' : isEditing ? 'text' : 'grab',
                 userSelect: isEditing ? 'text' : 'none',
-                padding: '4px 8px',
-                borderRadius: '4px',
-                backgroundColor: isSelected ? 'rgba(59, 130, 246, 0.1)' : 'transparent',
-                border: isSelected ? '2px solid #3b82f6' : '2px solid transparent',
-                minWidth: '50px',
+                padding: '8px 12px',
+                borderRadius: '6px',
+                backgroundColor: isSelected ? 'rgba(59, 130, 246, 0.2)' : 'rgba(0, 0, 0, 0.5)',
+                border: isSelected ? '2px solid #3b82f6' : '2px solid rgba(255, 255, 255, 0.3)',
+                backdropFilter: 'blur(8px)',
+                minWidth: '80px',
                 textAlign: 'center',
                 whiteSpace: 'nowrap',
                 zIndex: isSelected ? 1000 : 999,
+                boxShadow: '0 2px 8px rgba(0, 0, 0, 0.3)',
             }}
             onMouseDown={handleMouseDown}
             onDoubleClick={handleDoubleClick}
-            onClick={() => !isEditing && onSelect(annotation.id)}
+            onClick={(e) => {
+                e.stopPropagation();
+                if (!isEditing) onSelect(annotation.id);
+            }}
         >
             {isEditing ? (
                 <input
@@ -117,6 +128,7 @@ const TextAnnotation = ({
                     onChange={handleContentChange}
                     onBlur={handleBlur}
                     onKeyDown={handleKeyDown}
+                    placeholder="Type text..."
                     autoFocus
                     style={{
                         background: 'transparent',
@@ -127,7 +139,7 @@ const TextAnnotation = ({
                         fontWeight: 'inherit',
                         textAlign: 'center',
                         width: '100%',
-                        minWidth: '100px',
+                        minWidth: '120px',
                     }}
                 />
             ) : (

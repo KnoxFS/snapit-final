@@ -59,7 +59,7 @@ import CustomWatermark from './tools/CustomWatermark';
 import Noise from './tools/Noise';
 import SnapitWatermark from './tools/SnapitWatermark';
 import AnnotationLayer from './tools/AnnotationLayer';
-import AnnotationToolbar from './tools/AnnotationToolbar';
+import Annotations from './tools/Annotations';
 
 import CropModal from 'components/CropModal';
 
@@ -988,6 +988,20 @@ export default function ScreenshotMaker({ proMode }) {
                   proMode={proMode}
                 />
 
+                {/* Annotations */}
+                {blob?.src && (
+                  <Annotations
+                    annotations={annotations}
+                    selectedAnnotationId={selectedAnnotationId}
+                    isAddingAnnotation={isAddingAnnotation}
+                    annotationTypeToAdd={annotationTypeToAdd}
+                    onSelectTool={handleSelectAnnotationTool}
+                    onUpdateStyle={handleUpdateAnnotationStyle}
+                    onDeleteAnnotation={handleDeleteAnnotation}
+                    onCancelAdd={handleCancelAddAnnotation}
+                  />
+                )}
+
                 {/* Reset */}
                 <div
                   onClick={resetCanvas}
@@ -1217,19 +1231,6 @@ export default function ScreenshotMaker({ proMode }) {
               setCompletedCrop={setCompletedCrop}
               blob={blob}
               setBlob={setBlob}
-            />
-          )}
-
-          {/* Annotation Toolbar - Only show when screenshot is loaded */}
-          {blob?.src && (
-            <AnnotationToolbar
-              isAddingAnnotation={isAddingAnnotation}
-              annotationTypeToAdd={annotationTypeToAdd}
-              selectedAnnotation={annotations.find(a => a.id === selectedAnnotationId)}
-              onSelectTool={handleSelectAnnotationTool}
-              onUpdateStyle={handleUpdateAnnotationStyle}
-              onDeleteAnnotation={handleDeleteAnnotation}
-              onCancelAdd={handleCancelAddAnnotation}
             />
           )}
 
