@@ -732,23 +732,40 @@ export default function ScreenshotMaker({ proMode }) {
     }
   };
 
-  const handleLoadFromFilestreams = (fileUrl, filename) => {
-    // Load image from Filestreams URL
-    const img = new Image();
-    img.crossOrigin = 'anonymous';
-    img.onload = () => {
-      setBlob({
-        src: fileUrl,
-        width: img.width,
-        height: img.height,
-      });
-      toast.success(`Loaded ${filename}`);
-      updateStats('filestreams_loads');
-    };
-    img.onerror = () => {
-      toast.error('Failed to load image from Filestreams');
-    };
-    img.src = fileUrl;
+  const handleLoadFromFilestreams = async (fileUrl, filename) => {
+    const toastId = toast.loading(`Loading ${filename}...`);
+
+    try {
+      console.log('[ScreenshotMaker] Loading from Filestreams:', fileUrl);
+
+      // Fetch the image to avoid CORS issues
+      const response = await fetch(fileUrl);
+      if (!response.ok) {
+        throw new Error('Failed to fetch image');
+      }
+
+      const blob = await response.blob();
+      const blobUrl = URL.createObjectURL(blob);
+
+      // Load the blob URL into an image to get dimensions
+      const img = new Image();
+      img.onload = () => {
+        setBlob({
+          src: blobUrl,
+          width: img.width,
+          height: img.height,
+        });
+        toast.success(`Loaded ${filename}`, { id: toastId });
+        updateStats('filestreams_loads');
+      };
+      img.onerror = () => {
+        toast.error('Failed to load image', { id: toastId });
+      };
+      img.src = blobUrl;
+    } catch (error) {
+      console.error('[ScreenshotMaker] Error loading from Filestreams:', error);
+      toast.error('Failed to load image from Filestreams', { id: toastId });
+    }
   };
 
   const pickBackground = () => {
