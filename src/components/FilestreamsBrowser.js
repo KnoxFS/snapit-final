@@ -60,34 +60,15 @@ const FilestreamsBrowser = ({ isOpen, onClose, onSelectFile }) => {
 
     const handleSelectFile = async (file) => {
         try {
-            const { data: session } = await supabase.auth.getSession();
-            const token = session?.session?.access_token;
+            console.log('[FilestreamsBrowser] Selected file:', file);
 
-            if (!token) {
-                throw new Error('Not authenticated');
+            // Use the file URL directly - Filestreams provides public URLs
+            if (file.url) {
+                onSelectFile(file.url, file.name);
+                onClose();
+            } else {
+                throw new Error('File URL not available');
             }
-
-            // Get file download URL
-            const response = await fetch('/api/filestreams-get-file', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${token}`,
-                },
-                body: JSON.stringify({
-                    file_id: file.id,
-                }),
-            });
-
-            const data = await response.json();
-
-            if (!response.ok) {
-                throw new Error(data.error || 'Failed to get file');
-            }
-
-            // Pass file URL to parent
-            onSelectFile(data.file.url, file.name);
-            onClose();
         } catch (error) {
             console.error('[FilestreamsBrowser] Error selecting file:', error);
             toast.error(error.message || 'Failed to load file');
@@ -150,30 +131,28 @@ const FilestreamsBrowser = ({ isOpen, onClose, onSelectFile }) => {
                                 </p>
                             </div>
                         ) : (
-                            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+                            <div className="space-y-2">
                                 {filteredFiles.map((file) => (
                                     <button
                                         key={file.id}
                                         onClick={() => handleSelectFile(file)}
-                                        className="group relative aspect-square rounded-lg overflow-hidden bg-gray-700 hover:ring-2 hover:ring-green-400 transition"
+                                        className="w-full flex items-center justify-between p-4 rounded-lg bg-gray-700 hover:bg-gray-600 transition group"
                                     >
-                                        <img
-                                            src={file.thumbnail}
-                                            alt={file.name}
-                                            className="w-full h-full object-cover"
-                                            onError={(e) => {
-                                                e.target.src = file.url; // Fallback to full URL
-                                            }}
-                                        />
-                                        <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition flex items-end p-3">
-                                            <div className="text-left">
-                                                <p className="text-white text-sm font-medium truncate">
+                                        <div className="flex items-center space-x-4 flex-1 min-w-0">
+                                            <PhotoIcon className="h-10 w-10 text-green-400 flex-shrink-0" />
+                                            <div className="text-left flex-1 min-w-0">
+                                                <p className="text-white font-medium truncate">
                                                     {file.name}
                                                 </p>
-                                                <p className="text-gray-300 text-xs">
-                                                    {formatFileSize(file.size)}
+                                                <p className="text-gray-400 text-sm">
+                                                    {formatFileSize(file.size)} • {formatDate(file.created_at)}
                                                 </p>
                                             </div>
+                                        </div>
+                                        <div className="text-gray-400 group-hover:text-green-400 transition">
+                                            <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                                            </svg>
                                         </div>
                                     </button>
                                 ))}
@@ -206,6 +185,21 @@ function formatFileSize(bytes) {
     const sizes = ['B', 'KB', 'MB', 'GB'];
     const i = Math.floor(Math.log(bytes) / Math.log(k));
     return Math.round(bytes / Math.pow(k, i) * 100) / 100 + ' ' + sizes[i];
+}
+
+// Helper function to format date
+function formatDate(dateString) {
+    if (!dateString) return '';
+    const date = new Date(dateString);
+    const now = new Date();
+    const diffMs = now - date;
+    const diffDays = Math.floor(diffMs / (1000 * 60 * 60 * 24));
+
+    if (diffDays === 0) return 'Today';
+    if (diffDays === 1) return 'Yesterday';
+    if (diffDays < 7) return `${diffDays} days ago`;
+
+    return date.toLocaleDateString();
 }
 
 export default FilestreamsBrowser;
