@@ -69,8 +69,9 @@ const FilestreamsBrowser = ({ isOpen, onClose, onSelectFile }) => {
                 throw new Error('Not authenticated');
             }
 
-            // Get proper download URL from API
-            const response = await fetch('/api/filestreams-get-file', {
+            // Use proxy endpoint to download file (avoids CORS)
+            const proxyUrl = `/api/filestreams-proxy-download`;
+            const response = await fetch(proxyUrl, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -81,16 +82,19 @@ const FilestreamsBrowser = ({ isOpen, onClose, onSelectFile }) => {
                 }),
             });
 
-            const data = await response.json();
-
             if (!response.ok) {
-                throw new Error(data.error || 'Failed to get file');
+                const data = await response.json();
+                throw new Error(data.error || 'Failed to download file');
             }
 
-            console.log('[FilestreamsBrowser] Got download URL:', data.file.url);
+            // Convert response to blob and create object URL
+            const blob = await response.blob();
+            const blobUrl = URL.createObjectURL(blob);
 
-            // Pass download URL to parent
-            onSelectFile(data.file.url, file.name);
+            console.log('[FilestreamsBrowser] File downloaded, blob URL created');
+
+            // Pass blob URL to parent
+            onSelectFile(blobUrl, file.name);
             onClose();
         } catch (error) {
             console.error('[FilestreamsBrowser] Error selecting file:', error);

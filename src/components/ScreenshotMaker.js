@@ -732,20 +732,11 @@ export default function ScreenshotMaker({ proMode }) {
     }
   };
 
-  const handleLoadFromFilestreams = async (fileUrl, filename) => {
+  const handleLoadFromFilestreams = async (blobUrl, filename) => {
     const toastId = toast.loading(`Loading ${filename}...`);
 
     try {
-      console.log('[ScreenshotMaker] Loading from Filestreams:', fileUrl);
-
-      // Fetch the image to avoid CORS issues
-      const response = await fetch(fileUrl);
-      if (!response.ok) {
-        throw new Error('Failed to fetch image');
-      }
-
-      const blob = await response.blob();
-      const blobUrl = URL.createObjectURL(blob);
+      console.log('[ScreenshotMaker] Loading from blob URL');
 
       // Load the blob URL into an image to get dimensions
       const img = new Image();
