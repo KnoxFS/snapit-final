@@ -1,6 +1,12 @@
 // Helper function to get and refresh Filestreams access token
-import { supabase } from 'lib/supabase';
+import { createClient } from '@supabase/supabase-js';
 const { decrypt, encrypt } = require('./encryption');
+
+// Use service role key for server-side operations
+const supabase = createClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL,
+    process.env.SUPABASE_SERVICE_ROLE_KEY
+);
 
 /**
  * Get valid access token for user's Filestreams account
