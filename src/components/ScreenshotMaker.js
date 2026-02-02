@@ -58,6 +58,8 @@ import ScreenshotPosition from './tools/ScreenshotPosition';
 import CustomWatermark from './tools/CustomWatermark';
 import Noise from './tools/Noise';
 import SnapitWatermark from './tools/SnapitWatermark';
+import AnnotationLayer from './tools/AnnotationLayer';
+import AnnotationToolbar from './tools/AnnotationToolbar';
 
 import CropModal from 'components/CropModal';
 
@@ -147,6 +149,12 @@ export default function ScreenshotMaker({ proMode }) {
   const [crop, setCrop] = useState();
 
   const [completedCrop, setCompletedCrop] = useState();
+
+  // Annotations
+  const [annotations, setAnnotations] = useState([]);
+  const [selectedAnnotationId, setSelectedAnnotationId] = useState(null);
+  const [isAddingAnnotation, setIsAddingAnnotation] = useState(false);
+  const [annotationTypeToAdd, setAnnotationTypeToAdd] = useState(null);
 
   const { width, height } = useWindowSize();
 
@@ -556,6 +564,68 @@ export default function ScreenshotMaker({ proMode }) {
 
     setManualTiltAngle([0, 0]);
     setWebsiteUrl('');
+
+    // Reset annotations
+    setAnnotations([]);
+    setSelectedAnnotationId(null);
+    setIsAddingAnnotation(false);
+    setAnnotationTypeToAdd(null);
+  };
+
+  // Annotation handlers
+  const handleSelectAnnotationTool = (toolType) => {
+    if (annotationTypeToAdd === toolType) {
+      // Toggle off if clicking same tool
+      setIsAddingAnnotation(false);
+      setAnnotationTypeToAdd(null);
+    } else {
+      setIsAddingAnnotation(true);
+      setAnnotationTypeToAdd(toolType);
+      setSelectedAnnotationId(null);
+    }
+  };
+
+  const handleCancelAddAnnotation = () => {
+    setIsAddingAnnotation(false);
+    setAnnotationTypeToAdd(null);
+  };
+
+  const handleAnnotationAdded = (newAnnotation) => {
+    setAnnotations([...annotations, newAnnotation]);
+    setIsAddingAnnotation(false);
+    setAnnotationTypeToAdd(null);
+    setSelectedAnnotationId(newAnnotation.id);
+  };
+
+  const handleUpdateAnnotation = (id, updates) => {
+    setAnnotations(
+      annotations.map((ann) =>
+        ann.id === id ? { ...ann, ...updates } : ann
+      )
+    );
+  };
+
+  const handleSelectAnnotation = (id) => {
+    setSelectedAnnotationId(id);
+    setIsAddingAnnotation(false);
+    setAnnotationTypeToAdd(null);
+  };
+
+  const handleDeleteAnnotation = (id) => {
+    setAnnotations(annotations.filter((ann) => ann.id !== id));
+    setSelectedAnnotationId(null);
+  };
+
+  const handleUpdateAnnotationStyle = (styleUpdates) => {
+    if (!selectedAnnotationId) return;
+
+    setAnnotations(
+      annotations.map((ann) =>
+        ann.id === selectedAnnotationId
+          ? { ...ann, style: { ...ann.style, ...styleUpdates } }
+          : ann
+      )
+    );
   };
 
   const pickBackground = () => {
@@ -1150,6 +1220,19 @@ export default function ScreenshotMaker({ proMode }) {
             />
           )}
 
+          {/* Annotation Toolbar - Only show when screenshot is loaded */}
+          {blob?.src && (
+            <AnnotationToolbar
+              isAddingAnnotation={isAddingAnnotation}
+              annotationTypeToAdd={annotationTypeToAdd}
+              selectedAnnotation={annotations.find(a => a.id === selectedAnnotationId)}
+              onSelectTool={handleSelectAnnotationTool}
+              onUpdateStyle={handleUpdateAnnotationStyle}
+              onDeleteAnnotation={handleDeleteAnnotation}
+              onCancelAdd={handleCancelAddAnnotation}
+            />
+          )}
+
           <div
             className={`relative my-5 flex w-full items-center justify-center overflow-hidden duration-200 ease-in-out`}>
             <div
@@ -1193,8 +1276,8 @@ export default function ScreenshotMaker({ proMode }) {
               {blob?.src ? (
                 <div
                   className={`flex h-full ${options.text.position === 'top'
-                      ? 'flex-col'
-                      : 'flex-col-reverse'
+                    ? 'flex-col'
+                    : 'flex-col-reverse'
                     }  items-center justify-center`}>
                   {/* Text */}
 
@@ -1285,6 +1368,21 @@ export default function ScreenshotMaker({ proMode }) {
                     </div>
                   </div>
                 </div>
+              )}
+
+              {/* Annotation Layer - Only render when screenshot is loaded */}
+              {blob?.src && (
+                <AnnotationLayer
+                  annotations={annotations}
+                  selectedAnnotationId={selectedAnnotationId}
+                  onUpdateAnnotation={handleUpdateAnnotation}
+                  onSelectAnnotation={handleSelectAnnotation}
+                  onDeleteAnnotation={handleDeleteAnnotation}
+                  wrapperRef={wrapperRef}
+                  isAddingAnnotation={isAddingAnnotation}
+                  annotationTypeToAdd={annotationTypeToAdd}
+                  onAnnotationAdded={handleAnnotationAdded}
+                />
               )}
 
               {/* custom watermark */}
