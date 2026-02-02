@@ -55,31 +55,38 @@ export default async function handler(req, res) {
 
         form.append('access_token', access_token);
         if (account_id) {
-            form.append('account_id', account_id);
+            form.append('account_id', account_id.toString());
         }
         form.append('upload_file', buffer, {
             filename: filename,
-            contentType: 'image/png', // Default, will be auto-detected
+            contentType: 'image/png',
         });
 
         if (folder && folder !== '/') {
             form.append('folder_id', folder);
         }
 
-        // Upload to Filestreams
+        console.log('[Filestreams Upload] Sending request to Filestreams API...');
+
+        // Upload to Filestreams using node-fetch compatible approach
         const uploadResponse = await fetch('https://www.filestreams.com/api/v2/file/upload', {
             method: 'POST',
-            headers: form.getHeaders(),
-            body: form,
+            headers: {
+                ...form.getHeaders(),
+            },
+            body: form.getBuffer(),
         });
+
+        console.log('[Filestreams Upload] Response status:', uploadResponse.status);
 
         if (!uploadResponse.ok) {
             const errorText = await uploadResponse.text();
             console.error('[Filestreams Upload] API error:', uploadResponse.status, errorText);
-            return res.status(500).json({ error: 'Failed to upload file' });
+            return res.status(500).json({ error: 'Failed to upload file to Filestreams' });
         }
 
         const uploadData = await uploadResponse.json();
+        console.log('[Filestreams Upload] Response data:', uploadData);
 
         if (uploadData._status !== 'success') {
             console.error('[Filestreams Upload] Failed:', uploadData.response);
