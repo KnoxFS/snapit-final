@@ -60,6 +60,7 @@ import Noise from './tools/Noise';
 import SnapitWatermark from './tools/SnapitWatermark';
 import AnnotationLayer from './tools/AnnotationLayer';
 import Annotations from './tools/Annotations';
+import FilestreamsBrowser from './FilestreamsBrowser';
 
 import CropModal from 'components/CropModal';
 
@@ -156,7 +157,39 @@ export default function ScreenshotMaker({ proMode }) {
   const [isAddingAnnotation, setIsAddingAnnotation] = useState(false);
   const [annotationTypeToAdd, setAnnotationTypeToAdd] = useState(null);
 
+  // Filestreams
+  const [isFilestreamsBrowserOpen, setIsFilestreamsBrowserOpen] = useState(false);
+  const [isFilestreamsConnected, setIsFilestreamsConnected] = useState(false);
+
   const { width, height } = useWindowSize();
+
+  // Check Filestreams connection status on mount
+  useEffect(() => {
+    checkFilestreamsConnection();
+  }, [user]);
+
+  const checkFilestreamsConnection = async () => {
+    if (!user) return;
+
+    try {
+      const { data: session } = await supabase.auth.getSession();
+      const token = session?.session?.access_token;
+
+      if (!token) return;
+
+      const response = await fetch('/api/filestreams-status', {
+        method: 'GET',
+        headers: {
+          'Authorization': `Bearer ${token}`,
+        },
+      });
+
+      const data = await response.json();
+      setIsFilestreamsConnected(data.connected || false);
+    } catch (error) {
+      console.error('[ScreenshotMaker] Error checking Filestreams status:', error);
+    }
+  };
 
   // shortcuts
   useHotkeys(
@@ -1194,6 +1227,31 @@ export default function ScreenshotMaker({ proMode }) {
           <span className='mr-2 h-6 w-6'>{ClipboardIcon}</span>
           Copy
         </button>
+
+        {/* Filestreams Buttons */}
+        {isFilestreamsConnected && (
+          <>
+            <button
+              className='flex items-center justify-center rounded-md bg-blue-500 px-4 py-2 text-base font-medium text-white transition hover:bg-blue-600'
+              onClick={handleSaveToFilestreams}
+              title='Save to Filestreams storage'>
+              <svg className="mr-2 h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
+              </svg>
+              Save to Cloud
+            </button>
+
+            <button
+              className='flex items-center justify-center rounded-md bg-purple-500 px-4 py-2 text-base font-medium text-white transition hover:bg-purple-600'
+              onClick={() => setIsFilestreamsBrowserOpen(true)}
+              title='Load from Filestreams storage'>
+              <svg className="mr-2 h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M9 19l3 3m0 0l3-3m-3 3V10" />
+              </svg>
+              Load from Cloud
+            </button>
+          </>
+        )}
       </div>
 
       <div
@@ -1445,6 +1503,13 @@ export default function ScreenshotMaker({ proMode }) {
           </div>
         </div>
       </div>
+
+      {/* Filestreams Browser Modal */}
+      <FilestreamsBrowser
+        isOpen={isFilestreamsBrowserOpen}
+        onClose={() => setIsFilestreamsBrowserOpen(false)}
+        onSelectFile={handleLoadFromFilestreams}
+      />
     </div>
   );
 }
