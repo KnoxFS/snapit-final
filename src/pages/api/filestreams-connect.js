@@ -1,6 +1,6 @@
 // API endpoint to connect user's Filestreams account
 import { supabase } from 'lib/supabase';
-const { encrypt } = require('../../utils/encryption');
+const { encrypt } = require('utils/encryption');
 
 export default async function handler(req, res) {
     if (req.method !== 'POST') {

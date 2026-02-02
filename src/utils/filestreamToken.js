@@ -1,6 +1,6 @@
 // Helper function to get and refresh Filestreams access token
 import { supabase } from 'lib/supabase';
-const { decrypt, encrypt } = require('../../utils/encryption');
+const { decrypt, encrypt } = require('./encryption');
 
 /**
  * Get valid access token for user's Filestreams account

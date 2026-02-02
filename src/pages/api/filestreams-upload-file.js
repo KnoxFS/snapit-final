@@ -1,6 +1,6 @@
 // API endpoint to upload/save image to user's Filestreams account
 import { supabase } from 'lib/supabase';
-const { getFilestreamToken } = require('../../utils/filestreamToken');
+const { getFilestreamToken } = require('utils/filestreamToken');
 
 export default async function handler(req, res) {
     if (req.method !== 'POST') {

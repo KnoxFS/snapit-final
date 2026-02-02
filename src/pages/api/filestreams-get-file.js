@@ -1,6 +1,6 @@
 // API endpoint to get/download a specific file from Filestreams
 import { supabase } from 'lib/supabase';
-const { getFilestreamToken } = require('../../utils/filestreamToken');
+const { getFilestreamToken } = require('utils/filestreamToken');
 
 export default async function handler(req, res) {
     if (req.method !== 'POST') {
