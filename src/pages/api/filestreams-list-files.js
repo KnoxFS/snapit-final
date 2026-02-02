@@ -55,6 +55,9 @@ export default async function handler(req, res) {
 
         const listData = await listResponse.json();
 
+        console.log('[Filestreams List] API response status:', listData._status);
+        console.log('[Filestreams List] Sample file data:', JSON.stringify(listData.data?.files?.[0], null, 2));
+
         if (listData._status !== 'success') {
             console.error('[Filestreams List] Failed:', listData.response);
             return res.status(500).json({ error: listData.response || 'Failed to list files' });
@@ -67,18 +70,19 @@ export default async function handler(req, res) {
             return imageExtensions.includes(ext);
         });
 
-        // Format response
+        // Format response - map Filestreams fields to our format
         const formattedFiles = files.map(file => ({
             id: file.id,
-            name: file.filename,
-            size: file.filesize,
-            url: file.url,
+            name: file.filename || file.name || 'Untitled',
+            size: parseInt(file.filesize || file.size || 0),
+            url: file.url || file.download_url || file.file_url,
             thumbnail: file.thumbnail_url || file.url,
-            created_at: file.upload_date,
+            created_at: file.upload_date || file.created_at || file.date,
             extension: file.filename?.split('.').pop()?.toLowerCase(),
         }));
 
         console.log('[Filestreams List] Found', formattedFiles.length, 'image files');
+        console.log('[Filestreams List] First file formatted:', formattedFiles[0]);
 
         return res.status(200).json({
             success: true,

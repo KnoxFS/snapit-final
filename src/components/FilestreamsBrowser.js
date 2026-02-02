@@ -145,7 +145,8 @@ const FilestreamsBrowser = ({ isOpen, onClose, onSelectFile }) => {
                                                     {file.name}
                                                 </p>
                                                 <p className="text-gray-400 text-sm">
-                                                    {formatFileSize(file.size)} • {formatDate(file.created_at)}
+                                                    {file.size ? formatFileSize(file.size) : 'Unknown size'}
+                                                    {file.created_at && ` • ${formatDate(file.created_at)}`}
                                                 </p>
                                             </div>
                                         </div>
