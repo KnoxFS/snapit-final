@@ -62,13 +62,36 @@ const FilestreamsBrowser = ({ isOpen, onClose, onSelectFile }) => {
         try {
             console.log('[FilestreamsBrowser] Selected file:', file);
 
-            // Use the file URL directly - Filestreams provides public URLs
-            if (file.url) {
-                onSelectFile(file.url, file.name);
-                onClose();
-            } else {
-                throw new Error('File URL not available');
+            const { data: session } = await supabase.auth.getSession();
+            const token = session?.session?.access_token;
+
+            if (!token) {
+                throw new Error('Not authenticated');
             }
+
+            // Get proper download URL from API
+            const response = await fetch('/api/filestreams-get-file', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`,
+                },
+                body: JSON.stringify({
+                    file_id: file.id,
+                }),
+            });
+
+            const data = await response.json();
+
+            if (!response.ok) {
+                throw new Error(data.error || 'Failed to get file');
+            }
+
+            console.log('[FilestreamsBrowser] Got download URL:', data.file.url);
+
+            // Pass download URL to parent
+            onSelectFile(data.file.url, file.name);
+            onClose();
         } catch (error) {
             console.error('[FilestreamsBrowser] Error selecting file:', error);
             toast.error(error.message || 'Failed to load file');
