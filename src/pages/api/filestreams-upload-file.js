@@ -94,12 +94,22 @@ export default async function handler(req, res) {
         });
     } catch (error) {
         console.error('[Filestreams Upload] Unexpected error:', error);
+        console.error('[Filestreams Upload] Error stack:', error.stack);
+        console.error('[Filestreams Upload] Error message:', error.message);
 
         if (error.message === 'Filestreams account not connected') {
             return res.status(400).json({ error: 'Filestreams account not connected' });
         }
 
-        return res.status(500).json({ error: 'Internal server error' });
+        if (error.message && error.message.includes('Cannot find module')) {
+            console.error('[Filestreams Upload] Missing dependency:', error.message);
+            return res.status(500).json({ error: 'Server configuration error: missing dependency' });
+        }
+
+        return res.status(500).json({
+            error: 'Internal server error',
+            details: error.message
+        });
     }
 }
 
