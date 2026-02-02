@@ -84,6 +84,7 @@ export default async function handler(req, res) {
                     api_key2_encrypted: encryptedKey2,
                     access_token_encrypted: encryptedToken,
                     token_expires_at: tokenExpiresAt.toISOString(),
+                    account_id: account_id,
                     updated_at: new Date().toISOString(),
                 })
                 .eq('user_id', user.id);
@@ -102,6 +103,7 @@ export default async function handler(req, res) {
                     api_key2_encrypted: encryptedKey2,
                     access_token_encrypted: encryptedToken,
                     token_expires_at: tokenExpiresAt.toISOString(),
+                    account_id: account_id,
                 });
 
             if (insertError) {

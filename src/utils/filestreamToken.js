@@ -35,7 +35,7 @@ export async function getFilestreamToken(userId) {
         // Token is still valid
         return {
             access_token: decrypt(credentials.access_token_encrypted),
-            account_id: null, // Will be returned from API if needed
+            account_id: credentials.account_id || null,
         };
     }
 
