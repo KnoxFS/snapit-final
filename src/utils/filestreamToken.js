@@ -33,8 +33,15 @@ export async function getFilestreamToken(userId) {
 
     if (expiresAt.getTime() - now.getTime() > bufferTime) {
         // Token is still valid
+        const decryptedToken = decrypt(credentials.access_token_encrypted);
+        console.log('[Filestreams Token] Returning cached token:', {
+            hasToken: !!decryptedToken,
+            tokenLength: decryptedToken?.length,
+            hasAccountId: !!credentials.account_id,
+            accountId: credentials.account_id
+        });
         return {
-            access_token: decrypt(credentials.access_token_encrypted),
+            access_token: decryptedToken,
             account_id: credentials.account_id || null,
         };
     }

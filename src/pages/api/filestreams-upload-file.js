@@ -36,6 +36,13 @@ export default async function handler(req, res) {
         // Get valid access token
         const { access_token, account_id } = await getFilestreamToken(user.id);
 
+        console.log('[Filestreams Upload] Token retrieved:', {
+            hasToken: !!access_token,
+            tokenLength: access_token?.length,
+            hasAccountId: !!account_id,
+            accountId: account_id
+        });
+
         console.log('[Filestreams Upload] Uploading file:', filename);
 
         // Convert base64 to buffer
