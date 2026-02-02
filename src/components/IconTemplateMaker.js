@@ -595,7 +595,6 @@ const IconTemplateMaker = ({ proMode }) => {
 
                 {/* Roundness */}
                 <Roundness options={options} setOptions={setOptions} target='wrapper' />
-                <Roundness options={options} setOptions={setOptions} target='icon' />
 
                 {/* Watermark */}
                 <SnapitWatermark options={options} setOptions={setOptions} proMode={proMode} />
