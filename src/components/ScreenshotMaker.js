@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react';
+import { useRef, useState, useEffect } from 'react';
 import domtoimage from 'dom-to-image';
 import toast from 'react-hot-toast';
 import classnames from 'classnames';
