@@ -74,11 +74,11 @@ export default async function handler(req, res) {
         const formattedFiles = files.map(file => ({
             id: file.id,
             name: file.filename || file.name || 'Untitled',
-            size: parseInt(file.filesize || file.size || 0),
-            url: file.url || file.download_url || file.file_url,
-            thumbnail: file.thumbnail_url || file.url,
-            created_at: file.upload_date || file.created_at || file.date,
-            extension: file.filename?.split('.').pop()?.toLowerCase(),
+            size: parseInt(file.fileSize || file.filesize || file.size || 0),
+            url: file.url_file || file.url || file.download_url,
+            thumbnail: file.thumbnail_url || file.url_file || file.url,
+            created_at: file.uploadDate || file.upload_date || file.created_at || null,
+            extension: file.extension || file.filename?.split('.').pop()?.toLowerCase(),
         }));
 
         console.log('[Filestreams List] Found', formattedFiles.length, 'image files');
