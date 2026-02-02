@@ -661,6 +661,79 @@ export default function ScreenshotMaker({ proMode }) {
     );
   };
 
+  // Filestreams handlers
+  const handleSaveToFilestreams = async () => {
+    if (!isFilestreamsConnected) {
+      toast.error('Please connect your Filestreams account in Settings');
+      return;
+    }
+
+    const toastId = toast.loading('Saving to Filestreams...');
+
+    try {
+      // Generate image as base64
+      const dataUrl = await domtoimage.toPng(wrapperRef.current, {
+        quality: 1,
+        bgcolor: null,
+      });
+
+      const { data: session } = await supabase.auth.getSession();
+      const token = session?.session?.access_token;
+
+      if (!token) {
+        throw new Error('Not authenticated');
+      }
+
+      // Generate filename
+      const timestamp = new Date().toISOString().replace(/[:.]/g, '-').slice(0, -5);
+      const filename = `screenshot_${timestamp}.png`;
+
+      const response = await fetch('/api/filestreams-upload-file', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`,
+        },
+        body: JSON.stringify({
+          file_data: dataUrl,
+          filename: filename,
+          folder: '/',
+        }),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || 'Failed to save to Filestreams');
+      }
+
+      toast.success('Saved to Filestreams!', { id: toastId });
+      updateStats('filestreams_saves');
+    } catch (error) {
+      console.error('[ScreenshotMaker] Error saving to Filestreams:', error);
+      toast.error(error.message || 'Failed to save to Filestreams', { id: toastId });
+    }
+  };
+
+  const handleLoadFromFilestreams = (fileUrl, filename) => {
+    // Load image from Filestreams URL
+    const img = new Image();
+    img.crossOrigin = 'anonymous';
+    img.onload = () => {
+      setBlob({
+        src: fileUrl,
+        width: img.width,
+        height: img.height,
+      });
+      toast.success(`Loaded ${filename}`);
+      updateStats('filestreams_loads');
+    };
+    img.onerror = () => {
+      toast.error('Failed to load image from Filestreams');
+    };
+    img.src = fileUrl;
+  };
+
   const pickBackground = () => {
     return (
       <>
