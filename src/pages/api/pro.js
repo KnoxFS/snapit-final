@@ -26,6 +26,9 @@ export default async function handler(req, res) {
       });
 
       res.json({ session_url: session.url, session_id: session.id });
+    } else {
+      res.setHeader("Allow", "POST");
+      res.status(405).end("Method Not Allowed");
     }
 
   } else {
@@ -50,6 +53,9 @@ export default async function handler(req, res) {
       });
 
       res.json({ session_url: session.url, session_id: session.id });
+    } else {
+      res.setHeader("Allow", "POST");
+      res.status(405).end("Method Not Allowed");
     }
   }
 }
