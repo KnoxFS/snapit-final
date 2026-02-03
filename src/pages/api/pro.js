@@ -1,6 +1,6 @@
 import { Stripe } from "stripe";
 
-const stripe = new Stripe(process.env.STRIPE_SECREY_KEY);
+const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 
 const YOUR_DOMAIN = process.env.NEXT_PUBLIC_HOST_URL;
 
@@ -30,9 +30,9 @@ export default async function handler(req, res) {
 
   } else {
     const price_id =
-    plan.toLowerCase() === "monthly"
-      ? process.env.STRIPE_MONTHLY_PRICE_ID
-      : process.env.STRIPE_YEARLY_PRICE_ID;
+      plan.toLowerCase() === "monthly"
+        ? process.env.STRIPE_MONTHLY_PRICE_ID
+        : process.env.STRIPE_YEARLY_PRICE_ID;
 
     if (req.method === "POST") {
       const session = await stripe.checkout.sessions.create({

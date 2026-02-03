@@ -40,20 +40,29 @@ const Signup = () => {
 
   const handleBuyPro = async user => {
     if (!user) {
-      router.replace('/singup?state=buyPro');
-      setOpen(false);
+      router.replace('/signup?state=buyPro');
       return;
     }
 
-    const res = await fetch(
-      `/api/pro?plan=${selectedPlan.name}&user_id=${user.id}`,
-      {
-        method: 'POST',
-      },
-    ).then(res => res.json());
+    try {
+      const res = await fetch(
+        `/api/pro?plan=${selectedPlan.name}&user_id=${user.id}`,
+        {
+          method: 'POST',
+        },
+      ).then(res => res.json());
 
-    // Open Stripe Checkout
-    window.location.href = res.session_url;
+      if (res.session_url) {
+        // Open Stripe Checkout
+        window.location.href = res.session_url;
+      } else {
+        toast.error('Something went wrong. Please try again.');
+        console.error('Stripe session creation failed:', res);
+      }
+    } catch (error) {
+      console.error('Error in handleBuyPro:', error);
+      toast.error('Failed to redirect to payment provider.');
+    }
   };
 
   const handleChange = e => {
