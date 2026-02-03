@@ -6,15 +6,17 @@ export default async function handler(req, res) {
   const { plan, user_id } = req.query;
 
   console.log(`[API/Pro] Request received: ${req.method} ${req.url}`);
-  // Do NOT log the actual key for security, just presence
-  console.log(`[API/Pro] STRIPE_SECRET_KEY present: ${!!process.env.STRIPE_SECRET_KEY}`);
+  // Support both correct and typo'd variable names from Vercel
+  const stripeKey = process.env.STRIPE_SECRET_KEY || process.env.STRIPE_SECREY_KEY;
 
-  if (!process.env.STRIPE_SECRET_KEY) {
-    console.error("[API/Pro] Missing STRIPE_SECRET_KEY in environment variables.");
+  console.log(`[API/Pro] Stripe key present: ${!!stripeKey}`);
+
+  if (!stripeKey) {
+    console.error("[API/Pro] Missing STRIPE_SECRET_KEY (or legacy STRIPE_SECREY_KEY) in environment variables.");
     return res.status(500).json({ error: "Server configuration error: Missing payment provider key." });
   }
 
-  const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
+  const stripe = new Stripe(stripeKey);
 
   if (plan.toLowerCase() == "lifetime") {
     const lifetime = "price_1MQ91dFt34MDQES9lN7iLH6t";
