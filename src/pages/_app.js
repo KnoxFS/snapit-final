@@ -57,19 +57,7 @@ function MyApp({ Component, pageProps }) {
           gtag('config', 'UA-247227689-1');
         `}
           </Script>
-          <Script
-            src='https://www.googletagmanager.com/gtag/js?id=UA-247227689-2'
-            strategy='afterInteractive'
-          />
-          <Script id='google-analytics' strategy='afterInteractive'>
-            {`
-          window.dataLayer = window.dataLayer || [];
-          function gtag(){window.dataLayer.push(arguments);}
-          gtag('js', new Date());
 
-          gtag('config', 'UA-247227689-2');
-        `}
-          </Script>
         </main>
       </ThemeProvider>
     );
@@ -118,19 +106,7 @@ function MyApp({ Component, pageProps }) {
           gtag('config', 'UA-247227689-1');
         `}
         </Script>
-        <Script
-          src='https://www.googletagmanager.com/gtag/js?id=UA-247227689-2'
-          strategy='afterInteractive'
-        />
-        <Script id='google-analytics' strategy='afterInteractive'>
-          {`
-          window.dataLayer = window.dataLayer || [];
-          function gtag(){window.dataLayer.push(arguments);}
-          gtag('js', new Date());
 
-          gtag('config', 'UA-247227689-2');
-        `}
-        </Script>
       </main>
     </ThemeProvider>
   );
