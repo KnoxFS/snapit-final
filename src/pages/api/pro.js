@@ -7,6 +7,9 @@ const YOUR_DOMAIN = process.env.NEXT_PUBLIC_HOST_URL;
 export default async function handler(req, res) {
   const { plan, user_id } = req.query;
 
+  console.log(`[API/Pro] Request received: ${req.method} ${req.url}`);
+  console.log(`[API/Pro] Query params:`, { plan, user_id });
+
   if (plan.toLowerCase() == "lifetime") {
     const lifetime = "price_1MQ91dFt34MDQES9lN7iLH6t";
 

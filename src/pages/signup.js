@@ -45,12 +45,21 @@ const Signup = () => {
     }
 
     try {
-      const res = await fetch(
+      const response = await fetch(
         `/api/pro?plan=${selectedPlan.name}&user_id=${user.id}`,
         {
           method: 'POST',
         },
-      ).then(res => res.json());
+      );
+
+      if (!response.ok) {
+        const text = await response.text();
+        console.error(`[handleBuyPro] API Error ${response.status}:`, text);
+        toast.error('Payment initialization failed. Please try again.');
+        return;
+      }
+
+      const res = await response.json();
 
       if (res.session_url) {
         // Open Stripe Checkout
