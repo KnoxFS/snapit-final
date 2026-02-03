@@ -1,4 +1,5 @@
 import { Tab } from '@headlessui/react';
+import Image from 'next/image';
 import MobileTemplateMaker from 'components/MobileTemplateMaker';
 import DesktopTemplateMaker from 'components/DesktopTemplateMaker';
 import CodeTemplateMaker from 'components/CodeTemplateMaker';
@@ -46,11 +47,14 @@ const Templates = () => {
             className='mt-12 mb-24 grid h-full grid-cols-1 gap-5 sm:grid-cols-2 md:grid-cols-4'>
             <Tab className='outline-none'>
               <article className='h-full rounded-md bg-primary bg-opacity-20 p-4 ui-selected:bg-primary dark:bg-opacity-10 dark:ui-selected:bg-primary'>
-                <img
-                  src='/MobileTemplate.png'
-                  alt='Mobile Template'
-                  className='w-full rounded-md'
-                />
+                <div className="relative w-full aspect-[4/3]">
+                  <Image
+                    src='/MobileTemplate.png'
+                    alt='Mobile Template'
+                    fill
+                    className='rounded-md object-cover'
+                  />
+                </div>
 
                 <h3 className='my-4 text-xl font-bold text-darkGreen ui-selected:text-darkGreen dark:text-white'>
                   Mobile Screenshots Mockup
@@ -65,11 +69,14 @@ const Templates = () => {
 
             <Tab className='outline-none'>
               <article className='h-full rounded-md bg-primary bg-opacity-20 p-4 ui-selected:bg-primary dark:bg-opacity-10 dark:ui-selected:bg-primary'>
-                <img
-                  src='/DesktopTemplate.png'
-                  alt='Mobile Template'
-                  className='w-full rounded-md'
-                />
+                <div className="relative w-full aspect-[4/3]">
+                  <Image
+                    src='/DesktopTemplate.png'
+                    alt='Desktop Template'
+                    fill
+                    className='rounded-md object-cover'
+                  />
+                </div>
                 <h3 className='my-4 text-xl font-bold text-darkGreen ui-selected:text-darkGreen dark:text-white'>
                   Desktop Screenshots Mockup
                 </h3>
@@ -83,11 +90,14 @@ const Templates = () => {
 
             <Tab className='outline-none'>
               <article className='h-full rounded-md bg-primary bg-opacity-20 p-4 ui-selected:bg-primary dark:bg-opacity-10 dark:ui-selected:bg-primary'>
-                <img
-                  src='/CodeTemplate.png'
-                  alt='Mobile Template'
-                  className='w-full rounded-md'
-                />
+                <div className="relative w-full aspect-[4/3]">
+                  <Image
+                    src='/CodeTemplate.png'
+                    alt='Code Snippet Template'
+                    fill
+                    className='rounded-md object-cover'
+                  />
+                </div>
 
                 <h3 className='my-4 text-xl font-bold text-darkGreen ui-selected:text-darkGreen dark:text-white'>
                   Code Snippet Mockup
@@ -101,11 +111,14 @@ const Templates = () => {
             </Tab>
             <Tab className='outline-none'>
               <article className='h-full rounded-md bg-primary bg-opacity-20 p-4 ui-selected:bg-primary dark:bg-opacity-10 dark:ui-selected:bg-primary'>
-                <img
-                  src='/DesktopTemplate.png'
-                  alt='Screenshot Template'
-                  className='w-full rounded-md'
-                />
+                <div className="relative w-full aspect-[4/3]">
+                  <Image
+                    src='/DesktopTemplate.png'
+                    alt='Animated Screenshot Template'
+                    fill
+                    className='rounded-md object-cover'
+                  />
+                </div>
                 <h3 className='my-4 text-xl font-bold text-darkGreen ui-selected:text-darkGreen dark:text-white'>
                   Animated Screenshot Mockup
                 </h3>
@@ -117,11 +130,14 @@ const Templates = () => {
             </Tab>
             <Tab className='outline-none'>
               <article className='h-full rounded-md bg-primary bg-opacity-20 p-4 ui-selected:bg-primary dark:bg-opacity-10 dark:ui-selected:bg-primary'>
-                <img
-                  src='/KeyCaps.png'
-                  alt='Screenshot Template'
-                  className='w-full rounded-md'
-                />
+                <div className="relative w-full aspect-[4/3]">
+                  <Image
+                    src='/KeyCaps.png'
+                    alt='Keyboard Shortcut Template'
+                    fill
+                    className='rounded-md object-cover'
+                  />
+                </div>
 
                 <h3 className='my-4 text-xl font-bold text-darkGreen ui-selected:text-darkGreen dark:text-white'>
                   Keyboard Shortcut Mockup
@@ -135,11 +151,14 @@ const Templates = () => {
             </Tab>
             <Tab className="outline-none">
               <article className='bg-primary bg-opacity-10 p-4 rounded-md ui-selected:bg-primary h-full'>
-                <img
-                  src="/TweetTemplate.png"
-                  alt="Screenshot Template"
-                  className="w-full rounded-md"
-                />
+                <div className="relative w-full aspect-[4/3]">
+                  <Image
+                    src="/TweetTemplate.png"
+                    alt="Twitter Screenshot Template"
+                    fill
+                    className="rounded-md object-cover"
+                  />
+                </div>
 
                 <h3 className='text-white ui-selected:text-darkGreen text-xl font-bold my-4'>
                   Twitter Screenshots Mockup
@@ -153,11 +172,14 @@ const Templates = () => {
             </Tab>
             <Tab className="outline-none">
               <article className='h-full rounded-md bg-primary bg-opacity-20 p-4 ui-selected:bg-primary dark:bg-opacity-10 dark:ui-selected:bg-primary'>
-                <img
-                  src="/IconTemplate.png"
-                  alt="Icon Template"
-                  className="w-full rounded-md"
-                />
+                <div className="relative w-full aspect-[4/3]">
+                  <Image
+                    src="/IconTemplate.png"
+                    alt="Icon Template"
+                    fill
+                    className="rounded-md object-cover"
+                  />
+                </div>
 
                 <h3 className='my-4 text-xl font-bold text-darkGreen ui-selected:text-darkGreen dark:text-white'>
                   Icon Image Generator
@@ -170,11 +192,14 @@ const Templates = () => {
             </Tab>
             <Tab className="outline-none">
               <article className='h-full rounded-md bg-primary bg-opacity-20 p-4 ui-selected:bg-primary dark:bg-opacity-10 dark:ui-selected:bg-primary'>
-                <img
-                  src="/TestimonialTemplate.png"
-                  alt="Testimonial Template"
-                  className="w-full rounded-md"
-                />
+                <div className="relative w-full aspect-[4/3]">
+                  <Image
+                    src="/TestimonialTemplate.png"
+                    alt="Testimonial Template"
+                    fill
+                    className="rounded-md object-cover"
+                  />
+                </div>
 
                 <h3 className='my-4 text-xl font-bold text-darkGreen ui-selected:text-darkGreen dark:text-white'>
                   Testimonial Generator
