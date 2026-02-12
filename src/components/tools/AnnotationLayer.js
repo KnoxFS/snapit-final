@@ -1,4 +1,7 @@
 import TextAnnotation from '../annotations/TextAnnotation';
+import ArrowAnnotation from '../annotations/ArrowAnnotation';
+import ShapeAnnotation from '../annotations/ShapeAnnotation';
+import CursorAnnotation from '../annotations/CursorAnnotation';
 
 /**
  * AnnotationLayer Component
@@ -27,18 +30,49 @@ const AnnotationLayer = ({
         const y = ((e.clientY - rect.top) / rect.height) * 100;
 
         // Create new annotation based on type
+        const newId = `annotation-${Date.now()}`;
+        let newAnnotation = null;
+
+        const defaultStyle = {
+            color: '#ef4444', // Default red
+            fontSize: 24,
+            fontWeight: 600,
+        };
+
         if (annotationTypeToAdd === 'text') {
-            const newAnnotation = {
-                id: `annotation-${Date.now()}`,
+            newAnnotation = {
+                id: newId,
                 type: 'text',
                 position: { x, y },
                 content: '',
-                style: {
-                    color: '#000000',
-                    fontSize: 24,
-                    fontWeight: 600,
-                },
+                style: { ...defaultStyle, color: '#000000' },
             };
+        } else if (annotationTypeToAdd.startsWith('arrow')) {
+            const direction = annotationTypeToAdd.split('-')[1]; // arrow-up, arrow-down...
+            newAnnotation = {
+                id: newId,
+                type: 'arrow',
+                direction: direction,
+                position: { x, y },
+                style: defaultStyle,
+            };
+        } else if (annotationTypeToAdd === 'circle' || annotationTypeToAdd === 'rectangle') {
+            newAnnotation = {
+                id: newId,
+                type: annotationTypeToAdd,
+                position: { x, y },
+                style: defaultStyle,
+            };
+        } else if (annotationTypeToAdd === 'cursor') {
+            newAnnotation = {
+                id: newId,
+                type: 'cursor',
+                position: { x, y },
+                style: { ...defaultStyle, color: '#000000' },
+            };
+        }
+
+        if (newAnnotation) {
             onAnnotationAdded(newAnnotation);
         }
     };
@@ -75,21 +109,29 @@ const AnnotationLayer = ({
                 }}
             >
                 {annotations.map((annotation) => {
+                    const commonProps = {
+                        key: annotation.id,
+                        annotation,
+                        isSelected: selectedAnnotationId === annotation.id,
+                        onUpdate: onUpdateAnnotation,
+                        onSelect: onSelectAnnotation,
+                        onDelete: onDeleteAnnotation,
+                        wrapperRef,
+                    };
+
                     if (annotation.type === 'text') {
-                        return (
-                            <TextAnnotation
-                                key={annotation.id}
-                                annotation={annotation}
-                                isSelected={selectedAnnotationId === annotation.id}
-                                onUpdate={onUpdateAnnotation}
-                                onSelect={onSelectAnnotation}
-                                onDelete={onDeleteAnnotation}
-                                wrapperRef={wrapperRef}
-                            />
-                        );
+                        return <TextAnnotation {...commonProps} />;
+                    }
+                    if (annotation.type === 'arrow') {
+                        return <ArrowAnnotation {...commonProps} />;
+                    }
+                    if (annotation.type === 'circle' || annotation.type === 'rectangle') {
+                        return <ShapeAnnotation {...commonProps} />;
+                    }
+                    if (annotation.type === 'cursor') {
+                        return <CursorAnnotation {...commonProps} />;
                     }
 
-                    // TODO: Add other annotation types (arrow, shapes)
                     return null;
                 })}
             </div>

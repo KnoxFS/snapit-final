@@ -23,7 +23,65 @@ const AnnotationToolbar = ({
                 </svg>
             ),
         },
-        // TODO: Add arrow, rectangle, circle, line tools
+        {
+            id: 'arrow-right',
+            name: 'Arrow Right',
+            icon: (
+                <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                </svg>
+            ),
+        },
+        {
+            id: 'arrow-left',
+            name: 'Arrow Left',
+            icon: (
+                <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+                </svg>
+            ),
+        },
+        {
+            id: 'arrow-up',
+            name: 'Arrow Up',
+            icon: (
+                <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 10l7-7m0 0l7 7m-7-7v18" />
+                </svg>
+            ),
+        },
+        {
+            id: 'arrow-down',
+            name: 'Arrow Down',
+            icon: (
+                <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+                </svg>
+            ),
+        },
+        {
+            id: 'rectangle',
+            name: 'Rectangle',
+            icon: (
+                <div className="w-4 h-4 border-2 border-current rounded-sm" />
+            ),
+        },
+        {
+            id: 'circle',
+            name: 'Circle',
+            icon: (
+                <div className="w-4 h-4 border-2 border-current rounded-full" />
+            ),
+        },
+        {
+            id: 'cursor',
+            name: 'Cursor',
+            icon: (
+                <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" stroke="white" strokeWidth="1">
+                    <path d="M5.5 3.5L11.5 19.5L14.5 13.5L20.5 10.5L5.5 3.5Z" />
+                </svg>
+            ),
+        },
     ];
 
     return (
@@ -35,8 +93,8 @@ const AnnotationToolbar = ({
                         key={tool.id}
                         onClick={() => onSelectTool(tool.id)}
                         className={`p-2 rounded-md transition ${annotationTypeToAdd === tool.id
-                                ? 'bg-green-500 text-white'
-                                : 'bg-[#212121] text-gray-400 hover:text-white hover:bg-[#3a3a3a]'
+                            ? 'bg-green-500 text-white'
+                            : 'bg-[#212121] text-gray-400 hover:text-white hover:bg-[#3a3a3a]'
                             }`}
                         title={tool.name}
                     >
