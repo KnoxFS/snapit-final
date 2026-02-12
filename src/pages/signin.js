@@ -15,6 +15,7 @@ const Signup = () => {
 
   const [logging, setLoggging] = useState(false);
   const [showProMessage, setShowProMessage] = useState(false);
+  const [isMagicLink, setIsMagicLink] = useState(false);
 
   const router = useRouter();
 
@@ -39,31 +40,47 @@ const Signup = () => {
     e.preventDefault();
     setLoggging(true);
 
-    const toastId = toast.loading('Logging in...');
+    const toastId = toast.loading(isMagicLink ? 'Sending Magic Link...' : 'Logging in...');
 
-    const { error } = await supabase.auth.signInWithPassword({
-      email: credentials.email,
-      password: credentials.password,
-    });
+    let error;
+
+    if (isMagicLink) {
+      const { error: magicLinkError } = await supabase.auth.signInWithOtp({
+        email: credentials.email,
+        options: {
+          emailRedirectTo: window.location.origin + '/auth/callback',
+        },
+      });
+      error = magicLinkError;
+    } else {
+      const { error: passwordError } = await supabase.auth.signInWithPassword({
+        email: credentials.email,
+        password: credentials.password,
+      });
+      error = passwordError;
+    }
 
     if (error) {
       toast.error(error.error_description || error.message, { id: toastId });
-
       setLoggging(false);
       return;
     }
 
-    toast.dismiss(toastId);
-    setLoggging(false);
-
-    router.replace('/');
+    if (isMagicLink) {
+      toast.success('Magic Link sent! Check your email.', { id: toastId });
+      setLoggging(false);
+    } else {
+      toast.dismiss(toastId);
+      setLoggging(false);
+      router.replace('/');
+    }
   };
 
   return (
     <>
       <Head>
         <title>
-        Screenshots4all - Create beautiful screenshots and mockups so easily
+          Screenshots4all - Create beautiful screenshots and mockups so easily
         </title>
         <meta
           name='description'
@@ -91,7 +108,7 @@ const Signup = () => {
           {/* form */}
           <form>
             <h3 className='text-2xl font-bold text-darkGreen dark:text-white'>
-              Signin
+              {isMagicLink ? 'Sign in with Magic Link' : 'Sign in'}
             </h3>
 
             <div className='my-6 space-y-4'>
@@ -105,22 +122,35 @@ const Signup = () => {
                 autoFocus
               />
 
-              <input
-                type='password'
-                name='password'
-                value={credentials.password}
-                onChange={handleChange}
-                placeholder='Password'
-                className='w-full px-4 py-2 text-white rounded-md outline-none bg-primary placeholder-darkGreen ring-1 ring-transparent focus:ring-green-400 dark:bg-darkGreen dark:placeholder-white'
-              />
+              {!isMagicLink && (
+                <input
+                  type='password'
+                  name='password'
+                  value={credentials.password}
+                  onChange={handleChange}
+                  placeholder='Password'
+                  className='w-full px-4 py-2 text-white rounded-md outline-none bg-primary placeholder-darkGreen ring-1 ring-transparent focus:ring-green-400 dark:bg-darkGreen dark:placeholder-white'
+                />
+              )}
             </div>
 
             <button
               className='w-full py-2 mt-4 font-medium text-center rounded-md bg-primary text-darkGreen hover:bg-green-500 disabled:opacity-70'
               disabled={logging}
               onClick={handleLogin}>
-              Login
+              {isMagicLink ? 'Send Magic Link' : 'Login'}
             </button>
+
+            <div className='mt-4 text-center'>
+              <button
+                type='button'
+                className='text-sm text-darkGreen underline hover:text-green-500 dark:text-white'
+                onClick={() => setIsMagicLink(!isMagicLink)}>
+                {isMagicLink
+                  ? 'Sign in with password instead'
+                  : 'Sign in with Magic Link'}
+              </button>
+            </div>
 
             <div className='flex items-center justify-between mt-6'>
               <Link href='/signup'>
@@ -129,11 +159,13 @@ const Signup = () => {
                 </a>
               </Link>
 
-              <Link href='/forgot-password'>
-                <a className='underline text-darkGreen dark:text-white'>
-                  Reset password
-                </a>
-              </Link>
+              {!isMagicLink && (
+                <Link href='/forgot-password'>
+                  <a className='underline text-darkGreen dark:text-white'>
+                    Reset password
+                  </a>
+                </Link>
+              )}
             </div>
           </form>
         </div>
