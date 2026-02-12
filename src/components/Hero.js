@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Image from 'next/image';
 import ToggleTheme from './ToggleTheme';
 
 const brands = [
@@ -84,9 +85,15 @@ const Hero = () => {
                 <li
                   key={appLink.name}
                   className='flex items-center space-x-2 text-sm w-[43%] sm:w-[45%] md:w-[170px]'>
-                    <a href={appLink.url} target='_blank' rel='noreferrer' className='flex w-[100%]'>
-                      <img src={appLink.image} alt={appLink.name} className='w-[100%]' />
-                    </a>
+                  <a href={appLink.url} target='_blank' rel='noreferrer' className='flex w-[100%] relative h-[50px]'>
+                    <Image
+                      src={appLink.image}
+                      alt={appLink.name}
+                      fill
+                      className='object-contain'
+                      sizes="(max-width: 768px) 150px, 200px"
+                    />
+                  </a>
                 </li>
               ))}
             </div>

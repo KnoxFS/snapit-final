@@ -22,7 +22,6 @@ const HeadOG = ({ title, description, image, url }) => {
         content={image || "https://www.screenshots4all.com/og-image.png"}
         property="og:image"
       />
-      <meta content="object" property="og:type" />
     </NextHead>
   );
 };

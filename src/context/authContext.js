@@ -93,7 +93,6 @@ export default function AuthProvider({ children }) {
 
       const { subscription_id, avatar_url, presets, twitter_handle, filestreams_account_id, filestreams_username, filestreams_status } = userRow || {};
 
-
       const data = {
         id: user.id,
         email: user.email,

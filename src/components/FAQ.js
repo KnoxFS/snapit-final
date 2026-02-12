@@ -44,7 +44,7 @@ const FAQ = () => {
       className='mx-auto mt-[80px] sm:w-[90%] md:mt-[140px] md:max-w-[1280px]'
       id='faq'>
       <header className='pb-12 text-center text-darkGreen dark:text-white'>
-        <h3 className='mb-4 text-3xl font-semibold md:text-5xl'>FAQs</h3>
+        <h2 className='mb-4 text-3xl font-semibold md:text-5xl'>FAQs</h2>
       </header>
 
       <article className='space-y-4'>
