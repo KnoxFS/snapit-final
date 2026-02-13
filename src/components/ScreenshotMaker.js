@@ -1462,6 +1462,7 @@ export default function ScreenshotMaker({ proMode }) {
                     reset={false}
                     className={`relative`}>
                     <div
+                      style={{ position: 'relative' }}
                       className={`flex flex-col items-center justify-center ${options.aspectRatio} transition`}>
                       {getTabFrame(options?.browserBar, options?.rounded)}
                       <img
@@ -1474,6 +1475,19 @@ export default function ScreenshotMaker({ proMode }) {
                             ? ''
                             : 'rounded-t-none'
                           }`}
+                      />
+
+                      {/* Annotation Layer - Inside ReactTilt so it tilts with the image */}
+                      <AnnotationLayer
+                        annotations={annotations}
+                        selectedAnnotationId={selectedAnnotationId}
+                        onUpdateAnnotation={handleUpdateAnnotation}
+                        onSelectAnnotation={handleSelectAnnotation}
+                        onDeleteAnnotation={handleDeleteAnnotation}
+                        wrapperRef={wrapperRef}
+                        isAddingAnnotation={isAddingAnnotation}
+                        annotationTypeToAdd={annotationTypeToAdd}
+                        onAnnotationAdded={handleAnnotationAdded}
                       />
                     </div>
                   </ReactTilt>
@@ -1527,20 +1541,7 @@ export default function ScreenshotMaker({ proMode }) {
                 </div>
               )}
 
-              {/* Annotation Layer - Only render when screenshot is loaded */}
-              {blob?.src && (
-                <AnnotationLayer
-                  annotations={annotations}
-                  selectedAnnotationId={selectedAnnotationId}
-                  onUpdateAnnotation={handleUpdateAnnotation}
-                  onSelectAnnotation={handleSelectAnnotation}
-                  onDeleteAnnotation={handleDeleteAnnotation}
-                  wrapperRef={wrapperRef}
-                  isAddingAnnotation={isAddingAnnotation}
-                  annotationTypeToAdd={annotationTypeToAdd}
-                  onAnnotationAdded={handleAnnotationAdded}
-                />
-              )}
+
 
               {/* custom watermark */}
               {options?.customWatermark.show && blob?.src && (
