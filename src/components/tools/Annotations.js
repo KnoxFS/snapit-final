@@ -199,22 +199,20 @@ const Annotations = ({
                                     </div>
                                 </div>
 
-                                {/* Font Size (for text annotations) */}
-                                {selectedAnnotation.type === 'text' && (
-                                    <div>
-                                        <label className='mb-1 block text-xs font-medium text-gray-400'>
-                                            Font Size: {selectedAnnotation.style.fontSize}px
-                                        </label>
-                                        <input
-                                            type="range"
-                                            min="12"
-                                            max="72"
-                                            value={selectedAnnotation.style.fontSize}
-                                            onChange={(e) => onUpdateStyle({ fontSize: parseInt(e.target.value) })}
-                                            className="w-full"
-                                        />
-                                    </div>
-                                )}
+                                {/* Size Control (for all annotations) */}
+                                <div>
+                                    <label className='mb-1 block text-xs font-medium text-gray-400'>
+                                        {selectedAnnotation.type === 'text' ? 'Font Size' : 'Size'}: {selectedAnnotation.style.fontSize}px
+                                    </label>
+                                    <input
+                                        type="range"
+                                        min="12"
+                                        max="72"
+                                        value={selectedAnnotation.style.fontSize}
+                                        onChange={(e) => onUpdateStyle({ fontSize: parseInt(e.target.value) })}
+                                        className="w-full"
+                                    />
+                                </div>
 
                                 {/* Delete Button */}
                                 <button
