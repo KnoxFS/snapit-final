@@ -773,7 +773,7 @@ export default function ScreenshotMaker({ proMode }) {
         )}
         <div
           className={classnames(
-            'absolute top-[calc(100%)] left-[-30px] z-10 flex w-auto max-w-[400px] flex-col rounded-xl border border-gray-400 bg-white/80 py-4 px-5 shadow-lg shadow-gray-500/50 backdrop-blur duration-200 dark:border-gray-800 dark:bg-primary/20 dark:shadow-black/80',
+            'absolute top-[calc(100%)] left-0 z-10 flex w-auto max-w-[400px] flex-col rounded-xl border border-gray-400 bg-white/80 py-4 px-5 shadow-lg shadow-gray-500/50 backdrop-blur duration-200 dark:border-gray-800 dark:bg-primary/20 dark:shadow-black/80',
             {
               'pointer-events-none scale-[0.9] opacity-0': !bgPicker,
             },
