@@ -169,14 +169,17 @@ const Annotations = ({
                         {/* Style Controls - Only show when annotation is selected */}
                         {selectedAnnotation && (
                             <div className='space-y-3 border-t border-gray-700 pt-3'>
-                                <div>
-                                    <label className='mb-2 block text-xs font-medium text-gray-400'>
-                                        Selected Annotation
-                                    </label>
-                                    <p className='text-xs text-gray-500 mb-2'>
-                                        {selectedAnnotation.content || 'Empty text'}
-                                    </p>
-                                </div>
+                                {/* Selected Annotation Info - Only for text annotations */}
+                                {selectedAnnotation.type === 'text' && (
+                                    <div>
+                                        <label className='mb-2 block text-xs font-medium text-gray-400'>
+                                            Selected Annotation
+                                        </label>
+                                        <p className='text-xs text-gray-500 mb-2'>
+                                            {selectedAnnotation.content || 'Empty text'}
+                                        </p>
+                                    </div>
+                                )}
 
                                 {/* Color Picker */}
                                 <div>
