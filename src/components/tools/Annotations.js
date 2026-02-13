@@ -22,7 +22,7 @@ const Annotations = ({
         <Disclosure defaultOpen={false}>
             {({ open }) => (
                 <>
-                    <Disclosure.Button className='flex w-full items-center justify-between rounded-md bg-[#2B2C2F] p-3 text-left text-sm font-medium text-white hover:bg-[#3a3a3a] focus:outline-none'>
+                    <Disclosure.Button className='flex w-full items-center justify-between text-left text-sm font-medium text-darkGreen dark:text-white focus:outline-none'>
                         <span className='flex items-center'>
                             <svg className="w-5 h-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
@@ -34,7 +34,7 @@ const Annotations = ({
                         />
                     </Disclosure.Button>
 
-                    <Disclosure.Panel className='mt-2 space-y-3 rounded-md bg-[#212121] p-3'>
+                    <Disclosure.Panel className='mt-2 space-y-3'>
                         {/* Add Annotation Tools */}
                         <div>
                             <label className='mb-2 block text-xs font-medium text-gray-400'>

@@ -926,7 +926,7 @@ export default function ScreenshotMaker({ proMode }) {
 
         {/* tabs */}
 
-        <Tab.List className='absolute top-1/2 -left-[122px] flex w-52 -rotate-90 cursor-pointer flex-row-reverse justify-between overflow-auto rounded-t-xl bg-primary bg-opacity-5 text-sm text-darkGreen dark:bg-primary dark:bg-opacity-20 dark:text-white'>
+        <Tab.List className='flex w-full cursor-pointer justify-start gap-2 overflow-auto rounded-t-xl bg-primary bg-opacity-5 text-sm text-darkGreen dark:bg-primary dark:bg-opacity-20 dark:text-white mb-4'>
           <Tab
             as='button'
             className='w-full px-4 py-2 font-light outline-none ui-selected:bg-primary dark:ui-selected:bg-opacity-60'>
@@ -942,7 +942,7 @@ export default function ScreenshotMaker({ proMode }) {
         <Tab.Panels>
           {/* options */}
           <Tab.Panel>
-            <div className='custom-scrollbar relative mt-10 h-auto w-full overflow-y-scroll rounded-md bg-primary bg-opacity-10 p-6 dark:bg-opacity-20 md:max-h-[550px] lg:mt-0 lg:p-8'>
+            <div className='custom-scrollbar relative h-auto w-full overflow-y-scroll rounded-md bg-primary bg-opacity-10 p-6 dark:bg-opacity-20 md:max-h-[550px] lg:p-8'>
               <div className='relative flex flex-row flex-wrap items-start justify-start space-y-5 lg:flex-col lg:items-start'>
                 <h3 className='text-light w-full text-center text-sm text-darkGreen dark:text-white'>
                   Screenshot Options
@@ -1112,13 +1112,6 @@ export default function ScreenshotMaker({ proMode }) {
                 {/* Noise */}
                 <Noise options={options} setOptions={setOptions} />
 
-                {/* Snapit Watermark */}
-                <SnapitWatermark
-                  options={options}
-                  setOptions={setOptions}
-                  proMode={proMode}
-                />
-
                 {/* Annotations */}
                 {blob?.src && (
                   <Annotations
@@ -1132,6 +1125,13 @@ export default function ScreenshotMaker({ proMode }) {
                     onCancelAdd={handleCancelAddAnnotation}
                   />
                 )}
+
+                {/* Snapit Watermark */}
+                <SnapitWatermark
+                  options={options}
+                  setOptions={setOptions}
+                  proMode={proMode}
+                />
 
                 {/* Reset */}
                 <div
