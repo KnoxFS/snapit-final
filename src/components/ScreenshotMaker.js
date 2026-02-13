@@ -770,7 +770,7 @@ export default function ScreenshotMaker({ proMode }) {
           />
         ) : (
           ''
-        )}\
+        )}
         <div
           className={classnames(
             'absolute top-[calc(100%)] left-[-30px] z-10 flex w-auto max-w-[400px] flex-col rounded-xl border border-gray-400 bg-white/80 py-4 px-5 shadow-lg shadow-gray-500/50 backdrop-blur duration-200 dark:border-gray-800 dark:bg-primary/20 dark:shadow-black/80',
@@ -990,37 +990,31 @@ export default function ScreenshotMaker({ proMode }) {
                   {({ open }) => (
                     <>
                       <Disclosure.Button className='w-full'>
-                        <div className='relative flex w-full items-center justify-between pb-2 text-sm text-gray-400'>
-                          <div className='flex items-center'>
-                            <div className='flex items-center space-x-2'>
-                              <BackgroundIcon className='h-6 w-6 text-darkGreen dark:text-white' />
+                        <div className='grid w-full grid-cols-[3fr,1fr]'>
+                          <div className='flex items-center space-x-2'>
+                            <BackgroundIcon className='h-6 w-6 text-darkGreen dark:text-white' />
 
-                              <h3 className='text-sm text-darkGreen dark:text-white'>
-                                Background
-                              </h3>
-                            </div>
-
-                            {pickBackground()}
+                            <h3 className='text-sm text-darkGreen dark:text-white'>
+                              Background
+                            </h3>
                           </div>
 
-                          <div className='flex items-center gap-2'>
+                          <div className='flex items-center justify-around'>
                             {/* Pencil icon for color picker */}
                             <div
                               onClick={e => {
                                 e.stopPropagation();
                                 setBGPicker(!bgPicker);
                               }}
-                              className='flex cursor-pointer items-center rounded-sm p-1 hover:bg-primary/20'>
-                              <PencilIcon className='h-4 w-4 text-darkGreen dark:text-white' />
+                              className='cursor-pointer'>
+                              <PencilIcon className='h-6 w-6 text-darkGreen dark:text-white' />
                             </div>
 
                             {/* Arrow for expand/collapse */}
-                            <div className='flex items-center'>
-                              <ChevronRightIcon
-                                className={`${open ? 'rotate-90 transform' : ''
-                                  } h-5 w-5 text-darkGreen dark:text-white`}
-                              />
-                            </div>
+                            <ChevronRightIcon
+                              className={`${open ? 'rotate-90 transform' : ''
+                                } h-5 w-5 text-darkGreen dark:text-white`}
+                            />
                           </div>
                         </div>
                       </Disclosure.Button>
