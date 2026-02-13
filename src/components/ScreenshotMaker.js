@@ -1001,13 +1001,17 @@ export default function ScreenshotMaker({ proMode }) {
 
                           <div className='flex items-center justify-around'>
                             {/* Pencil icon for color picker */}
-                            <div
-                              onClick={e => {
-                                e.stopPropagation();
-                                setBGPicker(!bgPicker);
-                              }}
-                              className='cursor-pointer'>
-                              <PencilIcon className='h-6 w-6 text-darkGreen dark:text-white' />
+                            <div className='relative'>
+                              <div
+                                onClick={e => {
+                                  e.stopPropagation();
+                                  setBGPicker(!bgPicker);
+                                }}
+                                className='cursor-pointer'>
+                                <PencilIcon className='h-6 w-6 text-darkGreen dark:text-white' />
+                              </div>
+
+                              {pickBackground()}
                             </div>
 
                             {/* Arrow for expand/collapse */}
@@ -1018,8 +1022,6 @@ export default function ScreenshotMaker({ proMode }) {
                           </div>
                         </div>
                       </Disclosure.Button>
-
-                      {pickBackground()}
 
                       <Disclosure.Panel className='scrollbar-none w-full overflow-x-scroll'>
                         <div>
