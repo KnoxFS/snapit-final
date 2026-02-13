@@ -22,6 +22,7 @@ import {
   ChevronLeftIcon,
   ChevronRightIcon,
   LinkIcon,
+  PencilIcon,
   PhotoIcon,
   StopIcon,
   TrashIcon,
@@ -1001,16 +1002,23 @@ export default function ScreenshotMaker({ proMode }) {
 
                             {pickBackground()}
                           </div>
-                          <div className='relative'>
+
+                          <div className='flex items-center gap-2'>
+                            {/* Pencil icon for color picker */}
                             <div
                               onClick={e => {
                                 e.stopPropagation();
                                 setBGPicker(!bgPicker);
                               }}
-                              className='flex cursor-pointer items-center rounded-sm px-2'>
+                              className='flex cursor-pointer items-center rounded-sm p-1 hover:bg-primary/20'>
+                              <PencilIcon className='h-4 w-4 text-darkGreen dark:text-white' />
+                            </div>
+
+                            {/* Arrow for expand/collapse */}
+                            <div className='flex items-center'>
                               <ChevronRightIcon
                                 className={`${open ? 'rotate-90 transform' : ''
-                                  } h-5 w-5 justify-self-end text-darkGreen dark:text-white`}
+                                  } h-5 w-5 text-darkGreen dark:text-white`}
                               />
                             </div>
                           </div>
