@@ -1019,6 +1019,8 @@ export default function ScreenshotMaker({ proMode }) {
                         </div>
                       </Disclosure.Button>
 
+                      {pickBackground()}
+
                       <Disclosure.Panel className='scrollbar-none w-full overflow-x-scroll'>
                         <div>
                           <div className='mt-1 grid grid-cols-6 flex-wrap gap-x-4 gap-y-2'>
