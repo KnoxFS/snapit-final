@@ -1,0 +1,15 @@
+# www.screenshots4all.com llms.txt
+
+> Facilitates easy creation, customization, and sharing of high-quality, annotated, and branded screenshots for social media, websites, and marketing materials with advanced editing options and website capture features.
+
+- [Code Snippets Sharing](https://www.screenshots4all.com/blog): Promote sharing and viewing code snippets through screenshots on their platform.
+- [Screenshot Sharing Platform](https://www.screenshots4all.com/signin): Allows users to sign in and access features for sharing code screenshots, including code snippets.
+- [Screenshots Templates](https://www.screenshots4all.com/templates): Offers customizable templates for creating and sharing various types of mockups, screenshots, and design assets.
+- [About Screenshots4all](https://www.screenshots4all.com/aboutus): Introduce and explain the mission of Screenshots4all for easy, beautiful screenshot creation.
+- [Code Snippets Sharing](https://www.screenshots4all.com/opengraph): Promote sharing and managing code screenshots with innovative features.
+- [Sign Up for Screenshots](https://www.screenshots4all.com/signup): Encourage users to sign up for a plan to use screenshot sharing features.
+- [Password Reset](https://www.screenshots4all.com/forgot-password): Assist users in resetting their passwords via email.
+- [Privacy Policy](https://www.screenshots4all.com/privacypolicy): Privacy policy outlining data protection and confidentiality practices for screenshot sharing service.
+- [Screenshot Tool Overview](https://www.screenshots4all.com): Promote a tool for capturing, customizing, and exporting high-quality screenshots with various editing options.
+- [Terms of Service](https://www.screenshots4all.com/termsofservice): Outlines terms and conditions for using Screenshots4all website and services.
+- [Screenshot Platform](https://www.screenshots4all.com/pricing): Provides a platform for capturing and editing screenshots with optional Pro features.
