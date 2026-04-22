@@ -24,6 +24,9 @@ export default function AuthProvider({ children }) {
 
   const [showBuyPro, setShowBuyPro] = useState(false);
 
+  // Guard to prevent concurrent getUser() calls during rapid auth events
+  let getUserInFlight = false;
+
   useEffect(() => {
     getUser();
   }, []);
@@ -58,109 +61,125 @@ export default function AuthProvider({ children }) {
   }, []);
 
   const getUser = async () => {
-    console.log('[Auth] Getting user...');
-    const {
-      data: { user },
-      error,
-    } = await supabase.auth.getUser();
-
-    if (error) {
-      console.error('[Auth] Error getting auth user:', error);
-      setUser(null);
-      setLoading(false);
+    // Prevent concurrent calls during rapid auth state changes
+    if (getUserInFlight) {
+      console.log('[Auth] getUser already in flight, skipping');
       return;
     }
+    getUserInFlight = true;
 
-    if (user) {
-      console.log('[Auth] Auth user found:', user.id, user.email);
-
-      // get user data from supabase
+    try {
+      console.log('[Auth] Getting user...');
       const {
-        data: userRow,
-        error: userRowError,
-      } = await supabase
-        .from("users")
-        .select("*")
-        .eq("user_id", user.id)
-        .single();
+        data: { user },
+        error,
+      } = await supabase.auth.getUser();
 
-      if (userRowError) {
-        console.error('[Auth] Error fetching user row:', userRowError);
-        // Continue anyway with minimal user data
+      if (error) {
+        console.error('[Auth] Error getting auth user:', error);
+        setUser(null);
+        setLoading(false);
+        return;
       }
 
-      console.log('[Auth] User row data:', userRow);
+      if (user) {
+        console.log('[Auth] Auth user found:', user.id, user.email);
 
-      const { subscription_id, avatar_url, presets, twitter_handle, filestreams_account_id, filestreams_username, filestreams_status } = userRow || {};
+        // get user data from supabase
+        const {
+          data: userRow,
+          error: userRowError,
+        } = await supabase
+          .from("users")
+          .select("*")
+          .eq("user_id", user.id)
+          .single();
 
-      const data = {
-        id: user.id,
-        email: user.email,
-        name: user.user_metadata.name,
-        avatar_url,
-        isPro: false,
-        endPro: null,
-        presets,
-        twitter_handle,
-        filestreams_account_id,
-        filestreams_username,
-        filestreams_status,
-      };
+        if (userRowError) {
+          console.error('[Auth] Error fetching user row:', userRowError);
+          // Continue anyway with minimal user data
+        }
 
-      if (subscription_id) {
-        if (subscription_id == 'lifetime' || subscription_id == null) {
-          data.isPro = true;
-        } else {
-          // Determine verification source & payload
-          let source = 'stripe';
-          let token = null;
-          let productId = null;
+        console.log('[Auth] User row data:', userRow);
 
-          const purchaseToken = userRow.purchase_token;
-          // 'purchase_type' likely holds the SKU/Product ID (e.g. "monthly")
-          const purchaseType = userRow.purchase_type;
+        const { subscription_id, avatar_url, presets, twitter_handle, filestreams_account_id, filestreams_username, filestreams_status } = userRow || {};
 
-          if (subscription_id.startsWith('sub_')) {
-            source = 'stripe';
-          }
-          else if (subscription_id.startsWith('GPA')) {
-            source = 'google';
-            token = purchaseToken;
-            productId = purchaseType;
-          }
-          else {
-            // Fallback to Apple if not Stripe/Google
-            source = 'apple';
-            token = purchaseToken;
-          }
+        const data = {
+          id: user.id,
+          email: user.email,
+          name: user.user_metadata.name,
+          avatar_url,
+          isPro: false,
+          endPro: null,
+          presets,
+          twitter_handle,
+          filestreams_account_id,
+          filestreams_username,
+          filestreams_status,
+        };
 
-          // Verify subscription
-          try {
-            const { active, end, message } = await fetch('/api/verifySubscription', {
-              method: 'POST',
-              headers: { 'Content-Type': 'application/json' },
-              body: JSON.stringify({
-                subscription_id,
-                source,
-                token,
-                product_id: productId
-              })
-            }).then((res) => res.json());
+        if (subscription_id) {
+          if (subscription_id == 'lifetime' || subscription_id == null) {
+            data.isPro = true;
+          } else {
+            // Determine verification source & payload
+            let source = 'stripe';
+            let token = null;
+            let productId = null;
 
-            if (active) {
-              data.isPro = true;
-              data.endPro = end;
-            } else if (message) {
-              console.warn(`[Auth] Verification failed for ${source}:`, message);
+            const purchaseToken = userRow.purchase_token;
+            // 'purchase_type' likely holds the SKU/Product ID (e.g. "monthly")
+            const purchaseType = userRow.purchase_type;
+
+            if (subscription_id.startsWith('sub_')) {
+              source = 'stripe';
             }
-          } catch (err) {
-            console.error('[Auth] Verification error:', err);
+            else if (subscription_id.startsWith('GPA')) {
+              source = 'google';
+              token = purchaseToken;
+              productId = purchaseType;
+            }
+            else {
+              // Fallback to Apple if not Stripe/Google
+              source = 'apple';
+              token = purchaseToken;
+            }
+
+            // Verify subscription
+            try {
+              const { active, end, message } = await fetch('/api/verifySubscription', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                  subscription_id,
+                  source,
+                  token,
+                  product_id: productId
+                })
+              }).then((res) => res.json());
+
+              if (active) {
+                data.isPro = true;
+                data.endPro = end;
+              } else if (message) {
+                console.warn(`[Auth] Verification failed for ${source}:`, message);
+              }
+            } catch (err) {
+              console.error('[Auth] Verification error:', err);
+            }
           }
         }
-      }
 
-      setUser(user ? data : null);
-      setLoading(false);
+        setUser(data);
+        setLoading(false);
+      } else {
+        // user is null without error — happens during session transitions
+        console.log('[Auth] No authenticated user found');
+        setUser(null);
+        setLoading(false);
+      }
+    } finally {
+      getUserInFlight = false;
     }
   };
 

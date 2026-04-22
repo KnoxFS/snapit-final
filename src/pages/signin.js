@@ -40,6 +40,9 @@ const Signup = () => {
     e.preventDefault();
     setLoggging(true);
 
+    // Clear any existing session to prevent race conditions when switching accounts
+    await supabase.auth.signOut();
+
     const toastId = toast.loading(isMagicLink ? 'Sending Magic Link...' : 'Logging in...');
 
     let error;
