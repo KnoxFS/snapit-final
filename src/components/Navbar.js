@@ -19,7 +19,7 @@ import Screenshots4all from "../../public/brands/Snapit.svg";
 import ToggleTheme from "./ToggleTheme";
 
 const Navbar = () => {
-  const { user, setShowBuyPro } = useAuth();
+  const { user, setUser, setShowBuyPro } = useAuth();
   const { theme, setTheme } = useTheme();
   const [openSettings, setOpenSettings] = useState(false);
 
@@ -63,6 +63,10 @@ const Navbar = () => {
     } catch (err) {
       console.error('[Navbar] Logout exception:', err);
     }
+    // Always clear state and reload, even if signOut had an error
+    // This ensures the UI updates even when the auth listener doesn't fire
+    setUser(null);
+    window.location.href = '/';
   };
 
   const handleDark = () => {
