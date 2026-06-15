@@ -1,1 +1,56 @@
-import { Stripe } from "stripe";\r\n\r\nconst stripe = new Stripe(process.env.STRIPE_SECRET_KEY || process.env.STRIPE_SECREY_KEY);\r\n\r\nconst YOUR_DOMAIN = process.env.NEXT_PUBLIC_HOST_URL;\r\n\r\nexport default async function handler(req, res) {\r\n  const { session_id, subscription_id } = req.body;\r\n\r\n  console.log(`[Billing] Portal request: session_id=${session_id}, subscription_id=${subscription_id}`);\r\n\r\n  try {\r\n    let customerId = null;\r\n\r\n    // Try to get customer from subscription_id first (most reliable)\r\n    if (subscription_id && subscription_id.startsWith('sub_')) {\r\n      try {\r\n        const subscription = await stripe.subscriptions.retrieve(subscription_id);\r\n        customerId = subscription.customer;\r\n        console.log(`[Billing] Got customer from subscription: ${customerId}`);\r\n      } catch (subErr) {\r\n        console.error(`[Billing] Failed to retrieve subscription ${subscription_id}:`, subErr.message);\r\n      }\r\n    }\r\n\r\n    // Fallback: try to get customer from checkout session\r\n    if (!customerId && session_id) {\r\n      try {\r\n        const checkoutSession = await stripe.checkout.sessions.retrieve(session_id);\r\n        customerId = checkoutSession.customer;\r\n        console.log(`[Billing] Got customer from session: ${customerId}`);\r\n      } catch (sessErr) {\r\n        console.error(`[Billing] Failed to retrieve session ${session_id}:`, sessErr.message);\r\n      }\r\n    }\r\n\r\n    if (!customerId) {\r\n      console.error('[Billing] Could not determine Stripe customer ID');\r\n      return res.status(400).json({ error: 'Could not find your Stripe customer. Please contact support.' });\r\n    }\r\n\r\n    // Create portal session\r\n    const returnUrl = YOUR_DOMAIN;\r\n    const portalSession = await stripe.billingPortal.sessions.create({\r\n      customer: customerId,\r\n      return_url: returnUrl,\r\n    });\r\n\r\n    console.log(`[Billing] Portal session created for customer ${customerId}`);\r\n    res.json({ session_url: portalSession.url, session_id: portalSession.id });\r\n\r\n  } catch (err) {\r\n    console.error('[Billing] Error creating portal session:', err.message);\r\n    res.status(500).json({ error: 'Failed to create billing portal session.' });\r\n  }\r\n}\r\n
+import { Stripe } from "stripe";
+
+const stripe = new Stripe(process.env.STRIPE_SECRET_KEY || process.env.STRIPE_SECREY_KEY);
+
+const YOUR_DOMAIN = process.env.NEXT_PUBLIC_HOST_URL;
+
+export default async function handler(req, res) {
+  const { session_id, subscription_id } = req.body;
+
+  console.log(`[Billing] Portal request: session_id=${session_id}, subscription_id=${subscription_id}`);
+
+  try {
+    let customerId = null;
+
+    // Try to get customer from subscription_id first (most reliable)
+    if (subscription_id && subscription_id.startsWith('sub_')) {
+      try {
+        const subscription = await stripe.subscriptions.retrieve(subscription_id);
+        customerId = subscription.customer;
+        console.log(`[Billing] Got customer from subscription: ${customerId}`);
+      } catch (subErr) {
+        console.error(`[Billing] Failed to retrieve subscription ${subscription_id}:`, subErr.message);
+      }
+    }
+
+    // Fallback: try to get customer from checkout session
+    if (!customerId && session_id) {
+      try {
+        const checkoutSession = await stripe.checkout.sessions.retrieve(session_id);
+        customerId = checkoutSession.customer;
+        console.log(`[Billing] Got customer from session: ${customerId}`);
+      } catch (sessErr) {
+        console.error(`[Billing] Failed to retrieve session ${session_id}:`, sessErr.message);
+      }
+    }
+
+    if (!customerId) {
+      console.error('[Billing] Could not determine Stripe customer ID');
+      return res.status(400).json({ error: 'Could not find your Stripe customer. Please contact support.' });
+    }
+
+    // Create portal session
+    const returnUrl = YOUR_DOMAIN;
+    const portalSession = await stripe.billingPortal.sessions.create({
+      customer: customerId,
+      return_url: returnUrl,
+    });
+
+    console.log(`[Billing] Portal session created for customer ${customerId}`);
+    res.json({ session_url: portalSession.url, session_id: portalSession.id });
+
+  } catch (err) {
+    console.error('[Billing] Error creating portal session:', err.message);
+    res.status(500).json({ error: 'Failed to create billing portal session.' });
+  }
+}
