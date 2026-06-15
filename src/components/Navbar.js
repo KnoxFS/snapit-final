@@ -26,29 +26,41 @@ const Navbar = () => {
   const handleManageSubscription = async () => {
     const { data, error } = await supabase
       .from("users")
-      .select("session_id")
+      .select("session_id, subscription_id")
       .eq("user_id", user.id);
 
     if (error) {
-      console.log(error);
+      console.error('[Navbar] Error fetching subscription data:', error);
       return;
     }
 
-    const session_id = data[0].session_id;
+    const session_id = data[0]?.session_id;
+    const subscription_id = data[0]?.subscription_id;
 
-    const res = await fetch(`/api/billing`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        session_id,
-      }),
-    });
+    console.log(`[Navbar] Managing subscription: session_id=${session_id}, subscription_id=${subscription_id}`);
 
-    const { session_url } = await res.json();
+    try {
+      const res = await fetch(`/api/billing`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          session_id,
+          subscription_id,
+        }),
+      });
 
-    window.location.href = session_url;
+      const result = await res.json();
+
+      if (result.session_url) {
+        window.location.href = result.session_url;
+      } else {
+        console.error('[Navbar] No portal URL returned:', result);
+      }
+    } catch (err) {
+      console.error('[Navbar] Error opening billing portal:', err);
+    }
   };
 
   const handleLogout = async () => {

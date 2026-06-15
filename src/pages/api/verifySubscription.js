@@ -62,6 +62,7 @@ export default async function handler(req, res) {
   const { subscription_id, source, token, product_id } = req.method === 'POST' ? req.body : req.query;
 
   try {
+    console.log(`[Verify] Request: method=${req.method}, subscription_id=${subscription_id}, source=${source}, hasToken=${!!token}, product_id=${product_id}`);
     // 1. Google Verification
     if (source === 'google' || (subscription_id && subscription_id.startsWith('GPA'))) {
       const packageName = process.env.ANDROID_PACKAGE_NAME || 'com.screenshots4all.app';
@@ -178,12 +179,19 @@ export default async function handler(req, res) {
 
     // 3. Stripe Verification (Default)
     if (subscription_id && subscription_id.startsWith('sub_')) {
-      const subscription = await stripe.subscriptions.retrieve(subscription_id);
+      console.log(`[Verify] Stripe: Retrieving subscription ${subscription_id}`);
+      try {
+        const subscription = await stripe.subscriptions.retrieve(subscription_id);
+        console.log(`[Verify] Stripe subscription status: ${subscription.status}, current_period_end: ${subscription.current_period_end}`);
 
-      if (subscription.status === "active" || subscription.status === "trialing") {
-        return res.status(200).json({ active: true, end: subscription.current_period_end });
-      } else {
-        return res.status(200).json({ active: false, message: "Subscription is not active." });
+        if (subscription.status === "active" || subscription.status === "trialing") {
+          return res.status(200).json({ active: true, end: subscription.current_period_end });
+        } else {
+          return res.status(200).json({ active: false, message: `Subscription status is '${subscription.status}', not active.` });
+        }
+      } catch (stripeErr) {
+        console.error(`[Verify] Stripe verification error for ${subscription_id}:`, stripeErr.message);
+        return res.status(200).json({ active: false, message: `Stripe verification failed: ${stripeErr.message}` });
       }
     }
 

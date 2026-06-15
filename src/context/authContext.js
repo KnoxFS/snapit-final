@@ -119,8 +119,10 @@ export default function AuthProvider({ children }) {
         };
 
         if (subscription_id) {
+          console.log(`[Auth] subscription_id found: '${subscription_id}'`);
           if (subscription_id == 'lifetime' || subscription_id == null) {
             data.isPro = true;
+            console.log('[Auth] User is lifetime Pro');
           } else {
             // Determine verification source & payload
             let source = 'stripe';
@@ -145,9 +147,11 @@ export default function AuthProvider({ children }) {
               token = purchaseToken;
             }
 
+            console.log(`[Auth] Verifying subscription via ${source}...`);
+
             // Verify subscription
             try {
-              const { active, end, message } = await fetch('/api/verifySubscription', {
+              const verifyResponse = await fetch('/api/verifySubscription', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
@@ -156,11 +160,16 @@ export default function AuthProvider({ children }) {
                   token,
                   product_id: productId
                 })
-              }).then((res) => res.json());
+              });
+
+              console.log(`[Auth] Verification response status: ${verifyResponse.status}`);
+              const { active, end, message } = await verifyResponse.json();
+              console.log(`[Auth] Verification result: active=${active}, end=${end}, message=${message}`);
 
               if (active) {
                 data.isPro = true;
                 data.endPro = end;
+                console.log('[Auth] User is Pro!');
               } else if (message) {
                 console.warn(`[Auth] Verification failed for ${source}:`, message);
               }
@@ -168,6 +177,8 @@ export default function AuthProvider({ children }) {
               console.error('[Auth] Verification error:', err);
             }
           }
+        } else {
+          console.log('[Auth] No subscription_id found in user row');
         }
 
         setUser(data);
